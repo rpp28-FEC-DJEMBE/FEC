@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RelatedPdt from './RelatedPdt.jsx';
+import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 
 class App extends React.Component {
   constructor(props) {
