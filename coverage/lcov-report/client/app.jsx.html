@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for RelatedPdt.jsx</title>
+    <title>Code coverage report for client/app.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> RelatedPdt.jsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">client</a> app.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -39,7 +39,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -106,23 +106,14 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,8 +139,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,77 +156,72 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+import ReactDOM from 'react-dom';
 &nbsp;
-class RelatedPdt extends React.Component {
+import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
+&nbsp;
+class App extends React.Component {
   constructor(props) {
     super(props);
-  }
-  render () {
-    return (
-      &lt;ul&gt;
+    this.state = {
+      users: [
         {
-          this.props.users.map( user =&gt;
-            (
-              &lt;li className="userLi" key={user.userId}&gt;#{user.userId}: {user.username}&lt;/li&gt;
-            )
-          )
+          userId: 1,
+          username: 'Kingsley'
+        },
+        {
+          userId: 2,
+          username: 'Huiqing'
+        },
+        {
+          userId: 3,
+          username: 'Simon'
+        },
+        {
+          userId: 4,
+          username: 'Andre'
         }
-      &lt;/ul&gt;
-    )
+      ],
+      test: true
+    }
   }
+&nbsp;
+&nbsp;
+render() {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Hello World&lt;/p&gt;
+      &lt;RelatedPdt users={this.state.users}/&gt;
+    &lt;/div&gt;
+  )
 }
 &nbsp;
-// const RelatedPdt = (props) =&gt; (
-//   &lt;ul&gt;
-//     {
-//       props.users.map( user =&gt;
-//         (
-//           &lt;li className="userLi" key={user.userId}&gt;#{user.userId}: {user.username}&lt;/li&gt;
-//         )
-//       )
-//     }
-//   &lt;/ul&gt;
-// )
 &nbsp;
-export default RelatedPdt;
 &nbsp;
-// this.state = {
-//   users: [
-//     {
-//       userId: 1,
-//       username: 'Kingsley'
-//     },
-//     {
-//       userId: 2,
-//       username: 'Huiqing'
-//     },
-//     {
-//       userId: 3,
-//       username: 'Simon'
-//     },
-//     {
-//       userId: 4,
-//       username: 'Andre'
-//     }
-//   ]
-// }</pre></td></tr></table></pre>
+&nbsp;
+&nbsp;
+}
+&nbsp;
+export default App
+&nbsp;
+// ReactDOM.render(&lt;App /&gt;, document.getElementById('app'));</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jun 02 2021 20:23:44 GMT-0700 (Pacific Daylight Time)
+                at Wed Jun 02 2021 20:41:04 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
-        <script src="prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
