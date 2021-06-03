@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './app.css';
+import Overview from './overview/overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 
 class App extends React.Component {
@@ -29,22 +31,16 @@ class App extends React.Component {
     }
   }
 
-
-render() {
-  return (
-    <div>
-      <p>Hello World</p>
-      <RelatedPdt users={this.state.users}/>
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <p>Welcome to our app!</p>
+        <Overview />
+        <RelatedPdt users={this.state.users}/>
+      </div>
+    )
+  }
 }
 
-
-
-
-
-}
-
-export default App
-
+export default App;
 // ReactDOM.render(<App />, document.getElementById('app'));
