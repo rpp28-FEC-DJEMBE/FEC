@@ -25,8 +25,8 @@ module.exports = {
   entry: path.join(__dirname, '/client/index.jsx'),
   devtool: 'inline-source-map',
   output: {
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
   },
   module: {
     rules: [
