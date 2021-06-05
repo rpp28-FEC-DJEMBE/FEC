@@ -5,6 +5,7 @@ configure({adapter: new Adapter()});
 import RelatedPdt from '../../client/relatedProducts/RelatedPdt.jsx';
 import App from '../../client/app.jsx';
 
+
 test("renders users correctly", () => {
   const users = [{
     userId: 0,
