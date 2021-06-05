@@ -9,6 +9,7 @@ bundle.js.LICENSE.txt
 # Other files and folders
 .settings/
 node_modules
+coverage
 
 # Executables
 *.swf
