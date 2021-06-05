@@ -2,8 +2,8 @@ import React from 'react';
 import {shallow, configure} from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({adapter: new Adapter()});
-import RelatedPdt from './RelatedPdt.jsx';
-import App from '../app.jsx'
+import RelatedPdt from '../../client/relatedProducts/RelatedPdt.jsx';
+import App from '../../client/app.jsx'
  const a = App
 
 test("renders users correctly", () => {
