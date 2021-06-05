@@ -4,6 +4,20 @@ class RelatedPdt extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  cloneArray(array) {
+    // console.log(...array)
+    return [...array];
+  }
+
+  reverseString(str) {
+    return str
+    .toLowerCase()
+    .split('')
+    .reverse()
+    .join('');
+  }
+
   render () {
     return (
       <ul>
