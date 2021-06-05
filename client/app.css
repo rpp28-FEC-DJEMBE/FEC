@@ -1,0 +1,37 @@
+
+/* Base Styles */
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+/* Layout Styles */
+
+
+
+/* Module Styles */
+
+.product-overview {
+  border: solid gray 1px;
+  padding: 8px;
+}
+
+
+/* State Styles */
+
+
+
+
+
+/*
+  DETAILS
+
+  Base: Default styles. Typically applies to native elements: body, form, input, a, a:hover, etc.
+  Layout: Styles that divide the page/component into sections. l- or layout-
+  Module: Reusable, modular parts of design. Think: callouts, product lists, ratings graphs, etc.
+  State: How things look in a particular state. Hidden or expanded? Active or inactive? is-hidden or is-collapse
+
+  http://smacss.com/book/categorizing
+  https://medium.com/@fuladuf/state-of-the-art-in-css-a-closer-look-at-css-architecture-systems-544339a6c625
+*/
