@@ -7,7 +7,10 @@ body {
 
 
 /* Layout Styles */
-
+.ratings-reviews {
+  display: flex;
+  flex-flow: row;
+}
 
 
 /* Module Styles */
