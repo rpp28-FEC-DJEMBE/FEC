@@ -7,7 +7,7 @@ body {
 
 
 /* Layout Styles */
-.ratings-reviews {
+.rr-content {
   display: flex;
   flex-flow: row;
 }

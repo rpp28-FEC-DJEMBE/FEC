@@ -2,7 +2,7 @@ import React from 'react';
 import ReviewList from './ReviewList.jsx';
 import Breakdown from './Breakdown.jsx';
 
-class Ratings extends React.Component {
+class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,16 +12,18 @@ class Ratings extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Ratings and Reviews</p>
-        <div className='ratings-reviews'>
-          <Breakdown />
-          <ReviewList />
+
+      <div className='ratings-reviews'>
+          <p>Ratings and Reviews</p>
+          <div className='rr-content'>
+            <Breakdown />
+            <ReviewList />
+          </div>
         </div>
-      </div>
+
 
     )
   }
 }
 
-export default Ratings;
+export default Reviews;

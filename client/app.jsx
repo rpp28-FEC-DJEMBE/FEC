@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './app.css';
 import Overview from './overview/overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
-import Ratings from './ratings/ratings.jsx';
+import Reviews from './reviews/Reviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class App extends React.Component {
         <p>Welcome to our app!</p>
         <Overview />
         <RelatedPdt users={this.state.users}/>
-        <Ratings />
+        <Reviews />
       </div>
     )
   }
