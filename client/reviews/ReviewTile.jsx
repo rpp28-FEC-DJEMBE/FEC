@@ -4,38 +4,51 @@ class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      helpfulness: this.props.review.helpfulness
+      helpfulness: this.props.review.helpfulness,
+      helpfulClicked: false
     }
     this.handleHelpful = this.handleHelpful.bind(this);
   }
 
   handleHelpful() {
-    this.setState((prevState) => {
-      return { helpfulness: prevState.helpfulness + 1}
-    })
+    if (!this.state.helpfulClicked) {
+      this.setState((prevState) => {
+        return {
+          helpfulness: prevState.helpfulness + 1,
+          helpfulClicked: true
+        }
+      })
+
+    }
   }
 
   render() {
     let { review } = this.props;
+    let recommend;
     let response;
-    if(review.response) {
+    if (review.recommend) {
+      recommend = <p>&#10003; I recommend this product</p>
+    }
+    if (review.response) {
       response = <p>Response from seller: <em>{this.props.review.response}</em></p>
     }
-    console.log(review)
+
     return (
       <div className='review-tile'>
-        <p>Really cool review here</p>
-        <div className='stars tile-stars'>
-          {review.rating}
+        <div className='review-header'>
+          <div className='stars tile-stars'>
+            {review.rating} Stars
+          </div>
+          <p className='user tile-user'>{review.reviewer_name} {review.date}</p>
         </div>
-        <p className='user tile-user'>{review.reviewer_name} {review.date}</p>
-        <h4>{review.summary}</h4>
         <div id='review-body'>
+          <h4>{review.summary}</h4>
           {review.body}
+          {recommend}
           {response}
         </div>
-        <div id='review-helpful'>
-          <p>Helpful? Yes {this.state.helpfulness}</p>
+        <div id='review-footer'>
+          Helpful? <u onClick={this.handleHelpful}>Yes</u> {this.state.helpfulness} | <u>Report</u>
         </div>
       </div>
     )

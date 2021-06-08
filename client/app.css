@@ -15,10 +15,13 @@ body {
 
 /* Module Styles */
 
-.product-overview {
+.product-overview,
+.review-list,
+.review-tile {
   border: solid gray 1px;
   padding: 8px;
 }
+
 
 
 /* State Styles */
