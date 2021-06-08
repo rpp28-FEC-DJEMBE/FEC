@@ -5,6 +5,7 @@ import './app.css';
 import Overview from './overview/overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 import Questions from './questions/questions.jsx';
+import Reviews from './reviews/Reviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class App extends React.Component {
         <Overview />
         <RelatedPdt users={this.state.users}/>
         <Questions />
+        <Reviews />
       </div>
     )
   }
