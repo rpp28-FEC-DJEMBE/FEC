@@ -10,6 +10,7 @@ bundle.js.LICENSE.txt
 .settings/
 node_modules
 coverage
+selftest
 
 # Executables
 *.swf
