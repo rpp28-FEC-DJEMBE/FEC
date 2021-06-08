@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+
+import Search from './search.jsx';
+import QuestionsList from './questionsList.jsx';
 
 const Questions = () => {
   return (
-    <h1>Questions and Answers</h1>
-  )
-}
+    <div className="qaDisplay">
+      <h1>Questions and Answers</h1>
+      <Search />
+      <QuestionsList />
+    </div>
+  );
+};
 
 export default Questions;
