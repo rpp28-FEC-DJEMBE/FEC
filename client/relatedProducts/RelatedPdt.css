@@ -1,0 +1,10 @@
+.relatedProductBox {
+  border: solid 1px powderblue;
+  /* padding: 5px;
+  margin: 10px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+

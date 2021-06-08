@@ -1,0 +1,43 @@
+.addOutfit,
+.productCard {
+  /* background-color: powderblue; */
+  width: 200px;
+  height: 300px;
+  left: 50%;
+  border: solid 1px grey;
+  margin: 5px;
+}
+
+.addOutfit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productImage {
+  height: 200px;
+  background-color: powderblue;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.productDetailBox {
+  width: 100%;
+  height: 100px;
+  font-size: small;
+  line-height: 0.4;
+  padding-left: 5px;
+}
+
+.cardBtn {
+  position: absolute;
+  z-index: 9;
+  margin-left: 170px;
+  font-family: system-ui;
+  font-size: larger;
+}
