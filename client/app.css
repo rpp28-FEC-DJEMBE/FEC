@@ -20,6 +20,10 @@ body {
   padding: 8px;
 }
 
+.qaDisplay {
+  border: solid gray 1px;
+  padding:8px;
+}
 
 /* State Styles */
 
