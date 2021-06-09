@@ -11,6 +11,7 @@ bundle.js.LICENSE.txt
 node_modules
 coverage
 selftest
+server*/config.js
 
 # Executables
 *.swf
