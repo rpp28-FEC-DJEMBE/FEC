@@ -7,8 +7,8 @@ body {
 
 :root {
   --star-size: 60px;
-  --star-color: #fff;
-  --star-background: gray;
+  --star-color: rgb(184, 184, 184);
+  --star-background: black;
 }
 
 
@@ -33,7 +33,7 @@ body {
 
 /* State Styles */
 
-.stars {
+/* .stars {
   --percent: calc(var(--rating) / 5 * 100%);
 
   display: inline-block;
@@ -42,7 +42,7 @@ body {
   line-height: 1;
 
 
-}
+} */
 
 .stars::before {
   content: '★★★★★';
