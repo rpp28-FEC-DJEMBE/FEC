@@ -49,11 +49,51 @@ body {
   padding: 8px;
 }
 
-.qaDisplay {
+.qaDisplay .question-list {
   border: solid gray 1px;
   padding:8px;
 }
 
+.question-entry {
+  border: solid gray 1px;
+  padding:8px;
+}
+
+.answer {
+  border: solid gray 1px;
+  padding:8px;
+}
+
+.qaSearch {
+  display: block;
+  width: 99.5%;
+  height: 50px;
+}
+
+.question-entry {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.answer-footer {
+  display: grid;
+  grid-template-columns: 35% 10% 5%;
+  font-size:12px;
+  font-family: arial;
+  opacity: 0.5;
+}
+
+.question-entry-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: small;
+  opacity: .5;
+}
+
+.question {
+  font-weight: bold;
+  font-family: arial;
+}
 /* State Styles */
 
 
