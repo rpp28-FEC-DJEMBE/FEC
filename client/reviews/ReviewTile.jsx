@@ -9,6 +9,7 @@ class ReviewTile extends React.Component {
       helpfulClicked: false
     }
     this.handleHelpful = this.handleHelpful.bind(this);
+    this.convertDate = this.convertDate.bind(this);
   }
 
   handleHelpful() {
@@ -21,6 +22,29 @@ class ReviewTile extends React.Component {
       })
 
     }
+  }
+
+  convertDate(date){
+    const months = {
+      "01":"January",
+      "02":"February",
+      "03":"March",
+      "04":"April",
+      "05":"May",
+      "06":"June",
+      "07":"July",
+      "08":"August",
+      "09":"September",
+      "10":"October",
+      "11":"November",
+      "12":"December"
+    }
+
+    let month = months[date.slice(5,7)];
+    let day = date.slice(8,10);
+    let year = date.slice(0,4);
+
+    return `${month} ${day}, ${year}`
   }
 
   render() {
@@ -40,7 +64,7 @@ class ReviewTile extends React.Component {
           <div className='stars tile-stars'>
             <RatingStars rating={review.rating} />
           </div>
-          <p className='user tile-user'>{review.reviewer_name} {review.date}</p>
+          <p className='user tile-user'>{review.reviewer_name}, {this.convertDate(review.date)}</p>
         </div>
         <div id='review-body'>
           <h4>{review.summary}</h4>
