@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Answers from './answers.jsx';
+import AnswerModal from './addAnswerModal.jsx'
 
-const QuestionEntry = () => {
+const QuestionEntry = (props) => {
+const [show, setShow] = useState(false)
+
   return (
-    <div>
-      <p>Q: This is where the question will be</p>
-      <p>A: This is where the answer will be</p>
-    </div>
+    <>
+      {props.questions.map(question =>
+      <>
+          <div className="question-entry">
+            <p className="question">Q: {question.question_body}</p>
+            <div className="question-entry-header">
+              <p>Helpful? Yes({question.question_helpfulness})</p>
+              <p onClick={()=> setShow(true)}>Add Answer</p>
+              <AnswerModal onClick={()=> setShow(false)} show={show}/>
+            </div>
+          </div>
+            <Answers questionId={question.question_id}/>
+      </>
+      )}
+    </>
+
   )
 }
+
 
 export default QuestionEntry;
