@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingStars from './RatingStars.jsx';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class ReviewTile extends React.Component {
       <div className='review-tile'>
         <div className='review-header'>
           <div className='stars tile-stars'>
-            {review.rating} Stars
+            <RatingStars rating={review.rating} />
           </div>
           <p className='user tile-user'>{review.reviewer_name} {review.date}</p>
         </div>

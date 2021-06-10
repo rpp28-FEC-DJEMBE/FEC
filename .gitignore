@@ -10,12 +10,8 @@ bundle.js.LICENSE.txt
 .settings/
 node_modules
 coverage
-<<<<<<< HEAD
-config.js
-=======
 selftest
 server*/config.js
->>>>>>> buildingStars
 
 # Executables
 *.swf
