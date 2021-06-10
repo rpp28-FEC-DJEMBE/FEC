@@ -11,13 +11,21 @@ class AnswerModal extends React.Component {
   }
 
   render(){
-    //check if button had been triggered
+    if (!this.props.show){
+      console.log("It didn't work")
+      return null;
+    }
+    return(
 
-    <div className="answer-modal">
+      <div className="answer-modal">
+        <div className="modal-header" onClick={() => this.props.onClick()}>
+          X
+        </div>
       <input className="user" type="text" maxlength="60" placeholder="Example: jack543"></input>
       <input className="email" type="text" maxlength="60" placeholder="Example: jack@email.com"></input>
       <textarea className="answer" type="text" maxlength="1000"></textarea>
     </div>
+    )
   }
 }
 
