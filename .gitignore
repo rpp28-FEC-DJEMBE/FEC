@@ -12,6 +12,7 @@ node_modules
 coverage
 selftest
 server*/config.js
+selftest
 
 # Executables
 *.swf
