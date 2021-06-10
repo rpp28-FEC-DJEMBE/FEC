@@ -6,17 +6,23 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      initial: [this.props.reviews[0], this.props.reviews[1]]
     }
   }
+
+  renderInitial() {
+    return this.state.initial.map((review, index) => {
+      return <ReviewTile key={index} review={review} />
+    })
+  }
+
   render() {
     return (
       <div className='review-container'>
         <SortOptions />
         <div className='review-list'>
           <p>Review List</p>
-          <ReviewTile />
-          <ReviewTile />
+          {this.renderInitial()}
         </div>
         <div className='review-buttons'>
           <button>More Reviews</button>
