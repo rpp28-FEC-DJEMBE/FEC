@@ -1,12 +1,26 @@
 import React from 'react';
+import Answers from './answers.jsx';
 
-const QuestionEntry = () => {
+const QuestionEntry = (props) => {
+
   return (
-    <div>
-      <p>Q: This is where the question will be</p>
-      <p>A: This is where the answer will be</p>
-    </div>
+    <>
+      {props.questions.map(question =>
+      <>
+          <div className="question-entry">
+            <p className="question">Q: {question.question_body}</p>
+            <div className="question-entry-header">
+              <p>Helpful? Yes({question.question_helpfulness})</p>
+              <p onClick={()=> console.log("hi")}>Add Answer</p>
+            </div>
+          </div>
+            <Answers questionId={question.question_id}/>
+      </>
+      )}
+    </>
+
   )
 }
+
 
 export default QuestionEntry;
