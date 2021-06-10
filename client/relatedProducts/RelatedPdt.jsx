@@ -1,136 +1,131 @@
-import React from 'react';
+// import React from 'react';
+import React, {useEffect, useState} from 'react';
+
 import style from './RelatedPdt.css';
 import OutfitAddCard from './OutfitAddCard.jsx';
 import Product from './Product.jsx';
 import Comparison from './Comparison.jsx';
+const axios = require('axios');
 
-class RelatedPdt extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [
-        {
-          userId: 1,
-          username: 'Kingsley',
-          widget: 'Overview',
-          rating: 1
-        },
-        {
-          userId: 2,
-          username: 'Huiqing',
-          widget: 'Related Products',
-          rating: 2
-        },
-        {
-          userId: 3,
-          username: 'Simon',
-          widget: 'Questions & Answers',
-          rating: 3
-        },
-        {
-          userId: 4,
-          username: 'Andre',
-          widget: 'Ratings & Reviews',
-          rating: 4
-        }
-      ]
-    }
+
+
+function RelatedPdt(props) {
+  const [id, setId] = useState(22122);
+  const [pdt_ids, setPdt_Ids] = useState([]);
+  // [22123, 22124, 22129, 22128]
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [outfits, setOutfits] = useState([]);
+
+  useEffect( () => {
+    getOutfits();
+    getPdt_Ids(id);
+    // getRelatedProducts(pdt_ids);
+    getRelatedProducts([22123, 22124, 22129, 22128]);
+  }, [])
+
+  const getOutfits = () => {
+    axios.get('/products?page=1&count=4')
+      .then( res => {
+        console.log(res.data);
+        setOutfits(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
-  cloneArray(array) {
-    // console.log(...array)
-    return [...array];
+
+  const getPdt_Ids = (id) => {
+    axios.get(`/products/${id}/related`)
+      .then( res => {
+        console.log('ids', res.data);
+        setPdt_Ids(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
-  reverseString(str) {
-    return str
-    .toLowerCase()
-    .split('')
-    .reverse()
-    .join('');
+
+  const getRelatedProducts = (pdt_ids) => {
+    const products = [];
+    pdt_ids.forEach( pdt_id => {
+      axios.get(`/products/${pdt_id}`)
+      .then( res => {
+        console.log('related', res.data);
+        products.push(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    } )
+    setRelatedProducts(products);
   }
 
-  slideLeft() {
-
+  const slideLeft = () => {
   }
 
-  slideRight() {
-
+  const slideRight = () => {
   }
 
-  render () {
-    return (
-      <div>
+  return (
+    <div>
 
-        <div className="relatedProductWidget">
-          <h3 className="relatedProductHeader">RELATED PRODUCTS</h3>
-          <div className="relatedProductBox">
-            <button id="leftBtn" onClick={this.slideLeft.bind(this)}>left</button>
-            {
-              this.state.users.map( user =>
-                (
-                  <Product
-                    key={user.userId}
-                    userId={user.userId}
-                    username={user.username}
-                    rating={user.rating}
-                    cardBtn={'\u2606'}
-                  />
-                )
+      <div className="relatedProductWidget">
+        <h3 className="relatedProductHeader">RELATED PRODUCTS</h3>
+        <div className="relatedProductBox">
+          <button id="leftBtn" onClick={slideLeft}>left</button>
+          {
+            relatedProducts.map( product =>
+              (
+                <Product
+                  key={product.id}
+                  id={product.id}
+                  category={product.category}
+                  name={product.name}
+                  default_price={product.default_price}
+                  rating={'5'}
+                  cardBtn={'\u2606'}
+                />
               )
-            }
-            <button id="rightBtn" onClick={this.slideRight.bind(this)}>right</button>
-          </div>
+            )
+          }
+          <button id="rightBtn" onClick={slideRight}>right</button>
         </div>
-
-        <div className="relatedProductWidget">
-          <h3 className="relatedProductHeader">YOUR OUTFIT</h3>
-          <div className="relatedProductBox">
-            <button id="leftBtn" onClick={this.slideLeft.bind(this)}>left</button>
-            <OutfitAddCard />
-            {
-              this.state.users.map( user =>
-                (
-                  <Product
-                    key={user.userId}
-                    userId={user.userId}
-                    username={user.username}
-                    rating={user.rating}
-                    cardBtn={'\u2327'}
-                  />
-                )
-              )
-            }
-            <button id="leftBtn" onClick={this.slideRight.bind(this)}>Right</button>
-          </div>
-        </div>
-
-        <Comparison />
-
       </div>
-    )
-  }
+
+      <div className="relatedProductWidget">
+        <h3 className="relatedProductHeader">YOUR OUTFIT</h3>
+        <div className="relatedProductBox">
+          <button id="leftBtn" onClick={slideLeft}>left</button>
+          <OutfitAddCard />
+          {
+            outfits.map( outfit =>
+              (
+                <Product
+                  key={outfit.id}
+                  id={outfit.id}
+                  category={outfit.category}
+                  name={outfit.name}
+                  default_price={outfit.default_price}
+                  rating={'5'}
+                  cardBtn={'\u2327'}
+                />
+              )
+            )
+          }
+          <button id="leftBtn" onClick={slideRight}>Right</button>
+        </div>
+      </div>
+
+      <Comparison />
+
+    </div>
+  )
 
 }
 
 export default RelatedPdt;
 
 
-        // <div className="yourOutfitSection">
-        //   <h3 className="yourOutfitHeader">YOUR OUTFIT</h3>
-        //   <div className="yourOutfitBox">
-        //     <OutfitAddCard />
-        //     {
-        //       this.state.users.map( user =>
-        //         (
-        //           <Outfit
-        //             key={user.userId}
-        //             userId={user.userId}
-        //             username={user.username}
-        //             widget={user.widget}
-        //           />
-        //         )
-        //       )
-        //     }
-        //   </div>
-        // </div>
+
