@@ -1,41 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ImageGallery from './ImageGallery.jsx';
+import ProductControls from './ProductControls.jsx';
+import ProductDescription from './ProductDescription.jsx';
+import axios from 'axios';
+
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // not yet
+      productId: 22168,
+      productData: {},
+      productStyles: {},
+      selectedStyleId: null
     }
+  }
+
+  componentDidMount() {
+
+    axios.get('http://localhost:3000/products/' + this.state.productId)
+      .then(response => {
+        console.log('Overview.jsx: Received product data from server');
+        this.setState({
+          productData: response.data
+        });
+        // console.log('Overview.jsx: state = ', JSON.stringify(this.state));
+      })
+      .catch(err => {
+        return err;
+      })
+
+    axios.get(`http://localhost:3000/products/${this.state.productId}/styles`)
+      .then(response => {
+        console.log('Overview.jsx: Received style data from server');
+        this.setState({
+          productStyles: response.data
+        })
+      })
+      .catch(err => {
+        return err;
+      })
+
   }
 
   render() {
     return(
       <div className="container product-overview">
-        <div className="product-image">
-          <p>Product image component</p>
-        </div>
-        <div className="product-controls">
-          <div>Ratings</div>
-          <p>Category</p>
-          <p>Expanded Product Name</p>
-          <p>Price</p>
-          <div>Style Icons</div>
-          <div></div>
-            <div>Select a size</div>
-            <div>Qty</div>
-            <div>Add to bag</div>
-            <div>Star</div>
-        </div>
-        <div className="productDescription">
-          <p>Product Slogan</p>
-          <p>Product Description</p>
-          <ul>
-            <li>GMO and pesticide-free</li>
-            <li>Made with real artificial lemon flavorettes</li>
-            <li>What is happening?</li>
-          </ul>
-        </div>
+        <ImageGallery styles={this.state.productStyles} />
+        <ProductControls />
+        <ProductDescription />
       </div>
     )
   }
