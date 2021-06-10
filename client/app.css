@@ -13,6 +13,35 @@ body {
 
 
 /* Layout Styles */
+
+.product-overview {
+  display: grid;
+  grid-template-columns: 1fr 5fr 3fr;
+}
+
+.image-gallery {
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+
+.product-controls {
+  grid-column-start: 7;
+  grid-column-end: 10;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.product-description {
+  grid-column-start: 2;
+  grid-column-end: 10;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+
 .rr-content {
   display: flex;
   flex-flow: row;
@@ -28,9 +57,50 @@ body {
   padding: 8px;
 }
 
-.qaDisplay {
+.qaDisplay .question-list {
   border: solid gray 1px;
   padding:8px;
+}
+
+.question-entry {
+  border: solid gray 1px;
+  padding:8px;
+}
+
+.answer {
+  border: solid gray 1px;
+  padding:8px;
+}
+
+.qaSearch {
+  display: block;
+  width: 99.5%;
+  height: 50px;
+}
+
+.question-entry {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.answer-footer {
+  display: grid;
+  grid-template-columns: 35% 10% 5%;
+  font-size:12px;
+  font-family: arial;
+  opacity: 0.5;
+}
+
+.question-entry-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: small;
+  opacity: .5;
+}
+
+.question {
+  font-weight: bold;
+  font-family: arial;
 }
 
 
