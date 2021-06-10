@@ -5,6 +5,12 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+:root {
+  --star-size: 60px;
+  --star-color: rgb(184, 184, 184);
+  --star-background: black;
+}
+
 
 /* Layout Styles */
 .rr-content {
@@ -22,11 +28,22 @@ body {
   padding: 8px;
 }
 
+.qaDisplay {
+  border: solid gray 1px;
+  padding:8px;
+}
 
 
 /* State Styles */
 
-
+.stars::before {
+  content: '★★★★★';
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 
 
