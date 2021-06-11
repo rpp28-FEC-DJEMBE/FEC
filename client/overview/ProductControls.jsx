@@ -11,7 +11,7 @@ class ProductControls extends React.Component {
 
   render() {
     return(
-      <div className="product-controls">
+      <div className="o-product-controls">
         {/* <StarRating /> */}
         <p>&#9733; &#9733; &#9733; &#9733; &#9733;</p>
 
@@ -20,18 +20,18 @@ class ProductControls extends React.Component {
         <p>Price</p>
         <p>Style > Selected Style</p>
 
-        <ul className="style-selctor">
+        <ul className="o-style-selctor">
           <li>Style 1</li>
           <li>Style 1</li>
         </ul>
 
-        <select name="size" className="size-list">
+        <select name="size" className="o-size-list">
           <option value="">Select Size</option>
           <option value="size1">Size XS</option>
           <option value="size2">Size XL</option>
         </select>
 
-        <select name="quantity" className="quantity-list">
+        <select name="quantity" className="o-quantity-list">
           <option value="">-</option>
           <option value="1">1</option>
           <option value="2">2</option>

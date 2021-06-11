@@ -13,25 +13,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [
-        {
-          userId: 1,
-          username: 'Kingsley'
-        },
-        {
-          userId: 2,
-          username: 'Huiqing'
-        },
-        {
-          userId: 3,
-          username: 'Simon'
-        },
-        {
-          userId: 4,
-          username: 'Andre'
-        }
-      ],
-      test: true
+      productId: [22122, 22128, 22129, 22161][Math.floor(Math.random() * 4)]
+      // id: 22122
     }
   }
 
@@ -39,12 +22,15 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <header>
-          <h1><img src={logo} alt='The Dejmbe Clothing Company' /></h1>
+          <nav>
+            <h1><img src={logo} alt='The Dejmbe Clothing Company' /></h1>
+          </nav>
+          <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>
-        <Overview />
-        <RelatedPdt users={this.state.users}/>
-        <Questions />
-        <Reviews />
+        <Overview productId={this.state.productId} />
+        <RelatedPdt productId={this.state.productId} />
+        <Questions productId={this.state.productId} />
+        <Reviews productId={this.state.productId} />
       </React.Fragment>
     )
   }

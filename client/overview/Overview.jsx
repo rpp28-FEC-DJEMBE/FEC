@@ -49,9 +49,8 @@ class Overview extends React.Component {
 
   render() {
     return (
-      <div className="container product-overview">
+      <div className="container o-product-overview">
         <ImageGallery styles={this.state.productStyles} />
-        {/* <ImageGallery /> */}
         <ProductControls />
         <ProductDescription />
       </div>

@@ -16,14 +16,16 @@ class ImageGallery extends React.Component {
     } else {
       return(
 
-        <div className="image-gallery">
-          <img src={this.props.styles.results[0].photos[0].url} />
-          <p>Main image here</p>
+        <div className="o-image-gallery">
 
-          <ul>
-            <li>Thumbnail 1</li>
-            <li>Thumbnail 1</li>
+          <ul className="o-image-gallery-thumbnails">
+            <li>x</li>
+            <li>x</li>
+            <li>x</li>
           </ul>
+
+          <img className="o-main-image" src={this.props.styles.results[0].photos[0].url} />
+
 
         </div>
       )
