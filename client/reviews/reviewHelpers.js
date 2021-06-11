@@ -12,8 +12,8 @@ const getAvgRating = (data) => {
 }
 
 // Convert star ratings to percentage for CSS
-const ratingConverter = (rating) => {
-  return rating / 5 * 100;
+const ratingConverter = (rating, divisor) => {
+  return rating / divisor * 100;
 }
 
 // Get total number of ratings

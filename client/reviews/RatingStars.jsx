@@ -9,7 +9,7 @@ const RatingStars = (props) => {
     lineHeight: 1,
   }
 
-  let starPercent = helper.ratingConverter(props.rating);
+  let starPercent = helper.ratingConverter(props.rating, 5);
   let percent= { '--percent': `${starPercent}%` };
 
   return (
