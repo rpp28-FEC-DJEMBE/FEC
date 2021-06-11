@@ -30,7 +30,7 @@ function Product ({id, category, name, default_price, rating, cardBtn}) {
       </div>
 
       <div className="productImage">
-        <img src={img} alt={`${id}`+'No Img'}></img>
+        <img className="product-image" src={img} alt={`${id}`+'No Img'}></img>
       </div>
 
       <div className="productDetailBox">
