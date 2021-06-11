@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './app.css';
+
+import logo from './images/react_js_logo_64px.png';
 import Overview from './overview/overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 import Questions from './questions/questions.jsx';
@@ -18,16 +20,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Welcome to our app!</p>
-        <Overview productId={this.state.productId}/>
-        <RelatedPdt productId={this.state.productId}/>
-        <Questions productId={this.state.productId}/>
-        <Reviews productId={this.state.productId}/>
-      </div>
+      <React.Fragment>
+        <header>
+          <nav>
+            <h1><img src={logo} alt='The Dejmbe Clothing Company' /></h1>
+          </nav>
+          <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
+        </header>
+        <Overview productId={this.state.productId} />
+        <RelatedPdt productId={this.state.productId} />
+        <Questions productId={this.state.productId} />
+        <Reviews productId={this.state.productId} />
+      </React.Fragment>
     )
   }
 }
 
 export default App;
-// ReactDOM.render(<App />, document.getElementById('app'));
