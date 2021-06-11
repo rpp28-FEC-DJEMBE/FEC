@@ -20,10 +20,10 @@ class App extends React.Component {
     return (
       <div>
         <p>Welcome to our app!</p>
-        <Overview />
+        <Overview id={this.state.id}/>
         <RelatedPdt id={this.state.id}/>
-        <Questions />
-        <Reviews />
+        <Questions id={this.state.id}/>
+        <Reviews id={this.state.id}/>
       </div>
     )
   }
