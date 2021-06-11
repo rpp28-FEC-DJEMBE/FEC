@@ -1,3 +1,4 @@
+// Get average rating for stars to nearest 0.25
 const getAvgRating = (data) => {
   let total = 0;
   let ratings = 0;
@@ -10,10 +11,21 @@ const getAvgRating = (data) => {
  return (Math.round(average * 4) / 4).toFixed(2)
 }
 
+// Convert star ratings to percentage for CSS
 const ratingConverter = (rating) => {
   return rating / 5 * 100;
 }
 
+// Get total number of ratings
+const getRatingTotal = (data) => {
+  let ratings = 0;
+  for (var key in data) {
+      ratings += Number(data[key]);
+  }
+ return ratings
+}
+
+// Convert date to MONTH/DD/YYYY format
 const convertDate = (date) => {
   const months = {
     "01":"January",
@@ -39,6 +51,7 @@ const convertDate = (date) => {
 
 module.exports = {
   getAvgRating: getAvgRating,
+  getRatingTotal: getRatingTotal,
   ratingConverter: ratingConverter,
   convertDate: convertDate
 }

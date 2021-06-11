@@ -9,6 +9,9 @@ body {
   --star-size: 60px;
   --star-color: rgb(184, 184, 184);
   --star-background: black;
+  --bars-size: 60px;
+  --bars-color: rgb(184, 184, 184);
+  --bars-background: green;
 }
 
 
@@ -42,7 +45,8 @@ body {
 }
 
 
-.rr-content {
+.rr-content,
+.rating-stars {
   display: flex;
   flex-flow: row;
 }
@@ -110,6 +114,14 @@ body {
   content: '★★★★★';
   letter-spacing: 3px;
   background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bars::before {
+  content: '𑁋𑁋𑁋𑁋𑁋';
+  background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
