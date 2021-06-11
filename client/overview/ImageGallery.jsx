@@ -1,27 +1,35 @@
+
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log('props:', props);
   }
 
+
   render() {
-    return(
-      <div className="image-gallery">
 
-        {/* <img src={this.props.styles.results[0].photos.url} /> */}
-        <p>Main image here</p>
+    if (this.props.styles === null) {
+      return null;
+    } else {
+      return(
 
-        <ul>
-          <li>Thumbnail 1</li>
-          <li>Thumbnail 1</li>
-        </ul>
+        <div className="o-image-gallery">
 
-      </div>
-    )
+          <ul className="o-image-gallery-thumbnails">
+            <li>x</li>
+            <li>x</li>
+            <li>x</li>
+          </ul>
+
+          <img className="o-main-image" src={this.props.styles.results[0].photos[0].url} />
+
+
+        </div>
+      )
+    }
   }
 }
 
