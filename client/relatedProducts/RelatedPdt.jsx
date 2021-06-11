@@ -10,7 +10,7 @@ const axios = require('axios');
 
 
 function RelatedPdt(props) {
-  const [id, setId] = useState(props.id);
+  const [id, setId] = useState(props.productId);
   const [pdt_ids, setPdt_Ids] = useState([]);
   // [22123, 22124, 22129, 22128]
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -21,7 +21,7 @@ function RelatedPdt(props) {
     getPdt_Ids(id);
     // getRelatedProducts(pdt_ids);
     // getRelatedProducts([22124, 22123, 22129, 22128]);
-    getRelatedProducts([props.id]);   // to test app.js props
+    getRelatedProducts([props.productId]);   // to test app.js props
   }, [])
 
   const getOutfits = () => {
