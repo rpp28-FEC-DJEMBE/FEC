@@ -11,25 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [
-        {
-          userId: 1,
-          username: 'Kingsley'
-        },
-        {
-          userId: 2,
-          username: 'Huiqing'
-        },
-        {
-          userId: 3,
-          username: 'Simon'
-        },
-        {
-          userId: 4,
-          username: 'Andre'
-        }
-      ],
-      test: true
+      productId: [22122, 22128, 22129, 22161][Math.floor(Math.random() * 4)]
+      // id: 22122
     }
   }
 
@@ -37,10 +20,10 @@ class App extends React.Component {
     return (
       <div>
         <p>Welcome to our app!</p>
-        <Overview />
-        <RelatedPdt users={this.state.users}/>
-        <Questions />
-        <Reviews />
+        <Overview productId={this.state.productId}/>
+        <RelatedPdt productId={this.state.productId}/>
+        <Questions productId={this.state.productId}/>
+        <Reviews productId={this.state.productId}/>
       </div>
     )
   }
