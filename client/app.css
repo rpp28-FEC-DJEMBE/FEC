@@ -1,5 +1,7 @@
 
-/* Base Styles */
+
+/* BASE STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -12,35 +14,59 @@ body {
 }
 
 
-/* Layout Styles */
+/* LAYOUT STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
 
-.product-overview {
+#app {
+  max-width: 1280px;
+  margin: auto;
+}
+
+.o-product-overview {
   display: grid;
   grid-template-columns: 1fr 5fr 3fr;
 }
 
-.image-gallery {
+.o-image-gallery {
   grid-column-start: 1;
   grid-column-end: 7;
   grid-row-start: 1;
   grid-row-end: 2;
 }
 
+/* .o-image-gallery {
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+} */
 
-.product-controls {
+.o-image-gallery-thumbnails {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: inline-block;
+}
+
+.o-main-image {
+  grid-column-start: 3;
+  grid-column-end: 7;
+}
+
+
+
+.o-product-controls {
   grid-column-start: 7;
   grid-column-end: 10;
   grid-row-start: 1;
   grid-row-end: 2;
 }
 
-.product-description {
+.o-product-description {
   grid-column-start: 2;
   grid-column-end: 10;
   grid-row-start: 2;
   grid-row-end: 3;
 }
-
 
 .rr-content {
   display: flex;
@@ -48,13 +74,54 @@ body {
 }
 
 
-/* Module Styles */
 
-.product-overview,
+/* MODULE STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
+
+header {
+  text-align: center;
+}
+
+header nav {
+  text-align: left;
+  background-color: rgb(4, 4, 4);
+}
+
+header nav h1 {
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+header nav img {
+  height: 40px;
+  width: 40px;
+  margin: 4px 8px;
+  vertical-align: middle;
+}
+
+header p {
+  margin: 16px 0;
+  font-weight: 300;
+  font-size: small;
+  text-transform: uppercase;
+}
+
+
+.o-product-overview,
 .review-list,
 .review-tile {
   border: solid gray 1px;
   padding: 8px;
+}
+
+.o-image-gallery .o-main-image {
+  width: 730px;
+}
+
+.o-main-image {
+  width: 675px;
+  height: 630px;
+  object-fit: cover;
 }
 
 .qaDisplay .question-list {
@@ -149,7 +216,8 @@ body {
 
 
 
-/* State Styles */
+/* STATE STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
 
 .stars::before {
   content: '★★★★★';
@@ -159,7 +227,6 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 
 /*
@@ -172,4 +239,5 @@ body {
 
   http://smacss.com/book/categorizing
   https://medium.com/@fuladuf/state-of-the-art-in-css-a-closer-look-at-css-architecture-systems-544339a6c625
+
 */

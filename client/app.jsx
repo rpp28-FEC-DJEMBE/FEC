@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './app.css';
+
+import logo from './images/react_js_logo_64px.png';
 import Overview from './overview/overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 import Questions from './questions/questions.jsx';
@@ -11,40 +13,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [
-        {
-          userId: 1,
-          username: 'Kingsley'
-        },
-        {
-          userId: 2,
-          username: 'Huiqing'
-        },
-        {
-          userId: 3,
-          username: 'Simon'
-        },
-        {
-          userId: 4,
-          username: 'Andre'
-        }
-      ],
-      test: true
+      productId: [22122, 22128, 22129, 22161][Math.floor(Math.random() * 4)]
+      // id: 22122
     }
   }
 
   render() {
     return (
-      <div>
-        <p>Welcome to our app!</p>
-        <Overview />
-        <RelatedPdt users={this.state.users}/>
-        <Questions />
-        <Reviews />
-      </div>
+      <React.Fragment>
+        <header>
+          <nav>
+            <h1><img src={logo} alt='The Dejmbe Clothing Company' /></h1>
+          </nav>
+          <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
+        </header>
+        <Overview productId={this.state.productId} />
+        <RelatedPdt productId={this.state.productId} />
+        <Questions productId={this.state.productId} />
+        <Reviews productId={this.state.productId} />
+      </React.Fragment>
     )
   }
 }
 
 export default App;
-// ReactDOM.render(<App />, document.getElementById('app'));
