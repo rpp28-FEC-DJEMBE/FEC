@@ -5,6 +5,11 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#app {
+  max-width: 1280px;
+  margin: auto;
+}
+
 :root {
   --star-size: 60px;
   --star-color: rgb(184, 184, 184);
@@ -49,6 +54,24 @@ body {
 
 
 /* Module Styles */
+
+
+header {
+  background-color: rgb(4, 4, 4);
+}
+
+header h1 {
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+header img {
+  height: 40px;
+  width: 40px;
+  margin: 4px 8px;
+  vertical-align: middle;
+}
+
 
 .product-overview,
 .review-list,
