@@ -14,10 +14,10 @@ class SortOptions extends React.Component {
   }
 
   render () {
-    // change the sort text ('248 reviews') dynamically
+    let reviewNumber = this.props.reviews.length;
     return (
       <div className='sort-options'>
-        <label>248 reviews, sorted by </label>
+        <label>{reviewNumber} reviews, sorted by </label>
         <select value={this.state.value} onChange={this.handleChange}>
           <option value='relevance'>relevance</option>
           <option value='helpful'>helpful</option>

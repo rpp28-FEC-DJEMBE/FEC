@@ -6,20 +6,22 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initial: [this.props.reviews[0], this.props.reviews[1]]
+      initial: null
     }
   }
 
   renderInitial() {
-    return this.state.initial.map((review, index) => {
+    let initial = this.props.reviews.slice(0,2);
+    return initial.map((review, index) => {
       return <ReviewTile key={index} review={review} />
     })
   }
 
+
   render() {
     return (
       <div className='review-container'>
-        <SortOptions />
+        <SortOptions reviews={this.props.reviews}/>
         <div className='review-list'>
           <p>Review List</p>
           {this.renderInitial()}
