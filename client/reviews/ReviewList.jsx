@@ -19,12 +19,19 @@ class ReviewList extends React.Component {
 
 
   render() {
+    let tiles;
+    if (this.props.reviews.length) {
+      tiles = this.renderInitial();
+    } else {
+      tiles = `There are currently no reviews for this product.
+      Be the first to leave a review!`
+    }
     return (
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews}/>
         <div className='review-list'>
           <p>Review List</p>
-          {this.renderInitial()}
+          {tiles}
         </div>
         <div className='review-buttons'>
           <button>More Reviews</button>

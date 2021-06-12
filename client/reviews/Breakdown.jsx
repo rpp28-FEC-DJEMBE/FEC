@@ -52,10 +52,10 @@ class Breakdown extends React.Component {
   }
 
   render() {
-    let { ratings } = this.state.metaData;
+    let { ratings, recommended } = this.state.metaData;
     return (
       <div className='breakdown'>
-        <RatingBreakdown ratings={ratings}/>
+        <RatingBreakdown ratings={ratings} recommended={recommended}/>
         <ProductBreakdown />
       </div>
     )

@@ -22,7 +22,16 @@ const getRatingTotal = (data) => {
   for (var key in data) {
       ratings += Number(data[key]);
   }
- return ratings
+ return ratings;
+}
+
+// Get total number of recommends
+const getRecTotal = (data) => {
+  let recs = 0;
+  for (var key in data) {
+    recs += Number(data[key]);
+  }
+  return recs;
 }
 
 // Convert date to MONTH/DD/YYYY format
@@ -52,6 +61,7 @@ const convertDate = (date) => {
 module.exports = {
   getAvgRating: getAvgRating,
   getRatingTotal: getRatingTotal,
+  getRecTotal: getRecTotal,
   ratingConverter: ratingConverter,
   convertDate: convertDate
 }

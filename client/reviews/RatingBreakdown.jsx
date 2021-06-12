@@ -3,9 +3,23 @@ import RatingStars from './RatingStars.jsx';
 import RatingBars from './RatingBars.jsx';
 import helper from './reviewHelpers.js';
 
-const RatingBreakdown = ({ratings}) => {
+const RatingBreakdown = ({ratings, recommended}) => {
+  if(Object.keys(ratings).length === 0) {
+    return (
+      <div className='rating-breakdown'>
+      <p>Rating Breakdown</p>
+      <div className='rating-stars'>
+        <h2>0</h2>
+        <RatingStars rating={0}/>
+      </div>
+      <p>0% of reviews recommend this product</p>
+    </div>
+    )
+  }
 
   let starAverage = helper.getAvgRating(ratings);
+  let totalRecs = helper.getRecTotal(recommended);
+  let recommendPct = Math.round(helper.ratingConverter(recommended['true'], totalRecs));
 
   return (
     <div className='rating-breakdown'>
@@ -14,6 +28,7 @@ const RatingBreakdown = ({ratings}) => {
         <h2>{starAverage}</h2>
         <RatingStars rating={starAverage}/>
       </div>
+      <p>{recommendPct}% of reviews recommend this product</p>
       <RatingBars ratings={ratings} />
     </div>
   )
