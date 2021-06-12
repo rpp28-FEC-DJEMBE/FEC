@@ -6,7 +6,7 @@ const QuestionEntry = (props) => {
   return (
     <>
       {props.questions.map((question, index) =>
-      <>
+      <div key={index}>
           <div className="question-entry" key={index}>
             <p className="question">Q: {question.question_body}</p>
             <div className="question-entry-header">
@@ -15,7 +15,7 @@ const QuestionEntry = (props) => {
             </div>
           </div>
             <Answers questionId={question.question_id}/>
-      </>
+      </div>
       )}
     </>
 
