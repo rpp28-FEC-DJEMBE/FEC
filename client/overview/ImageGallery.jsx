@@ -33,13 +33,13 @@ class ImageGallery extends React.Component {
 
   render() {
 
-    if (!this.state.isLoaded) {
-      return (
-        <section className="o-image-gallery">
-          <p>Loading...</p>
-        </section>
-      );
-    } else {
+    // if (!this.state.isLoaded) {
+    //   return (
+    //     <section className="o-image-gallery">
+    //       <p>Loading...</p>
+    //     </section>
+    //   );
+    // } else {
       return (
         <section className="o-image-gallery">
           <img className="o-main-image" src={this.state.mainImageUrl} />
@@ -52,7 +52,7 @@ class ImageGallery extends React.Component {
           </nav>
         </section>
       )
-    }
+    // }
   }
 }
 
