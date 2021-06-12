@@ -48,10 +48,6 @@ body {
   grid-row-end: 3;
 }
 
-<<<<<<< HEAD
-.rr-content,
-.rating-stars {
-=======
 .o-image-gallery-thumbnails {
   order: 1;
 }
@@ -63,7 +59,6 @@ body {
 }
 
 .rr-content {
->>>>>>> main
   display: flex;
   flex-flow: row;
 }
