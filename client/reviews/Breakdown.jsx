@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
@@ -36,15 +37,25 @@ class Breakdown extends React.Component {
                 "value": "4.0000000000000000"
             }
         }
-    }
+      }
     }
   }
 
+  componentDidMount() {
+    axios.get(`/reviews/meta?product_id=${this.props.productId}`)
+      .then((res) => {
+        this.setState({ metaData: res.data })
+      })
+      .catch((err) => {
+        console.log('Error fetching review meta data', err);
+      })
+  }
+
   render() {
-    let { ratings } = this.state.metaData;
+    let { ratings, recommended } = this.state.metaData;
     return (
       <div className='breakdown'>
-        <RatingBreakdown ratings={ratings}/>
+        <RatingBreakdown ratings={ratings} recommended={recommended}/>
         <ProductBreakdown />
       </div>
     )

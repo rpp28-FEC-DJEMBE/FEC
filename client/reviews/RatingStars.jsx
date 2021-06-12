@@ -1,4 +1,5 @@
 import React from 'react';
+import helper from './reviewHelpers.js';
 
 
 const RatingStars = (props) => {
@@ -8,11 +9,7 @@ const RatingStars = (props) => {
     lineHeight: 1,
   }
 
-  let ratingConverter = (rating) => {
-    return rating / 5 * 100;
-  }
-
-  let starPercent = ratingConverter(props.rating);
+  let starPercent = helper.ratingConverter(props.rating, 5);
   let percent= { '--percent': `${starPercent}%` };
 
   return (

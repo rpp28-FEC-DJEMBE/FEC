@@ -7,70 +7,65 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-#app {
-  max-width: 1280px;
-  margin: auto;
-}
-
 :root {
   --star-size: 60px;
   --star-color: rgb(184, 184, 184);
   --star-background: black;
+  --bars-size: 60px;
+  --bars-color: rgb(184, 184, 184);
+  --bars-background: green;
 }
 
 
 /* LAYOUT STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
+#app {
+  max-width: 1280px;
+  margin: auto;
+}
+
 .o-product-overview {
   display: grid;
-  grid-template-columns: 1fr 5fr 3fr;
+  grid-template-columns: 70% auto;
+  border: solid 1px Red;
 }
 
 .o-image-gallery {
   grid-column-start: 1;
-  grid-column-end: 7;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-column-end: 2;
+  display: flex;
+  border: solid 1px Blue;
 }
 
-/* .o-image-gallery {
-  grid-column-start: 1;
-  grid-column-end: 7;
-  grid-row-start: 1;
-  grid-row-end: 2;
-} */
+.o-product-controls {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.o-product-description {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
 
 .o-image-gallery-thumbnails {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  display: inline-block;
+  order: 1;
 }
 
 .o-main-image {
   grid-column-start: 3;
   grid-column-end: 7;
-}
-
-
-
-.o-product-controls {
-  grid-column-start: 7;
-  grid-column-end: 10;
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-
-.o-product-description {
-  grid-column-start: 2;
-  grid-column-end: 10;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  order: 2;
 }
 
 .rr-content {
   display: flex;
   flex-flow: row;
+}
+
+.rating-bars {
+  display: flex;
+  flex-flow: column;
 }
 
 
@@ -107,25 +102,28 @@ header p {
   text-transform: uppercase;
 }
 
-
-.product-overview,
+.o-product-overview,
 .review-list,
 .review-tile {
   border: solid gray 1px;
   padding: 8px;
 }
 
-.o-image-gallery .o-main-image {
+/* .o-image-gallery .o-main-image {
   width: 730px;
+} */
+
+.o-main-image {
+  width: 630px;
+  height: 630px;
+  object-fit: cover;
 }
 
+.o-image-gallery-thumbnails {
+  width: 120px;
+}
 
 .qaDisplay .question-list {
-  border: solid gray 1px;
-  padding:8px;
-}
-
-.question-entry {
   border: solid gray 1px;
   padding:8px;
 }
@@ -166,6 +164,71 @@ header p {
   font-family: arial;
 }
 
+.breakdown {
+  display: flex;
+  flex-flow: column;
+  width: 325px;
+}
+
+.rating-stars .stars {
+  padding-top: 15px;
+}
+
+.answer-modal, .question-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disclaimer {
+  font-size: small;
+  opacity: .5;
+  height: 0px;
+  margin-top: 1px;
+}
+
+.answer-content, .question-content {
+  display: grid;
+  background-color: white;
+  width: 750px;
+  height: 400px;
+  border-radius: .2rem;
+  padding: 8px;
+}
+
+.answer-content > input, textarea {
+  resize: none;
+  border-radius: .2rem;
+}
+
+.answer-content > label {
+  display: block;
+  padding-top:10px;
+}
+
+.answer-title {
+  font-family: arial;
+}
+
+.modal-header {
+  display:grid;
+  grid-template-columns: 98% 2%;
+}
+
+.modal-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-align: center;
+}
 
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -174,6 +237,17 @@ header p {
   content: '★★★★★';
   letter-spacing: 3px;
   background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bars::before {
+  content: '𑁋𑁋𑁋𑁋';
+  font-size: 25px;
+  font-stretch: expanded;
+  letter-spacing: -3px;
+  background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
