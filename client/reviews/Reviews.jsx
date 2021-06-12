@@ -49,7 +49,6 @@ class Reviews extends React.Component {
   componentDidMount() {
     axios.get(`/reviews/?sort=relevant&product_id=${this.state.product_id}`)
       .then((res) => {
-        console.log('GET review results', res.data.results);
         this.setState({reviews: res.data.results})
       })
       .catch((err) => {
@@ -63,7 +62,7 @@ class Reviews extends React.Component {
       <div className='ratings-reviews'>
           <p>Ratings and Reviews</p>
           <div className='rr-content'>
-            <Breakdown />
+            <Breakdown productId={this.state.product_id}/>
             <ReviewList reviews={this.state.reviews} />
           </div>
         </div>
