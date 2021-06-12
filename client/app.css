@@ -85,6 +85,7 @@ header {
 header nav {
   text-align: left;
   background-color: rgb(4, 4, 4);
+  color: lightgray;
 }
 
 header nav h1 {
@@ -94,7 +95,7 @@ header nav h1 {
 
 header nav img {
   height: 40px;
-  width: 40px;
+  width: 110px;
   margin: 4px 8px;
   vertical-align: middle;
 }

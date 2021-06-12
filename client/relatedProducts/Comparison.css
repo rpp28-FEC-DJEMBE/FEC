@@ -1,18 +1,25 @@
-.comparisonBox {
+.comparison-box {
   border: solid 1px grey;
   padding: 5px;
   width: 40%;
   margin: auto;
 }
 
-.comparisonName {
+.comparison-name {
   display: grid;
-  grid-template-columns: auto 30%
+  grid-template-columns: auto 30%;
+  margin: 0;
 }
 
-.comparisonTable {
+.comparison-table {
   display: grid;
-  grid-template-columns: auto auto 5%;
+  grid-template-columns: auto auto auto;
   font-size: small;
   line-height: 0.6;
+}
+
+.comparing {
+  font-weight: 300;
+  font-size: smaller;
+  margin: 0;
 }

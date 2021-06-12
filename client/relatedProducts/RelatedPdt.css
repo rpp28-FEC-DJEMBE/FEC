@@ -1,4 +1,4 @@
-.relatedProductBox {
+.related-product-box {
   border: solid 1px powderblue;
   /* padding: 5px;
   margin: 10px; */
@@ -6,5 +6,6 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 314px;
 }
 

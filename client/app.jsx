@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 
 import './app.css';
 
-import logo from './images/react_js_logo_64px.png';
+// import logo from './images/react_js_logo_64px.png';
+const logo = 'https://drive.google.com/uc?export=view&id=1ZJWMpyC9lHuT9YawTMJ8ymOfPlDK7ga_'
 import Overview from './overview/overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 import Questions from './questions/questions.jsx';
@@ -13,8 +14,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: [22122, 22128, 22129, 22161][Math.floor(Math.random() * 4)]
-      // id: 22122
+      productId: [22122, 22126, 22129, 22161][Math.floor(Math.random() * 4)]
+      // productId: 22122
     }
   }
 
@@ -23,7 +24,7 @@ class App extends React.Component {
       <React.Fragment>
         <header>
           <nav>
-            <h1><img src={logo} alt='The Dejmbe Clothing Company' /></h1>
+            <h1><img src={logo} alt='Dejmbe' />The Dejmbe Clothing Company</h1>
           </nav>
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>
