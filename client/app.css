@@ -177,7 +177,12 @@ header p {
   justify-content: center;
 }
 
-
+.disclaimer {
+  font-size: small;
+  opacity: .5;
+  height: 0px;
+  margin-top: 1px;
+}
 
 .answer-content, .question-content {
   display: grid;
