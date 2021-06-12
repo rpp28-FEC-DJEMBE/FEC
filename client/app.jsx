@@ -25,7 +25,7 @@ class App extends React.Component {
       <React.Fragment>
         <header>
           <nav>
-            <h1><img src={logo} alt='Dejmbe' />The Dejmbe Clothing Company</h1>
+            <h1><img src={logo} alt='Djembe' />The Djembe Clothing Company</h1>
           </nav>
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>
