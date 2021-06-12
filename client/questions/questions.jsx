@@ -27,7 +27,7 @@ class Questions extends React.Component{
       method:'get',
       url: '/qa/questions',
       params: {
-        product_id:22122,
+        product_id:this.props.productId,
         count:2
       }
     }).then(data => {
