@@ -1,28 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-// const Answers = (props) => {
-//   let answers = [];
-
-//   axios({
-//     method:'get',
-//     url: `/qa/questions/${props.questionID}`
-//   }).then(data => {
-
-//   })
-//   return (
-//     <div className="answer-list">
-//       {answers.map(answer =>
-//       <>
-//         <p className="answer" >`A: {answer.body}`</p>
-//         <p className="username" >{answer.answerer_name}</p> <p>Helpful?</p> <p>`Yes({answer.helpfulness})`</p> <p>report</p>
-//       </>
-//       )}
-//     </div>
-//     )
-// }
-
-
 class Answers extends React.Component {
   constructor(props) {
     super(props);
@@ -71,8 +49,8 @@ class Answers extends React.Component {
   render() {
     return (
       <div className="answer-list">
-        {this.state.answers.map(answer =>
-        <div  className="answer">
+        {this.state.answers.map((answer, index) =>
+        <div  className="answer" key={index}>
           <p>A: {answer.body}</p>
           <div className="answer-footer">
             <p>by {answer.answerer_name}, {this.convertDate(answer.date)}</p>
