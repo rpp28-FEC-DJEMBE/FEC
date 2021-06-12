@@ -47,11 +47,11 @@ class AnswerModal extends React.Component {
             <div className="exit" onClick={() => this.props.handleClose()}>X</div>
           </div>
           <label for="user">What is your nickname (mandatory) </label>
-          <input id="user" type="text" onChange={() => this.inputChange("user")} maxlength="60" placeholder="Example: jack543"></input>
+          <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543"></input>
           <label for="email">Your email (mandatory) </label>
-          <input id="email" type="text" onChange={() => this.inputChange("email")} maxlength="60" placeholder="Example: jack@email.com"></input>
+          <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com"></input>
           <label for="answer">Your Answer</label>
-          <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxlength="1000"></textarea>
+          <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000"></textarea>
           <div className="modal-footer">
             <input className="upload-photo" type="file"></input>
             <div className="answer-submit">Submit Answer</div>

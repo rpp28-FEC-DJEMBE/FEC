@@ -4,6 +4,7 @@ import axios from 'axios';
 import Search from './search.jsx';
 import QuestionsList from './questionsList.jsx';
 import AnswerModal from './addAnswerModal.jsx'
+import AddQuestion from './addQuestion.jsx'
 
 
 class Questions extends React.Component{
@@ -13,9 +14,12 @@ class Questions extends React.Component{
       product_id: 0,
       questions: [],
       answerShow: false,
+      questionShow: false,
       questionId: null
     }
     this.handleAddAnswerClick = this.handleAddAnswerClick.bind(this);
+    this.handleAddQClick = this.handleAddQClick.bind(this);
+
   }
 
   componentDidMount(){
@@ -48,13 +52,26 @@ class Questions extends React.Component{
     }
   }
 
+  handleAddQClick () {
+    if(!this.state.questionShow) {
+      this.setState({
+        questionShow: true
+      })
+    } else {
+      this.setState({
+        questionShow:false
+      })
+    }
+  }
+
   render() {
     return (
       <div className="qaDisplay">
         <h1>Questions & Answers</h1>
         <Search />
-        <QuestionsList questions={this.state.questions} handleAddAnswer={this.handleAddAnswerClick} />
+        <QuestionsList questions={this.state.questions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} />
         <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} />
+        <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick} />
       </div>
     );
   }

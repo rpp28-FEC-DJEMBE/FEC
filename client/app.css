@@ -175,6 +175,7 @@ header p {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .breakdown {
   display: flex;
   flex-flow: column;
@@ -186,6 +187,9 @@ header p {
 }
 =======
 .answer-modal {
+=======
+.answer-modal, .question-modal {
+>>>>>>> main
   position: fixed;
   left: 0;
   top: 0;
@@ -197,7 +201,14 @@ header p {
   justify-content: center;
 }
 
-.answer-content {
+.disclaimer {
+  font-size: small;
+  opacity: .5;
+  height: 0px;
+  margin-top: 1px;
+}
+
+.answer-content, .question-content {
   display: grid;
   background-color: white;
   width: 750px;

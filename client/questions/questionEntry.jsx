@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Answers from './answers.jsx';
-import AnswerModal from './addAnswerModal.jsx'
 
 const QuestionEntry = (props) => {
   return (
