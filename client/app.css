@@ -71,7 +71,8 @@ body {
   grid-row-end: 3;
 }
 
-.rr-content {
+.rr-content,
+.rating-stars {
   display: flex;
   flex-flow: row;
 }
@@ -178,6 +179,15 @@ header p {
   font-family: arial;
 }
 
+.breakdown {
+  display: flex;
+  flex-flow: column;
+  width: 325px;
+}
+
+.rating-stars .stars {
+  padding-top: 15px;
+}
 
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -192,7 +202,10 @@ header p {
 }
 
 .bars::before {
-  content: '𑁋𑁋𑁋𑁋𑁋';
+  content: '𑁋𑁋𑁋𑁋';
+  font-size: 25px;
+  font-stretch: expanded;
+  letter-spacing: -3px;
   background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;

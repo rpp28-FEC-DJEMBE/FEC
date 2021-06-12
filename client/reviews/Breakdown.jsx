@@ -37,7 +37,7 @@ class Breakdown extends React.Component {
                 "value": "4.0000000000000000"
             }
         }
-    }
+      }
     }
   }
 

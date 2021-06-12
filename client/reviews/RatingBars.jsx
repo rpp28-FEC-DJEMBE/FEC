@@ -19,23 +19,23 @@ const RatingBars = ({ratings}) => {
   return (
     <div className='rating-bars'>
       <div className='5-bar'>
-        5
+        5 stars
         <div className='bars' style={{...barStyle, ...percent5}}></div>
       </div>
       <div className='4-bar'>
-        4
+        4 stars
         <div className='bars' style={{...barStyle, ...percent4}}></div>
       </div>
       <div className='3-bar'>
-        3
+        3 stars
         <div className='bars' style={{...barStyle, ...percent3}}></div>
       </div>
       <div className='2-bar'>
-        2
+        2 stars
         <div className='bars' style={{...barStyle, ...percent2}}></div>
       </div>
       <div className='1-bar'>
-        1
+        1 stars
         <div className='bars' style={{...barStyle, ...percent1}}></div>
       </div>
     </div>
