@@ -6,8 +6,10 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initial: null
+      initial: [],
+      reviews: []
     }
+    this.handleMoreReviews = this.handleMoreReviews.bind(this);
   }
 
   renderInitial() {
@@ -17,6 +19,14 @@ class ReviewList extends React.Component {
     })
   }
 
+  handleMoreReviews() {
+    // let reviews = this.props.reviews.slice();
+    // this.setState((state, props) => ({
+    //   reviews: this.state.reviews.concat(reviews),
+    //   initial: this.state.initial.concat(this.props.reviews.slice(0, 2))
+    // }))
+    // console.log('review list state====',this.state)
+  }
 
   render() {
     let tiles;
@@ -34,7 +44,7 @@ class ReviewList extends React.Component {
           {tiles}
         </div>
         <div className='review-buttons'>
-          <button>More Reviews</button>
+          <button onClick={this.handleMoreReviews}>More Reviews</button>
           <button>Add A Review +</button>
         </div>
       </div>
