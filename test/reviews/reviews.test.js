@@ -4,9 +4,10 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({adapter: new Adapter()});
 import Reviews from '../../client/reviews/Reviews.jsx';
 
-test('shallow wrapper instance should not be null', () => {
-  const wrapper = shallow(<Reviews productId={22122}/>);
-  const instance = wrapper.instance();
+describe('Components render', () => {
+  test('Renders Reviews component', () => {
+    const reviews = shallow(<Reviews productId={22122}/>);
 
-  expect(instance).not.toBeNull();
+    expect(reviews.exists()).toBe(true);
+  })
 })
