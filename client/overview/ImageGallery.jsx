@@ -1,13 +1,17 @@
-
-
 import React from 'react';
-// import ReactDOM from 'react-dom';
 
 class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
   }
 
+renderThumbnails() {
+  // get the style data
+  // iterate through it, urls
+  // build the ul/li fragment
+
+
+}
 
   render() {
 
@@ -15,19 +19,16 @@ class ImageGallery extends React.Component {
       return null;
     } else {
       return(
-
-        <div className="o-image-gallery">
-
-          <ul className="o-image-gallery-thumbnails">
-            <li>x</li>
-            <li>x</li>
-            <li>x</li>
-          </ul>
-
+        <section className="o-image-gallery">
           <img className="o-main-image" src={this.props.styles.results[0].photos[0].url} />
-
-
-        </div>
+          <nav className="o-image-gallery-thumbnails">
+            <ul>
+              <li>x</li>
+              <li>x</li>
+              <li>x</li>
+            </ul>
+          </nav>
+        </section>
       )
     }
   }

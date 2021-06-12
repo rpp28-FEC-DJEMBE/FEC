@@ -11,8 +11,8 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
-      productId: 22168,
-      productData: null,
+      // productId: 22168,
+      // productData: null,
       productStyles: null,
       selectedStyleId: null
     }
@@ -20,7 +20,7 @@ class Overview extends React.Component {
 
   componentDidMount() {
 
-    // axios.get('http://localhost:3000/products/' + this.state.productId)
+    // axios.get('http://localhost:3000/products/' + this.props.productId)
     //   .then(response => {
     //     console.log('Overview: Received product data from server');
     //     this.setState({
@@ -32,7 +32,7 @@ class Overview extends React.Component {
     //   })
 
 
-    axios.get(`http://localhost:3000/products/${this.state.productId}/styles`)
+    axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
       .then(response => {
         console.log('Overview: Received style data from server');
         console.log('Overview: style data = ', response.data);
@@ -49,11 +49,11 @@ class Overview extends React.Component {
 
   render() {
     return (
-      <div className="container o-product-overview">
+      <section className="container o-product-overview">
         <ImageGallery styles={this.state.productStyles} />
-        <ProductControls />
-        <ProductDescription />
-      </div>
+        <ProductControls styles={this.state.productStyles}/>
+        <ProductDescription productId={this.props.productId} />
+      </section>
     );
   }
 }
