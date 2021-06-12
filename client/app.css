@@ -174,8 +174,6 @@ header p {
   font-family: arial;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .breakdown {
   display: flex;
   flex-flow: column;
@@ -185,11 +183,8 @@ header p {
 .rating-stars .stars {
   padding-top: 15px;
 }
-=======
-.answer-modal {
-=======
+
 .answer-modal, .question-modal {
->>>>>>> main
   position: fixed;
   left: 0;
   top: 0;
@@ -244,9 +239,6 @@ header p {
   padding-right: 2rem;
   text-align: center;
 }
-
-
->>>>>>> main
 
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
