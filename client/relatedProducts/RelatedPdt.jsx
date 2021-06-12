@@ -10,57 +10,61 @@ const axios = require('axios');
 
 
 function RelatedPdt(props) {
-  const [id, setId] = useState(props.productId);
-  const [pdt_ids, setPdt_Ids] = useState([]);
-  // [22123, 22124, 22129, 22128]
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  // const [id, setId] = useState(props.productId);
+
+  const [relatedPdts, setRelatedPdts] = useState({pdt_ids: [], relatedProducts: []});
   const [outfits, setOutfits] = useState([]);
+  const [clickedId, setClickedId] = useState(22122);
 
   useEffect( () => {
     getOutfits();
-    getPdt_Ids(id);
-    // getRelatedProducts(pdt_ids);
-    // getRelatedProducts([22124, 22123, 22129, 22128]);
-    getRelatedProducts([props.productId]);   // to test app.js props
+    getRelatedPdts(props.productId);
   }, [])
+
+  if (relatedPdts.pdt_ids.length !== 0) {
+    // console.log("state3", relatedPdts.pdt_ids, relatedPdts.relatedProducts);
+  }
+
+  const getRelatedPdts = async (id) => {
+    try {
+      // console.log('currentID:', props.productId)
+      const pdt_ids = await axios.get(`/products/${id}/related`);
+      // console.log('pdt_ids.data', pdt_ids.data);
+      let pdt_idsData = [];
+      pdt_ids.data.forEach( pdt_id => {
+        if (!pdt_idsData.includes(pdt_id)) {
+          pdt_idsData.push(pdt_id);
+        }
+      } )
+
+      let pdtPromises = [];
+      for (let i = 0; i < pdt_idsData.length; i++) {
+        pdtPromises[i] = axios.get(`/products/${pdt_idsData[i]}`)
+        // console.log('related Promises', pdtPromises[i]);
+      }
+      Promise.all(pdtPromises)
+        .then( (productsData) => {
+          let products = [];
+          productsData.forEach( (pdtData) => {
+            products.push(pdtData.data);
+          } )
+          // console.log('products', productsData[0].data);
+          setRelatedPdts({pdt_ids: pdt_idsData, relatedProducts: products})
+        } )
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const getOutfits = () => {
     axios.get('/products?page=1&count=4')
       .then( res => {
-        console.log(res.data);
+        // console.log('getOutfits', res.data);
         setOutfits(res.data);
       })
       .catch(err => {
         console.log(err);
       })
-  }
-
-
-  const getPdt_Ids = (id) => {
-    axios.get(`/products/${id}/related`)
-      .then( res => {
-        console.log('id', id, 'ids', res.data);
-        setPdt_Ids(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-
-  const getRelatedProducts = (pdt_ids) => {
-    const products = [];
-    pdt_ids.forEach( pdt_id => {
-      axios.get(`/products/${pdt_id}`)
-      .then( res => {
-        console.log('related', res.data);
-        products.push(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    } )
-    setRelatedProducts(products);
   }
 
   const slideLeft = () => {
@@ -72,15 +76,16 @@ function RelatedPdt(props) {
   return (
     <div>
 
-      <div className="relatedProductWidget">
-        <h3 className="relatedProductHeader">RELATED PRODUCTS</h3>
-        <div className="relatedProductBox">
-          <button id="leftBtn" onClick={slideLeft}>left</button>
+      <div className="related-product-widget">
+        <h3 className="related-product-header">RELATED PRODUCTS</h3>
+        <div className="related-product-box">
+          <button id="left-btn" onClick={slideLeft}>left</button>
           {
-            relatedProducts.map( product =>
+            relatedPdts.relatedProducts.map( product =>
               (
                 <Product
                   key={product.id}
+                  overviewProductId={props.productId}
                   id={product.id}
                   category={product.category}
                   name={product.name}
@@ -91,20 +96,21 @@ function RelatedPdt(props) {
               )
             )
           }
-          <button id="rightBtn" onClick={slideRight}>right</button>
+          <button id="right-btn" onClick={slideRight}>right</button>
         </div>
       </div>
 
-      <div className="relatedProductWidget">
-        <h3 className="relatedProductHeader">YOUR OUTFIT</h3>
-        <div className="relatedProductBox">
-          <button id="leftBtn" onClick={slideLeft}>left</button>
+      <div className="related-product-widget">
+        <h3 className="related-product-header">YOUR OUTFIT</h3>
+        <div className="related-product-box">
+          <button id="left-btn" onClick={slideLeft}>left</button>
           <OutfitAddCard />
           {
             outfits.map( outfit =>
               (
                 <Product
                   key={outfit.id}
+                  overviewProductId={props.productId}
                   id={outfit.id}
                   category={outfit.category}
                   name={outfit.name}
@@ -115,11 +121,11 @@ function RelatedPdt(props) {
               )
             )
           }
-          <button id="leftBtn" onClick={slideRight}>Right</button>
+          <button id="right-btn" onClick={slideRight}>Right</button>
         </div>
       </div>
 
-      <Comparison />
+      <Comparison productId={props.productId} clickedId={clickedId}/>
 
     </div>
   )

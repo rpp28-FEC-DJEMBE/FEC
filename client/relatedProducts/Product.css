@@ -1,5 +1,5 @@
-.addOutfit,
-.productCard {
+.add-outfit,
+.product-card {
   /* background-color: powderblue; */
   width: 200px;
   height: 300px;
@@ -8,15 +8,35 @@
   margin: 5px;
 }
 
-.addOutfit {
+.add-outfit {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.productImage {
+.product-image-div {
   height: 200px;
   background-color: powderblue;
+}
+
+.product-category {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.product-name {
+  /* font-weight: 300; */
+  font-weight: bold;
+}
+
+.product-price {
+  font-weight: 300;
+  font-size: smaller;
+}
+.product-id {
+  font-weight: 300;
+  font-size: smaller;
+  color: powderblue;
 }
 
 .product-image {
@@ -26,7 +46,7 @@
   box-sizing: border-box;
 }
 
-.productDetailBox {
+.product-detail-box {
   width: 100%;
   height: 100px;
   font-size: small;
@@ -34,7 +54,7 @@
   padding-left: 5px;
 }
 
-.cardBtn {
+.card-btn {
   position: absolute;
   z-index: 9;
   margin-left: 170px;
