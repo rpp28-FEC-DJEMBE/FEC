@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingStars from './RatingStars.jsx';
+import helper from './reviewHelpers.js';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class ReviewTile extends React.Component {
     }
   }
 
+
+
   render() {
     let { review } = this.props;
     let recommend;
@@ -40,7 +43,7 @@ class ReviewTile extends React.Component {
           <div className='stars tile-stars'>
             <RatingStars rating={review.rating} />
           </div>
-          <p className='user tile-user'>{review.reviewer_name} {review.date}</p>
+          <p className='user tile-user'>{review.reviewer_name}, {helper.convertDate(review.date)}</p>
         </div>
         <div id='review-body'>
           <h4>{review.summary}</h4>

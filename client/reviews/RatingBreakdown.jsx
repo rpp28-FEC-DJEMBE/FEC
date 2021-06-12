@@ -1,27 +1,35 @@
 import React from 'react';
 import RatingStars from './RatingStars.jsx';
+import RatingBars from './RatingBars.jsx';
+import helper from './reviewHelpers.js';
 
-const RatingBreakdown = (props) => {
-
-  const getAvgRating = (data) => {
-    let total = 0;
-    let ratings = 0;
-    for (var key in data) {
-        total += Number(key) * Number(data[key]);
-        ratings += Number(data[key]);
-    }
-
-   let average = total/ratings;
-   return (Math.round(average * 4) / 4).toFixed(2)
+const RatingBreakdown = ({ratings, recommended}) => {
+  if(Object.keys(ratings).length === 0) {
+    return (
+      <div className='rating-breakdown'>
+      <p>Rating Breakdown</p>
+      <div className='rating-stars'>
+        <h2>0</h2>
+        <RatingStars rating={0}/>
+      </div>
+      <p>0% of reviews recommend this product</p>
+    </div>
+    )
   }
 
-  let starAverage = getAvgRating(props.ratings);
+  let starAverage = helper.getAvgRating(ratings);
+  let totalRecs = helper.getRecTotal(recommended);
+  let recommendPct = Math.round(helper.ratingConverter(recommended['true'], totalRecs));
 
   return (
     <div className='rating-breakdown'>
       <p>Rating Breakdown</p>
-      {starAverage}
-      <RatingStars rating={starAverage}/>
+      <div className='rating-stars'>
+        <h2>{starAverage}</h2>
+        <RatingStars rating={starAverage}/>
+      </div>
+      <p>{recommendPct}% of reviews recommend this product</p>
+      <RatingBars ratings={ratings} />
     </div>
   )
 }
