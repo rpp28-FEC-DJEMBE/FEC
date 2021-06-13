@@ -6,26 +6,30 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initial: [],
-      reviews: []
+      initial: this.props.reviews.slice(0,2),
+      reviews: this.props.reviews.slice(),
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
   }
 
   renderInitial() {
-    let initial = this.props.reviews.slice(0,2);
-    return initial.map((review, index) => {
+    return this.state.initial.map((review, index) => {
       return <ReviewTile key={index} review={review} />
     })
   }
 
   handleMoreReviews() {
-    // let reviews = this.props.reviews.slice();
-    // this.setState((state, props) => ({
-    //   reviews: this.state.reviews.concat(reviews),
-    //   initial: this.state.initial.concat(this.props.reviews.slice(0, 2))
-    // }))
-    // console.log('review list state====',this.state)
+    this.setState((prevState) => ({
+      initial: prevState.initial.concat(this.state.reviews.splice(0,2))
+    }))
+    console.log('review list state====',this.state)
+    console.log(this.props.reviews)
+  }
+
+  componentDidMount() {
+    this.setState({
+      initial: this.state.reviews.splice(0,2)
+    })
   }
 
   render() {
@@ -36,6 +40,9 @@ class ReviewList extends React.Component {
       tiles = `There are currently no reviews for this product.
       Be the first to leave a review!`
     }
+    let moreReviews = (this.state.initial.length === this.props.reviews.length) ? null :
+      <button onClick={this.handleMoreReviews}>More Reviews</button>;
+
     return (
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews}/>
@@ -44,7 +51,7 @@ class ReviewList extends React.Component {
           {tiles}
         </div>
         <div className='review-buttons'>
-          <button onClick={this.handleMoreReviews}>More Reviews</button>
+          {moreReviews}
           <button>Add A Review +</button>
         </div>
       </div>
