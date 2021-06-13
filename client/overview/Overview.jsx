@@ -17,7 +17,6 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-
     axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
       .then(response => {
         console.log('Overview: Received style data from server');
@@ -32,34 +31,6 @@ class Overview extends React.Component {
         console.log('Overview: Error getting style data from server:', err);
       })
   }
-
-  // getStyles() {
-  //   axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
-  //     .then(response => {
-  //       console.log('Overview: Received style data from server');
-  //       console.log('Overview: style response.data.results = ', response.data.results);
-  //       this.setState({
-  //         productStyles: response.data.results,
-  //         selectedStyleId: response.data.results[0].style_id
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log('Overview: Error getting style data from server:', err);
-  //     })
-  // }
-
-  // getProducts() {
-    // axios.get('http://localhost:3000/products/' + this.props.productId)
-    //   .then(response => {
-    //     console.log('Overview: Received product data from server');
-    //     this.setState({
-    //       productData: response.data
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Overview: Error getting product data from server:', err);
-    //   })
-  // }
 
   render() {
     if (!this.state.isLoaded) {

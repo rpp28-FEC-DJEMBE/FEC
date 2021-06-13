@@ -9,6 +9,7 @@ class ImageGallery extends React.Component {
       mainImageUrl: '',
       isLoaded: false
     }
+    console.log('PROPS:', this.props);
   }
 
   componentDidMount() {
