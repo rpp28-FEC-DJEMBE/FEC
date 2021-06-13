@@ -6,8 +6,6 @@ configure({adapter: new Adapter()});
 import ImageGallery from '../../client/overview/ImageGallery.jsx';
 import {testDataStyles} from './testData.js';
 
-console.log('IMPORT:', testDataStyles);
-
 describe('rendering', () => {
 
   const propsForImageGallery = {
