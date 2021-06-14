@@ -42,7 +42,6 @@ class ReviewList extends React.Component {
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews}/>
         <div className='review-list'>
-          <p>Review List</p>
           {tiles}
         </div>
         <div className='review-buttons'>
