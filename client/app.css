@@ -45,14 +45,13 @@ body {
 }
 
 .o-image-gallery-thumbnails {
-  display: flex;
+  display: none; /*flex;*/
   flex-direction: column;
 }
+
 .o-image-gallery-thumbnails li {
   flex: auto;
 }
-
-
 
 .o-product-controls {
   grid-column-start: 2;
