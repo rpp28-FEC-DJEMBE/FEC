@@ -7,6 +7,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+body * {
+  box-sizing: border-box;
+}
+
 :root {
   --star-size: 60px;
   --star-color: rgb(184, 184, 184);
@@ -25,7 +29,7 @@ body {
   margin: auto;
 }
 
-.o-product-overview {
+/* .o-product-overview {
   display: grid;
   grid-template-columns: 800px auto;
   border: solid 1px Red;
@@ -34,18 +38,15 @@ body {
 .o-image-gallery {
   grid-column-start: 1;
   grid-column-end: 2;
-  /* display: flex; */
   border: solid 1px Blue;
 }
 
 .o-main-image {
-  /* grid-column-start: 3;
-  grid-column-end: 7; */
   order: 2;
 }
 
 .o-image-gallery-thumbnails {
-  display: none; /*flex;*/
+  display: none;
   flex-direction: column;
 }
 
@@ -61,7 +62,7 @@ body {
 .o-product-description {
   grid-row-start: 2;
   grid-row-end: 3;
-}
+} */
 
 .rr-content {
   display: flex;
@@ -114,7 +115,7 @@ header p {
   padding: 8px;
 }
 
-.o-main-image {
+/* .o-main-image {
   width: 800px;
   height: 630px;
   min-width: 800px;
@@ -130,7 +131,7 @@ header p {
   width: 65px;
   height: 65px;
   object-fit: cover;
-}
+} */
 
 .qaDisplay .question-list {
   border: solid gray 1px;

@@ -5,6 +5,8 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductControls from './ProductControls.jsx';
 import ProductDescription from './ProductDescription.jsx';
 
+import './overview.css';
+
 class Overview extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +62,7 @@ class Overview extends React.Component {
 
       let selectedStyle = this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
       return (
-        <section className="container o-product-overview">
+        <section className="o-product-overview">
           <ImageGallery stylePhotos={selectedStyle.photos} selectedStyleId={this.state.selectedStyleId} />
           <ProductControls styles={this.state.productStyles}/>
           <ProductDescription productId={this.props.productId} />
