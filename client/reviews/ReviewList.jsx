@@ -33,13 +33,8 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let tiles;
-    if (this.props.reviews.length) {
-      tiles = this.renderInitial();
-    } else {
-      tiles = `There are currently no reviews for this product.
-      Be the first to leave a review!`
-    }
+    let tiles = (this.props.reviews.length) ? this.renderInitial() : `There are currently no reviews for this product.
+    Be the first to leave a review!`;
     let moreReviews = (this.state.initial.length === this.props.reviews.length) ? null :
       <button onClick={this.handleMoreReviews}>More Reviews</button>;
 

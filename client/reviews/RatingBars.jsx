@@ -9,11 +9,13 @@ const RatingBars = ({ratings}) => {
     lineHeight: 1,
   }
   let total = helper.getRatingTotal(ratings);
-  let percent5 = { '--percent': `${helper.ratingConverter(ratings[5], total)}%` };
-  let percent4 = { '--percent': `${helper.ratingConverter(ratings[4], total)}%` };
-  let percent3 = { '--percent': `${helper.ratingConverter(ratings[3], total)}%` };
-  let percent2 = { '--percent': `${helper.ratingConverter(ratings[2], total)}%` };
-  let percent1 = { '--percent': `${helper.ratingConverter(ratings[1], total)}%` };
+  let emptyBar = { '--percent': `0%` };
+  let percent5 = (ratings[5]) ? { '--percent': `${helper.ratingConverter(ratings[5], total)}%` } : emptyBar;
+  let percent4 = (ratings[4]) ? { '--percent': `${helper.ratingConverter(ratings[4], total)}%` } : emptyBar;
+  let percent3 = (ratings[3]) ? { '--percent': `${helper.ratingConverter(ratings[3], total)}%` } : emptyBar;
+  let percent2 = (ratings[2]) ? { '--percent': `${helper.ratingConverter(ratings[2], total)}%` } : emptyBar;
+  let percent1 = (ratings[1]) ? { '--percent': `${helper.ratingConverter(ratings[1], total)}%` } : emptyBar;
+
 
 
   return (
