@@ -22,8 +22,6 @@ class ReviewList extends React.Component {
     this.setState((prevState) => ({
       initial: prevState.initial.concat(this.state.reviews.splice(0,2))
     }))
-    console.log('review list state====',this.state)
-    console.log(this.props.reviews)
   }
 
   componentDidMount() {
