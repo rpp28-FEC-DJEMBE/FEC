@@ -10,13 +10,14 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
+      product: [],
       productStyles: [],
       selectedStyleId: null,
       isLoaded: false
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
       .then(response => {
         console.log('Overview: Received style data from server');
@@ -32,7 +33,23 @@ class Overview extends React.Component {
       })
   }
 
+  // getProduct() {
+  //   axios.get('http://localhost:3000/products/' + this.props.productId)
+  //     .then(response => {
+  //       console.log('Overview: Received product data from server');
+  //       this.setState({
+  //         productData: response.data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log('Overview: Error getting product data from server:', err);
+  //     })
+  // }
+
+  // this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
+
   render() {
+
     if (!this.state.isLoaded) {
       return (
         <section className="container o-product-overview">
@@ -40,9 +57,11 @@ class Overview extends React.Component {
         </section>
       )
     } else {
+
+      let selectedStyle = this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
       return (
         <section className="container o-product-overview">
-          <ImageGallery styles={this.state.productStyles} styleId={this.state.selectedStyleId} />
+          <ImageGallery stylePhotos={selectedStyle.photos} selectedStyleId={this.state.selectedStyleId} />
           <ProductControls styles={this.state.productStyles}/>
           <ProductDescription productId={this.props.productId} />
         </section>
