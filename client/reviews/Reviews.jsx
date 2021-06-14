@@ -17,7 +17,9 @@ class Reviews extends React.Component {
       .then((res) => {
         this.setState({reviews: res.data.results})
       })
-
+      .catch((err) => {
+        console.log('Error fetching review data')
+      })
   }
 
   render() {
