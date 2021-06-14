@@ -8,10 +8,10 @@ body {
 }
 
 :root {
-  --star-size: 60px;
+  --star-size: 35px;
   --star-color: rgb(184, 184, 184);
   --star-background: black;
-  --bars-size: 60px;
+  --bars-size: 25px;
   --bars-color: rgb(184, 184, 184);
   --bars-background: green;
 }
@@ -236,6 +236,7 @@ header p {
 .stars::before {
   content: '★★★★★';
   letter-spacing: 3px;
+  /* font-size: var(--star-size); */
   background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;
@@ -243,8 +244,8 @@ header p {
 }
 
 .bars::before {
-  content: '𑁋𑁋𑁋𑁋';
-  font-size: 25px;
+  content: '𑁋𑁋𑁋𑁋𑁋';
+  font-size: var(--bars-size);
   font-stretch: expanded;
   letter-spacing: -3px;
   background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
