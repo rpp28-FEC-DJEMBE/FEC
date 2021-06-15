@@ -6,6 +6,8 @@ configure({adapter: new Adapter()});
 // import App from '../../client/app.jsx';
 import RelatedPdt from '../../client/relatedProducts/RelatedPdt.jsx';
 
+import axios from 'axios';
+
 describe("Authors", () => {
   let props;
   let wrapper;

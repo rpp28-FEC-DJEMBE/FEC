@@ -21,9 +21,9 @@ function RelatedPdt(props) {
     getRelatedPdts(props.productId);
   }, [])
 
-  if (relatedPdts.pdt_ids.length !== 0) {
+  // if (relatedPdts.pdt_ids.length !== 0) {
     // console.log("state3", relatedPdts.pdt_ids, relatedPdts.relatedProducts);
-  }
+  // }
 
   const getRelatedPdts = async (id) => {
     try {
