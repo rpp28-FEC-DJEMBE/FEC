@@ -38,7 +38,7 @@ class ReviewList extends React.Component {
 
     return (
       <div className='review-container'>
-        <SortOptions reviews={this.props.reviews}/>
+        <SortOptions reviews={this.props.reviews} handleSort={this.props.handleSort}/>
         <div className='review-list'>
           {tiles}
         </div>
