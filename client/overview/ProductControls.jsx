@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import './overview.css';
 
 class ProductControls extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ProductControls extends React.Component {
 
   render() {
     return(
-      <div className="o-product-controls">
+      <section className="o-product-controls">
         {/* <StarRating /> */}
         <p>&#9733; &#9733; &#9733; &#9733; &#9733;</p>
 
@@ -40,7 +40,7 @@ class ProductControls extends React.Component {
         <button>Add to bag</button>
 
         <button>&#9734;</button>
-      </div>
+      </section>
     )
   }
 }
