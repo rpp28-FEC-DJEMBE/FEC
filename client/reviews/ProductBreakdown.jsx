@@ -3,16 +3,20 @@ import React from 'react';
 const ProductBreakdown = ({characteristics}) => {
   let chars = Object.keys(characteristics)
 
-  return (
-    <div className='product-breakdown'>
-      <p>Product Breakdown</p>
-      {chars.map((char) => (
-        <div className='char-bar' key={characteristics[char].id}>
-          {char} {characteristics[char].value}
-        </div>
-      ))}
-    </div>
-  )
+  if (!chars.length) {
+    return null;
+  } else {
+    return (
+      <div className='product-breakdown'>
+        <p>Product Breakdown</p>
+        {chars.map((char) => (
+          <div className='char-bar' key={characteristics[char].id}>
+            {char} {characteristics[char].value}
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
 export default ProductBreakdown;
