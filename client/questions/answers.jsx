@@ -23,6 +23,13 @@ class Answers extends React.Component {
     })
   }
 
+  updateQuestionHelpful(){
+    axios({
+      method:'put',
+      url: `/qa/questions/${this.props.questionId}/helpful`,
+    })
+  }
+
   convertDate(date){
     const months = {
       "01":"January",

@@ -3,7 +3,9 @@ import React from 'react';
 const Search = () => {
 
   return (
-    <input className="qaSearch" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></input>
+    <div className="search">
+      <input className="qaSearch" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></input>
+    </div>
     )
 }
 
