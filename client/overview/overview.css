@@ -1,0 +1,82 @@
+
+/* BASE STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
+
+.shadow {
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+/* LAYOUT STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
+
+.o-product-overview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.o-images {
+  /* ↓ The width when the left and right are on the same row */
+  flex-basis: 50rem;
+  flex-grow: 1;
+}
+
+.o-product-controls {
+  /* ↓ Grow from nothing */
+  flex-basis: 0;
+  flex-grow: 999;
+  /* ↓ Wrap when the right side is smaller than this */
+  min-width: 20rem;
+}
+
+.o-product-description {
+  /* ↓ Grow from... */
+  flex-basis: 100%;
+}
+
+.o-images {
+  position: relative;
+}
+
+.o-images nav {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+}
+
+.o-images-offscreen {
+  display: none;
+}
+
+/* MODULE STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
+
+.o-images-main {
+  width: 100%;
+  max-height: 30rem;
+  object-fit: cover;
+}
+
+.o-images nav {
+  margin: 0;
+  padding: 0;
+}
+
+.o-images nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.o-images nav li {
+  margin: 0.25rem;
+}
+
+.o-images nav img {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border: solid White 0.1rem;
+}

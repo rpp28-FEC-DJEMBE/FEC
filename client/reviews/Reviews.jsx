@@ -7,22 +7,34 @@ class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: 22161,
       reviews: [],
+      isLoaded: false
     }
   }
 
   componentDidMount() {
     axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
+    // axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
       .then((res) => {
-        this.setState({reviews: res.data.results})
+        this.setState({
+          reviews: res.data.results,
+          isLoaded: true
+        })
       })
-
+      .catch((err) => {
+        console.log('Error fetching review data')
+      })
   }
 
   render() {
+    if (!this.state.isLoaded) {
+      return (
+        <section className="ratings-reviews">
+          <p>Loading...</p>
+        </section>
+      )
+    } else {
     return (
-
       <div className='ratings-reviews'>
           <p>Ratings and Reviews</p>
           <div className='rr-content'>
@@ -30,9 +42,8 @@ class Reviews extends React.Component {
             <ReviewList reviews={this.state.reviews} />
           </div>
         </div>
-
-
-    )
+      )
+    }
   }
 }
 

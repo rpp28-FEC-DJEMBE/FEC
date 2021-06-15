@@ -5,19 +5,21 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductControls from './ProductControls.jsx';
 import ProductDescription from './ProductDescription.jsx';
 
+import './overview.css';
+
 class Overview extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      product: [],
       productStyles: [],
       selectedStyleId: null,
       isLoaded: false
     }
   }
 
-  componentDidMount() {
-
+  async componentDidMount() {
     axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
       .then(response => {
         console.log('Overview: Received style data from server');
@@ -33,35 +35,23 @@ class Overview extends React.Component {
       })
   }
 
-  // getStyles() {
-  //   axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
+  // getProduct() {
+  //   axios.get('http://localhost:3000/products/' + this.props.productId)
   //     .then(response => {
-  //       console.log('Overview: Received style data from server');
-  //       console.log('Overview: style response.data.results = ', response.data.results);
+  //       console.log('Overview: Received product data from server');
   //       this.setState({
-  //         productStyles: response.data.results,
-  //         selectedStyleId: response.data.results[0].style_id
+  //         productData: response.data
   //       });
   //     })
   //     .catch(err => {
-  //       console.log('Overview: Error getting style data from server:', err);
+  //       console.log('Overview: Error getting product data from server:', err);
   //     })
   // }
 
-  // getProducts() {
-    // axios.get('http://localhost:3000/products/' + this.props.productId)
-    //   .then(response => {
-    //     console.log('Overview: Received product data from server');
-    //     this.setState({
-    //       productData: response.data
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Overview: Error getting product data from server:', err);
-    //   })
-  // }
+  // this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
 
   render() {
+
     if (!this.state.isLoaded) {
       return (
         <section className="container o-product-overview">
@@ -69,9 +59,11 @@ class Overview extends React.Component {
         </section>
       )
     } else {
+
+      let selectedStyle = this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
       return (
-        <section className="container o-product-overview">
-          <ImageGallery styles={this.state.productStyles} styleId={this.state.selectedStyleId} />
+        <section className="o-product-overview">
+          <ImageGallery stylePhotos={selectedStyle.photos} selectedStyleId={this.state.selectedStyleId} />
           <ProductControls styles={this.state.productStyles}/>
           <ProductDescription productId={this.props.productId} />
         </section>
