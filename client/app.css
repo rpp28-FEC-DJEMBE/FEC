@@ -29,41 +29,6 @@ body * {
   margin: auto;
 }
 
-/* .o-product-overview {
-  display: grid;
-  grid-template-columns: 800px auto;
-  border: solid 1px Red;
-}
-
-.o-image-gallery {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  border: solid 1px Blue;
-}
-
-.o-main-image {
-  order: 2;
-}
-
-.o-image-gallery-thumbnails {
-  display: none;
-  flex-direction: column;
-}
-
-.o-image-gallery-thumbnails li {
-  flex: auto;
-}
-
-.o-product-controls {
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-
-.o-product-description {
-  grid-row-start: 2;
-  grid-row-end: 3;
-} */
-
 .rr-content {
   display: flex;
   flex-flow: row;
@@ -73,7 +38,6 @@ body * {
   display: flex;
   flex-flow: column;
 }
-
 
 
 /* MODULE STYLES
@@ -114,24 +78,6 @@ header p {
   border: solid gray 1px;
   padding: 8px;
 }
-
-/* .o-main-image {
-  width: 800px;
-  height: 630px;
-  min-width: 800px;
-  object-fit: cover;
-  object-position: center;
-}
-
-.o-image-gallery-thumbnails ul {
-  list-style-type: none;
-}
-
-.o-image-gallery-thumbnails img {
-  width: 65px;
-  height: 65px;
-  object-fit: cover;
-} */
 
 .qaDisplay .question-list {
   border: solid gray 1px;
@@ -270,7 +216,6 @@ header p {
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
-
 
 /*
   DETAILS
