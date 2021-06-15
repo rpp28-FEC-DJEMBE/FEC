@@ -5,15 +5,19 @@
   margin: auto;
 }
 
-.comparison-name {
+.comparison-name-line {
   display: grid;
-  grid-template-columns: auto 30%;
+  grid-template-columns: auto max-content;
   margin: 0;
 }
 
+/* .comparison-name {
+  font-size: medium;
+} */
+
 .comparison-table {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto max-content;
   font-size: small;
   line-height: 0.6;
 }
@@ -22,4 +26,12 @@
   font-weight: 300;
   font-size: smaller;
   margin: 0;
+}
+
+.value2 {
+  justify-items: end;
+}
+
+.no-show {
+  opacity: 0;
 }

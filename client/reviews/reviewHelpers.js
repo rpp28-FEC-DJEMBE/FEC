@@ -11,7 +11,7 @@ const getAvgRating = (data) => {
  return (Math.round(average * 4) / 4).toFixed(2)
 }
 
-// Convert star ratings to percentage for CSS
+// Convert star/bar ratings to percentage for CSS
 const ratingConverter = (rating, divisor) => {
   return rating / divisor * 100;
 }

@@ -33,6 +33,18 @@
   font-weight: 300;
   font-size: smaller;
 }
+
+.product-default-price {
+  text-decoration: line-through;
+}
+
+.product-sale-price {
+  color: red;
+}
+.product-sale-price-none {
+  opacity: 0;
+}
+
 .product-id {
   font-weight: 300;
   font-size: smaller;
