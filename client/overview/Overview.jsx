@@ -19,11 +19,17 @@ class Overview extends React.Component {
     }
   }
 
-  async componentDidMount() {
+  // tbd
+  // setSelectedStyle(styleId) {
+  //   this.setState {
+  //   }
+  // }
+
+  componentDidMount() {
     axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
       .then(response => {
-        console.log('Overview: Received style data from server');
-        console.log('Overview: style response.data.results = ', response.data.results);
+        // console.log('Overview: Received style data from server');
+        // console.log('Overview: style response.data.results = ', response.data.results);
         this.setState({
           productStyles: response.data.results,
           selectedStyleId: response.data.results[0].style_id,

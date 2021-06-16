@@ -10,12 +10,17 @@ class ImageGallery extends React.Component {
       mainImageUrl: '',
       isLoaded: false
     }
+    this.handleClick = this.handleClick.bind(this);
+    this.setImages = this.setImages.bind(this);
   }
 
   componentDidMount() {
-    let thumbnailImage = this.props.stylePhotos[this.state.selectedImageIndex].thumbnail_url;
-    let mainImage = this.props.stylePhotos[this.state.selectedImageIndex].url;
+    this.setImages(this.state.selectedImageIndex);
+  }
 
+  setImages(imageIndex) {
+    let thumbnailImage = this.props.stylePhotos[imageIndex].thumbnail_url;
+    let mainImage = this.props.stylePhotos[imageIndex].url;
     this.setState({
       thumbnailImageUrl: thumbnailImage,
       mainImageUrl: mainImage,
@@ -23,18 +28,29 @@ class ImageGallery extends React.Component {
     });
   }
 
+  handleClick(e) {
+    let newIndex = parseInt(e.target.id);
+    console.log('newIndex:', newIndex);
+    this.setState({
+      selectedImageIndex: newIndex
+    });
+    this.setImages(newIndex);
+  }
+
   renderThumbnails() {
 
-    const thumbnailList = this.props.stylePhotos.map((photo, index) => {
+    if(this.props.stylePhotos.length === 1) { return null };
 
-      let imgClass = '';
-      if (index === this.state.selectedImageIndex) { imgClass = 'o-images-selected' };
-      if (index < this.state.topImageIndex || index > this.state.topImageIndex + 6) { imgClass = imgClass + ' ' + 'o-images-offscreen' };
+    let thumbnailList = this.props.stylePhotos.map((photo, index) => {
+      let imgClass = 'pointer ';
+      console.log('index:', index, 'this.state.selectedImageIndex:', this.state.selectedImageIndex, 'equal?', index === this.state.selectedImageIndex);
+      if (index === this.state.selectedImageIndex) { imgClass = imgClass + 'o-images-selected ' };
+      if (index < this.state.topImageIndex || index > this.state.topImageIndex + 6) { imgClass = imgClass + 'o-images-offscreen' };
       imgClass = imgClass.trim();
 
       return (
         <li key={index}>
-          <img className={imgClass} src={photo.thumbnail_url} />
+          <img id={index} className={imgClass} src={photo.thumbnail_url} onClick={this.handleClick} />
         </li>
       )
     });
@@ -47,7 +63,6 @@ class ImageGallery extends React.Component {
   }
 
   render() {
-
     if (!this.state.isLoaded) {
       return (
         <section className="o-images-gallery">
