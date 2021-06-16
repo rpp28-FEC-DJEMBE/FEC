@@ -23,7 +23,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    this.getStyles(this.props.productId, this.state.useMockData);
+    this.getStyles(this.props.productId);
   }
 
   setStyle(styleId, styles) {
