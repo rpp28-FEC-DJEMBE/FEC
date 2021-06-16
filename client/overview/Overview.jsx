@@ -6,6 +6,7 @@ import ProductControls from './ProductControls.jsx';
 import ProductDescription from './ProductDescription.jsx';
 
 import './overview.css';
+import {testDataStyles} from '../../test/overview/testData.js';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -15,46 +16,81 @@ class Overview extends React.Component {
       product: [],
       productStyles: [],
       selectedStyleId: null,
-      isLoaded: false
+      selectedStyle: [],
+      isLoaded: false,
+      useMockData: true
     }
   }
 
-  // tbd
-  // setSelectedStyle(styleId) {
-  //   this.setState {
-  //   }
-  // }
-
   componentDidMount() {
-    axios.get(`http://localhost:3000/products/${this.props.productId}/styles`)
-      .then(response => {
-        // console.log('Overview: Received style data from server');
-        // console.log('Overview: style response.data.results = ', response.data.results);
-        this.setState({
-          productStyles: response.data.results,
-          selectedStyleId: response.data.results[0].style_id,
-          isLoaded: true
-        });
-      })
-      .catch(err => {
-        console.log('Overview: Error getting style data from server:', err);
-      })
+    this.getStyles(this.props.productId, this.state.useMockData);
   }
 
-  // getProduct() {
-  //   axios.get('http://localhost:3000/products/' + this.props.productId)
-  //     .then(response => {
-  //       console.log('Overview: Received product data from server');
-  //       this.setState({
-  //         productData: response.data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log('Overview: Error getting product data from server:', err);
-  //     })
-  // }
+  setStyle(styleId, styles) {
+    let style = styles.find( ({style_id}) => style_id => style_id === styleId );
+    this.setState({
+      selectedStyleId: styleId,
+      selectedStyle: style
+    });
+  }
 
-  // this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
+  getStyles(productId, getMockData) {
+    const mock = (getMockData || this.state.useMockData);
+
+    let styles;
+    let selectedStyle;
+    const endpoint = `http://localhost:3000/products/${productId}/styles`;
+
+    try {
+
+      if (mock) {
+        // console.log('Overview: Getting mock style data');
+        styles = testDataStyles;
+        this.setState({
+          productStyles: styles,
+          selectedStyleId: styles[0].style_id,
+          selectedStyle: styles[0],
+          isLoaded: true
+        });
+      }
+
+      if (!mock) {
+        this.getAPIData(endpoint)
+          .then(response => {
+            // console.log('Overview: Received style data from the server:', response);
+            styles = response.data.results;
+            this.setState({
+              productStyles: styles,
+              selectedStyleId: styles[0].style_id,
+              selectedStyle: styles[0],
+              isLoaded: true
+            });
+          })
+          .catch(error => {
+            console.error('Overview: Error getting style data from the server', error);
+          })
+      }
+
+    } catch (error) {
+      console.error('Overview: Error getting style data', error);
+    }
+
+  }
+
+  async getAPIData(endpointUrl) {
+    try {
+      const response = await axios.get(endpointUrl);
+      // console.log('Overview: Received data from server');
+      return response
+    } catch (error) {
+      // console.error('Overview: Error getting data from server');
+      return error;
+    }
+  }
+
+  // TODO: getProduct()
+  // axios.get('http://localhost:3000/products/' + this.props.productId)
+
 
   render() {
 
@@ -65,11 +101,9 @@ class Overview extends React.Component {
         </section>
       )
     } else {
-
-      let selectedStyle = this.state.productStyles.find( ({style_id}) => style_id => style_id === selectedStyleId );
       return (
         <section className="o-product-overview">
-          <ImageGallery stylePhotos={selectedStyle.photos} selectedStyleId={this.state.selectedStyleId} />
+          <ImageGallery selectedStyleId={this.state.selectedStyleId} stylePhotos={this.state.selectedStyle.photos} />
           <ProductControls styles={this.state.productStyles}/>
           <ProductDescription productId={this.props.productId} />
         </section>

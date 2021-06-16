@@ -39,15 +39,13 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   position: relative;
 }
 
-.o-images nav {
+.o-images-thumbnails {
+  width: 3.25rem;
   position: absolute;
-  top: 0.5rem;
+  top: 0.7rem;
   left: 1rem;
 }
 
-.o-images-offscreen {
-  display: none;
-}
 
 /* MODULE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -58,28 +56,51 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   object-fit: cover;
 }
 
-.o-images nav {
+.o-images-thumbnails > * {
   margin: 0;
   padding: 0;
 }
 
-.o-images nav ul {
-  margin: 0;
-  padding: 0;
+.o-images-thumbnails ul {
   list-style-type: none;
 }
 
-.o-images nav li {
-  margin: 0.25rem;
-}
-
-.o-images nav img {
-  width: 3.5rem;
-  height: 3.5rem;
+.o-images-thumbnails img {
+  width: 3.25rem;
+  height: 3.25rem;
   object-fit: cover;
-  border: solid White 0.1rem;
+  border: solid Black 0.05rem;
 }
 
 .o-images nav img.o-images-selected {
-	border: solid Black 0.2rem;
+  border-color: White;
+}
+
+.arrow-up-container,
+.arrow-down-container {
+  width: 100%;
+  height: 1rem;
+  text-align: center;
+  border: solid red 1px;
+}
+.arrow-up-container {
+  margin-bottom: 0.25rem;
+}
+
+.arrow-up {
+  top: -0.5rem;
+  display:inline-block;
+  border-left: 0.75rem solid transparent;
+  border-right: 0.75rem solid transparent;
+  border-bottom: 0.75rem solid red;
+  position: relative;
+  top: -0.5rem;
+}
+
+.arrow-down {
+  top: -0.5rem;
+  display:inline-block;
+  border-left: 0.75rem solid transparent;
+  border-right: 0.75rem solid transparent;
+  border-top: 0.75rem solid white;
 }

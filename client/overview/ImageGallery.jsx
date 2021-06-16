@@ -29,8 +29,8 @@ class ImageGallery extends React.Component {
   }
 
   handleClick(e) {
-    let newIndex = parseInt(e.target.id);
     console.log('newIndex:', newIndex);
+    let newIndex = parseInt(e.target.id);
     this.setState({
       selectedImageIndex: newIndex
     });
@@ -43,16 +43,16 @@ class ImageGallery extends React.Component {
 
     let thumbnailList = this.props.stylePhotos.map((photo, index) => {
       let imgClass = 'pointer ';
-      console.log('index:', index, 'this.state.selectedImageIndex:', this.state.selectedImageIndex, 'equal?', index === this.state.selectedImageIndex);
-      if (index === this.state.selectedImageIndex) { imgClass = imgClass + 'o-images-selected ' };
-      if (index < this.state.topImageIndex || index > this.state.topImageIndex + 6) { imgClass = imgClass + 'o-images-offscreen' };
+      if (index === this.state.selectedImageIndex) { imgClass = imgClass + 'o-images-selected' };
       imgClass = imgClass.trim();
 
-      return (
-        <li key={index}>
-          <img id={index} className={imgClass} src={photo.thumbnail_url} onClick={this.handleClick} />
-        </li>
-      )
+      if (index >= this.state.topImageIndex && index <= this.state.topImageIndex + 6) {
+        return (
+          <li key={index}>
+            <img id={index} className={imgClass} src={photo.thumbnail_url} onClick={this.handleClick} />
+          </li>
+        )
+      }
     });
 
     return (
@@ -74,7 +74,14 @@ class ImageGallery extends React.Component {
         <section className="o-images">
           <img className="o-images-main" src={this.state.mainImageUrl} />
           <nav className="o-images-thumbnails">
+            <div className="arrow-up-container">
+              {/* {this.state.topImageIndex > 0 && <i className="pointer arrow-up" onClick={this.handleClick}></i>} */}
+              <i className="pointer arrow-up" onClick={this.handleClick}></i>
+            </div>
             {this.renderThumbnails()}
+            <div className="arrow-down-container">
+              { (this.state.topImageIndex + 6 < this.props.stylePhotos.length) && <i className="pointer arrow-down" onClick={this.handleClick}></i> }
+            </div>
           </nav>
         </section>
       )
