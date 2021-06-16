@@ -19,7 +19,8 @@ function RelatedPdt(props) {
   useEffect( () => {
     getOutfits();
     getRelatedPdts(props.productId);
-  }, [])
+  }, [props.productId])
+  // })
 
   // if (relatedPdts.pdt_ids.length !== 0) {
     // console.log("state3", relatedPdts.pdt_ids, relatedPdts.relatedProducts);
@@ -73,13 +74,14 @@ function RelatedPdt(props) {
   const slideRight = () => {
   }
 
+
   return (
     <div>
 
       <div className="related-product-widget">
-        <h3 className="related-product-header">RELATED PRODUCTS</h3>
+        <h3 className="related-product-header" onClick={()=>props.onCardClick(clickedId)}>RELATED PRODUCTS</h3>
         <div className="related-product-box">
-          <button id="left-btn" onClick={slideLeft}>left</button>
+          <button id="left-btn" onClick={slideLeft}>{'\u1438'}</button>
           {
             relatedPdts.relatedProducts.map( product =>
               (
@@ -92,18 +94,19 @@ function RelatedPdt(props) {
                   default_price={product.default_price}
                   rating={'5'}
                   cardBtn={'\u2606'}
+                  onCardClick={props.onCardClick}
                 />
               )
             )
           }
-          <button id="right-btn" onClick={slideRight}>right</button>
+          <button id="right-btn" onClick={slideRight}>{'\u1433'}</button>
         </div>
       </div>
 
       <div className="related-product-widget">
         <h3 className="related-product-header">YOUR OUTFIT</h3>
         <div className="related-product-box">
-          <button id="left-btn" onClick={slideLeft}>left</button>
+          <button id="left-btn" onClick={slideLeft}>{'\u1438'}</button>
           <OutfitAddCard />
           {
             outfits.map( outfit =>
@@ -117,15 +120,18 @@ function RelatedPdt(props) {
                   default_price={outfit.default_price}
                   rating={'5'}
                   cardBtn={'\u2327'}
+                  onCardClick={props.onCardClick}
                 />
               )
             )
           }
-          <button id="right-btn" onClick={slideRight}>Right</button>
+          <button id="right-btn" onClick={slideRight}>{'\u1433'}</button>
         </div>
       </div>
 
       <Comparison productId={props.productId} clickedId={clickedId}/>
+
+
 
     </div>
   )
