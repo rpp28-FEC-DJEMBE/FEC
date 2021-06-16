@@ -11,7 +11,6 @@ class Reviews extends React.Component {
       isLoaded: false
     }
     this.handleSort = this.handleSort.bind(this);
-    this.update = this.update.bind(this);
   }
 
   handleSort(e) {
@@ -57,7 +56,7 @@ class Reviews extends React.Component {
           <p>Ratings and Reviews</p>
           <div className='rr-content'>
             <Breakdown productId={this.props.productId}/>
-            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort}/>
+            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}/>
           </div>
         </div>
       )

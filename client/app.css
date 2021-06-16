@@ -130,7 +130,9 @@ header p {
   padding-top: 15px;
 }
 
-.answer-modal, .question-modal {
+.answer-modal,
+.question-modal,
+.review-modal {
   position: fixed;
   left: 0;
   top: 0;
@@ -149,7 +151,9 @@ header p {
   margin-top: 1px;
 }
 
-.answer-content, .question-content {
+.answer-content,
+.question-content,
+.review-content {
   display: grid;
   background-color: white;
   width: 750px;

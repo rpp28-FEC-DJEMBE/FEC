@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import SortOptions from './SortOptions.jsx';
+import AddReview from './AddReview.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -8,8 +9,11 @@ class ReviewList extends React.Component {
     this.state = {
       initial: this.props.reviews.slice(0,2),
       reviews: this.props.reviews.slice(),
+      showAdd: false
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
+    this.handleAddReview = this.handleAddReview.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   renderInitial() {
@@ -22,6 +26,16 @@ class ReviewList extends React.Component {
     this.setState((prevState) => ({
       initial: prevState.initial.concat(this.state.reviews.splice(0,2))
     }))
+  }
+
+  handleAddReview() {
+    if (!this.state.showAdd) {
+      this.setState({ showAdd: true })
+    }
+  }
+
+  handleClose() {
+    this.setState({ showAdd: false })
   }
 
   componentDidMount() {
@@ -44,7 +58,8 @@ class ReviewList extends React.Component {
         </div>
         <div className='review-buttons'>
           {moreReviews}
-          <button>Add A Review +</button>
+          <button onClick={this.handleAddReview}>Add A Review +</button>
+          <AddReview show={this.state.showAdd} productId={this.props.productId} handleClose={this.handleClose}/>
         </div>
       </div>
     )
