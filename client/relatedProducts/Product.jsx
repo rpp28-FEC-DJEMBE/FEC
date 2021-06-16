@@ -6,7 +6,7 @@ import ratingHelper from '../reviews/reviewHelpers.js';
 
 const axios = require('axios');
 
-function Product ({overviewProductId, id, category, name, default_price, rating, cardBtn}) {
+function Product ({overviewProductId, id, category, name, default_price, rating, cardBtn, onCardClick}) {
   const [detail, setDetail] = useState({
     img: '',
     sale_price: 0,
@@ -20,20 +20,13 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
   }, [])
 
   const getDetail = async () => {
-    // let starAverage;
-    // axios.get(`/reviews/meta?product_id=${id}`)
-    //   .then( res => {
-    //     console.log('ratings?', res.data.ratings);
-    //     starAverage = ratingHelper.getAvgRating(res.data.ratings);
-    //   } )
-
     try {
       let starAverage;
       const ratingData = await axios.get(`/reviews/meta?product_id=${id}`);
-      console.log('ratings?', ratingData.data.ratings);
+      // console.log('ratings?', ratingData.data.ratings);
       const ratingAvg = ratingHelper.getAvgRating(ratingData.data.ratings);
       isNaN(ratingAvg) ? starAverage = 0 : starAverage = ratingAvg;
-      console.log('starAverage', starAverage, id)
+      // console.log('starAverage', starAverage, id);
       axios.get(`/products/${id}/styles`)
       .then( res => {
         // console.log('product card', res.data.results);
@@ -71,7 +64,7 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
   }
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={()=>onCardClick(id)}>
 
       <div className="card-btn">
         <a className="compare-btn">{cardBtn}</a>
@@ -85,12 +78,12 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
         <p className="product-category">{category}</p>
         <p className="product-name">{name}</p>
         <div className="product-price">
-          <span className={className.regular}>${detail.original_price}</span>
+          <span className={className.regular} onClick={()=>onCardClick(id)}>${detail.original_price}</span>
           <span className={className.sale}>  ${detail.sale_price}</span>
         </div>
         <p className="product-id">id: {id} -OverviewId: {overviewProductId}</p>
         {/* <p>&#9733; &#9733; &#9733; &#9733; &#9733;</p> */}
-        <RatingStars rating={detail.starAverage}/>
+        <RatingStars rating={detail.starAverage} size={20}/>
       </div>
 
     </div>
