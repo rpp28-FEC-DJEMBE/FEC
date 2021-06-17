@@ -22,7 +22,7 @@ function Comparison (props) {
 
   useEffect( () => {
     getFetures(props.productId, props.clickedId);
-  }, [])
+  }, [props.productId])
 
 
   const getFetures = async (currentId, clickedId) => {
