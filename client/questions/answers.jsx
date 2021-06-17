@@ -10,6 +10,16 @@ class Answers extends React.Component {
   }
 
   componentDidMount(){
+    this.getAnswers();
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.questionId !== this.state.questionId) {
+      this.getAnswers();
+    }
+  }
+
+  getAnswers(){
     axios({
       method:'get',
       url: `/qa/questions/${this.props.questionId}/answers`,
@@ -18,8 +28,17 @@ class Answers extends React.Component {
       }
     }).then(data => {
       this.setState({
-        answers: data.data.results
+        answers: data.data.results,
+        questionId: this.props.questionId
       })
+      console.log(this.state)
+    })
+  }
+
+  updateQuestionHelpful(){
+    axios({
+      method:'put',
+      url: `/qa/questions/${this.props.questionId}/helpful`,
     })
   }
 
@@ -47,6 +66,9 @@ class Answers extends React.Component {
   }
 
   render() {
+    if (this.state.answers.length === 0) {
+      return null;
+    }
     return (
       <div className="answer-list">
         {this.state.answers.map((answer, index) =>
