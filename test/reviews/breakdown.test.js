@@ -47,7 +47,7 @@ describe('Components render', () => {
   })
 
   test('Renders ProductBreakdown component', () => {
-    const breakdownPDT = shallow(<ProductBreakdown />);
+    const breakdownPDT = shallow(<ProductBreakdown characteristics={data.characteristics}/>);
 
     expect(breakdownPDT.exists()).toBe(true);
   })
