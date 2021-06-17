@@ -15,8 +15,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
-      productId: 22122
+      productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
+      // productId: 22122
     }
   }
 

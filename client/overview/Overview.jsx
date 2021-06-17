@@ -18,7 +18,7 @@ class Overview extends React.Component {
       selectedStyleId: null,
       selectedStyle: [],
       isLoaded: false,
-      useMockData: true
+      useMockData: false
     }
   }
 
