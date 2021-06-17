@@ -6,7 +6,7 @@ import ratingHelper from '../reviews/reviewHelpers.js';
 
 const axios = require('axios');
 
-function Product ({overviewProductId, id, category, name, default_price, rating, cardBtn, onCardClick}) {
+function Product ({overviewProductId, id, category, name, default_price, rating, cardBtn, onProductBtnClick, onOutfitBtnClick, onCardClick}) {
   const [detail, setDetail] = useState({
     img: '',
     sale_price: 0,
@@ -59,26 +59,36 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
       console.log(err);
     }
 
+  }
 
-
+  const onClickActionBtn = () => {
+    setTimeout( () => {
+      if (cardBtn === '\u2606') {
+        // console.log('product', cardBtn);
+        onProductBtnClick(id);
+      } else if (cardBtn === '\u2327') {
+        // console.log('outfit', cardBtn);
+        onOutfitBtnClick(id);
+      }
+    } )
   }
 
   return (
-    <div className="product-card" onClick={()=>onCardClick(id)}>
+    <div className="product-card">
 
       <div className="card-btn">
-        <a className="compare-btn">{cardBtn}</a>
+        <a className="compare-btn" onClick={onClickActionBtn}>{cardBtn}</a>
       </div>
 
-      <div className="product-image-div">
+      <div className="product-image-div" onClick={() => onCardClick(id)}>
         <img className="product-image" src={detail.img} alt={`${id}`+'No Img'}></img>
       </div>
 
-      <div className="product-detail-box">
+      <div className="product-detail-box" onClick={() => onCardClick(id)}>
         <p className="product-category">{category}</p>
         <p className="product-name">{name}</p>
         <div className="product-price">
-          <span className={className.regular} onClick={()=>onCardClick(id)}>${detail.original_price}</span>
+          <span className={className.regular}>${detail.original_price}</span>
           <span className={className.sale}>  ${detail.sale_price}</span>
         </div>
         <p className="product-id">id: {id} -OverviewId: {overviewProductId}</p>

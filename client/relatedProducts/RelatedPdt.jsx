@@ -14,12 +14,16 @@ function RelatedPdt(props) {
 
   const [relatedPdts, setRelatedPdts] = useState({pdt_ids: [], relatedProducts: []});
   const [outfits, setOutfits] = useState([]);
-  const [clickedId, setClickedId] = useState(22122);
+  const [clickedId, setClickedId] = useState(props.productId);
+  const [btnId, setBtnId] = useState(props.productId);
+  // const [showComp, setShowComp] = useState(false);
+  const [showComp, setShowComp] = useState(true);
 
   useEffect( () => {
     getOutfits();
     getRelatedPdts(props.productId);
   }, [props.productId])
+  // }, [props.productId, btnId])
   // })
 
   // if (relatedPdts.pdt_ids.length !== 0) {
@@ -68,18 +72,94 @@ function RelatedPdt(props) {
       })
   }
 
+  const addOutfit = async (selectedId) => {
+    try {
+      const newOutfitData = await axios.get(`/products/${selectedId}`);
+      // console.log('newOutfitData', newOutfitData)
+      let newOutfit = newOutfitData.data;
+      // console.log('newOutfit', newOutfit)
+
+      // outfits.push(newOutfit)    //doesn't work because of pending promise?
+      // console.log('updated', outfits)
+      // setOutfits(outfits);
+
+      Promise.all(outfits)
+        .then( (currentOutfits) => {
+          // console.log('currentOutfits2',currentOutfits)
+          // console.log('newOutfit2', newOutfit)
+          let allOutfitIds = [];
+          currentOutfits.forEach( outfit => {
+            allOutfitIds.push(outfit.id);
+          } )
+          console.log('allOutfitIds', allOutfitIds);
+          if (!allOutfitIds.includes(newOutfit.id)) {
+            currentOutfits.push(newOutfit);
+          }
+          // console.log('updated', currentOutfits)
+          setOutfits(currentOutfits);
+        } )
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const removeOutfit = async (selectedId) => {
+
+    Promise.all(outfits)
+      .then( (currentOutfits) => {
+        console.log('currentOutfits2',selectedId, currentOutfits);
+        // // console.log('updated', currentOutfits)
+        let updatedOutfits = currentOutfits;
+        for (let i = 0; i < currentOutfits.length; i++) {
+          if (currentOutfits[i].id === selectedId) {
+            console.log(i, currentOutfits[i].id, currentOutfits[i].name)
+            updatedOutfits.splice(i, 1);
+          }
+        }
+        // console.log('outfitCopy', outfitCopy)
+        console.log('updatedOutfits', updatedOutfits)
+        setOutfits(updatedOutfits);
+      } )
+      .catch(err => {
+        console.log(err);
+      })
+
+  }
+
   const slideLeft = () => {
   }
 
   const slideRight = () => {
   }
 
+  const onProductBtnClick = (btnId) => {
+    console.log('onProductBtnClick', btnId);
+    setShowComp(true);
+    setBtnId(btnId);
+  }
+
+  const onCompaClose = () => {
+    console.log('onCompaClose');
+    setShowComp(false);
+  }
+
+  const onAddOutfitClick = () => {
+    console.log('onAddOutfitClick', props.productId);
+    // setOutfits(res.data);  //todo
+    addOutfit(props.productId);
+  }
+
+  const onOutfitBtnClick = (btnId) => {
+    console.log('onOutfitBtnClick', btnId);
+    // setOutfits(res.data);  //todo
+    removeOutfit (btnId);
+  }
 
   return (
     <div>
 
       <div className="related-product-widget">
-        <h3 className="related-product-header" onClick={()=>props.onCardClick(clickedId)}>RELATED PRODUCTS</h3>
+        <h3 className="related-product-header">RELATED PRODUCTS</h3>
         <div className="related-product-box">
           <button id="left-btn" onClick={slideLeft}>{'\u1438'}</button>
           {
@@ -94,6 +174,7 @@ function RelatedPdt(props) {
                   default_price={product.default_price}
                   rating={'5'}
                   cardBtn={'\u2606'}
+                  onProductBtnClick={onProductBtnClick}
                   onCardClick={props.onCardClick}
                 />
               )
@@ -107,7 +188,7 @@ function RelatedPdt(props) {
         <h3 className="related-product-header">YOUR OUTFIT</h3>
         <div className="related-product-box">
           <button id="left-btn" onClick={slideLeft}>{'\u1438'}</button>
-          <OutfitAddCard />
+          <OutfitAddCard onAddOutfitClick={onAddOutfitClick}/>
           {
             outfits.map( outfit =>
               (
@@ -120,6 +201,7 @@ function RelatedPdt(props) {
                   default_price={outfit.default_price}
                   rating={'5'}
                   cardBtn={'\u2327'}
+                  onOutfitBtnClick={onOutfitBtnClick}
                   onCardClick={props.onCardClick}
                 />
               )
@@ -129,9 +211,7 @@ function RelatedPdt(props) {
         </div>
       </div>
 
-      <Comparison productId={props.productId} clickedId={clickedId}/>
-
-
+      <Comparison productId={props.productId} btnId={btnId} showComp={showComp} onCompaClose={onCompaClose}/>
 
     </div>
   )

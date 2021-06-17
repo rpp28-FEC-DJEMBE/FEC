@@ -18,6 +18,8 @@ class App extends React.Component {
     this.state = {
       productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
       // productId: 22122
+      // productId: 22156 // for dup features
+      // productId: 22164 // for sale price
     }
   }
 
@@ -39,7 +41,6 @@ class App extends React.Component {
         </header>
         <Overview productId={this.state.productId} />
         <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
-        {/* <RelatedPdt productId={this.state.productId}/> */}
         <Questions productId={this.state.productId} />
         <Reviews productId={this.state.productId} />
       </React.Fragment>
