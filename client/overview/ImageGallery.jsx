@@ -6,48 +6,104 @@ class ImageGallery extends React.Component {
     this.state = {
       selectedImageIndex: 0,
       topImageIndex: 0,
-      thumbnailImageUrl: '',
       mainImageUrl: '',
       isLoaded: false
     }
+    this.handleClick = this.handleClick.bind(this);
+    this.setImages = this.setImages.bind(this);
+
+    // helpful values not needed in state
+    this.thumbnailsToShow = 7;
   }
 
   componentDidMount() {
-    let thumbnailImage = this.props.stylePhotos[this.state.selectedImageIndex].thumbnail_url;
-    let mainImage = this.props.stylePhotos[this.state.selectedImageIndex].url;
+    this.setImages(this.state.selectedImageIndex);
+  }
 
+  setImages(selectedImageIndex) {
+
+    // "quantize" the input - if the provided index is out of bounds, bound it
+    selectedImageIndex = Math.min( Math.max(selectedImageIndex, 0), this.props.stylePhotos.length - 1);
+
+    // determine the first visible image in the gallery
+    let firstVisibleImage = this.state.topImageIndex;
+    let lastVisibleImage = firstVisibleImage + this.thumbnailsToShow - 1;
+    if (selectedImageIndex < firstVisibleImage) { firstVisibleImage = selectedImageIndex; }
+    if (selectedImageIndex > lastVisibleImage)  { firstVisibleImage = selectedImageIndex - this.thumbnailsToShow + 1; }
+
+    // get the main image url and set state
+    let mainImage = this.props.stylePhotos[selectedImageIndex].url;
     this.setState({
-      thumbnailImageUrl: thumbnailImage,
+      selectedImageIndex: selectedImageIndex,
+      topImageIndex: firstVisibleImage,
       mainImageUrl: mainImage,
       isLoaded: true,
     });
   }
 
-  renderThumbnails() {
+  handleClick(e) {
 
-    const thumbnailList = this.props.stylePhotos.map((photo, index) => {
+    let classes = e.currentTarget.classList;
+    let newSelectedImageIndex = 0;
 
-      let imgClass = '';
-      if (index === this.state.selectedImageIndex) { imgClass = 'o-images-selected' };
-      if (index < this.state.topImageIndex || index > this.state.topImageIndex + 6) { imgClass = imgClass + ' ' + 'o-images-offscreen' };
+    if (classes.contains('o-images-thumbnail')) {
+      newSelectedImageIndex = parseInt(e.currentTarget.id);
+    }
+    if (classes.contains('back-arrow')) {
+      newSelectedImageIndex = Math.max(this.state.selectedImageIndex - 1, 0);
+    }
+    if (classes.contains('forward-arrow')) {
+      newSelectedImageIndex = Math.min(this.state.selectedImageIndex + 1, this.props.stylePhotos.length - 1);
+    }
+    this.setImages(newSelectedImageIndex);
+
+  }
+
+  renderThumbnailGallery() {
+
+    if(this.props.stylePhotos.length === 1) { return null };
+
+    const firstVisibleImageIndex = this.state.topImageIndex;
+    const lastVisibleImageIndex = firstVisibleImageIndex + this.thumbnailsToShow - 1;
+
+    // render the thumbnail gallery
+    let thumbnailList = this.props.stylePhotos.map((photo, index) => {
+      let imgClass = 'pointer o-images-thumbnail ';
+      if (index === this.state.selectedImageIndex) { imgClass = imgClass + 'o-images-selected' };
       imgClass = imgClass.trim();
 
-      return (
-        <li key={index}>
-          <img className={imgClass} src={photo.thumbnail_url} />
-        </li>
-      )
+      if (index >= firstVisibleImageIndex && index <= lastVisibleImageIndex) {
+        return (
+          <li key={index}>
+            <img id={index} className={imgClass} src={photo.thumbnail_url} onClick={this.handleClick} />
+          </li>
+        )
+      }
     });
 
+    // render the forward/backward arrows
+    let backArrow = null;
+    let forwardArrow = null;
+
+    if (firstVisibleImageIndex > 0) {
+      backArrow = (<i className='pointer back-arrow' onClick={this.handleClick}></i>);
+    }
+
+    if (lastVisibleImageIndex < this.props.stylePhotos.length - 1) {
+      forwardArrow = (<i className='pointer forward-arrow' onClick={this.handleClick}></i>);
+    }
+
+    // return elements
     return (
-      <ul>
-        {thumbnailList}
-      </ul>
+      <React.Fragment>
+        <div className="back-arrow-container">{backArrow}</div>
+        <ul>{thumbnailList}</ul>
+        <div className="forward-arrow-container">{forwardArrow}</div>
+      </React.Fragment>
     );
   }
 
   render() {
-
     if (!this.state.isLoaded) {
       return (
         <section className="o-images-gallery">
@@ -59,7 +115,7 @@ class ImageGallery extends React.Component {
         <section className="o-images">
           <img className="o-images-main" src={this.state.mainImageUrl} />
           <nav className="o-images-thumbnails">
-            {this.renderThumbnails()}
+            {this.renderThumbnailGallery()}
           </nav>
         </section>
       )
