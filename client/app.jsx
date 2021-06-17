@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+const axios = require('axios');
 
 import './app.css';
 
@@ -20,6 +21,13 @@ class App extends React.Component {
     }
   }
 
+  onCardClick(productCardId) {
+    console.log('event.target', productCardId);
+    this.setState({
+      productId: productCardId
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -30,7 +38,8 @@ class App extends React.Component {
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>
         <Overview productId={this.state.productId} />
-        <RelatedPdt productId={this.state.productId} />
+        <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
+        {/* <RelatedPdt productId={this.state.productId}/> */}
         <Questions productId={this.state.productId} />
         <Reviews productId={this.state.productId} />
       </React.Fragment>
