@@ -85,9 +85,14 @@ header p {
 }
 
 .qaDisplay {
-max-height: 1000px;
-overflow: hidden;
+max-height: 800px;
 display: block;
+}
+
+.question-list {
+  display: block;
+  max-height: 650px;
+  overflow:scroll;
 }
 
 .answer {

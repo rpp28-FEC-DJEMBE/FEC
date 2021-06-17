@@ -13,32 +13,39 @@ class Questions extends React.Component{
     this.state = {
       product_id: 0,
       questions: [],
+      displayQuestions: [],
       answerShow: false,
       questionShow: false,
       questionId: null
     }
     this.handleAddAnswerClick = this.handleAddAnswerClick.bind(this);
-    this.handleAddQClick = this.handleAddQClick.bind(this);
 
   }
 
   componentDidMount(){
     this.getQuestions()
+    .then(data => {
+      console.log("this is the data", data.data.results)
+      console.log(this.props.productId)
+      this.setState({
+        product_id: Number(data.data.productId),
+        questions: data.data.results,
+      })
+    })
+    .then(() => {
+      console.log(this.state.questions)
+      this.handleMoreAnsweredQuestions()
+    })
   }
 
   getQuestions(){
-    axios({
+    return axios({
       method:'get',
       url: '/qa/questions',
       params: {
         product_id:this.props.productId,
-        count:2
+        count:50
       }
-    }).then(data => {
-      this.setState({
-        product_id: Number(data.data.product_id),
-        questions: data.data.results
-      })
     })
   }
 
@@ -46,6 +53,14 @@ class Questions extends React.Component{
     if(prevState.product_id !== this.props.productId){
      this.getQuestions();
     }
+  }
+
+  handleMoreAnsweredQuestions() {
+    this.setState({
+      displayQuestions:this.state.displayQuestions.concat(this.state.questions.splice(0,2))
+    })
+    console.log("questions: ",this.state.questions)
+    console.log("display: ", this.state.displayQuestions)
   }
 
   handleAddAnswerClick (question_id) {
@@ -74,14 +89,18 @@ class Questions extends React.Component{
     }
   }
 
+
+
   render() {
     return (
       <div className="qaDisplay">
         <h1>Questions & Answers</h1>
         <Search />
-        <QuestionsList questions={this.state.questions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} />
+        <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
         <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} />
         <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick} />
+        <button onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
+        <button onClick={() => this.handleAddQClick()}>Add a question</button>
       </div>
     );
   }

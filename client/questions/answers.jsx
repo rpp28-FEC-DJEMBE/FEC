@@ -31,7 +31,6 @@ class Answers extends React.Component {
         answers: data.data.results,
         questionId: this.props.questionId
       })
-      console.log(this.state)
     })
   }
 
