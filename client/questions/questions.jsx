@@ -23,6 +23,10 @@ class Questions extends React.Component{
   }
 
   componentDidMount(){
+    this.getQuestions()
+  }
+
+  getQuestions(){
     axios({
       method:'get',
       url: '/qa/questions',
@@ -32,10 +36,16 @@ class Questions extends React.Component{
       }
     }).then(data => {
       this.setState({
-        product_id: data.data.product_id,
+        product_id: Number(data.data.product_id),
         questions: data.data.results
       })
     })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.product_id !== this.props.productId){
+     this.getQuestions();
+    }
   }
 
   handleAddAnswerClick (question_id) {
