@@ -4,7 +4,7 @@ import style from './Comparison.css';
 const axios = require('axios');
 const {collectFeatures, combineFeatures} = require('./featuresHelper');
 
-function Comparison (props) {
+function Comparison ({productId, btnId, showComp, onCompaClose}) {
   const check="\u2713";
 
   const [featuresComp, setFeaturesComp] = useState(
@@ -21,14 +21,14 @@ function Comparison (props) {
   );
 
   useEffect( () => {
-    getFetures(props.productId, props.clickedId);
-  }, [props.productId])
+    getFetures(productId, btnId);
+  }, [productId, btnId])
 
 
-  const getFetures = async (currentId, clickedId) => {
+  const getFetures = async (currentId, btnId) => {
     try {
       const featuresData1 = await axios.get(`/products/${currentId}`);
-      const featuresData2 = await axios.get(`/products/${clickedId}`);
+      const featuresData2 = await axios.get(`/products/${btnId}`);
       // console.log('1', currentId, featuresData1.data.name, featuresData1.data.features)
       // console.log('2', currentId, featuresData2.data.name, featuresData2.data.features)
 
@@ -41,7 +41,7 @@ function Comparison (props) {
 
       setFeaturesComp(
         {
-          id: [currentId, clickedId],
+          id: [currentId, btnId],
           name: [featuresData1.data.name, featuresData2.data.name],
           features: [featuresData1.data.features, featuresData2.data.features],
           featuresCombined: featuresCombined
@@ -58,9 +58,12 @@ function Comparison (props) {
     // console.log('props:', featuresComp.features[0], featuresComp);
   // }
 
+  if (!showComp) {
+    return null;
+  }
 
   return (
-    <div className="comparison-box">
+    <div className="comparison-box" onClick={onCompaClose}>
       <p className="comparing">COMPARING</p>
       <div className="comparison-name-line">
         <p>{featuresComp.name[0]}</p>
@@ -69,7 +72,7 @@ function Comparison (props) {
       <div className="comparison-table">
         <div>
           {/* <p className="comparison-name">{featuresComp.name[0]}</p> */}
-          <p className="product-id">{props.productId}</p>
+          <p className="product-id">{productId}</p>
           {
             featuresComp.featuresCombined.value1.map( (value1, i) => (
               <p key={i}>{value1}</p>
@@ -87,7 +90,7 @@ function Comparison (props) {
         </div>
         <div>
           {/* <p className="comparison-name">{featuresComp.name[1]}</p> */}
-          <p className="product-id">{props.clickedId}</p>
+          <p className="product-id">{btnId}</p>
           {
             featuresComp.featuresCombined.value2.map( (value2, i) => {
             if (value2 === '') {

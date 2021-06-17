@@ -6,13 +6,22 @@ const collectFeatures = (features) => {
     featureAndValue: []
   };
   for (let i = 0; i < features.length; i++) {
-    collectedFeatures.feature.push(features[i].feature);
+    let newFeatureValue;
     if (features[i].value === null) {
-      collectedFeatures.value.push(null);
-      collectedFeatures.featureAndValue.push(`${features[i].feature}`);
+      newFeatureValue = `${features[i].feature}`;
     } else {
-      collectedFeatures.value.push(features[i].value.replace(/[^a-zA-Z ]/g, ''));
-      collectedFeatures.featureAndValue.push(`${features[i].feature} ${features[i].value.replace(/[^a-zA-Z ]/g, '')}`);
+      newFeatureValue = `${features[i].feature} ${features[i].value.replace(/[^a-zA-Z ]/g, '')}`;
+    }
+    // console.log(newFeatureValue);
+    if (collectedFeatures.featureAndValue.indexOf(newFeatureValue) < 0) {
+      collectedFeatures.feature.push(features[i].feature);
+      if (features[i].value === null) {
+        collectedFeatures.value.push(null);
+        collectedFeatures.featureAndValue.push(newFeatureValue);
+      } else {
+        collectedFeatures.value.push(features[i].value.replace(/[^a-zA-Z ]/g, ''));
+        collectedFeatures.featureAndValue.push(newFeatureValue);
+      }
     }
   }
   return collectedFeatures;
