@@ -79,10 +79,10 @@ header p {
   padding: 8px;
 }
 
-.qaDisplay .question-list {
+/* .qaDisplay .question-list {
   border: solid gray 1px;
   padding:8px;
-}
+} */
 
 .qaDisplay {
 max-height: 800px;
@@ -92,12 +92,16 @@ display: block;
 .question-list {
   display: block;
   max-height: 650px;
-  overflow:scroll;
+  overflow-y:scroll;
 }
 
-.answer {
+/* .answer {
   border: solid gray 1px;
   padding:8px;
+} */
+
+.answer-body{
+  margin:1px;
 }
 
 .search {

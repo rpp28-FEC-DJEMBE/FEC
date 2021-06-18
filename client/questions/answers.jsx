@@ -83,7 +83,7 @@ class Answers extends React.Component {
       <div className="answer-list">
         {this.state.answers.map((answer, index) =>
         <div  className="answer" key={index}>
-          <p>A: {answer.body}</p>
+          <p className="answer-body">A: {answer.body}</p>
           <div className="answer-footer">
             <p>by {answer.answerer_name}, {this.convertDate(answer.date)}</p>
             <p>Helpful? Yes({answer.helpfulness})</p>
