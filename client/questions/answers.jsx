@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import ExpandAnswers from './expandAnswers.jsx'
 
 class Answers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      answersList:[],
       answers:[]
     }
+    this.handleExpandAnswers = this.handleExpandAnswers.bind(this);
   }
 
   componentDidMount(){
@@ -24,11 +27,13 @@ class Answers extends React.Component {
       method:'get',
       url: `/qa/questions/${this.props.questionId}/answers`,
       params: {
-        count: 2
+        count: 50
       }
     }).then(data => {
+      let sorted = data.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
       this.setState({
-        answers: data.data.results,
+        answersList: sorted,
+        answers: sorted.slice(0,2),
         questionId: this.props.questionId
       })
     })
@@ -64,6 +69,12 @@ class Answers extends React.Component {
     return `${month} ${day}, ${year}`
   }
 
+  handleExpandAnswers() {
+    this.setState({
+      answers: this.state.answersList
+    })
+  }
+
   render() {
     if (this.state.answers.length === 0) {
       return null;
@@ -80,6 +91,7 @@ class Answers extends React.Component {
           </div>
         </div>
         )}
+        <ExpandAnswers answersList={this.state.answersList} seeMoreAnswers={this.handleExpandAnswers} />
       </div>
     )
   }

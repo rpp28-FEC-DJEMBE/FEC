@@ -104,6 +104,12 @@ display: block;
   display:flex;
 }
 
+.expand-answers-btn{
+  margin-top: 5px;
+  font-size: small;
+  opacity: .5;
+}
+
 .qaSearch {
   width: 100%;
   height: 50px;

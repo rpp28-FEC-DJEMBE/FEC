@@ -24,18 +24,8 @@ class Questions extends React.Component{
 
   componentDidMount(){
     this.getQuestions()
-    .then(data => {
-      console.log("this is the data", data.data.results)
-      console.log(this.props.productId)
-      this.setState({
-        product_id: Number(data.data.productId),
-        questions: data.data.results,
-      })
-    })
-    .then(() => {
-      console.log(this.state.questions)
-      this.handleMoreAnsweredQuestions()
-    })
+    .then((data) => this.updateState(data))
+    .then(() => this.handleMoreAnsweredQuestions())
   }
 
   getQuestions(){
@@ -49,18 +39,29 @@ class Questions extends React.Component{
     })
   }
 
+  updateState(data){
+    let sorted = data.data.results.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
+    this.setState({
+      product_id: Number(data.data.product_id),
+      displayQuestions: sorted.splice(0,4),
+      questions: sorted
+    })
+    console.log(sorted)
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if(prevState.product_id !== this.props.productId){
-     this.getQuestions();
+     this.getQuestions()
+     .then(data => {
+       this.updateState(data)
+     })
     }
   }
 
   handleMoreAnsweredQuestions() {
     this.setState({
-      displayQuestions:this.state.displayQuestions.concat(this.state.questions.splice(0,2))
+      displayQuestions:this.state.displayQuestions.concat(this.state.questions.splice(0,4))
     })
-    console.log("questions: ",this.state.questions)
-    console.log("display: ", this.state.displayQuestions)
   }
 
   handleAddAnswerClick (question_id) {
@@ -94,7 +95,7 @@ class Questions extends React.Component{
   render() {
     return (
       <div className="qaDisplay">
-        <h1>Questions & Answers</h1>
+        <h3>Questions & Answers</h3>
         <Search />
         <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
         <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} />
