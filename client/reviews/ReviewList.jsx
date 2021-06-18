@@ -7,6 +7,7 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productId: this.props.productId,
       initial: this.props.reviews.slice(0,2),
       reviews: this.props.reviews.slice(),
       showAdd: false
@@ -38,6 +39,17 @@ class ReviewList extends React.Component {
     this.setState({ showAdd: false })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.productId !== this.props.productId){
+      this.setState({
+        initial: this.props.reviews.slice(0,2),
+        reviews: this.props.reviews.slice(),
+      })
+      console.log('review list props', this.props.reviews)
+      console.log('review list state', this.state)
+    }
+  }
+
   componentDidMount() {
     this.setState({
       initial: this.state.reviews.splice(0,2)
@@ -54,7 +66,12 @@ class ReviewList extends React.Component {
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews} handleSort={this.props.handleSort}/>
         <div className='review-list'>
-          {tiles}
+          {/* {tiles} */}
+          {
+            (this.state.initial.map((review, index) => {
+              return <ReviewTile key={index} review={review} />
+            }))
+          }
         </div>
         <div className='review-buttons'>
           {moreReviews}

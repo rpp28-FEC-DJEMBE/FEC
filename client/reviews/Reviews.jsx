@@ -27,20 +27,51 @@ class Reviews extends React.Component {
       })
   }
 
+  async getReviews() {
+    try {
+      let response = await axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
+      let reviews = response.data;
+      return reviews;
+    } catch(err) {
+      console.log('Error fetching review data')
+    }
+  }
+
+  // axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
+  // // axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
+  //   .then((res) => {
+  //     this.setState({
+  //       reviews: res.data.results,
+  //       productId: Number(res.data.product),
+  //       isLoaded: true
+  //     });
+  //     console.log('review state', this.state)
+  //   })
+  //   .catch((err) => {
+  //     console.log('Error fetching review data');
+  //   })
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.productId !== this.props.productId){
+      this.getReviews()
+      .then((data) => {
+        this.setState({
+          reviews: data.results,
+          productId: Number(data.product)
+        })
+      })
+    }
+  }
 
   componentDidMount() {
-    axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
-    // axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
-      .then((res) => {
-        this.setState({
-          reviews: res.data.results,
-          isLoaded: true
-        });
-        console.log('initial state', this.state);
+    this.getReviews()
+    .then((data) => {
+      this.setState({
+        reviews: data.results,
+        productId: Number(data.product),
+        isLoaded: true
       })
-      .catch((err) => {
-        console.log('Error fetching review data');
-      })
+    })
   }
 
   render() {

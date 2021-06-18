@@ -12,6 +12,20 @@ class Breakdown extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.productId !== this.props.productId){
+      axios.get(`/reviews/meta?product_id=${this.props.productId}`)
+      .then((res) => {
+        this.setState({
+          metaData: res.data
+        })
+      })
+      .catch((err) => {
+        console.log('Error fetching review meta data', err);
+      })
+    }
+  }
+
   componentDidMount() {
     axios.get(`/reviews/meta?product_id=${this.props.productId}`)
       .then((res) => {
