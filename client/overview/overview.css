@@ -20,6 +20,7 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   /* ↓ The width when the left and right are on the same row */
   flex-basis: 50rem;
   flex-grow: 1;
+  max-width: 60rem;
 }
 
 .o-product-controls {
@@ -53,6 +54,7 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 .o-images-main {
   width: 100%;
   max-height: 30rem;
+  min-height: 30rem;
   object-fit: cover;
 }
 
@@ -102,4 +104,9 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 
 .forward-arrow {
   border-top: 0.75rem solid gray;
+}
+
+.o-product-category {
+  font-weight: 100;
+  text-transform: uppercase;
 }
