@@ -10,27 +10,12 @@ class Reviews extends React.Component {
       reviews: [],
       isLoaded: false
     }
-    this.handleSort = this.handleSort.bind(this);
-  }
-
-  handleSort(e) {
-    console.log('handle sort', e.target.value);
-    axios.get(`/reviews/?count=100&sort=${e.target.value}&product_id=${this.props.productId}`)
-      .then((res) => {
-        this.setState({
-          reviews: res.data.results,
-        });
-
-      })
-      .catch((err) => {
-        console.log('Error updating sort', err);
-      })
   }
 
 
   componentDidMount() {
-    axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
-    // axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
+    // axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
+    axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
       .then((res) => {
         this.setState({
           reviews: res.data.results,
@@ -56,7 +41,7 @@ class Reviews extends React.Component {
           <p>Ratings and Reviews</p>
           <div className='rr-content'>
             <Breakdown productId={this.props.productId}/>
-            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}/>
+            <ReviewList reviews={this.state.reviews} productId={this.props.productId}/>
           </div>
         </div>
       )

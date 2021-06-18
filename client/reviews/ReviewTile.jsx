@@ -12,6 +12,7 @@ class ReviewTile extends React.Component {
     this.handleHelpful = this.handleHelpful.bind(this);
   }
 
+  // NOT WORKING ANYMORE because the display is now rendering from props and not state
   handleHelpful() {
     if (!this.state.helpfulClicked) {
       this.setState((prevState) => {
@@ -52,7 +53,7 @@ class ReviewTile extends React.Component {
           {response}
         </div>
         <div id='review-footer'>
-          Helpful? <u onClick={this.handleHelpful}>Yes</u> {this.state.helpfulness} | <u>Report</u>
+          Helpful? <u onClick={this.handleHelpful}>Yes</u> {this.props.review.helpfulness} | <u>Report</u>
         </div>
       </div>
     )

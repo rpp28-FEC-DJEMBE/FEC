@@ -14,6 +14,7 @@ class ReviewList extends React.Component {
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   renderInitial() {
@@ -22,10 +23,37 @@ class ReviewList extends React.Component {
     })
   }
 
+  handleSort(e) {
+    console.log('handle sort', e.target.value);
+    if (e.target.value === 'helpful') {
+      let helpfulReviews = this.props.reviews.sort((a, b) => b.helpfulness - a.helpfulness);
+      this.setState({
+        initial: helpfulReviews.slice(0,2),
+        reviews: helpfulReviews.slice(this.state.initial.length, helpfulReviews.length)
+      })
+      console.log('handle sort', this.state);
+    }
+
+
+
+
+    // axios.get(`/reviews/?count=100&sort=${e.target.value}&product_id=${this.props.productId}`)
+    //   .then((res) => {
+    //     this.setState({
+    //       reviews: res.data.results,
+    //     });
+
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error updating sort', err);
+    //   })
+  }
+
   handleMoreReviews() {
     this.setState((prevState) => ({
       initial: prevState.initial.concat(this.state.reviews.splice(0,2))
     }))
+    console.log('more reviews', this.state);
   }
 
   handleAddReview() {
@@ -52,7 +80,7 @@ class ReviewList extends React.Component {
 
     return (
       <div className='review-container'>
-        <SortOptions reviews={this.props.reviews} handleSort={this.props.handleSort}/>
+        <SortOptions reviews={this.props.reviews} handleSort={this.handleSort}/>
         <div className='review-list'>
           {tiles}
         </div>
