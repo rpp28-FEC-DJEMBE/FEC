@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import ReviewTile from './ReviewTile.jsx';
 import SortOptions from './SortOptions.jsx';
 import AddReview from './AddReview.jsx';
@@ -31,7 +32,16 @@ class ReviewList extends React.Component {
 
   handleAddReview() {
     if (!this.state.showAdd) {
-      this.setState({ showAdd: true })
+      axios.get(`/reviews/meta?product_id=${this.props.productId}`)
+      .then((res) => {
+        this.setState({
+          metaData: res.data,
+          showAdd: true
+        })
+      })
+      .catch((err) => {
+        console.log('Error fetching review meta data', err);
+      })
     }
   }
 
@@ -45,8 +55,8 @@ class ReviewList extends React.Component {
         initial: this.props.reviews.slice(0,2),
         reviews: this.props.reviews.slice(),
       })
-      console.log('review list props', this.props.reviews)
-      console.log('review list state', this.state)
+      // console.log('review list props', this.props.reviews)
+      // console.log('review list state', this.state)
     }
   }
 
@@ -76,7 +86,12 @@ class ReviewList extends React.Component {
         <div className='review-buttons'>
           {moreReviews}
           <button onClick={this.handleAddReview}>Add A Review +</button>
-          <AddReview show={this.state.showAdd} productId={this.props.productId} handleClose={this.handleClose}/>
+          <AddReview
+            show={this.state.showAdd}
+            productId={this.props.productId}
+            handleClose={this.handleClose}
+            metaData={this.state.metaData}
+          />
         </div>
       </div>
     )
