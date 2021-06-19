@@ -3,6 +3,7 @@ import './overview.css';
 
 import utils from './overviewUtils.js';
 import RatingStars from '../reviews/RatingStars.jsx';
+import StyleSelector from './StyleSelector.jsx';
 
 class ProductControls extends React.Component {
   constructor(props) {
@@ -29,11 +30,7 @@ class ProductControls extends React.Component {
           <p className="o-product-style-price">{utils.toCurrency(this.props.style.original_price)}</p>
           <p className="o-product-style-name"><b>STYLE > </b>{this.props.style.name}</p>
           <hr />
-          <ul className="o-style-selctor">
-            <li>Style 1</li>
-            <li>Style 1</li>
-          </ul>
-
+          <StyleSelector />
           <select name="size" className="o-size-list">
             <option value="">Select Size</option>
             <option value="size1">Size XS</option>
