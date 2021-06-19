@@ -1,12 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import ExpandAnswers from './expandAnswers.jsx'
 
 class Answers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      answers:[]
+      answersList:[],
+      answers:[],
+      report:[]
     }
+    this.handleExpandAnswers = this.handleExpandAnswers.bind(this);
   }
 
   componentDidMount(){
@@ -14,7 +18,7 @@ class Answers extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    if(prevProps.questionId !== this.state.questionId) {
+    if(prevProps.questionId !== this.props.questionId) {
       this.getAnswers();
     }
   }
@@ -24,15 +28,17 @@ class Answers extends React.Component {
       method:'get',
       url: `/qa/questions/${this.props.questionId}/answers`,
       params: {
-        count: 2
+        count: 50
       }
     }).then(data => {
+      let sorted = data.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
       this.setState({
-        answers: data.data.results,
+        answersList: sorted,
+        answers: sorted.slice(0,2),
         questionId: this.props.questionId
       })
-      console.log(this.state)
     })
+    .catch((err) => console.log("Error: ", err))
   }
 
   updateQuestionHelpful(){
@@ -40,6 +46,7 @@ class Answers extends React.Component {
       method:'put',
       url: `/qa/questions/${this.props.questionId}/helpful`,
     })
+    .catch((err) => console.log("Error: ", err))
   }
 
   convertDate(date){
@@ -65,6 +72,26 @@ class Answers extends React.Component {
     return `${month} ${day}, ${year}`
   }
 
+  handleExpandAnswers() {
+    this.setState({
+      answers: this.state.answersList
+    })
+  }
+
+
+// handleReportClick(answerId){
+//   const reportedList = this.state.report
+//   console.log(reportedList)
+//   if(!reportedList.includes(answerId)){
+//     this.setState({
+//       report: this.state.report.push(answerId)
+//     })
+//     console.log(answerId)
+//   } else {
+//     console.log("Can't report again!")
+//   }
+// }
+
   render() {
     if (this.state.answers.length === 0) {
       return null;
@@ -73,14 +100,18 @@ class Answers extends React.Component {
       <div className="answer-list">
         {this.state.answers.map((answer, index) =>
         <div  className="answer" key={index}>
-          <p>A: {answer.body}</p>
+          <div className="answer-display">
+            <p className="a">A:</p>
+            <p className="answer-body">{answer.body}</p>
+          </div>
           <div className="answer-footer">
             <p>by {answer.answerer_name}, {this.convertDate(answer.date)}</p>
             <p>Helpful? Yes({answer.helpfulness})</p>
-            <p>report</p>
+            <p onClick={()=> this.handleReportClick(answer.answer_id)}>report</p>
           </div>
         </div>
         )}
+        <ExpandAnswers answersList={this.state.answersList} seeMoreAnswers={this.handleExpandAnswers} />
       </div>
     )
   }
