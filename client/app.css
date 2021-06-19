@@ -79,24 +79,35 @@ header p {
   padding: 8px;
 }
 
-.qaDisplay .question-list {
+/* .qaDisplay .question-list {
   border: solid gray 1px;
   padding:8px;
-}
+} */
 
 .qaDisplay {
-max-height: 1000px;
-overflow: hidden;
+max-height: 800px;
 display: block;
 }
 
-.answer {
+.question-list {
+  display: block;
+  max-height: 650px;
+  overflow-y:scroll;
+}
+
+/* .answer {
   border: solid gray 1px;
   padding:8px;
-}
+} */
 
 .search {
   display:flex;
+}
+
+.expand-answers-btn{
+  margin-top: 5px;
+  font-size: small;
+  opacity: .5;
 }
 
 .qaSearch {
@@ -160,8 +171,28 @@ display: block;
   margin-top: 1px;
 }
 
+<<<<<<< HEAD
 .answer-content,
 .question-content {
+=======
+.answer-display {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-flex;
+
+}
+
+.a {
+  font-weight: bold;
+}
+
+.a, .answer-body {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.answer-content, .question-content {
+>>>>>>> main
   display: grid;
   background-color: white;
   width: 750px;
