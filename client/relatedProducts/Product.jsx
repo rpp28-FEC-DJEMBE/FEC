@@ -77,14 +77,14 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
     <div className="product-card">
 
       <div className="card-btn">
-        <a className="compare-btn" onClick={onClickActionBtn}>{cardBtn}</a>
+        <a className="compare-btn pointer" onClick={onClickActionBtn}>{cardBtn}</a>
       </div>
 
-      <div className="product-image-div" onClick={() => onCardClick(id)}>
+      <div className="product-image-div pointer" onClick={() => onCardClick(id)}>
         <img className="product-image" src={detail.img} alt={`${id}`+'No Img'}></img>
       </div>
 
-      <div className="product-detail-box" onClick={() => onCardClick(id)}>
+      <div className="product-detail-box pointer" onClick={() => onCardClick(id)}>
         <p className="product-category">{category}</p>
         <p className="product-name">{name}</p>
         <div className="product-price">
