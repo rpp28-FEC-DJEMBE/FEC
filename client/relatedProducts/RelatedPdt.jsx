@@ -10,14 +10,18 @@ const axios = require('axios');
 
 
 function RelatedPdt(props) {
-  // const [id, setId] = useState(props.productId);
-
-  const [relatedPdts, setRelatedPdts] = useState({pdt_ids: [], relatedProducts: []});
-  const [outfits, setOutfits] = useState([]);
+  const [relatedPdts, setRelatedPdts] = useState({pdt_ids: [], products: []});
+  const [pdtLayOut, setPdtLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
+  // const [outfits, setOutfits] = useState([]);
+  const [outfits, setOutfits] = useState({pdt_ids: [], products: []});
+  const [outfitLayOut, setOutfitLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
   const [clickedId, setClickedId] = useState(props.productId);
   const [btnId, setBtnId] = useState(props.productId);
-  // const [showComp, setShowComp] = useState(false);
-  const [showComp, setShowComp] = useState(true);
+  // const [showComp, setShowComp] = useState(true);
+  const [showComp, setShowComp] = useState(false);
+  const displayPdtItems = 4;
+  // const displayPdtItems = 2;
+  const displayOutfitItems = displayPdtItems - 1;
 
   useEffect( () => {
     getOutfits();
@@ -27,7 +31,7 @@ function RelatedPdt(props) {
   // })
 
   // if (relatedPdts.pdt_ids.length !== 0) {
-    // console.log("state3", relatedPdts.pdt_ids, relatedPdts.relatedProducts);
+    // console.log("state3", relatedPdts.pdt_ids, relatedPdts.products);
   // }
 
   const getRelatedPdts = async (id) => {
@@ -37,7 +41,7 @@ function RelatedPdt(props) {
       // console.log('pdt_ids.data', pdt_ids.data);
       let pdt_idsData = [];
       pdt_ids.data.forEach( pdt_id => {
-        if (!pdt_idsData.includes(pdt_id)) {
+        if (!pdt_idsData.includes(pdt_id) && pdt_id !== props.productId) {
           pdt_idsData.push(pdt_id);
         }
       } )
@@ -49,12 +53,17 @@ function RelatedPdt(props) {
       }
       Promise.all(pdtPromises)
         .then( (productsData) => {
-          let products = [];
-          productsData.forEach( (pdtData) => {
-            products.push(pdtData.data);
-          } )
-          // console.log('products', productsData[0].data);
-          setRelatedPdts({pdt_ids: pdt_idsData, relatedProducts: products})
+          let products = productsData.map( pdtData => (pdtData.data) );
+          // console.log('products', pdt_idsData);
+          setRelatedPdts({pdt_ids: pdt_idsData, products: products});
+          console.log('all relatedid', pdt_idsData)
+          if (pdt_idsData.length > displayPdtItems) {
+            // console.log('no left with right', pdt_idsData, relatedPdts.pdt_ids)
+            setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer'});
+          } else {
+            // console.log('no left no right', pdt_idsData, relatedPdts.pdt_ids)
+            setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
+          }
         } )
     } catch (err) {
       console.log(err);
@@ -62,14 +71,22 @@ function RelatedPdt(props) {
   }
 
   const getOutfits = () => {
-    axios.get('/products?page=1&count=4')
-      .then( res => {
-        // console.log('getOutfits', res.data);
-        setOutfits(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    let savedOutfit, savedOutfitIds;
+    if (localStorage.getItem('outfit') !== null) {
+      savedOutfit = JSON.parse(localStorage.getItem('outfit'));
+      savedOutfitIds = JSON.parse(localStorage.getItem('outfitId'));
+    } else {
+      savedOutfit = [];
+      savedOutfitIds = [];
+    }
+    setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
+    if (savedOutfitIds.length > displayOutfitItems) {
+      // console.log('no left with right', pdt_idsData, relatedPdts.pdt_ids)
+      setOutfitLayOut({displayFirstId: 0, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer'});
+    } else {
+      // console.log('no left no right', pdt_idsData, relatedPdts.pdt_ids)
+      setOutfitLayOut({displayFirstId: 0, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
+    }
   }
 
   const addOutfit = async (selectedId) => {
@@ -77,59 +94,94 @@ function RelatedPdt(props) {
       const newOutfitData = await axios.get(`/products/${selectedId}`);
       // console.log('newOutfitData', newOutfitData)
       let newOutfit = newOutfitData.data;
-      // console.log('newOutfit', newOutfit)
 
-      // outfits.push(newOutfit)    //doesn't work because of pending promise?
-      // console.log('updated', outfits)
-      // setOutfits(outfits);
+      let savedOutfit, savedOutfitIds;
+      if (localStorage.getItem('outfit') !== null) {
+        savedOutfit = JSON.parse(localStorage.getItem('outfit'));
+        savedOutfitIds = JSON.parse(localStorage.getItem('outfitId'));
+        console.log('current savedOutfitIds', savedOutfitIds, savedOutfit.length);
+        if (!savedOutfitIds.includes(newOutfit.id)) {
+          savedOutfit.push(newOutfit);
+          savedOutfitIds.push(newOutfit.id);
+        }
+      } else {
+        savedOutfit = [newOutfit];
+        savedOutfitIds = [newOutfit.id];
+      }
+      console.log('updated savedOutfitIds', savedOutfitIds, savedOutfit.length);
 
-      Promise.all(outfits)
-        .then( (currentOutfits) => {
-          // console.log('currentOutfits2',currentOutfits)
-          // console.log('newOutfit2', newOutfit)
-          let allOutfitIds = [];
-          currentOutfits.forEach( outfit => {
-            allOutfitIds.push(outfit.id);
-          } )
-          console.log('allOutfitIds', allOutfitIds);
-          if (!allOutfitIds.includes(newOutfit.id)) {
-            currentOutfits.push(newOutfit);
-          }
-          // console.log('updated', currentOutfits)
-          setOutfits(currentOutfits);
-        } )
+      localStorage.setItem('outfitId', JSON.stringify(savedOutfitIds));
+      localStorage.setItem('outfit', JSON.stringify(savedOutfit));
+      setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
+
     } catch (err) {
       console.log(err);
     }
   }
 
-  const removeOutfit = async (selectedId) => {
+  const removeOutfit = (selectedId) => {
 
-    Promise.all(outfits)
-      .then( (currentOutfits) => {
-        console.log('currentOutfits2',selectedId, currentOutfits);
-        // // console.log('updated', currentOutfits)
-        let updatedOutfits = currentOutfits;
-        for (let i = 0; i < currentOutfits.length; i++) {
-          if (currentOutfits[i].id === selectedId) {
-            console.log(i, currentOutfits[i].id, currentOutfits[i].name)
-            updatedOutfits.splice(i, 1);
-          }
+    let savedOutfit = JSON.parse(localStorage.getItem('outfit'));
+    let savedOutfitIds = JSON.parse(localStorage.getItem('outfitId'));
+    let toDeleteId = savedOutfitIds.indexOf(selectedId);
+    console.log('current savedOutfitIds', savedOutfitIds, savedOutfit.length);
+    savedOutfit.splice(toDeleteId, 1);
+    savedOutfitIds.splice(toDeleteId, 1);
+    console.log('updated savedOutfitIds', savedOutfitIds, savedOutfit.length);
+
+    localStorage.removeItem('outfitId');
+    localStorage.setItem('outfitId', JSON.stringify(savedOutfitIds));
+    localStorage.removeItem('outfit');
+    localStorage.setItem('outfit', JSON.stringify(savedOutfit));
+    setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
+
+  }
+
+  // pdtLayOut|outfitLayOut => carousel
+  // relatedPdts|outfits => products
+  // displayPdtItems|displayOutfitItems => itemNum
+  const slideLeft = (carousel, products, itemNum) => {
+    if (carousel.displayFirstId > 0) {
+      // console.log('left1', carousel.displayFirstId);
+      if (carousel.displayFirstId === 1) {
+        let updatedLayout = {displayFirstId: carousel.displayFirstId - 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer'};
+        if (itemNum === displayPdtItems) {
+          setPdtLayOut(updatedLayout);
+        } else {
+          setOutfitLayOut(updatedLayout);
         }
-        // console.log('outfitCopy', outfitCopy)
-        console.log('updatedOutfits', updatedOutfits)
-        setOutfits(updatedOutfits);
-      } )
-      .catch(err => {
-        console.log(err);
-      })
+      } else {
+        let updatedLayout = {displayFirstId: carousel.displayFirstId - 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer'};
+        if (itemNum === displayPdtItems) {
+          setPdtLayOut(updatedLayout);
+        } else {
+          setOutfitLayOut(updatedLayout);
+        }
+      }
+      // console.log('left2', carousel.displayFirstId);
 
+    }
   }
 
-  const slideLeft = () => {
-  }
-
-  const slideRight = () => {
+  const slideRight = (carousel, products, itemNum) => {
+    // console.log(carousel, products, itemNum);
+    if (carousel.totalItems > carousel.displayFirstId + itemNum) {
+      if (products.pdt_ids.length > carousel.displayFirstId + itemNum + 1) {
+        let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer'};
+        if (itemNum === displayPdtItems) {
+          setPdtLayOut(updatedLayout);
+        } else {
+          setOutfitLayOut(updatedLayout);
+        }
+      } else {
+        let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer btn-Inactive'};
+        if (itemNum === displayPdtItems) {
+          setPdtLayOut(updatedLayout);
+        } else {
+          setOutfitLayOut(updatedLayout);
+        }
+      }
+    }
   }
 
   const onProductBtnClick = (btnId) => {
@@ -139,7 +191,7 @@ function RelatedPdt(props) {
   }
 
   const onCompaClose = () => {
-    console.log('onCompaClose');
+    // console.log('onCompaClose');
     setShowComp(false);
   }
 
@@ -155,66 +207,81 @@ function RelatedPdt(props) {
     removeOutfit (btnId);
   }
 
-  return (
-    <div>
-
-      <div className="related-product-widget">
-        <h3 className="related-product-header">RELATED PRODUCTS</h3>
-        <div className="related-product-box">
-          <button id="left-btn" onClick={slideLeft}>{'\u1438'}</button>
-          {
-            relatedPdts.relatedProducts.map( product =>
-              (
-                <Product
-                  key={product.id}
-                  overviewProductId={props.productId}
-                  id={product.id}
-                  category={product.category}
-                  name={product.name}
-                  default_price={product.default_price}
-                  rating={'5'}
-                  cardBtn={'\u2606'}
-                  onProductBtnClick={onProductBtnClick}
-                  onCardClick={props.onCardClick}
-                />
+  if (!relatedPdts.products.length) {
+    return (<p></p>);
+  } else {
+    return (
+      <div>
+        <div className="related-product-widget">
+          <h3 className="related-product-header">RELATED PRODUCTS</h3>
+          <div className="related-product-box">
+            <label
+              className={pdtLayOut.pdtLeftBtn}
+              onClick={() => slideLeft(pdtLayOut, relatedPdts, displayPdtItems)}
+            >{'\u1438'}</label>
+            {
+              relatedPdts.products.slice(pdtLayOut.displayFirstId, pdtLayOut.displayFirstId + displayPdtItems).map( product =>
+                (
+                  <Product
+                    key={product.id}
+                    overviewProductId={props.productId}
+                    id={product.id}
+                    category={product.category}
+                    name={product.name}
+                    default_price={product.default_price}
+                    rating={'5'}
+                    cardBtn={'\u2606'}
+                    onProductBtnClick={onProductBtnClick}
+                    onCardClick={props.onCardClick}
+                  />
+                )
               )
-            )
-          }
-          <button id="right-btn" onClick={slideRight}>{'\u1433'}</button>
+            }
+            <label
+              className={pdtLayOut.pdtRightBtn}
+              onClick={() => slideRight(pdtLayOut, relatedPdts, displayPdtItems)}
+            >{'\u1433'}</label>
+          </div>
         </div>
-      </div>
 
-      <div className="related-product-widget">
-        <h3 className="related-product-header">YOUR OUTFIT</h3>
-        <div className="related-product-box">
-          <button id="left-btn" onClick={slideLeft}>{'\u1438'}</button>
-          <OutfitAddCard onAddOutfitClick={onAddOutfitClick}/>
-          {
-            outfits.map( outfit =>
-              (
-                <Product
-                  key={outfit.id}
-                  overviewProductId={props.productId}
-                  id={outfit.id}
-                  category={outfit.category}
-                  name={outfit.name}
-                  default_price={outfit.default_price}
-                  rating={'5'}
-                  cardBtn={'\u2327'}
-                  onOutfitBtnClick={onOutfitBtnClick}
-                  onCardClick={props.onCardClick}
-                />
+        <div className="related-product-widget">
+          <h3 className="related-product-header">YOUR OUTFIT</h3>
+          <div className="related-product-box">
+          <label
+              className={outfitLayOut.pdtLeftBtn}
+              onClick={() => slideLeft(outfitLayOut, outfits, displayOutfitItems)}
+            >{'\u1438'}</label>
+            <OutfitAddCard onAddOutfitClick={onAddOutfitClick}/>
+            {
+              outfits.products.slice(outfitLayOut.displayFirstId, outfitLayOut.displayFirstId + displayOutfitItems).map( outfit =>
+                (
+                  <Product
+                    key={outfit.id}
+                    overviewProductId={props.productId}
+                    id={outfit.id}
+                    category={outfit.category}
+                    name={outfit.name}
+                    default_price={outfit.default_price}
+                    rating={'5'}
+                    cardBtn={'\u2327'}
+                    onOutfitBtnClick={onOutfitBtnClick}
+                    onCardClick={props.onCardClick}
+                  />
+                )
               )
-            )
-          }
-          <button id="right-btn" onClick={slideRight}>{'\u1433'}</button>
+            }
+            <label
+              className={outfitLayOut.pdtRightBtn}
+              onClick={() => slideRight(outfitLayOut, outfits, displayOutfitItems)}
+            >{'\u1433'}</label>
+          </div>
         </div>
+
+        <Comparison productId={props.productId} btnId={btnId} showComp={showComp} onCompaClose={onCompaClose}/>
+
       </div>
-
-      <Comparison productId={props.productId} btnId={btnId} showComp={showComp} onCompaClose={onCompaClose}/>
-
-    </div>
-  )
+    )
+  }
 
 }
 
