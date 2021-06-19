@@ -171,10 +171,6 @@ display: block;
   margin-top: 1px;
 }
 
-<<<<<<< HEAD
-.answer-content,
-.question-content {
-=======
 .answer-display {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -192,7 +188,6 @@ display: block;
 }
 
 .answer-content, .question-content {
->>>>>>> main
   display: grid;
   background-color: white;
   width: 750px;
