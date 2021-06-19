@@ -25,7 +25,7 @@ class Questions extends React.Component{
   componentDidMount(){
     this.getQuestions()
     .then((data) => this.updateState(data))
-    .then(() => this.handleMoreAnsweredQuestions())
+    // .then(() => this.handleMoreAnsweredQuestions())
   }
 
   getQuestions(){
@@ -43,7 +43,7 @@ class Questions extends React.Component{
     let sorted = data.data.results.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
     this.setState({
       product_id: Number(data.data.product_id),
-      displayQuestions: sorted.splice(0,4),
+      displayQuestions: sorted.splice(0,2),
       questions: sorted
     })
     console.log(sorted)

@@ -7,7 +7,8 @@ class Answers extends React.Component {
     super(props);
     this.state = {
       answersList:[],
-      answers:[]
+      answers:[],
+      report:[]
     }
     this.handleExpandAnswers = this.handleExpandAnswers.bind(this);
   }
@@ -17,7 +18,7 @@ class Answers extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    if(prevProps.questionId !== this.state.questionId) {
+    if(prevProps.questionId !== this.props.questionId) {
       this.getAnswers();
     }
   }
@@ -75,6 +76,20 @@ class Answers extends React.Component {
     })
   }
 
+
+// handleReportClick(answerId){
+//   const reportedList = this.state.report
+//   console.log(reportedList)
+//   if(!reportedList.includes(answerId)){
+//     this.setState({
+//       report: this.state.report.push(answerId)
+//     })
+//     console.log(answerId)
+//   } else {
+//     console.log("Can't report again!")
+//   }
+// }
+
   render() {
     if (this.state.answers.length === 0) {
       return null;
@@ -83,11 +98,14 @@ class Answers extends React.Component {
       <div className="answer-list">
         {this.state.answers.map((answer, index) =>
         <div  className="answer" key={index}>
-          <p className="answer-body">A: {answer.body}</p>
+          <div className="answer-display">
+            <p className="a">A:</p>
+            <p className="answer-body">{answer.body}</p>
+          </div>
           <div className="answer-footer">
             <p>by {answer.answerer_name}, {this.convertDate(answer.date)}</p>
             <p>Helpful? Yes({answer.helpfulness})</p>
-            <p>report</p>
+            <p onClick={()=> this.handleReportClick(answer.answer_id)}>report</p>
           </div>
         </div>
         )}

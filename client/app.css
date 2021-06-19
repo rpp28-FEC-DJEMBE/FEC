@@ -100,10 +100,6 @@ display: block;
   padding:8px;
 } */
 
-.answer-body{
-  margin:1px;
-}
-
 .search {
   display:flex;
 }
@@ -171,6 +167,22 @@ display: block;
   opacity: .5;
   height: 0px;
   margin-top: 1px;
+}
+
+.answer-display {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-flex;
+
+}
+
+.a {
+  font-weight: bold;
+}
+
+.a, .answer-body {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .answer-content, .question-content {
