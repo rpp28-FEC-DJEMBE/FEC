@@ -38,7 +38,7 @@ class AnswerEntry extends React.Component{
         url: `/qa/answers/${this.props.answer.answer_id}/helpful`
       })
     } else {
-      console.log("Akready Clicked!")
+      console.log("Already Clicked!")
     }
   }
 
