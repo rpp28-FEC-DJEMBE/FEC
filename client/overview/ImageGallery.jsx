@@ -20,6 +20,12 @@ class ImageGallery extends React.Component {
     this.setImages(this.state.selectedImageIndex);
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.selectedStyleId != this.props.selectedStyleId) {
+      this.setImages(this.state.selectedImageIndex);
+    }
+  }
+
   setImages(selectedImageIndex) {
 
     // "quantize" the input - if the provided index is out of bounds, bound it

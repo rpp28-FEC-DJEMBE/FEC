@@ -30,17 +30,26 @@ class App extends React.Component {
     });
   }
 
+  changeProductId() {
+    let newProductId = [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)];
+    this.setState({
+      productId: newProductId
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
         <header>
           <nav>
             <h1><img src={logo} alt='Djembe' />The Djembe Clothing Company</h1>
+            <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div>
           </nav>
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>
         <Overview productId={this.state.productId} />
         <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
+        {/* <RelatedPdt productId={this.state.productId}/> */}
         <Questions productId={this.state.productId} />
         <Reviews productId={this.state.productId} />
       </React.Fragment>

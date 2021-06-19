@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import Answers from './answers.jsx';
+import AnswersList from './answersList.jsx';
 
 const QuestionEntry = (props) => {
+
   return (
     <>
       {props.questions.map((question, index) =>
@@ -13,7 +14,7 @@ const QuestionEntry = (props) => {
               <p onClick={()=> props.handleAddAnswer(question.question_id)} >Add Answer</p>
             </div>
           </div>
-            <Answers questionId={question.question_id}/>
+            <AnswersList questionId={question.question_id}/>
       </div>
       )}
     </>

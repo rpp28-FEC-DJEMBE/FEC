@@ -13,17 +13,34 @@ class Overview extends React.Component {
     super(props);
 
     this.state = {
-      product: [],
+      product: null,
       productStyles: [],
       selectedStyleId: null,
       selectedStyle: [],
-      isLoaded: false,
+      productLoaded: false,
+      styleLoaded: false,
       useMockData: false
     }
   }
 
   componentDidMount() {
+    this.setState({
+      productLoaded: false,
+      styleLoaded: false
+    });
+    this.getProduct(this.props.productId);
     this.getStyles(this.props.productId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.productId != this.props.productId) {
+      this.setState({
+        productLoaded: false,
+        styleLoaded: false
+      });
+      this.getProduct(this.props.productId);
+      this.getStyles(this.props.productId);
+    }
   }
 
   setStyle(styleId, styles) {
@@ -39,7 +56,7 @@ class Overview extends React.Component {
 
     let styles;
     let selectedStyle;
-    const endpoint = `http://localhost:3000/products/${productId}/styles`;
+    const endpoint = `/products/${productId}/styles`;
 
     try {
 
@@ -63,7 +80,7 @@ class Overview extends React.Component {
               productStyles: styles,
               selectedStyleId: styles[0].style_id,
               selectedStyle: styles[0],
-              isLoaded: true
+              styleLoaded: true
             });
           })
           .catch(error => {
@@ -77,6 +94,27 @@ class Overview extends React.Component {
 
   }
 
+  getProduct(productId) {
+
+    // TODO: mock product data
+    let product;
+    const endpoint = '/products/' + this.props.productId;
+
+    this.getAPIData(endpoint)
+      .then(response => {
+        // console.log('Overview: Received product data from the server:', response);
+        product = [];
+        product.push(response.data);
+        this.setState({
+          product: product,
+          productLoaded: true
+        });
+      })
+      .catch(error => {
+        console.error('Overview: Error getting product data from the server', error);
+      })
+  }
+
   async getAPIData(endpointUrl) {
     try {
       const response = await axios.get(endpointUrl);
@@ -88,13 +126,9 @@ class Overview extends React.Component {
     }
   }
 
-  // TODO: getProduct()
-  // axios.get('http://localhost:3000/products/' + this.props.productId)
-
-
   render() {
 
-    if (!this.state.isLoaded) {
+    if (!this.state.productLoaded || !this.state.styleLoaded) {
       return (
         <section className="container o-product-overview">
           <p>Loading...</p>
@@ -104,8 +138,8 @@ class Overview extends React.Component {
       return (
         <section className="o-product-overview">
           <ImageGallery selectedStyleId={this.state.selectedStyleId} stylePhotos={this.state.selectedStyle.photos} />
-          <ProductControls styles={this.state.productStyles}/>
-          <ProductDescription productId={this.props.productId} />
+          <ProductControls product={this.state.product} style={this.state.selectedStyle} />
+          <ProductDescription />
         </section>
       );
     }
