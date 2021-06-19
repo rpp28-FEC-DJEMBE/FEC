@@ -7,6 +7,7 @@ const RatingBreakdown = ({ratings, recommended}) => {
   const [star, setStar] = useState(ratings);
 
   useEffect(() => { setStar(ratings) }, [ratings]);
+
   if(Object.keys(ratings).length === 0) {
     return (
       <div className='rating-breakdown'>

@@ -217,6 +217,7 @@ display: block;
   font-size: var(--bars-size);
   font-weight: bolder;
   letter-spacing: -3px;
+  vertical-align: middle;
   background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;

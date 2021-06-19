@@ -37,19 +37,15 @@ class Reviews extends React.Component {
     }
   }
 
-  // axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
-  // // axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
-  //   .then((res) => {
-  //     this.setState({
-  //       reviews: res.data.results,
-  //       productId: Number(res.data.product),
-  //       isLoaded: true
-  //     });
-  //     console.log('review state', this.state)
-  //   })
-  //   .catch((err) => {
-  //     console.log('Error fetching review data');
-  //   })
+  async getMetaData() {
+    try {
+      let response = await axios.get(`/reviews/meta?product_id=${this.props.productId}`);
+      let metaData = response.data;
+      return metaData;
+    } catch(err) {
+      console.log('Error fetching review meta data')
+    }
+  }
 
   componentDidUpdate(prevProps) {
     if(prevProps.productId !== this.props.productId){
@@ -71,7 +67,15 @@ class Reviews extends React.Component {
         productId: Number(data.product),
         isLoaded: true
       })
+      // return this.getMetaData()
     })
+    // .then((metaData) => {
+    //   this.setState({
+    //     metaData: metaData,
+    //     isLoaded: true
+    //   })
+    //   console.log('metadata', metaData)
+    // })
   }
 
   render() {
@@ -86,7 +90,7 @@ class Reviews extends React.Component {
       <div className='ratings-reviews'>
           <p>Ratings and Reviews</p>
           <div className='rr-content'>
-            <Breakdown productId={this.props.productId}/>
+            <Breakdown productId={this.props.productId} metaData={this.state.metaData} isLoaded={this.state.isLoaded}/>
             <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}/>
           </div>
         </div>
