@@ -10,20 +10,72 @@ class Reviews extends React.Component {
       reviews: [],
       isLoaded: false
     }
+    this.handleSort = this.handleSort.bind(this);
   }
 
-  componentDidMount() {
-    axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
-    // axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
+  handleSort(e) {
+    console.log('handle sort', e.target.value);
+    axios.get(`/reviews/?count=100&sort=${e.target.value}&product_id=${this.props.productId}`)
       .then((res) => {
         this.setState({
           reviews: res.data.results,
-          isLoaded: true
-        })
+        });
+
       })
       .catch((err) => {
-        console.log('Error fetching review data')
+        console.log('Error updating sort', err);
       })
+  }
+
+  async getReviews() {
+    try {
+      let response = await axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
+      let reviews = response.data;
+      return reviews;
+    } catch(err) {
+      console.log('Error fetching review data')
+    }
+  }
+
+  async getMetaData() {
+    try {
+      let response = await axios.get(`/reviews/meta?product_id=${this.props.productId}`);
+      let metaData = response.data;
+      return metaData;
+    } catch(err) {
+      console.log('Error fetching review meta data')
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.productId !== this.props.productId){
+      this.getReviews()
+      .then((data) => {
+        this.setState({
+          reviews: data.results,
+          productId: Number(data.product)
+        })
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.getReviews()
+    .then((data) => {
+      this.setState({
+        reviews: data.results,
+        productId: Number(data.product),
+        isLoaded: true
+      })
+      // return this.getMetaData()
+    })
+    // .then((metaData) => {
+    //   this.setState({
+    //     metaData: metaData,
+    //     isLoaded: true
+    //   })
+    //   console.log('metadata', metaData)
+    // })
   }
 
   render() {
@@ -38,8 +90,8 @@ class Reviews extends React.Component {
       <div className='ratings-reviews'>
           <p>Ratings and Reviews</p>
           <div className='rr-content'>
-            <Breakdown productId={this.props.productId}/>
-            <ReviewList reviews={this.state.reviews} />
+            <Breakdown productId={this.props.productId} metaData={this.state.metaData} isLoaded={this.state.isLoaded}/>
+            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}/>
           </div>
         </div>
       )

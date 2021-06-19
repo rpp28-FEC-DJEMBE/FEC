@@ -10,6 +10,7 @@ class SortOptions extends React.Component {
   }
 
   handleChange(e) {
+    this.props.handleSort(e)
     this.setState({ value: e.target.value });
   }
 
@@ -18,8 +19,8 @@ class SortOptions extends React.Component {
     return (
       <div className='sort-options'>
         <label>{reviewNumber} reviews, sorted by </label>
-        <select value={this.state.value} onChange={this.handleChange}>
-          <option value='relevance'>relevance</option>
+        <select value={this.state.value} onChange={this.handleChange} >
+          <option value='relevant'>relevance</option>
           <option value='helpful'>helpful</option>
           <option value='newest'>newest</option>
         </select>
