@@ -18,6 +18,8 @@ class App extends React.Component {
     this.state = {
       productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
       // productId: 22122
+      // productId: 22156 // for dup features
+      // productId: 22164 // for sale price, for >6 relatedid
     }
   }
 
