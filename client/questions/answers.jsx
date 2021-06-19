@@ -38,6 +38,7 @@ class Answers extends React.Component {
         questionId: this.props.questionId
       })
     })
+    .catch((err) => console.log("Error: ", err))
   }
 
   updateQuestionHelpful(){
@@ -45,6 +46,7 @@ class Answers extends React.Component {
       method:'put',
       url: `/qa/questions/${this.props.questionId}/helpful`,
     })
+    .catch((err) => console.log("Error: ", err))
   }
 
   convertDate(date){

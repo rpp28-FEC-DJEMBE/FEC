@@ -25,6 +25,8 @@ class Questions extends React.Component{
   componentDidMount(){
     this.getQuestions()
     .then((data) => this.updateState(data))
+    .catch((err) => console.log("Error: ", err))
+
     // .then(() => this.handleMoreAnsweredQuestions())
   }
 
@@ -46,7 +48,6 @@ class Questions extends React.Component{
       displayQuestions: sorted.splice(0,2),
       questions: sorted
     })
-    console.log(sorted)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -55,6 +56,7 @@ class Questions extends React.Component{
      .then(data => {
        this.updateState(data)
      })
+    .catch((err) => console.log("Error: ", err))
     }
   }
 
