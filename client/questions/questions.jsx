@@ -101,7 +101,7 @@ class Questions extends React.Component{
         <Search />
         <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
         <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} />
-        <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick} />
+        <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick.bind(this)} />
         <button onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
         <button onClick={() => this.handleAddQClick()}>Add a question</button>
       </div>
