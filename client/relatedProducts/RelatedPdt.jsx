@@ -56,8 +56,8 @@ function RelatedPdt(props) {
           let products = productsData.map( pdtData => (pdtData.data) );
           // console.log('products', pdt_idsData);
           setRelatedPdts({pdt_ids: pdt_idsData, products: products});
-          console.log('all relatedid', pdt_idsData)
-          if (pdt_idsData.length > displayPdtItems) {
+          // console.log('all relatedid', pdt_idsData)
+          if (pdt_idsData.length > displayPdtItems - 1) {
             // console.log('no left with right', pdt_idsData, relatedPdts.pdt_ids)
             setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'});
           } else {
@@ -80,7 +80,7 @@ function RelatedPdt(props) {
       savedOutfitIds = [];
     }
     setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
-    if (savedOutfitIds.length > displayOutfitItems) {
+    if (savedOutfitIds.length > displayOutfitItems - 1) {
       // console.log('no left with right', pdt_idsData, relatedPdts.pdt_ids)
       setOutfitLayOut({displayFirstId: 0, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'});
     } else {
@@ -116,7 +116,8 @@ function RelatedPdt(props) {
 
       // check if needs to show right arrow
       // console.log('outfitLayOut.displayFirstId', savedOutfitIds, outfitLayOut.displayFirstId);
-      if (savedOutfitIds.length > displayOutfitItems) {
+
+      if (savedOutfitIds.length > displayOutfitItems - 1) {
         let updatedLayout = {displayFirstId: outfitLayOut.displayFirstId, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'};
         setOutfitLayOut(updatedLayout);
       }
@@ -144,8 +145,9 @@ function RelatedPdt(props) {
 
     // check if needs to hide right arrow
     // console.log('removeoutfit', selectedId, outfitLayOut.displayFirstId, outfitLayOut.totalItems, savedOutfitIds, JSON.parse(localStorage.getItem('outfitId')), outfits.pdt_ids);
+    // removeoutfit 22137 0 3 [22167, 22828] [22167, 22828] [22137, 22167, 22828]
 
-    if (outfitLayOut.displayFirstId + displayOutfitItems === savedOutfitIds.length) {
+    if (outfitLayOut.displayFirstId + displayOutfitItems === savedOutfitIds.length + 1) {
       let updatedLayout = {displayFirstId: outfitLayOut.displayFirstId, totalItems: savedOutfitIds.length, pdtLeftBtn: outfitLayOut.pdtLeftBtn, pdtRightBtn: 'pointer rightBtn btn-Inactive'};
       setOutfitLayOut(updatedLayout);
     }
@@ -179,8 +181,9 @@ function RelatedPdt(props) {
 
   const slideRight = (carousel, products, itemNum) => {
     // console.log(carousel, products, itemNum);
-    if (carousel.totalItems > carousel.displayFirstId + itemNum) {
-      if (products.pdt_ids.length > carousel.displayFirstId + itemNum + 1) {
+
+    if (carousel.totalItems > carousel.displayFirstId + itemNum - 1) {
+      if (products.pdt_ids.length > carousel.displayFirstId + itemNum) {
         let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer rightBtn'};
         if (itemNum === displayPdtItems) {
           setPdtLayOut(updatedLayout);
