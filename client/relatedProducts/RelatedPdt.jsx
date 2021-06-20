@@ -7,20 +7,20 @@ import Product from './Product.jsx';
 import Comparison from './Comparison.jsx';
 const axios = require('axios');
 
-
+const Fade = () => {return ''};
 
 function RelatedPdt(props) {
   const [relatedPdts, setRelatedPdts] = useState({pdt_ids: [], products: []});
-  const [pdtLayOut, setPdtLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
+  const [pdtLayOut, setPdtLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn btn-Inactive'});
   // const [outfits, setOutfits] = useState([]);
   const [outfits, setOutfits] = useState({pdt_ids: [], products: []});
-  const [outfitLayOut, setOutfitLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
+  const [outfitLayOut, setOutfitLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn btn-Inactive'});
   const [clickedId, setClickedId] = useState(props.productId);
   const [btnId, setBtnId] = useState(props.productId);
   // const [showComp, setShowComp] = useState(true);
   const [showComp, setShowComp] = useState(false);
+  // const displayPdtItems = 2;  // for quick testing of carousel sliding
   const displayPdtItems = 4;
-  // const displayPdtItems = 2;
   const displayOutfitItems = displayPdtItems - 1;
 
   useEffect( () => {
@@ -59,10 +59,10 @@ function RelatedPdt(props) {
           console.log('all relatedid', pdt_idsData)
           if (pdt_idsData.length > displayPdtItems) {
             // console.log('no left with right', pdt_idsData, relatedPdts.pdt_ids)
-            setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer'});
+            setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'});
           } else {
             // console.log('no left no right', pdt_idsData, relatedPdts.pdt_ids)
-            setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
+            setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn btn-Inactive'});
           }
         } )
     } catch (err) {
@@ -82,7 +82,7 @@ function RelatedPdt(props) {
     setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
     if (savedOutfitIds.length > displayOutfitItems) {
       // console.log('no left with right', pdt_idsData, relatedPdts.pdt_ids)
-      setOutfitLayOut({displayFirstId: 0, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer'});
+      setOutfitLayOut({displayFirstId: 0, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'});
     } else {
       // console.log('no left no right', pdt_idsData, relatedPdts.pdt_ids)
       setOutfitLayOut({displayFirstId: 0, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer btn-Inactive'});
@@ -114,6 +114,13 @@ function RelatedPdt(props) {
       localStorage.setItem('outfit', JSON.stringify(savedOutfit));
       setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
 
+      // check if needs to show right arrow
+      // console.log('outfitLayOut.displayFirstId', savedOutfitIds, outfitLayOut.displayFirstId);
+      if (savedOutfitIds.length > displayOutfitItems) {
+        let updatedLayout = {displayFirstId: outfitLayOut.displayFirstId, totalItems: savedOutfitIds.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'};
+        setOutfitLayOut(updatedLayout);
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -135,6 +142,13 @@ function RelatedPdt(props) {
     localStorage.setItem('outfit', JSON.stringify(savedOutfit));
     setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
 
+    // check if needs to hide right arrow
+    // console.log('removeoutfit', selectedId, outfitLayOut.displayFirstId, outfitLayOut.totalItems, savedOutfitIds, JSON.parse(localStorage.getItem('outfitId')), outfits.pdt_ids);
+
+    if (outfitLayOut.displayFirstId + displayOutfitItems === savedOutfitIds.length) {
+      let updatedLayout = {displayFirstId: outfitLayOut.displayFirstId, totalItems: savedOutfitIds.length, pdtLeftBtn: outfitLayOut.pdtLeftBtn, pdtRightBtn: 'pointer rightBtn btn-Inactive'};
+      setOutfitLayOut(updatedLayout);
+    }
   }
 
   // pdtLayOut|outfitLayOut => carousel
@@ -144,14 +158,14 @@ function RelatedPdt(props) {
     if (carousel.displayFirstId > 0) {
       // console.log('left1', carousel.displayFirstId);
       if (carousel.displayFirstId === 1) {
-        let updatedLayout = {displayFirstId: carousel.displayFirstId - 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer'};
+        let updatedLayout = {displayFirstId: carousel.displayFirstId - 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn'};
         if (itemNum === displayPdtItems) {
           setPdtLayOut(updatedLayout);
         } else {
           setOutfitLayOut(updatedLayout);
         }
       } else {
-        let updatedLayout = {displayFirstId: carousel.displayFirstId - 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer'};
+        let updatedLayout = {displayFirstId: carousel.displayFirstId - 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer rightBtn'};
         if (itemNum === displayPdtItems) {
           setPdtLayOut(updatedLayout);
         } else {
@@ -167,14 +181,14 @@ function RelatedPdt(props) {
     // console.log(carousel, products, itemNum);
     if (carousel.totalItems > carousel.displayFirstId + itemNum) {
       if (products.pdt_ids.length > carousel.displayFirstId + itemNum + 1) {
-        let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer'};
+        let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer rightBtn'};
         if (itemNum === displayPdtItems) {
           setPdtLayOut(updatedLayout);
         } else {
           setOutfitLayOut(updatedLayout);
         }
       } else {
-        let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer btn-Inactive'};
+        let updatedLayout = {displayFirstId: carousel.displayFirstId + 1, totalItems: products.pdt_ids.length, pdtLeftBtn: 'pointer', pdtRightBtn: 'pointer rightBtn btn-Inactive'};
         if (itemNum === displayPdtItems) {
           setPdtLayOut(updatedLayout);
         } else {
@@ -206,6 +220,7 @@ function RelatedPdt(props) {
     // setOutfits(res.data);  //todo
     removeOutfit (btnId);
   }
+
 
   if (!relatedPdts.products.length) {
     return (<p></p>);
@@ -241,6 +256,7 @@ function RelatedPdt(props) {
               className={pdtLayOut.pdtRightBtn}
               onClick={() => slideRight(pdtLayOut, relatedPdts, displayPdtItems)}
             >{'\u1433'}</label>
+            {/* <Fade className="fade" /> */}
           </div>
         </div>
 
@@ -274,10 +290,12 @@ function RelatedPdt(props) {
               className={outfitLayOut.pdtRightBtn}
               onClick={() => slideRight(outfitLayOut, outfits, displayOutfitItems)}
             >{'\u1433'}</label>
+            {/* <Fade className="fade" /> */}
           </div>
         </div>
 
         <Comparison productId={props.productId} btnId={btnId} showComp={showComp} onCompaClose={onCompaClose}/>
+
 
       </div>
     )
