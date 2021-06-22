@@ -5,14 +5,35 @@
   align-items: center;
   position: relative;
   height: 360px;
-  width: 1070px;
+  width: 1106px;
 }
 
 .related-product-widget {
   margin: auto;
-  width: 1070px;
+  /* width: 1106px; */
+  width: 1000px;
+  overflow: hidden;
 }
 
 .btn-Inactive {
   opacity: 0;
+}
+
+.rightBtn {
+  z-index: 8;
+  position: absolute;
+  margin-left: 89%;
+}
+
+.related-product-box:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  margin-left: 80%;
+  width: 11%;
+  height: 360px;
+
+  pointer-events: none;
+  background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
 }
