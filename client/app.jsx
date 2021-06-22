@@ -49,7 +49,6 @@ class App extends React.Component {
         </header>
         <Overview productId={this.state.productId} />
         <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
-        {/* <RelatedPdt productId={this.state.productId}/> */}
         <Questions productId={this.state.productId} />
         <Reviews productId={this.state.productId} />
       </React.Fragment>

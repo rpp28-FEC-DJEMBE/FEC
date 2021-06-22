@@ -73,5 +73,7 @@
   z-index: 9;
   margin-left: 210px;
   font-family: system-ui;
-  font-size: larger;
+  font-size: x-large;
+  /* background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%); */
+  background-image: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0) 50%);
 }
