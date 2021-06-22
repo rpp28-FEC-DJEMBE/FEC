@@ -46,6 +46,7 @@ class AnswerModal extends React.Component {
             <h2 className="answer-title">Submit your Answer</h2>
             <div className="exit" onClick={() => this.props.handleClose()}>X</div>
           </div>
+          <p>{this.props.questionBody}</p>
           <label for="user">What is your nickname (mandatory) </label>
           <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543"></input>
           <label for="email">Your email (mandatory) </label>

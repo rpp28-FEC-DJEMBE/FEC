@@ -11,10 +11,10 @@ const QuestionEntry = (props) => {
             <p className="question">Q: {question.question_body}</p>
             <div className="question-entry-header">
               <p>Helpful? Yes({question.question_helpfulness})</p>
-              <p onClick={()=> props.handleAddAnswer(question.question_id)} >Add Answer</p>
+              <p onClick={()=> props.handleAddAnswer(question.question_id, question.question_body)} >Add Answer</p>
             </div>
           </div>
-            <AnswersList questionId={question.question_id}/>
+            <AnswersList questionId={question.question_id}  />
       </div>
       )}
     </>
