@@ -224,11 +224,10 @@ display: block;
   text-align: center;
 }
 
-.review-content,
-.modal-body {
+.review-content {
   display: grid;
   background-color: white;
-  /* max-height: 400px; */
+  max-height: 400px;
   border-radius: .2rem;
   padding: 8px;
   overflow-y: scroll;
@@ -238,6 +237,13 @@ display: block;
 .addreview-header {
   display:grid;
   grid-template-columns: 95% 5%;
+}
+
+#summary,
+#review-body,
+#nickname,
+#email {
+  width: 100%
 }
 
 /* STATE STYLES

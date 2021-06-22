@@ -6,12 +6,18 @@ const AddReview = (props) => {
   const [rating, setRating] = useState(0);
   const [recommend, setRecommend] = useState(null);
   const [characteristics, setChars] = useState({});
-  const [summary, setSummary] = useState(null);
-  const [body, setBody] = useState(null);
+  const [summary, setSummary] = useState('');
+  const [body, setBody] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     getPdtName();
   });
+
+  if (!props.show) {
+    return null
+  }
 
   const getPdtName = () => {
     axios.get(`/products/${props.productId}`)
@@ -36,6 +42,11 @@ const AddReview = (props) => {
       Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
     }
 
+    const handleCharEntry = (e) => {
+      let nam = e.target.name;
+      let val = Number(e.target.value);
+      setChars(prevState => ({...prevState, [nam]: val}))
+    }
 
     return chars.map(char => {
       let charId = characteristics[char].id;
@@ -45,8 +56,8 @@ const AddReview = (props) => {
           <div className='review-chars-entry'>
             {
               charsTable[char].map((option, index) => (
-                // NEED TO FIX - charId in state when clicked
-              <span key={index} onClick={e => setChars(prevState => ({...prevState, charId: e.target.value}))}>
+
+              <span key={index} onClick={e => handleCharEntry(e)}>
                       <input type='radio' name={charId} value={index + 1}></input>{option}</span>
               ))
 
@@ -58,9 +69,13 @@ const AddReview = (props) => {
     })
   }
 
-  if (!props.show) {
-    return null
+  const reviewBodyCount = () => {
+    if (body.length < 50) {
+      return `Minimum required characters left: ${50 - body.length}`;
+    }
+    return `Minimum reached`;
   }
+
 
   return(
     <div className='review-modal' onClick={props.handleClose}>
@@ -99,17 +114,36 @@ const AddReview = (props) => {
           <label>Characteristics*</label>
             {charsEntry()}
           <label>Review Summary</label>
-          <input
-            id="summary" type="text" onChange={e => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!">
-          </input>
-          <label>Review Body*</label>
-          <textarea
-            id="summary" type="text" onChange={e => setBody(e.target.value)} maxLength="1000" placeholder="Why did you like the product or not?">
-          </textarea>
+          <div className='review-text'>
+            <input
+              id="summary" type="text" onChange={e => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!">
+            </input>
           </div>
+          <label>Review Body*</label>
+          <div className='review-text'>
+            <textarea
+              id="review-body" type="text" onChange={e => setBody(e.target.value)} maxLength="1000" placeholder="Why did you like the product or not?">
+            </textarea>
+            <p className="disclaimer">{reviewBodyCount()}</p>
+          </div>
+          <label>What is your nickname*</label>
+          <div className='review-text'>
+            <input
+              id="nickname" type="text" onChange={e => setName(e.target.value)} maxLength="60" placeholder="Example: jackson11!">
+            </input>
+            <p className="disclaimer">For privacy reasons, do not use your full name or email address</p>
+          </div>
+          <label>Your email*</label>
+          <div className='review-text'>
+            <input
+              id="email" type="text" onChange={e => setEmail(e.target.value)} maxLength="60" placeholder="Example: jackson11@email.com">
+            </input>
+            <p className="disclaimer">For authentication reasons, you will not be emailed</p>
+          </div>
+        </div>
         <div className='modal-footer'>
           <input className="upload-photo" type="file"></input>
-          <button className="review-button" onClick={() => console.log(body)}>Submit Review</button>
+          <button className="review-button" onClick={() => console.log(characteristics)}>Submit Review</button>
         </div>
       </div>
     </div>
