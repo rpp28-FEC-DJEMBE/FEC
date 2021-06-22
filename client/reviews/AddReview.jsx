@@ -80,21 +80,6 @@ const AddReview = (props) => {
   }
 
 
-  const submitReview = () => {
-    let postBody = {
-      product_id: props.productId,
-      rating: rating,
-      summary: summary,
-      body: body,
-      recommend: recommend,
-      name: name,
-      email: email,
-      photos: photos,
-      characteristics: characteristics
-    }
-
-  }
-
   let missingFieldsAlert = () => {
     let template = `You must enter the following:`
     if (rating === 0) {
@@ -122,7 +107,33 @@ const AddReview = (props) => {
       - Your email*`
     }
 
-    alert(template);
+    if (template !== `You must enter the following:`) {
+      alert(template);
+    }
+  }
+
+  const submitReview = () => {
+    let postBody = {
+      product_id: props.productId,
+      rating: rating,
+      summary: summary,
+      body: body,
+      recommend: recommend,
+      name: name,
+      email: email,
+      photos: photos,
+      characteristics: characteristics
+    }
+
+    console.log('review body being posted', postBody);
+    missingFieldsAlert();
+    axios({
+      method: 'post',
+      url: `/reviews`,
+      data: postBody
+    })
+    .then(() => console.log(`Review successfully posted`))
+    .catch((err) => console.log('Error posting review'))
   }
 
   return(
@@ -191,7 +202,7 @@ const AddReview = (props) => {
         </div>
         <div className='modal-footer'>
           <input className="upload-photo" type="file"></input>
-          <button className="review-button" onClick={() => missingFieldsAlert()}>Submit Review</button>
+          <button className="review-button" onClick={() => submitReview()}>Submit Review</button>
         </div>
       </div>
     </div>
