@@ -16,26 +16,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
-      // productId: 22122
+      // productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
       // productId: 22156 // for dup features
       // productId: 22164 // for sale price, for >6 relatedid
+      productId: 22122,
+      productName: 'Camo Onesie'
     }
   }
 
-  onCardClick(productCardId) {
-    console.log('event.target', productCardId);
+  onCardClick(productCardId, productName) {
+    console.log('event.target', productCardId, productName);
     this.setState({
-      productId: productCardId
+      productId: productCardId,
+      productName: productName
     });
   }
 
-  changeProductId() {
-    let newProductId = [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)];
-    this.setState({
-      productId: newProductId
-    });
-  }
+  // changeProductId() {
+  //   let newProductId = [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)];
+  //   this.setState({
+  //     productId: newProductId
+  //   });
+  // }
 
   render() {
     return (
@@ -43,7 +45,7 @@ class App extends React.Component {
         <header>
           <nav>
             <h1><img src={logo} alt='Djembe' />The Djembe Clothing Company</h1>
-            <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div>
+            {/* <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div> */}
           </nav>
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>
