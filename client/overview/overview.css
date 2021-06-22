@@ -6,6 +6,22 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   cursor: pointer;
 }
 
+.o-product-overview select,
+.o-product-overview button {
+  background: none;
+  box-shadow: none;
+  border-radius: 0px;
+  border: 0.1rem solid #5A5A5A;
+  padding: 1rem;
+  margin: 1rem;
+  margin-left: 0;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 
 /* LAYOUT STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -110,11 +126,25 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 }
 
 
-/* PRODUCT CATEGORY */
+/* PRODUCT CONTROLS */
 
 .o-product-category {
   font-weight: 100;
   text-transform: uppercase;
+}
+
+.o-product-name {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.o-product-style-price .strikethrough {
+  text-decoration: line-through;
+}
+
+.o-product-style-price .sale {
+  margin-left: 0.5rem;
+  color: red;
 }
 
 .o-style-selector {
@@ -123,10 +153,10 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   width: 100%;
   row-gap: 1.5rem;
   column-gap: 2rem;
-  border: solid red 0.05rem;
+  /* border: solid red 0.05rem; */
 }
 
-.container {
+.circle-container {
   width: 4rem;
   max-width: 4rem;
   flex-grow: 1;
@@ -169,3 +199,26 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   }
 }
 
+
+/* PRODUCT DESCRIPTION */
+
+.o-product-description-slogan {
+  font-size: medium;
+  font-weight: bold;
+}
+
+.o-product-description-features {
+  list-style: none;
+}
+
+.o-product-description-features li {
+  list-style: none;
+}
+
+.o-product-description-features li:before {
+  content: "\E876";
+  font-family: 'Material Icons';
+  position: relative;
+  left: -0.7rem;
+
+}

@@ -138,8 +138,8 @@ class Overview extends React.Component {
       return (
         <section className="o-product-overview">
           <ImageGallery selectedStyleId={this.state.selectedStyleId} stylePhotos={this.state.selectedStyle.photos} />
-          <ProductControls product={this.state.product} style={this.state.selectedStyle} />
-          <ProductDescription />
+          <ProductControls product={this.state.product} style={this.state.selectedStyle} styles={this.state.productStyles} />
+          <ProductDescription product={this.state.product} />
         </section>
       );
     }
