@@ -38,8 +38,8 @@ class AnswerModal extends React.Component {
     if (!this.props.show){
       return null;
     }
-    return(
 
+    return(
       <div className="answer-modal">
         <div className="answer-content">
           <div className="modal-header">

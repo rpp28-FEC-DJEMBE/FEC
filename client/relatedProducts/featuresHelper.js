@@ -46,8 +46,9 @@ const combineFeatures = (features1, features2) => {
         combinedFeatures.featureWValue.push(features1.featureAndValue[i]);
         // console.log('76 same FV', index2, features1.featureAndValue[i], features2.featureAndValue[index2]);
       } else {
-        combinedFeatures.value1.push(features1.value);
-        combinedFeatures.value2.push(features2.value);
+        console.log('1', features1.value[i], '2', features2.value[i], '3', features1.feature[i])
+        combinedFeatures.value1.push(features1.value[i]);
+        combinedFeatures.value2.push(features2.value[i]);
         combinedFeatures.featureWValue.push(features1.feature[i]);
         // console.log('81 same F diff V', index2, features1.featureAndValue[i], features2.featureAndValue[index2]);
       }
@@ -62,20 +63,14 @@ const combineFeatures = (features1, features2) => {
     }
   }
   // console.log('94', features1, features2);
-  toDeleteIndex2.sort();
-  if (toDeleteIndex2.length) {
-    for (let k = toDeleteIndex2.length - 1; k >= 0; k--) {
-      features2.feature.splice(toDeleteIndex2, 1);
-      features2.value.splice(toDeleteIndex2, 1);
-      features2.featureAndValue.splice(toDeleteIndex2, 1);
-    }
-  }
-  // console.log('94again', features1, features2);
+  // console.log(toDeleteIndex2);
 
   for (let j = 0; j < features2.featureAndValue.length; j++) {
-    combinedFeatures.value1.push('');
-    combinedFeatures.value2.push(check);
-    combinedFeatures.featureWValue.push(features2.featureAndValue[j]);
+    if (!toDeleteIndex2.includes(j)) {
+      combinedFeatures.value1.push('');
+      combinedFeatures.value2.push(check);
+      combinedFeatures.featureWValue.push(features2.featureAndValue[j]);
+    }
     // console.log('100 final for 2', features1, features2)
 
   }

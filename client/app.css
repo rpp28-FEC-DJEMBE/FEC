@@ -79,24 +79,35 @@ header p {
   padding: 8px;
 }
 
-.qaDisplay .question-list {
+/* .qaDisplay .question-list {
   border: solid gray 1px;
   padding:8px;
-}
+} */
 
 .qaDisplay {
-max-height: 1000px;
-overflow: hidden;
+max-height: 800px;
 display: block;
 }
 
-.answer {
+.question-list {
+  display: block;
+  max-height: 650px;
+  overflow-y:scroll;
+}
+
+/* .answer {
   border: solid gray 1px;
   padding:8px;
-}
+} */
 
 .search {
   display:flex;
+}
+
+.expand-answers-btn{
+  margin-top: 5px;
+  font-size: small;
+  opacity: .5;
 }
 
 .qaSearch {
@@ -160,9 +171,23 @@ display: block;
   margin-top: 1px;
 }
 
-.answer-content,
-.question-content,
-.review-content {
+.answer-display {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-flex;
+
+}
+
+.a {
+  font-weight: bold;
+}
+
+.a, .answer-body {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.answer-content, .question-content {
   display: grid;
   background-color: white;
   width: 750px;
@@ -199,6 +224,28 @@ display: block;
   text-align: center;
 }
 
+.review-content {
+  display: grid;
+  background-color: white;
+  max-height: 400px;
+  border-radius: .2rem;
+  padding: 8px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.addreview-header {
+  display:grid;
+  grid-template-columns: 95% 5%;
+}
+
+#summary,
+#review-body,
+#nickname,
+#email {
+  width: 100%
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -217,6 +264,7 @@ display: block;
   font-size: var(--bars-size);
   font-weight: bolder;
   letter-spacing: -3px;
+  vertical-align: middle;
   background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;

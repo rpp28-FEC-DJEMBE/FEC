@@ -12,20 +12,55 @@ class Reviews extends React.Component {
     }
   }
 
+  async getReviews() {
+    try {
+      let response = await axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
+      let reviews = response.data;
+      return reviews;
+    } catch(err) {
+      console.log('Error fetching review data')
+    }
+  }
+
+  async getMetaData() {
+    try {
+      let response = await axios.get(`/reviews/meta?product_id=${this.props.productId}`);
+      let metaData = response.data;
+      return metaData;
+    } catch(err) {
+      console.log('Error fetching review meta data')
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.productId !== this.props.productId){
+      this.getReviews()
+      .then((data) => {
+        this.setState({
+          reviews: data.results,
+          productId: Number(data.product)
+        })
+      })
+    }
+  }
 
   componentDidMount() {
-    // axios.get(`/reviews/?count=100&sort=relevant&product_id=${this.props.productId}`)
-    axios.get(`/reviews/?count=100&sort=relevant&product_id=${22168}`)
-      .then((res) => {
-        this.setState({
-          reviews: res.data.results,
-          isLoaded: true
-        });
-        console.log('initial state', this.state);
+    this.getReviews()
+    .then((data) => {
+      this.setState({
+        reviews: data.results,
+        productId: Number(data.product),
+        isLoaded: true
       })
-      .catch((err) => {
-        console.log('Error fetching review data');
-      })
+      // return this.getMetaData()
+    })
+    // .then((metaData) => {
+    //   this.setState({
+    //     metaData: metaData,
+    //     isLoaded: true
+    //   })
+    //   console.log('metadata', metaData)
+    // })
   }
 
   render() {
@@ -38,10 +73,15 @@ class Reviews extends React.Component {
     } else {
     return (
       <div className='ratings-reviews'>
-          <p>Ratings and Reviews</p>
+          <h3>Ratings and Reviews</h3>
           <div className='rr-content'>
+<<<<<<< HEAD
             <Breakdown productId={this.props.productId}/>
             <ReviewList reviews={this.state.reviews} productId={this.props.productId}/>
+=======
+            <Breakdown productId={this.props.productId} metaData={this.state.metaData} isLoaded={this.state.isLoaded}/>
+            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}/>
+>>>>>>> main
           </div>
         </div>
       )

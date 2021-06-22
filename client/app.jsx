@@ -19,7 +19,7 @@ class App extends React.Component {
       productId: [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)]
       // productId: 22122
       // productId: 22156 // for dup features
-      // productId: 22164 // for sale price
+      // productId: 22164 // for sale price, for >6 relatedid
     }
   }
 
@@ -30,12 +30,20 @@ class App extends React.Component {
     });
   }
 
+  changeProductId() {
+    let newProductId = [22122, 22349, 22168, 22164][Math.floor(Math.random() * 4)];
+    this.setState({
+      productId: newProductId
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
         <header>
           <nav>
             <h1><img src={logo} alt='Djembe' />The Djembe Clothing Company</h1>
+            <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div>
           </nav>
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
         </header>

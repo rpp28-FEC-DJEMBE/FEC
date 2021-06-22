@@ -63,7 +63,7 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
   }
 
   return (
-    <div className="comparison-box" onClick={onCompaClose}>
+    <div className="comparison-box pointer" onClick={onCompaClose}>
       <p className="comparing">COMPARING</p>
       <div className="comparison-name-line">
         <p>{featuresComp.name[0]}</p>

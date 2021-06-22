@@ -12,11 +12,28 @@ class Breakdown extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    // if (prevProps.isLoaded !== this.props.isLoaded) {
+    //   this.setState({ isLoaded: this.props.isLoaded })
+    // }
+    if(prevProps.productId !== this.props.productId){
+      axios.get(`/reviews/meta?product_id=${this.props.productId}`)
+      .then((res) => {
+        this.setState({
+          metaData: res.data
+        })
+      })
+      .catch((err) => {
+        console.log('Error fetching review meta data', err);
+      })
+    }
+  }
+
   componentDidMount() {
     axios.get(`/reviews/meta?product_id=${this.props.productId}`)
       .then((res) => {
         this.setState({
-          metaData: res.data ,
+          metaData: res.data,
           isLoaded: true
         })
       })
@@ -24,6 +41,7 @@ class Breakdown extends React.Component {
         console.log('Error fetching review meta data', err);
       })
   }
+
 
   render() {
     let { ratings, recommended, characteristics } = this.state.metaData;

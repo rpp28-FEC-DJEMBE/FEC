@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import RatingStars from './RatingStars.jsx';
 import RatingBars from './RatingBars.jsx';
 import helper from './reviewHelpers.js';
 
 const RatingBreakdown = ({ratings, recommended}) => {
+  const [star, setStar] = useState(ratings);
+
+  useEffect(() => { setStar(ratings) }, [ratings]);
+
   if(Object.keys(ratings).length === 0) {
     return (
       <div className='rating-breakdown'>

@@ -1,12 +1,17 @@
 
-// const verbose = true;
+// currency formatter
+const toCurrency = (number) => {
 
-// function utilsSetVerbose(value) {
-//   verbose = value;
-// };
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  })
 
-// function utilsLog() {
-//   if (verbose) {
-//     console.log(...arguments);
-//   }
-// }
+  return formatter.format(Number(number));
+}
+
+
+module.exports = {
+  toCurrency: toCurrency
+}
