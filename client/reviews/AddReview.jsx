@@ -10,14 +10,12 @@ const AddReview = (props) => {
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
     getPdtName();
   });
 
-  if (!props.show) {
-    return null
-  }
 
   const getPdtName = () => {
     axios.get(`/products/${props.productId}`)
@@ -28,6 +26,7 @@ const AddReview = (props) => {
         console.log('Error fetching product name', err);
       })
   }
+
 
   const charsEntry = (e) => {
     let { characteristics } = props.metaData;
@@ -76,6 +75,55 @@ const AddReview = (props) => {
     return `Minimum reached`;
   }
 
+  if (!props.show) {
+    return null
+  }
+
+
+  const submitReview = () => {
+    let postBody = {
+      product_id: props.productId,
+      rating: rating,
+      summary: summary,
+      body: body,
+      recommend: recommend,
+      name: name,
+      email: email,
+      photos: photos,
+      characteristics: characteristics
+    }
+
+  }
+
+  let missingFieldsAlert = () => {
+    let template = `You must enter the following:`
+    if (rating === 0) {
+      template += `
+      - Overall Rating*`
+    }
+    if (recommend === null) {
+      template += `
+      - Do you recommend this product?*`
+    }
+    if (Object.keys(characteristics).length !== Object.keys(props.metaData.characteristics).length) {
+      template += `
+      - Characteristics*`
+    }
+    if (body.length < 50) {
+      template += `
+      - Review Body*`
+    }
+    if (name === '') {
+      template += `
+      - What is your nickname*`
+    }
+    if (email === '') {
+      template += `
+      - Your email*`
+    }
+
+    alert(template);
+  }
 
   return(
     <div className='review-modal' onClick={props.handleClose}>
@@ -88,19 +136,19 @@ const AddReview = (props) => {
         <div className='modal-body'>
           <label>Overall Rating*</label>
           <div className="review-stars">
-            <span onClick={e => setRating(e.target.value)}>
+            <span onClick={e => setRating(Number(e.target.value))}>
               <input type="radio" name="rating" id="str1" value="1"></input>
             </span>
-            <span onClick={e => setRating(e.target.value)}>
+            <span onClick={e => setRating(Number(e.target.value))}>
               <input type="radio" name="rating" id="str2" value="2"></input>
             </span>
-            <span onClick={e => setRating(e.target.value)}>
+            <span onClick={e => setRating(Number(e.target.value))}>
               <input type="radio" name="rating" id="str3" value="3"></input>
             </span>
-            <span onClick={e => setRating(e.target.value)}>
+            <span onClick={e => setRating(Number(e.target.value))}>
               <input type="radio" name="rating" id="str4" value="4"></input>
             </span>
-            <span onClick={e => setRating(e.target.value)}>
+            <span onClick={e => setRating(Number(e.target.value))}>
               <input type="radio" name="rating" id="str5" value="5"></input>
             </span>
           </div>
@@ -136,14 +184,14 @@ const AddReview = (props) => {
           <label>Your email*</label>
           <div className='review-text'>
             <input
-              id="email" type="text" onChange={e => setEmail(e.target.value)} maxLength="60" placeholder="Example: jackson11@email.com">
+              id="email" type="email" onChange={e => setEmail(e.target.value)} maxLength="60" placeholder="Example: jackson11@email.com">
             </input>
             <p className="disclaimer">For authentication reasons, you will not be emailed</p>
           </div>
         </div>
         <div className='modal-footer'>
           <input className="upload-photo" type="file"></input>
-          <button className="review-button" onClick={() => console.log(characteristics)}>Submit Review</button>
+          <button className="review-button" onClick={() => missingFieldsAlert()}>Submit Review</button>
         </div>
       </div>
     </div>
