@@ -105,8 +105,8 @@ class Questions extends React.Component{
         <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
         <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} questionBody={this.state.questionBody} />
         <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick.bind(this)} />
-        <button onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
-        <button onClick={() => this.handleAddQClick()}>Add a question</button>
+        <button className="more-q-btn" onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
+        <button className="add-q-btn" onClick={() => this.handleAddQClick()}>Add a question +</button>
       </div>
     );
   }

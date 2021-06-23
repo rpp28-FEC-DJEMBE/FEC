@@ -75,7 +75,7 @@ class AnswerEntry extends React.Component{
           </div>
           <div className="answer-footer">
             <p>by {this.props.answer.answerer_name}, {this.convertDate(this.props.answer.date)}</p>
-            <p onClick={() => this.handleHelpful()}>Helpful? Yes({this.state.helpful})</p>
+            <p >Helpful? <u onClick={() => this.handleHelpful()}>Yes</u> ({this.state.helpful})</p>
             <p onClick={()=> this.handleReport()}>report</p>
           </div>
         </div>

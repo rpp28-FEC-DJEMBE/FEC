@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import AnswerPhotos from './answerPhotos.jsx';
+import AddedPhotos from './addedPhotos.jsx';
 
 class AnswerModal extends React.Component {
   constructor(props) {
@@ -8,7 +10,9 @@ class AnswerModal extends React.Component {
       answer:"",
       user:"",
       email:"",
+      photos: []
     }
+    this.updatePhotos = this.updatePhotos.bind(this);
   }
 
   submitAnswers(){
@@ -34,6 +38,12 @@ class AnswerModal extends React.Component {
     console.log(this.state)
   }
 
+  updatePhotos(event){
+    this.setState({
+      photos: this.state.photos.concat([event.target.files[0]])
+    })
+  }
+
   render(){
     if (!this.props.show){
       return null;
@@ -47,14 +57,17 @@ class AnswerModal extends React.Component {
             <div className="exit" onClick={() => this.props.handleClose()}>X</div>
           </div>
           <p>{this.props.questionBody}</p>
-          <label for="user">What is your nickname (mandatory) </label>
-          <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543"></input>
-          <label for="email">Your email (mandatory) </label>
-          <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com"></input>
-          <label for="answer">Your Answer</label>
-          <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000"></textarea>
+          <div className="input-content">
+            <label htmlFor="user">What is your nickname (mandatory) </label>
+            <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543"></input>
+            <label htmlFor="email">Your email (mandatory) </label>
+            <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com"></input>
+            <label htmlFor="answer">Your Answer</label>
+            <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000"></textarea>
+          </div>
+          <AddedPhotos photos={this.state.photos} />
           <div className="modal-footer">
-            <input className="upload-photo" type="file"></input>
+            <AnswerPhotos updatePhotos={this.updatePhotos} files={this.state.photos} />
             <div className="answer-submit">Submit Answer</div>
           </div>
         </div>
