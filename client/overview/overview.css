@@ -153,13 +153,13 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   width: 100%;
   row-gap: 1.5rem;
   column-gap: 2rem;
-  /* border: solid red 0.05rem; */
 }
 
 .circle-container {
   width: 4rem;
   max-width: 4rem;
   flex-grow: 1;
+  position: relative;
 }
 
 .circle {
@@ -171,12 +171,22 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   padding-top: 100%;
   position: relative;
   width: 100%;
+
+  -webkit-box-shadow: 0.1rem 0.1rem 0.3rem 0.1rem #ccc;
+  -moz-box-shadow:    0.1rem 0.1rem 0.3rem 0.1rem #ccc;
+  box-shadow:         0.1rem 0.1rem 0.3rem 0.1rem #ccc;
+  /* [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color]; */
+}
+
+.circle:hover {
+  -webkit-box-shadow: 0.1rem 0.1rem 0.3rem 0.1rem #141414;
+  -moz-box-shadow:    0.1rem 0.1rem 0.3rem 0.1rem #141414;
+  box-shadow:         0.1rem 0.1rem 0.3rem 0.1rem #141414;
 }
 
 .circle::after {
   border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(15, 28, 63, 0.25);
-  content: "";
+  content: '';
   height: 100%;
   left: 0;
   position: absolute;
@@ -199,6 +209,30 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   }
 }
 
+.circle-container .icon-container {
+  margin: 0;
+  padding: 0;
+  height: 1.1rem;
+  width: 1.1rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  position: absolute;
+  left: 3rem;
+
+
+}
+
+.circle-container .icon-container .material-icons {
+  margin: 0;
+  padding: 0;
+  height: 1rem;
+  width: 1rem;
+  z-index: 2;
+  position: relative;
+  top: -0.19rem;
+  left: -0.17rem;
+}
 
 /* PRODUCT DESCRIPTION */
 
@@ -215,10 +249,9 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   list-style: none;
 }
 
-.o-product-description-features li:before {
+.o-product-description-features li::before {
   content: "\E876";
   font-family: 'Material Icons';
   position: relative;
   left: -0.7rem;
-
 }
