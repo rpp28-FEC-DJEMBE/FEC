@@ -64,7 +64,7 @@ class AnswersList extends React.Component {
     return (
       <div className="answer-list">
         {this.state.answers.map((answer, index) =>
-        <AnswerEntry answer={answer} key={index} />
+        <AnswerEntry answer={answer} key={index} question={this.props.question} />
         )}
         <ExpandAnswers answersList={this.state.answersList} seeMoreAnswers={this.handleExpandAnswers} />
       </div>
