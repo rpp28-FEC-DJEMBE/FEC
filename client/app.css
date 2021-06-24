@@ -34,7 +34,8 @@ body * {
   flex-flow: row;
 }
 
-.rating-bars {
+.rating-bars,
+.char-bar {
   display: flex;
   flex-flow: column;
 }
@@ -246,6 +247,37 @@ display: block;
   width: 100%
 }
 
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 6px;
+  background: rgb(184, 184, 184);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(71, 70, 70);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(71, 70, 70);
+  cursor: pointer;
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -277,6 +309,7 @@ display: block;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
+
 
 /*
   DETAILS

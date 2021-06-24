@@ -11,7 +11,8 @@ const ProductBreakdown = ({characteristics}) => {
         <p>Product Breakdown</p>
         {chars.map((char) => (
           <div className='char-bar' key={characteristics[char].id}>
-            {char} {characteristics[char].value}
+            <label>{char} {characteristics[char].value}</label>
+            <input readOnly type="range" min="1" max="5" value={characteristics[char].value} className="slider"></input>
           </div>
         ))}
       </div>
