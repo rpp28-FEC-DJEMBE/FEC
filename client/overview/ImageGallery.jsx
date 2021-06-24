@@ -21,7 +21,12 @@ class ImageGallery extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.selectedStyleId != this.props.selectedStyleId) {
+    if(prevProps.selectedStyleId != this.props.selectedStyleId && this.props.stylePhotos) {
+      this.setState({
+        isLoaded: false
+      });
+
+
       this.setImages(this.state.selectedImageIndex);
     }
   }
@@ -43,7 +48,7 @@ class ImageGallery extends React.Component {
       selectedImageIndex: selectedImageIndex,
       topImageIndex: firstVisibleImage,
       mainImageUrl: mainImage,
-      isLoaded: true,
+      isLoaded: true
     });
   }
 
@@ -67,7 +72,7 @@ class ImageGallery extends React.Component {
 
   renderThumbnailGallery() {
 
-    if(this.props.stylePhotos.length === 1) { return null };
+    if(!this.props.stylePhotos || this.props.stylePhotos.length === 1) { return null };
 
     const firstVisibleImageIndex = this.state.topImageIndex;
     const lastVisibleImageIndex = firstVisibleImageIndex + this.thumbnailsToShow - 1;
