@@ -27,7 +27,7 @@ class AnswerModal extends React.Component {
           body:this.state.answer,
           name:this.state.user,
           email:this.state.email,
-          photos:this.state.photos
+          // photos:this.state.photos
         }
       })
     }
