@@ -16,6 +16,7 @@ class AnswerModal extends React.Component {
   }
 
   submitAnswers(){
+
     if (this.state.answer === "" || this.state.user === "" || this.state.email === ""){
       alert("Missing Username, Email, or Answer!");
     } else {
@@ -26,7 +27,7 @@ class AnswerModal extends React.Component {
           body:this.state.answer,
           name:this.state.user,
           email:this.state.email,
-          photos:[]
+          photos:this.state.photos
         }
       })
     }
@@ -40,7 +41,7 @@ class AnswerModal extends React.Component {
 
   updatePhotos(event){
     this.setState({
-      photos: this.state.photos.concat([event.target.files[0]])
+      photos: this.state.photos.concat([URL.createObjectURL(event.target.files[0])])
     })
   }
 
@@ -68,7 +69,7 @@ class AnswerModal extends React.Component {
           <AddedPhotos photos={this.state.photos} />
           <div className="modal-footer">
             <AnswerPhotos updatePhotos={this.updatePhotos} files={this.state.photos} />
-            <div className="answer-submit">Submit Answer</div>
+            <div className="answer-submit" onClick={()=>this.submitAnswers()}>Submit Answer</div>
           </div>
         </div>
       </div>

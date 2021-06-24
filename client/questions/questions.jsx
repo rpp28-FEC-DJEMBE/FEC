@@ -27,8 +27,6 @@ class Questions extends React.Component{
     this.getQuestions()
     .then((data) => this.updateState(data))
     .catch((err) => console.log("Error: ", err))
-
-    // .then(() => this.handleMoreAnsweredQuestions())
   }
 
   getQuestions(){
