@@ -1,4 +1,46 @@
 
+/* PRODUCT
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+export const testDataProduct = [
+    {
+        "id": 22126,
+        "campus": "hr-rpp",
+        "name": "Heir Force Ones",
+        "slogan": "A sneaker dynasty",
+        "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+        "category": "Kicks",
+        "default_price": "99.00",
+        "created_at": "2021-03-18T16:09:30.589Z",
+        "updated_at": "2021-03-18T16:09:30.589Z",
+        "features": [
+            {
+                "feature": "Sole",
+                "value": "Rubber"
+            },
+            {
+                "feature": "Material",
+                "value": "FullControlSkin"
+            },
+            {
+                "feature": "Mid-Sole",
+                "value": "ControlSupport Arch Bridge"
+            },
+            {
+                "feature": "Stitching",
+                "value": "Double Stitch"
+            }
+        ]
+    }
+];
+
+
+/* STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+
 export const testDataStyles = [
   {
       "style_id": 123167,
@@ -397,3 +439,110 @@ export const testDataStyles = [
       }
   }
 ];
+
+
+/* SELECTED STYLE
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+export const testDataSelectedStyle = [
+    {
+        "style_id": 123170,
+        "name": "White & Blue",
+        "original_price": "99.00",
+        "sale_price": null,
+        "default?": false,
+        "photos": [
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1553981834-a23f5b69e3ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1553981834-a23f5b69e3ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1531091087823-cb600a47ab79?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1531091087823-cb600a47ab79?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1514613818067-e207c3441db0?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1514613818067-e207c3441db0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1503146695898-afdf8ce5d5a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1503146695898-afdf8ce5d5a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1512023983263-7e94bf6b913e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1512023983263-7e94bf6b913e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1501813722636-45de2fe4f9b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1501813722636-45de2fe4f9b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1507464098880-e367bc5d2c08?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1507464098880-e367bc5d2c08?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1558682596-dea9bf84c219?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1558682596-dea9bf84c219?ixlib=rb-1.2.1&auto=format&fit=crop&w=2098&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1504281623087-1a6dd8f827c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1504281623087-1a6dd8f827c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1462833867037-0f06eab31cc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1462833867037-0f06eab31cc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+            }
+        ],
+        "skus": {
+            "714591": {
+                "quantity": 14,
+                "size": "7"
+            },
+            "714592": {
+                "quantity": 25,
+                "size": "7.5"
+            },
+            "714593": {
+                "quantity": 9,
+                "size": "8"
+            },
+            "714594": {
+                "quantity": 2,
+                "size": "8.5"
+            },
+            "714595": {
+                "quantity": 18,
+                "size": "9"
+            },
+            "714596": {
+                "quantity": 12,
+                "size": "9.5"
+            },
+            "714597": {
+                "quantity": 10,
+                "size": "10"
+            },
+            "714598": {
+                "quantity": 18,
+                "size": "10.5"
+            },
+            "714599": {
+                "quantity": 11,
+                "size": "11"
+            },
+            "714600": {
+                "quantity": 35,
+                "size": "11.5"
+            },
+            "714601": {
+                "quantity": 25,
+                "size": "12"
+            }
+        }
+    }
+  ];

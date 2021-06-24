@@ -4,15 +4,16 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({adapter: new Adapter()});
 
 import ImageGallery from '../../client/overview/ImageGallery.jsx';
-import {testDataStyles} from './testData.js';
+import {testDataSelectedStyle} from './testData.js';
 
 describe('rendering', () => {
 
   const propsForImageGallery = {
     styleId: 123167,
-    styles: testDataStyles
+    stylePhotos: testDataSelectedStyle[0].photos
   }
   const wrapper = shallow(<ImageGallery {...propsForImageGallery} />);
+
 
   describe('in the initial state', () => {
 
