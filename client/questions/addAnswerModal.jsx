@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import AnswerPhotos from './answerPhotos.jsx';
+import AddedPhotos from './addedPhotos.jsx';
 
 class AnswerModal extends React.Component {
   constructor(props) {
@@ -8,10 +10,13 @@ class AnswerModal extends React.Component {
       answer:"",
       user:"",
       email:"",
+      photos: []
     }
+    this.updatePhotos = this.updatePhotos.bind(this);
   }
 
   submitAnswers(){
+
     if (this.state.answer === "" || this.state.user === "" || this.state.email === ""){
       alert("Missing Username, Email, or Answer!");
     } else {
@@ -22,7 +27,7 @@ class AnswerModal extends React.Component {
           body:this.state.answer,
           name:this.state.user,
           email:this.state.email,
-          photos:[]
+          // photos:this.state.photos
         }
       })
     }
@@ -32,6 +37,12 @@ class AnswerModal extends React.Component {
     let input = document.getElementById(stateKey).value;
     this.setState({[stateKey]: input})
     console.log(this.state)
+  }
+
+  updatePhotos(event){
+    this.setState({
+      photos: this.state.photos.concat([URL.createObjectURL(event.target.files[0])])
+    })
   }
 
   render(){
@@ -46,15 +57,19 @@ class AnswerModal extends React.Component {
             <h2 className="answer-title">Submit your Answer</h2>
             <div className="exit" onClick={() => this.props.handleClose()}>X</div>
           </div>
-          <label for="user">What is your nickname (mandatory) </label>
-          <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543"></input>
-          <label for="email">Your email (mandatory) </label>
-          <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com"></input>
-          <label for="answer">Your Answer</label>
-          <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000"></textarea>
+          <p>{this.props.questionBody}</p>
+          <div className="input-content">
+            <label htmlFor="user">What is your nickname (mandatory) </label>
+            <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543"></input>
+            <label htmlFor="email">Your email (mandatory) </label>
+            <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com"></input>
+            <label htmlFor="answer">Your Answer</label>
+            <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000"></textarea>
+          </div>
+          <AddedPhotos photos={this.state.photos} />
           <div className="modal-footer">
-            <input className="upload-photo" type="file"></input>
-            <div className="answer-submit">Submit Answer</div>
+            <AnswerPhotos updatePhotos={this.updatePhotos} files={this.state.photos} />
+            <div className="answer-submit" onClick={()=>this.submitAnswers()}>Submit Answer</div>
           </div>
         </div>
       </div>
