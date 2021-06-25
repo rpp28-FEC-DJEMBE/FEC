@@ -76,12 +76,12 @@ class ReviewList extends React.Component {
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews} handleSort={this.props.handleSort}/>
         <div className='review-list'>
-          {/* {tiles} */}
-          {
+          {tiles}
+          {/* {
             (this.state.initial.map((review, index) => {
               return <ReviewTile key={index} review={review} />
             }))
-          }
+          } */}
         </div>
         <div className='review-buttons'>
           {moreReviews}
