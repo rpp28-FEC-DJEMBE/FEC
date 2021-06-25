@@ -307,7 +307,6 @@ font-size: 15px;
   border: 0;
   border-radius: 50%;
   background: rgb(71, 70, 70);
-  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
@@ -316,7 +315,6 @@ font-size: 15px;
   border: 0;
   border-radius: 50%;
   background: rgb(71, 70, 70);
-  cursor: pointer;
 }
 
 /* STATE STYLES
