@@ -15,9 +15,6 @@ body * {
   --star-size: 35px;
   --star-color: rgb(184, 184, 184);
   --star-background: black;
-  --bars-size: 30px;
-  --bars-color: rgb(184, 184, 184);
-  --bars-background: green;
 }
 
 
@@ -30,8 +27,8 @@ body * {
 }
 
 .rr-content {
-  display: flex;
-  flex-flow: row;
+  display: grid;
+  grid-template-columns: 30% 70%;
 }
 
 .rating-bars,
@@ -167,10 +164,13 @@ input[type="file"] {
   display: flex;
   flex-flow: column;
   width: 325px;
+  padding-right: 20px;
 }
 
-.rating-stars .stars {
-  padding-top: 15px;
+.rating-stars {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 25px 25px;
 }
 
 .answer-modal,
@@ -187,7 +187,9 @@ input[type="file"] {
   justify-content: center;
 }
 
-.more-q-btn, .add-q-btn {
+.more-q-btn,
+.add-q-btn,
+.review-btn {
 border: solid 1px;
 border-color: black;
 background-color: white;
@@ -327,6 +329,16 @@ font-size: 15px;
   background: green;
 }
 
+#star-average {
+  font-size: 45px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  justify-self: stretch;
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -335,18 +347,6 @@ font-size: 15px;
   letter-spacing: 3px;
   border-color: red;
   background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.bars::before {
-  content: '―――――';
-  font-size: var(--bars-size);
-  font-weight: bolder;
-  letter-spacing: -3px;
-  vertical-align: middle;
-  background: linear-gradient(90deg, var(--bars-background) var(--percent), var(--bars-color) var(--percent));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

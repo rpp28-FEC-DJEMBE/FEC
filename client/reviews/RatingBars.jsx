@@ -14,7 +14,7 @@ const RatingBars = ({ratings}) => {
         let barWidth = (ratings[star]) ? { '--width': `${helper.ratingConverter(ratings[star], total)}%` } : emptyBar;
 
         return (
-          <div className='rating-bar'>
+          <div className='rating-bar' key={star}>
                 <label>{star} stars</label>
                 <input readOnly type="range" min="1" max="5" value='1' className="star-slider" style={barWidth}></input>
           </div>

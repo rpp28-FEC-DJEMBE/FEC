@@ -70,7 +70,7 @@ class ReviewList extends React.Component {
     let tiles = (this.props.reviews.length) ? this.renderInitial() : `There are currently no reviews for this product.
     Be the first to leave a review!`;
     let moreReviews = (this.state.initial.length === this.props.reviews.length) ? null :
-      <button onClick={this.handleMoreReviews}>More Reviews</button>;
+      <button className='review-btn' onClick={this.handleMoreReviews}>More Reviews</button>;
 
     return (
       <div className='review-container'>
@@ -85,7 +85,7 @@ class ReviewList extends React.Component {
         </div>
         <div className='review-buttons'>
           {moreReviews}
-          <button onClick={this.handleAddReview}>Add A Review +</button>
+          <button className='review-btn' onClick={this.handleAddReview}>Add A Review +</button>
           <AddReview
             show={this.state.showAdd}
             productId={this.props.productId}
