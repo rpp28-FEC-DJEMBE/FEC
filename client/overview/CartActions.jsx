@@ -43,12 +43,12 @@ function CartActions(props) {
     return null;
   } else {
     return (
-      <React.Fragment>
+      <section className="o-cart-actions">
         <SelectSize inventory={inventory} saveSize={saveOrderSize} />
-        <SelectQty inventory={inventory} saveQty={saveOrderQty} />
+        <SelectQty inventory={inventory} saveQty={saveOrderQty} selectedSize={orderSize} />
         <button>Add to bag</button>
         <button>&#9734;</button>
-      </React.Fragment>
+      </section>
     );
   }
 }

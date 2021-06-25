@@ -3,15 +3,15 @@ import React from 'react';
 function SelectSize(props) {
 
   // receives:
-    // inventory={inventory}
-    // saveSize={saveOrderSize}
+  // inventory={inventory}
+  // saveSize={saveOrderSize}
 
   const saveSize = (event => {
     let size = event.currentTarget.value === 'Select Size' ? null : event.currentTarget.value;
     props.saveSize(size);
   });
 
-  const renderOptions = (() => {
+  const renderSizeOptions = (() => {
     const sizeOptions = Object.keys(props.inventory).map(size => {
       return (
         <option key={size} value={size}>{size}</option>
@@ -28,9 +28,9 @@ function SelectSize(props) {
   });
 
   if (!props) {
-    return null;
+    return null;  // TODO: need to handle OUT OF STOCK here or below
   } else {
-    return renderOptions();
+    return renderSizeOptions();
   }
 
 }
