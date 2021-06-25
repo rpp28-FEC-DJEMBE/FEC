@@ -1,7 +1,6 @@
 import React from 'react';
 
 const AddedPhotos = (props) => {
-  console.log(props.photos)
 
   return (
 
