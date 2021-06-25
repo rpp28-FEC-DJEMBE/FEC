@@ -53,7 +53,8 @@ class AnswersList extends React.Component {
 
   handleExpandAnswers() {
     this.setState({
-      answers: this.state.answersList
+      answers: this.state.answersList,
+      answersList: []
     })
   }
 
