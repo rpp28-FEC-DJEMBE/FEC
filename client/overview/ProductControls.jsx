@@ -3,6 +3,7 @@ import './overview.css';
 import axios from 'axios';
 
 import StyleSelector from './StyleSelector.jsx';
+import CartActions from './CartActions.jsx';
 import utils from './overviewUtils.js';
 import RatingStars from '../reviews/RatingStars.jsx';
 import ratingHelper from '../reviews/reviewHelpers.js';

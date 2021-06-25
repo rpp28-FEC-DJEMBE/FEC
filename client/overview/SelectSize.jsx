@@ -3,19 +3,36 @@ import React from 'react';
 function SelectSize(props) {
 
   // receives:
-  // props.skus: current object of skus
-  // props.saveSKU: upstream function
+    // inventory={inventory}
+    // saveSize={saveOrderSize}
 
-  return (
-    <select name="size" className="o-size-list" value={}>
-      <option value="Select Size">Select Size</option>
-      Object.keys(props.skus).map((sku, index) => {
-        return <SelectSizeOption key={/* skus key */} sku={sku} size={sku.size} />
-      })
-    </select>
-  );
+  const saveSize = (event => {
+    let size = event.currentTarget.value === 'Select Size' ? null : event.currentTarget.value;
+    props.saveSize(size);
+  });
+
+  const renderOptions = (() => {
+    const sizeOptions = Object.keys(props.inventory).map(size => {
+      return (
+        <option key={size} value={size}>{size}</option>
+      );
+    });
+    return (
+      <React.Fragment>
+        <select name="size" className="o-size-list" onChange={saveSize}>
+          <option value='Select Size'>Select Size</option>
+          {sizeOptions}
+        </select>
+      </React.Fragment>
+    )
+  });
+
+  if (!props) {
+    return null;
+  } else {
+    return renderOptions();
+  }
+
 }
 
 export default SelectSize;
-
-

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SelectQuantity(props) {
+function SelectQty(props) {
 
   // const onSwatchClick = (()=> {
   //   props.setStyle(props.styleId);
@@ -16,9 +16,4 @@ function SelectQuantity(props) {
 
 }
 
-
-
-
-export default SelectQuantity;
-
-
+export default SelectQty;

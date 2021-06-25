@@ -1,31 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import SelectSize from './SelectSize.jsx';
+import SelectQty from './SelectQty.jsx';
 
 function CartActions(props) {
 
-  // receives
-    // props.style: the currently selected style object
-    // props.selectedStyleId: the id of the currently selected style
+  // receives:
+  // style={this.props.style}
+  // selectedStyleId={this.props.selectedStyleId}
 
-  // save sku and quantity in state
-  const [sku, setSKU] = useState(null);
-  const [qty, setQty] = useState(0);
+  const [inventory, setInventory] = useState(null);
+  const [orderSize, setOrderSize] = useState(null);
+  const [orderQty, setOrderQty] = useState(null);
 
-  const saveSKU = ((skuId)=> {
-    setSKU(skuId);
+  const saveOrderSize = (size => {
+    setOrderSize(size);
   });
 
-  const saveQty = ((skuQty)=> {
-    setQty(skuQty);
+  const saveOrderQty = (qty => {
+    setOrderQty(qty);
   });
 
-  return (
-    <SelectSize skus={props.style.skus} saveSKU={saveSKU} />
-    <SelectQty skus={props.style.skus} saveQty={saveQty} />
-    <AddToCart sku={sku} qty={qty} />
-    <AddToOutfit selectedStyleId={props.selectedStyleId} />
-  );
+    useEffect(() => {
+    calcAndSetInventory(props.style.skus);
+  }, [props.style]); // Only re-run the effect if props.style changes
+
+  // multiple skus can be the same size; reduce to a distinct list of size and qty
+  const calcAndSetInventory = (skus) => {
+    if (!skus) { return }
+    let fullInventory = Array.from(Object.values(skus));
+    const reducer = (accumulator, current) => {
+      if (accumulator[current.size] === undefined) {
+        accumulator[current.size] = current.quantity;
+      } else {
+        accumulator[current.size] = accumulator[current.size] + current.quantity;
+      }
+      return accumulator;
+    }
+    setInventory(fullInventory.reduce(reducer, {}));
+  }
+
+  if (!props || !inventory) {
+    return null;
+  } else {
+    return (
+      <React.Fragment>
+        <SelectSize inventory={inventory} saveSize={saveOrderSize} />
+        <SelectQty inventory={inventory} saveQty={saveOrderQty} />
+        <button>Add to bag</button>
+        <button>&#9734;</button>
+      </React.Fragment>
+    );
+  }
 }
 
 export default CartActions;
-
-

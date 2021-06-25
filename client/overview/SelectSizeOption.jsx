@@ -1,16 +1,20 @@
 import React from 'react';
 
-function StyleSizeOption(props) {
+function SelectSizeOption(props) {
 
-  const selectSize = ((sku)=> {
-    props.setStyle(props.styleId);
+  // receives:
+  // key={size} size={size} saveSize={saveSize}
+
+  const setSize = (() => {
+    console.log('CALLING SET SIZE WITH', props.size)
+    props.saveSize(props.size);
   });
 
   return (
-    <option value={props.size} onChange={selectSize(props.sku, props.size)}>{props.size}</option>
+    <option value={props.size} onChange={setSize}>{props.size}</option>
   );
 }
 
-export default StyleSizeOption;
+export default SelectSizeOption;
 
 
