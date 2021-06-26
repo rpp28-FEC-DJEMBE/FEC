@@ -70,22 +70,22 @@ class ReviewList extends React.Component {
     let tiles = (this.props.reviews.length) ? this.renderInitial() : `There are currently no reviews for this product.
     Be the first to leave a review!`;
     let moreReviews = (this.state.initial.length === this.props.reviews.length) ? null :
-      <button onClick={this.handleMoreReviews}>More Reviews</button>;
+      <button className='review-btn' onClick={this.handleMoreReviews}>More Reviews</button>;
 
     return (
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews} handleSort={this.props.handleSort}/>
         <div className='review-list'>
-          {/* {tiles} */}
-          {
+          {tiles}
+          {/* {
             (this.state.initial.map((review, index) => {
               return <ReviewTile key={index} review={review} />
             }))
-          }
+          } */}
         </div>
         <div className='review-buttons'>
           {moreReviews}
-          <button onClick={this.handleAddReview}>Add A Review +</button>
+          <button className='review-btn' onClick={this.handleAddReview}>Add A Review +</button>
           <AddReview
             show={this.state.showAdd}
             productId={this.props.productId}
