@@ -52,11 +52,13 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
         }
       })
       .catch(err => {
-        console.log(err);
+        // console.log('err1,,,,', err);
+        throw err;
       }
     )
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      throw err;
     }
 
   }
@@ -74,7 +76,7 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
   }
 
   return (
-    <div className="product-card">
+    <div id="pdtCard" className="product-card">
 
       <div className="card-btn">
         <a className="compare-btn pointer" onClick={onClickActionBtn}>{cardBtn}</a>

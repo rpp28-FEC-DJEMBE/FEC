@@ -1,7 +1,7 @@
 {
   "name": "fec",
   "version": "1.0.0",
-  "description": "",
+  "description": "install these",
   "main": "server.js",
   "scripts": {
     "test": "jest --coverage",
@@ -31,6 +31,7 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.4",
     "@babel/preset-react": "^7.13.13",
+    "@testing-library/react": "^11.2.7",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "axios": "^0.21.1",
     "babel-jest": "^27.0.2",
@@ -48,5 +49,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "style-loader": "^2.0.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

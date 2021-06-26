@@ -73,7 +73,7 @@ class Reviews extends React.Component {
     } else {
     return (
       <div className='ratings-reviews'>
-          <h3>Ratings and Reviews</h3>
+          <h3 id='rr-title'>Ratings and Reviews</h3>
           <div className='rr-content'>
             <Breakdown productId={this.props.productId}/>
             <ReviewList reviews={this.state.reviews} productId={this.props.productId}/>

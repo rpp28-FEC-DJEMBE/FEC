@@ -49,13 +49,14 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
       );
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      throw err;
     }
 
   }
 
-  // if (featuresComp[0].name !== '') {
-    // console.log('props:', featuresComp.features[0], featuresComp);
+  // if (featuresComp[0] !== '') {
+  //   console.log('props:', featuresComp.features[0], featuresComp);
   // }
 
   if (!showComp) {
@@ -63,7 +64,7 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
   }
 
   return (
-    <div className="comparison-box pointer" onClick={onCompaClose}>
+    <div data-testid="comparison" className="comparison-box pointer" onClick={onCompaClose}>
       <p className="comparing">COMPARING</p>
       <div className="comparison-name-line">
         <p>{featuresComp.name[0]}</p>

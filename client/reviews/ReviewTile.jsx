@@ -38,10 +38,11 @@ class ReviewTile extends React.Component {
       response = <p>Response from seller: <em>{this.props.review.response}</em></p>
     }
 
+
     return (
       <div className='review-tile'>
-        <div className='review-header'>
-          <div className='stars tile-stars'>
+        <div id='review-header'>
+          <div id='tile-stars'>
             <RatingStars rating={review.rating} />
           </div>
           <p className='user tile-user'>{review.reviewer_name}, {helper.convertDate(review.date)}</p>
@@ -53,7 +54,7 @@ class ReviewTile extends React.Component {
           {response}
         </div>
         <div id='review-footer'>
-          Helpful? <u onClick={this.handleHelpful}>Yes</u> {this.props.review.helpfulness} | <u>Report</u>
+          Helpful? <u className='pointer' onClick={this.handleHelpful}>Yes</u> {this.state.helpfulness} | <u className='pointer'>Report</u>
         </div>
       </div>
     )

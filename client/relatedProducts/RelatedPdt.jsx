@@ -7,8 +7,6 @@ import Product from './Product.jsx';
 import Comparison from './Comparison.jsx';
 const axios = require('axios');
 
-const Fade = () => {return ''};
-
 function RelatedPdt(props) {
   const [relatedPdts, setRelatedPdts] = useState({pdt_ids: [], products: []});
   const [pdtLayOut, setPdtLayOut]= useState({displayFirstId: 0, totalItems: 0, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn btn-Inactive'});
@@ -65,8 +63,13 @@ function RelatedPdt(props) {
             setPdtLayOut({displayFirstId: 0, totalItems: pdt_idsData.length, pdtLeftBtn: 'pointer btn-Inactive', pdtRightBtn: 'pointer rightBtn btn-Inactive'});
           }
         } )
+        .catch(err => {
+          // console.log('err1,,,,', err);
+          throw err;
+        })
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      throw err;
     }
   }
 
@@ -99,7 +102,7 @@ function RelatedPdt(props) {
       if (localStorage.getItem('outfit') !== null) {
         savedOutfit = JSON.parse(localStorage.getItem('outfit'));
         savedOutfitIds = JSON.parse(localStorage.getItem('outfitId'));
-        console.log('current savedOutfitIds', savedOutfitIds, savedOutfit.length);
+        // console.log('current savedOutfitIds', savedOutfitIds, savedOutfit.length);
         if (!savedOutfitIds.includes(newOutfit.id)) {
           savedOutfit.push(newOutfit);
           savedOutfitIds.push(newOutfit.id);
@@ -108,7 +111,7 @@ function RelatedPdt(props) {
         savedOutfit = [newOutfit];
         savedOutfitIds = [newOutfit.id];
       }
-      console.log('updated savedOutfitIds', savedOutfitIds, savedOutfit.length);
+      // console.log('updated savedOutfitIds', savedOutfitIds, savedOutfit.length);
 
       localStorage.setItem('outfitId', JSON.stringify(savedOutfitIds));
       localStorage.setItem('outfit', JSON.stringify(savedOutfit));
@@ -123,7 +126,8 @@ function RelatedPdt(props) {
       }
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      throw err;
     }
   }
 
@@ -132,10 +136,10 @@ function RelatedPdt(props) {
     let savedOutfit = JSON.parse(localStorage.getItem('outfit'));
     let savedOutfitIds = JSON.parse(localStorage.getItem('outfitId'));
     let toDeleteId = savedOutfitIds.indexOf(selectedId);
-    console.log('current savedOutfitIds', savedOutfitIds, savedOutfit.length);
+    // console.log('current savedOutfitIds', savedOutfitIds, savedOutfit.length);
     savedOutfit.splice(toDeleteId, 1);
     savedOutfitIds.splice(toDeleteId, 1);
-    console.log('updated savedOutfitIds', savedOutfitIds, savedOutfit.length);
+    // console.log('updated savedOutfitIds', savedOutfitIds, savedOutfit.length);
 
     localStorage.removeItem('outfitId');
     localStorage.setItem('outfitId', JSON.stringify(savedOutfitIds));
@@ -213,23 +217,23 @@ function RelatedPdt(props) {
   }
 
   const onAddOutfitClick = () => {
-    console.log('onAddOutfitClick', props.productId);
+    // console.log('onAddOutfitClick', props.productId);
     // setOutfits(res.data);  //todo
     addOutfit(props.productId);
   }
 
   const onOutfitBtnClick = (btnId) => {
-    console.log('onOutfitBtnClick', btnId);
+    // console.log('onOutfitBtnClick', btnId);
     // setOutfits(res.data);  //todo
     removeOutfit (btnId);
   }
 
 
-  if (!relatedPdts.products.length) {
-    return (<p></p>);
-  } else {
+  // if (!relatedPdts.products.length) {
+  //   return (<p></p>);
+  // } else {
     return (
-      <div>
+      <div data-testid="relatedPdt">
         <div className="related-product-widget">
           <h3 className="related-product-header">RELATED PRODUCTS</h3>
           <div className="related-product-box">
@@ -259,7 +263,6 @@ function RelatedPdt(props) {
               className={pdtLayOut.pdtRightBtn}
               onClick={() => slideRight(pdtLayOut, relatedPdts, displayPdtItems)}
             >{'\u1433'}</label>
-            {/* <Fade className="fade" /> */}
           </div>
         </div>
 
@@ -293,7 +296,6 @@ function RelatedPdt(props) {
               className={outfitLayOut.pdtRightBtn}
               onClick={() => slideRight(outfitLayOut, outfits, displayOutfitItems)}
             >{'\u1433'}</label>
-            {/* <Fade className="fade" /> */}
           </div>
         </div>
 
@@ -302,7 +304,7 @@ function RelatedPdt(props) {
 
       </div>
     )
-  }
+  // }
 
 }
 
