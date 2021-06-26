@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { charsTable } from './reviewHelpers.js';
 
 const AddReview = (props) => {
   const [product, setProduct] = useState('Andre');
@@ -32,21 +33,13 @@ const AddReview = (props) => {
     let { characteristics } = props.metaData;
     let chars = Object.keys(characteristics);
 
-    let charsTable = {
-      Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
-      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-      Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-      Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
-    }
-
     const handleCharEntry = (e) => {
       let nam = e.target.name;
       let val = Number(e.target.value);
       setChars(prevState => ({...prevState, [nam]: val}))
     }
 
+    // using chars table from helper file
     return chars.map(char => {
       let charId = characteristics[char].id;
       return (

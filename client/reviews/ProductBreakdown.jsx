@@ -1,4 +1,5 @@
 import React from 'react';
+import { charsTable } from './reviewHelpers.js';
 
 const ProductBreakdown = ({characteristics}) => {
   let chars = Object.keys(characteristics)
@@ -8,12 +9,25 @@ const ProductBreakdown = ({characteristics}) => {
   } else {
     return (
       <div className='product-breakdown'>
-        <p>Product Breakdown</p>
-        {chars.map((char) => (
-          <div className='char-bar' key={characteristics[char].id}>
-            {char} {characteristics[char].value}
-          </div>
-        ))}
+        {
+          chars.map((char) => {
+            let slider = (char === 'Comfort' || char === 'Quality') ? 'slider4' : 'slider3';
+            let description = (char === 'Comfort' || char === 'Quality') ?
+              <div id='char-desc'>
+                <label>{charsTable[char][0]}</label> <label>{charsTable[char][4]}</label>
+              </div>
+              : <div id='char-desc'>
+                  <label>{charsTable[char][0]}</label> <label>{charsTable[char][2]}</label> <label>{charsTable[char][4]}</label>
+                </div>
+            return (
+              <div className='char-bar' key={characteristics[char].id}>
+                <p id='char-title'>{char}</p>
+                <input readOnly type="range" min="1" max="5" value={characteristics[char].value} className={slider}></input>
+                {description}
+              </div>
+            )
+          })
+        }
       </div>
     )
   }
