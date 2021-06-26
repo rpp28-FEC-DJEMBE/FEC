@@ -9,9 +9,9 @@ class ReviewList extends React.Component {
     super(props);
     this.state = {
       productId: this.props.productId,
-      initial: this.props.reviews.slice(0,2),
-      reviews: this.props.reviews.slice(),
-      showAdd: false
+      showAdd: false,
+      count: 2,
+      display: this.props.reviews.slice(0, 2)
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
@@ -19,41 +19,38 @@ class ReviewList extends React.Component {
     this.handleSort = this.handleSort.bind(this);
   }
 
-  renderInitial() {
-    return this.state.initial.map((review, index) => {
-      return <ReviewTile key={index} review={review} />
-    })
-  }
 
   handleSort(e) {
     console.log('handle sort', e.target.value);
     if (e.target.value === 'helpful') {
       let helpfulReviews = this.props.reviews.sort((a, b) => b.helpfulness - a.helpfulness);
       this.setState({
-        initial: helpfulReviews.slice(0,2),
-        reviews: helpfulReviews.slice(this.state.initial.length, helpfulReviews.length)
+        display: helpfulReviews.slice(0, this.state.count)
       })
       console.log('handle sort', this.state);
     }
 
+    if (e.target.value === 'relevant') {
+      let relevantReviews = this.props.reviews.sort((a, b) => b.helpfulness - a.helpfulness);
+      this.setState({
+        display: relevantReviews.slice(0, this.state.count)
+      })
+      console.log('handle sort', this.state);
+    }
 
-
-
-    // axios.get(`/reviews/?count=100&sort=${e.target.value}&product_id=${this.props.productId}`)
-    //   .then((res) => {
-    //     this.setState({
-    //       reviews: res.data.results,
-    //     });
-
-    //   })
-    //   .catch((err) => {
-    //     console.log('Error updating sort', err);
-    //   })
+    if (e.target.value === 'newest') {
+      let newestReviews = this.props.reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+      this.setState({
+        display: newestReviews.slice(0, this.state.count)
+      })
+      console.log('handle sort', this.state);
+    }
   }
 
   handleMoreReviews() {
     this.setState((prevState) => ({
-      initial: prevState.initial.concat(this.state.reviews.splice(0,2))
+      count: prevState.count += 2,
+      display: this.props.reviews.slice(0, this.state.count)
     }))
     console.log('more reviews', this.state);
   }
@@ -80,36 +77,31 @@ class ReviewList extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.productId !== this.props.productId){
       this.setState({
-        initial: this.props.reviews.slice(0,2),
-        reviews: this.props.reviews.slice(),
+        count: 2,
+        display: this.props.reviews.slice(0,2)
       })
-      // console.log('review list props', this.props.reviews)
-      // console.log('review list state', this.state)
     }
   }
 
   componentDidMount() {
     this.setState({
-      initial: this.state.reviews.splice(0,2)
+      display: this.props.reviews.slice(0, this.state.count)
     })
   }
 
   render() {
-    let tiles = (this.props.reviews.length) ? this.renderInitial() : `There are currently no reviews for this product.
+    let tiles = (this.props.reviews.length) ? (this.state.display.map((review, index) => {
+      return <ReviewTile key={index} review={review} />
+    })) : `There are currently no reviews for this product.
     Be the first to leave a review!`;
-    let moreReviews = (this.state.initial.length === this.props.reviews.length) ? null :
+    let moreReviews = (this.state.display.length >= this.props.reviews.length) ? null :
       <button onClick={this.handleMoreReviews}>More Reviews</button>;
 
     return (
       <div className='review-container'>
         <SortOptions reviews={this.props.reviews} handleSort={this.handleSort}/>
         <div className='review-list'>
-          {/* {tiles} */}
-          {
-            (this.state.initial.map((review, index) => {
-              return <ReviewTile key={index} review={review} />
-            }))
-          }
+          {tiles}
         </div>
         <div className='review-buttons'>
           {moreReviews}
