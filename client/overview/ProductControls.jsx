@@ -3,6 +3,7 @@ import './overview.css';
 import axios from 'axios';
 
 import StyleSelector from './StyleSelector.jsx';
+import CartActions from './CartActions.jsx';
 import utils from './overviewUtils.js';
 import RatingStars from '../reviews/RatingStars.jsx';
 import ratingHelper from '../reviews/reviewHelpers.js';
@@ -60,21 +61,7 @@ class ProductControls extends React.Component {
           {this.renderPrice()}
           <p className="o-product-style-name"><b>STYLE > </b>{this.props.style.name}</p>
           <StyleSelector styles={this.props.styles} selectedStyleId={this.props.selectedStyleId} setStyle={this.props.setStyle} />
-          <select name="size" className="o-size-list">
-            <option value="">Select Size</option>
-            <option value="size1">Size XS</option>
-            <option value="size2">Size XL</option>
-          </select>
-
-          <select name="quantity" className="o-quantity-list">
-            <option value="">-</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-
-          <button>Add to bag</button>
-
-          <button>&#9734;</button>
+          <CartActions style={this.props.style} selectedStyleId={this.props.selectedStyleId} />
         </section>
       )
     }

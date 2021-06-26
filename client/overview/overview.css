@@ -234,6 +234,12 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   left: -0.17rem;
 }
 
+.o-qty-list {
+  width: 5rem;
+}
+
+
+
 /* PRODUCT DESCRIPTION */
 
 .o-product-description-slogan {
