@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   onCardClick(productCardId, productName) {
-    console.log('event.target', productCardId, productName);
+    // console.log('event.target', productCardId, productName);
     this.setState({
       productId: productCardId,
       productName: productName

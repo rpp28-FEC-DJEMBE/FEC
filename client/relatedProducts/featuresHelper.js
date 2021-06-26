@@ -46,7 +46,7 @@ const combineFeatures = (features1, features2) => {
         combinedFeatures.featureWValue.push(features1.featureAndValue[i]);
         // console.log('76 same FV', index2, features1.featureAndValue[i], features2.featureAndValue[index2]);
       } else {
-        console.log('1', features1.value[i], '2', features2.value[i], '3', features1.feature[i])
+        // console.log('1', features1.value[i], '2', features2.value[i], '3', features1.feature[i])
         combinedFeatures.value1.push(features1.value[i]);
         combinedFeatures.value2.push(features2.value[i]);
         combinedFeatures.featureWValue.push(features1.feature[i]);
