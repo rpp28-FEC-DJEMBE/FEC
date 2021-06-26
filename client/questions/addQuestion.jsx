@@ -46,6 +46,16 @@ class AddQuestion extends React.Component{
     this.setState({[stateKey]: input})
   }
 
+  closeModal() {
+    this.setState({
+      answer:"",
+      user:"",
+      email:"",
+      photos: []
+    })
+    this.props.handleClose()
+  }
+
   render(){
     if (!this.props.show){
       return null;
@@ -56,7 +66,7 @@ class AddQuestion extends React.Component{
         <div className="question-content">
           <div className="modal-header">
             <h2 className="question-title">Ask Your Question</h2>
-            <div onClick={() => this.props.handleClose()}>X</div>
+            <div onClick={() => this.closeModal()}>X</div>
           </div>
           <p className="subtitle">About the {this.props.productName}</p>
           <label>What is your nickname* </label>
