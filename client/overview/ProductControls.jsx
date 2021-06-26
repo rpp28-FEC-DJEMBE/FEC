@@ -59,7 +59,7 @@ class ProductControls extends React.Component {
           <p className="o-product-name">{this.props.product[0].name}</p>
           {this.renderPrice()}
           <p className="o-product-style-name"><b>STYLE > </b>{this.props.style.name}</p>
-          <StyleSelector />
+          <StyleSelector styles={this.props.styles} selectedStyleId={this.props.selectedStyleId} setStyle={this.props.setStyle} />
           <select name="size" className="o-size-list">
             <option value="">Select Size</option>
             <option value="size1">Size XS</option>
