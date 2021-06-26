@@ -1,7 +1,7 @@
 {
   "name": "fec",
   "version": "1.0.0",
-  "description": "",
+  "description": "install these",
   "main": "server.js",
   "scripts": {
     "test": "jest --coverage",
@@ -48,5 +48,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "style-loader": "^2.0.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }
