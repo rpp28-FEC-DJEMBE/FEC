@@ -30,11 +30,12 @@ class Questions extends React.Component{
   }
 
   getQuestions(){
+    console.log(this.props)
     return axios({
       method:'get',
       url: '/qa/questions',
       params: {
-        product_id:this.props.productId,
+        product_id:this.props.product.productId,
         count:50
       }
     })
@@ -50,7 +51,7 @@ class Questions extends React.Component{
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.product_id !== this.props.productId){
+    if(prevState.product_id !== this.props.product.productId){
      this.getQuestions()
      .then(data => {
        this.updateState(data)
@@ -101,8 +102,8 @@ class Questions extends React.Component{
         <h3>Questions & Answers</h3>
         <Search />
         <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
-        <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} questionBody={this.state.questionBody} />
-        <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick.bind(this)} />
+        <AnswerModal show={this.state.answerShow} productName={this.props.product.productName} handleClose={this.handleAddAnswerClick} question={this.state.questionId} questionBody={this.state.questionBody} />
+        <AddQuestion show={this.state.questionShow} productId={this.state.product_id} productName={this.props.product.productName} handleClose={this.handleAddQClick.bind(this)} />
         <button className="more-q-btn" onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
         <button className="add-q-btn" onClick={() => this.handleAddQClick()}>Add a question +</button>
       </div>
