@@ -16,7 +16,8 @@ class Questions extends React.Component{
       displayQuestions: [],
       answerShow: false,
       questionShow: false,
-      questionId: null
+      questionId: null,
+      questionBody: ""
     }
     this.handleAddAnswerClick = this.handleAddAnswerClick.bind(this);
 
@@ -26,8 +27,6 @@ class Questions extends React.Component{
     this.getQuestions()
     .then((data) => this.updateState(data))
     .catch((err) => console.log("Error: ", err))
-
-    // .then(() => this.handleMoreAnsweredQuestions())
   }
 
   getQuestions(){
@@ -66,16 +65,18 @@ class Questions extends React.Component{
     })
   }
 
-  handleAddAnswerClick (question_id) {
+  handleAddAnswerClick (question_id, question_body) {
     if(!this.state.answerShow) {
       this.setState({
         answerShow: true,
-        questionId: question_id
+        questionId: question_id,
+        questionBody: question_body
       })
     } else {
       this.setState({
         answerShow: false,
-        questionId: null
+        questionId: null,
+        questionBody: ""
       })
     }
   }
@@ -100,10 +101,10 @@ class Questions extends React.Component{
         <h3>Questions & Answers</h3>
         <Search />
         <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
-        <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} />
+        <AnswerModal show={this.state.answerShow} handleClose={this.handleAddAnswerClick} question={this.state.questionId} questionBody={this.state.questionBody} />
         <AddQuestion show={this.state.questionShow} handleClose={this.handleAddQClick.bind(this)} />
-        <button onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
-        <button onClick={() => this.handleAddQClick()}>Add a question</button>
+        <button className="more-q-btn" onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
+        <button className="add-q-btn" onClick={() => this.handleAddQClick()}>Add a question +</button>
       </div>
     );
   }

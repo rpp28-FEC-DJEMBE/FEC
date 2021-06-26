@@ -1,20 +1,50 @@
 import React from 'react';
 import './overview.css';
+import axios from 'axios';
 
+import StyleSelector from './StyleSelector.jsx';
 import utils from './overviewUtils.js';
 import RatingStars from '../reviews/RatingStars.jsx';
-import StyleSelector from './StyleSelector.jsx';
+import ratingHelper from '../reviews/reviewHelpers.js';
+
 
 class ProductControls extends React.Component {
   constructor(props) {
     super(props);
 
-    if (props.style) {
-      console.log('this.props.style.original_price:', utils.toCurrency(this.props.style.original_price));
-    } else {
-      console.log('No friggin this.props.style!');
-    }
+    this.renderPrice = this.renderPrice.bind(this);
+  }
 
+  // async getStarAverage() {
+  //   let starAverage = 3;
+  //   // const ratingData = await axios.get(`/reviews/meta?product_id=${this.props.product[0].id}`);
+    // console.log(ratingData);
+    // const ratingAvg = ratingHelper.getAvgRating(ratingData.data.ratings);
+    // isNaN(ratingAvg) ? starAverage = 0 : starAverage = ratingAvg;
+  //   return (
+  //     <React.Fragment>
+  //       <RatingStars rating={starAverage} size={14} />
+  //     </React.Fragment>
+  //   );
+  // }
+
+  renderPrice() {
+    if (this.props.style.sale_price) {
+      return (
+        <React.Fragment>
+          <p className="o-product-style-price">
+            <span className="strikethrough">{utils.toCurrency(this.props.style.original_price)}</span>
+            <span className="sale">{utils.toCurrency(this.props.style.sale_price)}</span>
+          </p>
+        </React.Fragment>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <p className="o-product-style-price">{utils.toCurrency(this.props.style.original_price)}</p>
+        </React.Fragment>
+      )
+    }
   }
 
   render() {
@@ -24,13 +54,12 @@ class ProductControls extends React.Component {
       return(
         <section className="o-product-controls">
           <RatingStars rating={3} size={14} />
-
+          {/* {this.getStarAverage()} */}
           <p className="o-product-category">{this.props.product[0].category}</p>
           <p className="o-product-name">{this.props.product[0].name}</p>
-          <p className="o-product-style-price">{utils.toCurrency(this.props.style.original_price)}</p>
+          {this.renderPrice()}
           <p className="o-product-style-name"><b>STYLE > </b>{this.props.style.name}</p>
-          <hr />
-          <StyleSelector />
+          <StyleSelector styles={this.props.styles} selectedStyleId={this.props.selectedStyleId} setStyle={this.props.setStyle} />
           <select name="size" className="o-size-list">
             <option value="">Select Size</option>
             <option value="size1">Size XS</option>

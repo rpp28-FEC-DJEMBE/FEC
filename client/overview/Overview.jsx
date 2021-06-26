@@ -16,18 +16,16 @@ class Overview extends React.Component {
       product: null,
       productStyles: [],
       selectedStyleId: null,
-      selectedStyle: [],
+      selectedStyle: null,
       productLoaded: false,
       styleLoaded: false,
       useMockData: false
     }
+
+    this.setStyle = this.setStyle.bind(this);
   }
 
   componentDidMount() {
-    this.setState({
-      productLoaded: false,
-      styleLoaded: false
-    });
     this.getProduct(this.props.productId);
     this.getStyles(this.props.productId);
   }
@@ -43,8 +41,8 @@ class Overview extends React.Component {
     }
   }
 
-  setStyle(styleId, styles) {
-    let style = styles.find( ({style_id}) => style_id => style_id === styleId );
+  setStyle(styleId) {
+    let style = this.state.productStyles.find( ({style_id}) => style_id === styleId );
     this.setState({
       selectedStyleId: styleId,
       selectedStyle: style
@@ -138,8 +136,14 @@ class Overview extends React.Component {
       return (
         <section className="o-product-overview">
           <ImageGallery selectedStyleId={this.state.selectedStyleId} stylePhotos={this.state.selectedStyle.photos} />
-          <ProductControls product={this.state.product} style={this.state.selectedStyle} />
-          <ProductDescription />
+          <ProductControls
+            product={this.state.product}
+            styles={this.state.productStyles}
+            selectedStyleId={this.state.selectedStyleId}
+            style={this.state.selectedStyle}
+            setStyle={this.setStyle}
+          />
+          <ProductDescription product={this.state.product} />
         </section>
       );
     }
