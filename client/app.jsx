@@ -7,7 +7,7 @@ import './app.css';
 // import logo from './images/react_js_logo_64px.png';
 import logo from './images/djembe.png';
 // const logo = 'https://drive.google.com/uc?export=view&id=1ZJWMpyC9lHuT9YawTMJ8ymOfPlDK7ga_'
-import Overview from './overview/overview.jsx';
+import Overview from './overview/Overview.jsx';
 import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
 import Questions from './questions/questions.jsx';
 import Reviews from './reviews/Reviews.jsx';
