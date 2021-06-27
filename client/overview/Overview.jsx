@@ -17,14 +17,14 @@ class Overview extends React.Component {
       productStyles: [],
       selectedStyleId: null,
       selectedStyle: null,
-      expandedMode: false,
+      imageMode: 0,
       productLoaded: false,
       styleLoaded: false,
       useMockData: false
     }
 
     this.setStyle = this.setStyle.bind(this);
-    this.toggleExpandedMode = this.toggleExpandedMode.bind(this);
+    this.setImageMode = this.setImageMode.bind(this);
   }
 
   componentDidMount() {
@@ -126,9 +126,10 @@ class Overview extends React.Component {
     }
   }
 
-  toggleExpandedMode() {
+  setImageMode(mode) {
+    // 0: normal, 1: expanded, 2: zoomed
     this.setState({
-      expandedMode: !this.state.expandedMode
+      imageMode: mode
     })
   }
 
@@ -146,9 +147,10 @@ class Overview extends React.Component {
           <ImageGallery
             selectedStyleId={this.state.selectedStyleId}
             stylePhotos={this.state.selectedStyle.photos}
-            toggleExpandedMode={this.toggleExpandedMode}
+            imageMode={this.state.imageMode}
+            setImageMode={this.setImageMode}
           />
-          { this.state.expandedMode
+          { this.state.imageMode > 0
             ? null
             : <ProductControls
                 product={this.state.product}

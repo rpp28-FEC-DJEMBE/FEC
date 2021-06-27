@@ -25,8 +25,6 @@ class ImageGallery extends React.Component {
       this.setState({
         isLoaded: false
       });
-
-
       this.setImages(this.state.selectedImageIndex);
     }
   }
@@ -58,7 +56,24 @@ class ImageGallery extends React.Component {
 
     // main image click
     if (classes.contains('o-images-main')) {
-      this.props.toggleExpandedMode();
+
+      let newMode;
+      if (this.props.imageMode === 0) {
+        newMode = 1; //normal --> expanded
+      }
+      // delete after zoom view is coded
+      if (this.props.imageMode === 1) {
+        newMode = 0; //expanded --> normal
+      }
+
+      // comment out until zoom view is coded
+      // if (this.props.imageMode === 1) {
+      //   newMode = 2; //expanded --> zoomed
+      // }
+      // if (this.props.imageMode === 2) {
+      //   newMode = 1; //zoomed --> expanded
+      // }
+      this.props.setImageMode(newMode);
       return;
     }
 
@@ -132,7 +147,17 @@ class ImageGallery extends React.Component {
     } else {
       return (
         <section className="o-images">
-          <img className="o-images-main pointer" src={this.state.mainImageUrl} onClick={this.handleClick} />
+          <img
+            className={
+              this.props.imageMode === 0
+                ? "o-images-main pointer"
+                : this.props.imageMode === 1
+                  ? "o-images-main o-expanded pointer"
+                  : "o-images-main o-zoomed pointer"
+            }
+            src={this.state.mainImageUrl}
+            onClick={this.handleClick}
+          />
           <nav className="o-images-thumbnails">
             {this.renderThumbnailGallery()}
           </nav>
