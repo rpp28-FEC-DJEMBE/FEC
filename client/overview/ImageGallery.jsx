@@ -55,6 +55,14 @@ class ImageGallery extends React.Component {
   handleClick(e) {
 
     let classes = e.currentTarget.classList;
+
+    // main image click
+    if (classes.contains('o-images-main')) {
+      this.props.toggleExpandedMode();
+      return;
+    }
+
+    // thumbnail gallery clicks
     let newSelectedImageIndex = 0;
 
     if (classes.contains('o-images-thumbnail')) {
@@ -124,7 +132,7 @@ class ImageGallery extends React.Component {
     } else {
       return (
         <section className="o-images">
-          <img className="o-images-main" src={this.state.mainImageUrl} />
+          <img className="o-images-main pointer" src={this.state.mainImageUrl} onClick={this.handleClick} />
           <nav className="o-images-thumbnails">
             {this.renderThumbnailGallery()}
           </nav>
