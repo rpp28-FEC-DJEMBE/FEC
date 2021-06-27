@@ -148,13 +148,16 @@ class Overview extends React.Component {
             stylePhotos={this.state.selectedStyle.photos}
             toggleExpandedMode={this.toggleExpandedMode}
           />
-          <ProductControls
-            product={this.state.product}
-            styles={this.state.productStyles}
-            selectedStyleId={this.state.selectedStyleId}
-            style={this.state.selectedStyle}
-            setStyle={this.setStyle}
-          />
+          { this.state.expandedMode
+            ? null
+            : <ProductControls
+                product={this.state.product}
+                styles={this.state.productStyles}
+                selectedStyleId={this.state.selectedStyleId}
+                style={this.state.selectedStyle}
+                setStyle={this.setStyle}
+              />
+          }
           <ProductDescription product={this.state.product} />
         </section>
       );
