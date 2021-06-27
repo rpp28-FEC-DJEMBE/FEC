@@ -238,8 +238,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   width: 5rem;
 }
 
-
-
 /* PRODUCT DESCRIPTION */
 
 .o-product-description-slogan {
@@ -260,4 +258,13 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   font-family: 'Material Icons';
   position: relative;
   left: -0.7rem;
+}
+
+/* STATE STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - */
+
+/* EXPANDED VIEW */
+
+.o-images.o-expanded {
+  max-width: 100%;
 }

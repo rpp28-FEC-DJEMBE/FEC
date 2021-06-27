@@ -146,9 +146,8 @@ class ImageGallery extends React.Component {
       )
     } else {
       return (
-        <section className="o-images">
-          <img
-            className={
+        <section className={this.props.imageMode === 0 ? "o-images" : "o-images o-expanded"}>
+          <img className={
               this.props.imageMode === 0
                 ? "o-images-main pointer"
                 : this.props.imageMode === 1
