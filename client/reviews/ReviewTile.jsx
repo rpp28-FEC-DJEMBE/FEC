@@ -44,13 +44,13 @@ class ReviewTile extends React.Component {
 
     // if a review has photos, render an image and hidden modal until clicked
     if (review.photos.length) {
-      photos = <ul className='review-photos'>
-        {
-          review.photos.map((image) => (
-            <ReviewPhotoModal url={image.url} id={image.id} key={image.id}/>
-          ))
-        }
-      </ul>
+      photos =  <ul className='review-photos'>
+                  {
+                    review.photos.map((image) => (
+                      <ReviewPhotoModal url={image.url} id={image.id} key={image.id}/>
+                    ))
+                  }
+                </ul>
     }
 
     return (

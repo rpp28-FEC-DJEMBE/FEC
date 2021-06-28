@@ -8,12 +8,12 @@ const ReviewPhotoModal = (props) => {
       <img className='picture-modal' src={props.url} alt={props.id} onClick={e => e.stopPropagation()}/>
     </div>
 
-return (
-  <li>
-    <img src={props.url} alt={props.id} className='review-photo pointer' onClick={() => setShow(true)}/>
-    {modal}
-  </li>
-)
+  return (
+    <li>
+      <img src={props.url} alt={props.id} className='review-photo pointer' onClick={() => setShow(true)}/>
+      {modal}
+    </li>
+  )
 
 }
 
