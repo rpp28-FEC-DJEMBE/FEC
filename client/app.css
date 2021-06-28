@@ -32,7 +32,8 @@ body * {
 }
 
 .rating-bars,
-.char-bar {
+.char-bar,
+#review-body {
   display: flex;
   flex-flow: column;
 }

@@ -7,9 +7,11 @@ class ReviewTile extends React.Component {
     super(props);
     this.state = {
       helpfulness: this.props.review.helpfulness,
-      helpfulClicked: false
+      helpfulClicked: false,
+      showBody: false
     }
     this.handleHelpful = this.handleHelpful.bind(this);
+    this.handleShowMore = this.handleShowMore.bind(this);
   }
 
   handleHelpful() {
@@ -24,12 +26,17 @@ class ReviewTile extends React.Component {
     }
   }
 
-
+  handleShowMore() {
+    this.setState({ showBody: true })
+  }
 
   render() {
     let { review } = this.props;
+    let body = (review.body.length > 250 && !this.state.showBody) ? review.body.substr(0,250) + '...' : review.body;
+    let showMore = (body === review.body) ? null : <u className='pointer' onClick={this.handleShowMore}>Show more</u>
     let recommend;
     let response;
+
     if (review.recommend) {
       recommend = <p>&#10003; I recommend this product</p>
     }
@@ -48,7 +55,8 @@ class ReviewTile extends React.Component {
         </div>
         <div id='review-body'>
           <h4>{review.summary}</h4>
-          {review.body}
+          {body}
+          {showMore}
           {recommend}
           {response}
         </div>
