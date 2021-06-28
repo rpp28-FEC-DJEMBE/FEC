@@ -41,7 +41,7 @@ class ReviewTile extends React.Component {
       recommend = <p>&#10003; I recommend this product</p>
     }
     if (review.response) {
-      response = <p>Response from seller: <em>{this.props.review.response}</em></p>
+      response = <p className='response'>Response from seller: <br></br> <em>{this.props.review.response}</em></p>
     }
 
 

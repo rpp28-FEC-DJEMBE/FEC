@@ -395,6 +395,12 @@ font-size: 15px;
   margin-bottom: 16px;
 }
 
+.response {
+  margin: 0px;
+  padding: 16px 16px;
+  background-color: rgba(202, 202, 202, 0.822);
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
