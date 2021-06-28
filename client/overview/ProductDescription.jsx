@@ -19,11 +19,15 @@ const ProductDescription = (props) => {
   } else {
     return (
       <section className="o-product-description">
-        <p className="o-product-description-slogan">{props.product[0].slogan}</p>
-        <p className="o-product-description-text">{props.product[0].description}</p>
-        <ul className="o-product-description-features">
-          {renderFeatures()}
-        </ul>
+        <section className="o-product-description-text">
+          <p className="o-product-description-slogan">{props.product[0].slogan}</p>
+          <p className="o-product-description-text">{props.product[0].description}</p>
+        </section>
+        <section className="o-product-description-features">
+          <ul className="o-product-description-bullets">
+            {renderFeatures()}
+          </ul>
+        </section>
       </section>
     );
   }
