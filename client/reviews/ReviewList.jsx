@@ -11,7 +11,7 @@ class ReviewList extends React.Component {
       productId: this.props.productId,
       initial: this.props.reviews.slice(0,2),
       reviews: this.props.reviews.slice(),
-      showAdd: false
+      showAdd: false,
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
