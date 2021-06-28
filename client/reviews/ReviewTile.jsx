@@ -30,11 +30,23 @@ class ReviewTile extends React.Component {
     let { review } = this.props;
     let recommend;
     let response;
+    let photos;
     if (review.recommend) {
       recommend = <p>&#10003; I recommend this product</p>
     }
     if (review.response) {
       response = <p>Response from seller: <em>{this.props.review.response}</em></p>
+    }
+    if (review.photos.length) {
+      photos = <ul className='review-photos'>
+        {
+          review.photos.map((image) => (
+            <li key={image.id}>
+              <img src={image.url} alt={image.id} className='review-photo pointer'/>
+            </li>
+          ))
+        }
+      </ul>
     }
 
 
@@ -51,6 +63,7 @@ class ReviewTile extends React.Component {
           {review.body}
           {recommend}
           {response}
+          {photos}
         </div>
         <div id='review-footer'>
           Helpful? <u className='pointer' onClick={this.handleHelpful}>Yes</u> {this.state.helpfulness} | <u className='pointer'>Report</u>

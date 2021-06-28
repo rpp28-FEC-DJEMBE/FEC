@@ -394,6 +394,20 @@ font-size: 15px;
   margin-bottom: 16px;
 }
 
+.review-photos {
+  display: flex;
+  flex-flow: row;
+  align-items: baseline;
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.review-photo {
+  max-height: 70px;
+  max-width: 70px;
+  margin: 10px;
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
