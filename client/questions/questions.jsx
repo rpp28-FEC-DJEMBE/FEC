@@ -30,7 +30,6 @@ class Questions extends React.Component{
   }
 
   getQuestions(){
-    console.log(this.props)
     return axios({
       method:'get',
       url: '/qa/questions',

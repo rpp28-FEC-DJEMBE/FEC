@@ -6,11 +6,10 @@ class AnswerPhotoDisplay extends React.Component {
     super(props);
     this.state = {
       photos: this.props.photos
-    }
-  }
+    };
+  };
 
   render() {
-    console.log("This is the state: ", this.state)
     if (this.state.photos === undefined) {
       return null;
     } else {
@@ -22,10 +21,8 @@ class AnswerPhotoDisplay extends React.Component {
         </div>
       )
     }
-  }
-
-
-}
+  };
+};
 
 
 

@@ -67,7 +67,6 @@ class AnswerEntry extends React.Component{
   }
 
   render() {
-    console.log(this.props.answer)
     return(
       <div  className="answer" >
           <div className="answer-display">
