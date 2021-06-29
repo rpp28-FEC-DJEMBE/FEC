@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import AnswerPhotoDisplay from './answerPhotoDisplay.jsx';
 
 class AnswerEntry extends React.Component{
   constructor(props){
@@ -66,13 +67,13 @@ class AnswerEntry extends React.Component{
   }
 
   render() {
-
     return(
       <div  className="answer" >
           <div className="answer-display">
             <p className="a">A:</p>
             <p className="answer-body">{this.props.answer.body}</p>
           </div>
+          <AnswerPhotoDisplay photos={this.props.answer.photos} />
           <div className="answer-footer">
             <p>by {this.props.answer.answerer_name}, {this.convertDate(this.props.answer.date)}</p>
             <p >Helpful? <u onClick={() => this.handleHelpful()}>Yes</u> ({this.state.helpful})</p>
