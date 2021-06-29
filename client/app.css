@@ -32,7 +32,8 @@ body * {
 }
 
 .rating-bars,
-.char-bar {
+.char-bar,
+#review-body {
   display: flex;
   flex-flow: column;
 }
@@ -399,7 +400,7 @@ font-size: 15px;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-
+  
 .review-photos {
   display: flex;
   flex-flow: row;
@@ -423,6 +424,12 @@ font-size: 15px;
   display: block;
   max-height: 85%;
   max-width: 85%;
+}
+
+.response {
+  margin: 0px;
+  padding: 16px 16px;
+  background-color: rgba(202, 202, 202, 0.822);
 }
 
 /* STATE STYLES
