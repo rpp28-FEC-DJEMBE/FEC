@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, {useEffect, useState} from 'react';
 import style from './Comparison.css';
 const axios = require('axios');
@@ -29,15 +28,10 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
     try {
       const featuresData1 = await axios.get(`/products/${currentId}`);
       const featuresData2 = await axios.get(`/products/${btnId}`);
-      // console.log('1', currentId, featuresData1.data.name, featuresData1.data.features)
-      // console.log('2', currentId, featuresData2.data.name, featuresData2.data.features)
 
       let features1 = collectFeatures(featuresData1.data.features);
       let features2 = collectFeatures(featuresData2.data.features);
       let featuresCombined = combineFeatures(features1, features2);
-
-      // console.log('features', featuresData1.data.features, featuresData2.data.features)
-      // console.log(features1, features2, featuresCombined)
 
       setFeaturesComp(
         {
@@ -49,15 +43,10 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
       );
 
     } catch (err) {
-      // console.log(err);
       throw err;
     }
 
   }
-
-  // if (featuresComp[0] !== '') {
-  //   console.log('props:', featuresComp.features[0], featuresComp);
-  // }
 
   if (!showComp) {
     return null;
@@ -72,7 +61,6 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
       </div>
       <div className="comparison-table">
         <div>
-          {/* <p className="comparison-name">{featuresComp.name[0]}</p> */}
           <p className="product-id">{productId}</p>
           {
             featuresComp.featuresCombined.value1.map( (value1, i) => (
@@ -81,7 +69,6 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
           }
         </div>
         <div>
-          {/* <p className="no-show comparison-name">null</p> */}
           <p className="product-id">vs</p>
           {
             featuresComp.featuresCombined.featureWValue.map( (featureValue, i) => (
@@ -90,7 +77,6 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
           }
         </div>
         <div>
-          {/* <p className="comparison-name">{featuresComp.name[1]}</p> */}
           <p className="product-id">{btnId}</p>
           {
             featuresComp.featuresCombined.value2.map( (value2, i) => {
