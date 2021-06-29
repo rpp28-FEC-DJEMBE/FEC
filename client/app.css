@@ -32,7 +32,8 @@ body * {
 }
 
 .rating-bars,
-.char-bar {
+.char-bar,
+#review-body {
   display: flex;
   flex-flow: column;
 }
@@ -64,21 +65,22 @@ header {
 }
 
 header nav {
-  text-align: left;
+  height: 4rem;
   background-color: rgb(4, 4, 4);
+  text-align: left;
   color: lightgray;
 }
 
 header nav h1 {
-  margin: 0;
-  margin-bottom: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+  padding-left: 1rem;
 }
 
 header nav img {
-  height: 40px;
-  width: 110px;
-  margin: 4px 8px;
-  vertical-align: middle;
+  height: 2em;
 }
 
 header p {
@@ -86,11 +88,6 @@ header p {
   font-weight: 300;
   font-size: small;
   text-transform: uppercase;
-}
-
-.o-product-overview {
-  border: solid gray 1px;
-  padding: 8px;
 }
 
 .qaDisplay {
@@ -259,6 +256,12 @@ font-size: 15px;
   padding-top:10px;
 }
 
+.img-display > img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: .7rem;
+}
+
 .answer-title {
   font-family: arial;
 }
@@ -392,6 +395,37 @@ font-size: 15px;
   display: flex;
   margin-top: 16px;
   margin-bottom: 16px;
+}
+  
+.review-photos {
+  display: flex;
+  flex-flow: row;
+  align-items: baseline;
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.review-photo {
+  max-height: 70px;
+  max-width: 70px;
+  margin: 10px;
+  transition: 0.3s;
+}
+.review-photo:hover {
+  opacity: 0.7;
+}
+
+.picture-modal {
+  margin: auto;
+  display: block;
+  max-height: 85%;
+  max-width: 85%;
+}
+
+.response {
+  margin: 0px;
+  padding: 16px 16px;
+  background-color: rgba(202, 202, 202, 0.822);
 }
 
 /* STATE STYLES

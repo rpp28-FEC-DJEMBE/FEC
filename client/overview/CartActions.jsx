@@ -44,10 +44,14 @@ function CartActions(props) {
   } else {
     return (
       <section className="o-cart-actions">
-        <SelectSize inventory={inventory} saveSize={saveOrderSize} />
-        <SelectQty inventory={inventory} saveQty={saveOrderQty} selectedSize={orderSize} />
-        <button>Add to bag</button>
-        <button>&#9734;</button>
+        <section className="o-cart-lists">
+          <SelectSize inventory={inventory} saveSize={saveOrderSize} />
+          <SelectQty inventory={inventory} saveQty={saveOrderQty} selectedSize={orderSize} />
+        </section>
+        <section className="o-cart-buttons">
+          <button className="o-add-to-bag">Add to bag<span className="o-add-to-bag-icon">+</span></button>
+          <button className="o-add-to-outfit">&#9734;</button>
+        </section>
       </section>
     );
   }

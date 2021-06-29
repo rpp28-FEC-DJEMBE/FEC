@@ -90,7 +90,8 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let tiles = (this.props.reviews.length) ? (this.state.display.map((review, index) => {
+    let display = this.props.reviews.slice(0, this.state.count)
+    let tiles = (this.props.reviews.length) ? (display.map((review, index) => {
       return <ReviewTile key={index} review={review} />
     })) : `There are currently no reviews for this product.
     Be the first to leave a review!`;
