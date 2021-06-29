@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import AnswersList from './answersList.jsx';
 
-const QuestionEntry = ({questions}) => {
+const QuestionEntry = ({questions, handleAddAnswer}) => {
 
   return (
     <>
@@ -11,7 +11,7 @@ const QuestionEntry = ({questions}) => {
             <p className="question">Q: {question_body}</p>
             <div className="question-entry-header">
               <p>Helpful? <u>Yes</u> ({question_helpfulness})</p>
-              <p onClick={()=> props.handleAddAnswer(question_id, question_body)} >Add Answer</p>
+              <p onClick={()=> handleAddAnswer(question_id, question_body)} >Add Answer</p>
             </div>
           </div>
             <AnswersList questionId={question_id}  />

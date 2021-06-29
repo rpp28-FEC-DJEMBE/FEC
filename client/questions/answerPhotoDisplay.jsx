@@ -1,13 +1,13 @@
 import React from 'react';
 
-const AnswerPhotoDisplay = (props) => {
-  if (props.photos === undefined) {
+const AnswerPhotoDisplay = ({photos}) => {
+  if (photos === undefined) {
     return null;
   } else {
     return (
       <div className="img-display">
-        {props.photos.map((photo, i) =>
-          <img src={photo.url} key={i} />
+        {photos.map(({url}, i) =>
+          <img src={url} key={i} />
         )}
       </div>
     )
