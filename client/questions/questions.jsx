@@ -20,6 +20,7 @@ class Questions extends React.Component{
       questionBody: ""
     }
     this.handleAddAnswerClick = this.handleAddAnswerClick.bind(this);
+    this.handleAddQClick = this.handleAddQClick.bind(this)
 
   }
 
@@ -96,13 +97,29 @@ class Questions extends React.Component{
 
 
   render() {
+    const {displayQuestions, answerShow, questionShow, product_id, questionId, questionBody} = this.state;
+    const {productName} = this.props.product;
+
     return (
       <div className="qaDisplay">
         <h3>Questions & Answers</h3>
         <Search />
-        <QuestionsList questions={this.state.displayQuestions} handleAddAnswer={this.handleAddAnswerClick} handleAddQ={this.handleAddQClick} handleMoreQuestions={this.handleMoreAnsweredQuestions} />
-        <AnswerModal show={this.state.answerShow} productName={this.props.product.productName} handleClose={this.handleAddAnswerClick} question={this.state.questionId} questionBody={this.state.questionBody} />
-        <AddQuestion show={this.state.questionShow} productId={this.state.product_id} productName={this.props.product.productName} handleClose={this.handleAddQClick.bind(this)} />
+        <QuestionsList
+          questions={displayQuestions}
+          handleAddAnswer={this.handleAddAnswerClick}
+          handleAddQ={this.handleAddQClick}
+          handleMoreQuestions={this.handleMoreAnsweredQuestions} />
+        <AnswerModal
+          show={answerShow}
+          productName={productName}
+          handleClose={this.handleAddAnswerClick}
+          question={questionId}
+          questionBody={questionBody} />
+        <AddQuestion
+          show={questionShow}
+          productId={product_id}
+          productName={productName}
+          handleClose={this.handleAddQClick} />
         <button className="more-q-btn" onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
         <button className="add-q-btn" onClick={() => this.handleAddQClick()}>Add a question +</button>
       </div>
