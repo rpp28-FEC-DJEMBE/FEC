@@ -65,21 +65,22 @@ header {
 }
 
 header nav {
-  text-align: left;
+  height: 4rem;
   background-color: rgb(4, 4, 4);
+  text-align: left;
   color: lightgray;
 }
 
 header nav h1 {
-  margin: 0;
-  margin-bottom: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+  padding-left: 1rem;
 }
 
 header nav img {
-  height: 40px;
-  width: 110px;
-  margin: 4px 8px;
-  vertical-align: middle;
+  height: 2em;
 }
 
 header p {
@@ -87,11 +88,6 @@ header p {
   font-weight: 300;
   font-size: small;
   text-transform: uppercase;
-}
-
-.o-product-overview {
-  border: solid gray 1px;
-  padding: 8px;
 }
 
 .qaDisplay {

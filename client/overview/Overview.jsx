@@ -17,12 +17,14 @@ class Overview extends React.Component {
       productStyles: [],
       selectedStyleId: null,
       selectedStyle: null,
+      imageMode: 0,
       productLoaded: false,
       styleLoaded: false,
       useMockData: false
     }
 
     this.setStyle = this.setStyle.bind(this);
+    this.setImageMode = this.setImageMode.bind(this);
   }
 
   componentDidMount() {
@@ -124,6 +126,13 @@ class Overview extends React.Component {
     }
   }
 
+  setImageMode(mode) {
+    // 0: normal, 1: expanded, 2: zoomed
+    this.setState({
+      imageMode: mode
+    })
+  }
+
   render() {
 
     if (!this.state.productLoaded || !this.state.styleLoaded) {
@@ -135,14 +144,22 @@ class Overview extends React.Component {
     } else {
       return (
         <section className="o-product-overview">
-          <ImageGallery selectedStyleId={this.state.selectedStyleId} stylePhotos={this.state.selectedStyle.photos} />
-          <ProductControls
-            product={this.state.product}
-            styles={this.state.productStyles}
+          <ImageGallery
             selectedStyleId={this.state.selectedStyleId}
-            style={this.state.selectedStyle}
-            setStyle={this.setStyle}
+            stylePhotos={this.state.selectedStyle.photos}
+            imageMode={this.state.imageMode}
+            setImageMode={this.setImageMode}
           />
+          { this.state.imageMode > 0
+            ? null
+            : <ProductControls
+                product={this.state.product}
+                styles={this.state.productStyles}
+                selectedStyleId={this.state.selectedStyleId}
+                style={this.state.selectedStyle}
+                setStyle={this.setStyle}
+              />
+          }
           <ProductDescription product={this.state.product} />
         </section>
       );
