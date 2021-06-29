@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingStars from './RatingStars.jsx';
+import ReviewPhotoModal from './ReviewPhotoModal.jsx';
 import helper from './reviewHelpers.js';
 
 class ReviewTile extends React.Component {
@@ -30,20 +31,35 @@ class ReviewTile extends React.Component {
     this.setState({ showBody: true })
   }
 
+
   render() {
     let { review } = this.props;
     let body = (review.body.length > 250 && !this.state.showBody) ? review.body.substr(0,250) + '...' : review.body;
     let showMore = (body === review.body) ? null : <u className='pointer' onClick={this.handleShowMore}>Show more</u>
     let recommend;
     let response;
+    let photos;
 
+    // display if a recommendation is present in the data
     if (review.recommend) {
       recommend = <p>&#10003; I recommend this product</p>
     }
+
+    // display if a response is present in the data
     if (review.response) {
       response = <p className='response'>Response from seller: <br></br> <em>{this.props.review.response}</em></p>
     }
 
+    // if a review has photos, render an image and hidden modal until clicked
+    if (review.photos.length) {
+      photos =  <ul className='review-photos'>
+                  {
+                    review.photos.map((image) => (
+                      <ReviewPhotoModal url={image.url} id={image.id} key={image.id}/>
+                    ))
+                  }
+                </ul>
+    }
 
     return (
       <div className='review-tile'>
@@ -59,6 +75,7 @@ class ReviewTile extends React.Component {
           {showMore}
           {recommend}
           {response}
+          {photos}
         </div>
         <div id='review-footer'>
           Helpful? <u className='pointer' onClick={this.handleHelpful}>Yes</u> {this.state.helpfulness} | <u className='pointer'>Report</u>

@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, {useEffect, useState} from 'react';
 import style from './Product.css';
 import RatingStars from '../reviews/RatingStars.jsx';
@@ -23,41 +22,31 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
     try {
       let starAverage;
       const ratingData = await axios.get(`/reviews/meta?product_id=${id}`);
-      // console.log('ratings?', ratingData.data.ratings);
       const ratingAvg = ratingHelper.getAvgRating(ratingData.data.ratings);
       isNaN(ratingAvg) ? starAverage = 0 : starAverage = ratingAvg;
-      // console.log('starAverage', starAverage, id);
       axios.get(`/products/${id}/styles`)
       .then( res => {
-        // console.log('product card', res.data.results);
-        // console.log('product card', res.data.results[0].photos[0].url);
+        let imgLink;
         if (!res.data.results[0].photos[0].url) {
-          // console.log('no image product card', res.data.results[0].photos[0].url);
-          setDetail({
-            img: `https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg`,
-            sale_price: res.data.results[0].sale_price,
-            original_price: res.data.results[0].original_price,
-            starAverage: starAverage
-          });
+          imgLink = `https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg`;
         } else {
-          setDetail({
-            img: res.data.results[0].photos[0].url,
-            sale_price: res.data.results[0].sale_price,
-            original_price: res.data.results[0].original_price,
-            starAverage: starAverage
-          });
+          imgLink = res.data.results[0].photos[0].url;
         }
+        setDetail({
+          img: imgLink,
+          sale_price: res.data.results[0].sale_price,
+          original_price: res.data.results[0].original_price,
+          starAverage: starAverage
+        });
         if (res.data.results[0].sale_price) {
           setClassName({regular: "product-default-price", sale: "product-sale-price"})
         }
       })
       .catch(err => {
-        // console.log('err1,,,,', err);
         throw err;
       }
     )
     } catch (err) {
-      // console.log(err);
       throw err;
     }
 
@@ -66,10 +55,8 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
   const onClickActionBtn = () => {
     setTimeout( () => {
       if (cardBtn === '\u2606') {
-        // console.log('product', cardBtn);
         onProductBtnClick(id);
       } else if (cardBtn === '\u2327') {
-        // console.log('outfit', cardBtn);
         onOutfitBtnClick(id);
       }
     } )
@@ -94,7 +81,6 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
           <span className={className.sale}>  ${detail.sale_price}</span>
         </div>
         <p className="product-id">id: {id} -OverviewId: {overviewProductId}</p>
-        {/* <p>&#9733; &#9733; &#9733; &#9733; &#9733;</p> */}
         <RatingStars rating={detail.starAverage} size={20}/>
       </div>
 

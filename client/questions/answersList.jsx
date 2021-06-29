@@ -22,7 +22,7 @@ class AnswersList extends React.Component {
     if(prevProps.questionId !== this.props.questionId) {
       this.getAnswers();
     }
-  }
+  };
 
   getAnswers(){
     axios({
@@ -39,23 +39,23 @@ class AnswersList extends React.Component {
         questionId: this.props.questionId
       })
     })
-    .catch((err) => console.log("Error: ", err))
-  }
+    .catch((err) => console.log("Error: ", err));
+  };
 
   updateQuestionHelpful(){
     axios({
       method:'put',
       url: `/qa/questions/${this.props.questionId}/helpful`,
     })
-    .catch((err) => console.log("Error: ", err))
-  }
+    .catch((err) => console.log("Error: ", err));
+  };
 
 
   handleExpandAnswers() {
     this.setState({
       answers: this.state.answersList
     })
-  }
+  };
 
   render() {
     if (this.state.answers.length === 0) {
@@ -69,8 +69,8 @@ class AnswersList extends React.Component {
         <ExpandAnswers answersList={this.state.answersList} seeMoreAnswers={this.handleExpandAnswers} />
       </div>
     )
-  }
+  };
 
-}
+};
 
 export default AnswersList;
