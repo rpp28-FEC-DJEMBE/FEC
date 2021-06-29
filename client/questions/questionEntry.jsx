@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
 import AnswersList from './answersList.jsx';
 
-const QuestionEntry = (props) => {
+const QuestionEntry = ({questions}) => {
 
   return (
     <>
-      {props.questions.map((question, index) =>
+      {questions.map(({question_body, question_id, question_helpfulness}, index) =>
       <div key={index}>
           <div className="question-entry" key={index}>
-            <p className="question">Q: {question.question_body}</p>
+            <p className="question">Q: {question_body}</p>
             <div className="question-entry-header">
-              <p>Helpful? <u>Yes</u> ({question.question_helpfulness})</p>
-              <p onClick={()=> props.handleAddAnswer(question.question_id, question.question_body)} >Add Answer</p>
+              <p>Helpful? <u>Yes</u> ({question_helpfulness})</p>
+              <p onClick={()=> props.handleAddAnswer(question_id, question_body)} >Add Answer</p>
             </div>
           </div>
-            <AnswersList questionId={question.question_id}  />
+            <AnswersList questionId={question_id}  />
       </div>
       )}
     </>
