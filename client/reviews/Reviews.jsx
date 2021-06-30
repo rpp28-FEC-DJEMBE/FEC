@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import Breakdown from './Breakdown.jsx';
+import { sortRelevantReviews } from './reviewHelpers.js';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Reviews extends React.Component {
       this.getReviews()
       .then((data) => {
         this.setState({
-          reviews: data.results,
+          reviews: sortRelevantReviews(data.results),
           productId: Number(data.product)
         })
       })
@@ -48,7 +49,7 @@ class Reviews extends React.Component {
     this.getReviews()
     .then((data) => {
       this.setState({
-        reviews: data.results,
+        reviews: sortRelevantReviews(data.results),
         productId: Number(data.product),
         isLoaded: true
       })

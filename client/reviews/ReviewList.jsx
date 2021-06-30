@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReviewTile from './ReviewTile.jsx';
 import SortOptions from './SortOptions.jsx';
 import AddReview from './AddReview.jsx';
+import { sortRelevantReviews } from './reviewHelpers.js';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class ReviewList extends React.Component {
       productId: this.props.productId,
       showAdd: false,
       count: 2,
-      display: this.props.reviews.slice(0, 2)
+      sorting: 'relevant'
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
@@ -19,40 +20,36 @@ class ReviewList extends React.Component {
     this.handleSort = this.handleSort.bind(this);
   }
 
-
   handleSort(e) {
-    console.log('handle sort', e.target.value);
     if (e.target.value === 'helpful') {
       let helpfulReviews = this.props.reviews.sort((a, b) => b.helpfulness - a.helpfulness);
+
       this.setState({
-        display: helpfulReviews.slice(0, this.state.count)
+        sorting: 'helpful'
       })
-      console.log('handle sort', this.state);
     }
 
     if (e.target.value === 'relevant') {
-      let relevantReviews = this.props.reviews.sort((a, b) => b.helpfulness - a.helpfulness);
+      sortRelevantReviews(this.props.reviews);
+
       this.setState({
-        display: relevantReviews.slice(0, this.state.count)
+        sorting: 'relevant'
       })
-      console.log('handle sort', this.state);
     }
 
     if (e.target.value === 'newest') {
       let newestReviews = this.props.reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
       this.setState({
-        display: newestReviews.slice(0, this.state.count)
+        sorting: 'newest'
       })
-      console.log('handle sort', this.state);
     }
   }
 
   handleMoreReviews() {
     this.setState((prevState) => ({
       count: prevState.count += 2,
-      display: this.props.reviews.slice(0, this.state.count)
     }))
-    console.log('more reviews', this.state);
   }
 
   handleAddReview() {
@@ -78,15 +75,9 @@ class ReviewList extends React.Component {
     if(prevProps.productId !== this.props.productId){
       this.setState({
         count: 2,
-        display: this.props.reviews.slice(0,2)
+        sorting: 'relevant'
       })
     }
-  }
-
-  componentDidMount() {
-    this.setState({
-      display: this.props.reviews.slice(0, this.state.count)
-    })
   }
 
   render() {
@@ -95,12 +86,12 @@ class ReviewList extends React.Component {
       return <ReviewTile key={index} review={review} />
     })) : `There are currently no reviews for this product.
     Be the first to leave a review!`;
-    let moreReviews = (this.state.display.length >= this.props.reviews.length) ? null :
+    let moreReviews = (display.length >= this.props.reviews.length) ? null :
       <button className='review-btn' onClick={this.handleMoreReviews}>More Reviews</button>;
 
     return (
       <div className='review-container'>
-        <SortOptions reviews={this.props.reviews} handleSort={this.handleSort}/>
+        <SortOptions reviews={this.props.reviews} handleSort={this.handleSort} sorting={this.state.sorting}/>
         <div className='review-list'>
           {tiles}
         </div>

@@ -19,7 +19,7 @@ class SortOptions extends React.Component {
     return (
       <div className='sort-options'>
         <label>{reviewNumber} reviews, sorted by </label>
-        <select value={this.state.value} onChange={this.handleChange} >
+        <select value={this.props.sorting} onChange={this.handleChange} >
           <option value='relevant'>relevance</option>
           <option value='helpful'>helpful</option>
           <option value='newest'>newest</option>
