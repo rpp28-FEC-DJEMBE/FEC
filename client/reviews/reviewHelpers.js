@@ -67,11 +67,22 @@ const charsTable = {
   Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
 }
 
+const sortRelevantReviews = (reviews) => {
+  let newestReviews = reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+      newestReviews.map((review, index) => { review.rank = index/4 });
+
+  let helpfulReviews = reviews.sort((a, b) => b.helpfulness - a.helpfulness);
+      helpfulReviews.map((review, index) => { review.rank += index });
+
+  return reviews.sort((a, b) => a.rank - b.rank);
+}
+
 module.exports = {
   getAvgRating: getAvgRating,
   getRatingTotal: getRatingTotal,
   getRecTotal: getRecTotal,
   ratingConverter: ratingConverter,
   convertDate: convertDate,
-  charsTable: charsTable
+  charsTable: charsTable,
+  sortRelevantReviews: sortRelevantReviews
 }
