@@ -285,7 +285,7 @@ font-size: 15px;
 .review-content {
   display: grid;
   background-color: white;
-  max-height: 400px;
+  max-height: 80%;
   border-radius: .2rem;
   padding: 8px;
   overflow-y: scroll;
@@ -396,7 +396,7 @@ font-size: 15px;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-  
+
 .review-photos {
   display: flex;
   flex-flow: row;
