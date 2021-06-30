@@ -7,7 +7,7 @@ const AddedPhotos = (props) => {
 
     <div className="photo-list">
       {props.photos.map((photo, i) => {
-        return <img src={photo} className="answer-img"></img>
+        return <img key={i} src={photo} className="answer-img"></img>
       })}
     </div>
   )
