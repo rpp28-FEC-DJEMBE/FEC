@@ -101,6 +101,10 @@ display: block;
   overflow-y:scroll;
 }
 
+.question-list::-webkit-scrollbar {
+  display:none;
+}
+
 .subtitle {
   margin: none;
 }

@@ -9,7 +9,8 @@ class AnswersList extends React.Component {
     this.state = {
       answersList:[],
       answers:[],
-      report:[]
+      report:[],
+      show: true
     }
     this.handleExpandAnswers = this.handleExpandAnswers.bind(this);
   };
@@ -44,7 +45,8 @@ class AnswersList extends React.Component {
 
   handleExpandAnswers() {
     this.setState({
-      answers: this.state.answersList
+      answers: this.state.answersList,
+      show: false
     })
   };
 
@@ -62,7 +64,8 @@ class AnswersList extends React.Component {
         )}
         <ExpandAnswers
           answersList={this.state.answersList}
-          seeMoreAnswers={this.handleExpandAnswers} />
+          seeMoreAnswers={this.handleExpandAnswers}
+          show={this.state.show} />
       </div>
     )
   };
