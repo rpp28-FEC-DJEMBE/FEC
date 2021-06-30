@@ -91,7 +91,7 @@ class Reviews extends React.Component {
           <h3 id='rr-title'>Ratings and Reviews</h3>
           <div className='rr-content'>
             <Breakdown productId={this.props.productId} metaData={this.state.metaData} isLoaded={this.state.isLoaded}/>
-            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}/>
+            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}    productName={this.props.productName}/>
           </div>
         </div>
       )

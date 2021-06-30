@@ -91,6 +91,7 @@ class ReviewList extends React.Component {
             productId={this.props.productId}
             handleClose={this.handleClose}
             metaData={this.state.metaData}
+            productName={this.props.productName}
           />
         </div>
       </div>

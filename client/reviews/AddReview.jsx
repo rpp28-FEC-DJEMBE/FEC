@@ -3,7 +3,6 @@ import axios from 'axios';
 import { charsTable } from './reviewHelpers.js';
 
 const AddReview = (props) => {
-  const [product, setProduct] = useState('Andre');
   const [rating, setRating] = useState(0);
   const [recommend, setRecommend] = useState(null);
   const [characteristics, setChars] = useState({});
@@ -12,21 +11,6 @@ const AddReview = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
-
-  useEffect(() => {
-    getPdtName();
-  });
-
-
-  const getPdtName = () => {
-    axios.get(`/products/${props.productId}`)
-      .then((res) => {
-        setProduct(res.data.name);
-      })
-      .catch((err) => {
-        console.log('Error fetching product name', err);
-      })
-  }
 
 
   const charsEntry = (e) => {
@@ -135,7 +119,7 @@ const AddReview = (props) => {
         <div className='addreview-header'>
           <h2 className='review-title'> Write Your Review</h2>
           <div className='exit pointer' onClick={props.handleClose}>X</div>
-          <h3>About the {product}</h3>
+          <h3>About the {props.productName}</h3>
         </div>
         <div className='modal-body'>
           <label>Overall Rating*</label>
