@@ -4,6 +4,9 @@ const port = 3000;
 const bodyParser = require('body-parser')
 const api = require('./server_utils/atelierAPI.js')
 
+// const compression = require('compression');
+// app.use(compression());
+
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json())
