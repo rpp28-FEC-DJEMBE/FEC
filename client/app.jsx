@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom';
 const axios = require('axios');
 
@@ -44,7 +44,7 @@ class App extends React.Component {
       <React.Fragment>
         <header>
           <nav>
-            <h1><img src={logo} alt='Djembe' />The Djembe Clothing Company</h1>
+            <h1><img src={logo} loading="lazy" width="120" height="30" alt='Djembe' />The Djembe Clothing Company</h1>
             {/* <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div> */}
           </nav>
           <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
