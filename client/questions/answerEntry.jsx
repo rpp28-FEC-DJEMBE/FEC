@@ -9,22 +9,22 @@ class AnswerEntry extends React.Component{
       reported: false,
       helpfulClick: false,
       helpful: this.props.answer.helpfulness
-    }
-  }
+    };
+  };
 
   handleReport(){
     if (!this.state.reported) {
       this.setState({
-        reported: true
+        reported: true,
       })
       axios({
         method: "put",
         url: `/qa/answers/${this.props.answer.answer_id}/report`
       })
     } else {
-      console.log("Already Reported")
+      console.log("Already Reported");
     }
-  }
+  };
 
   handleHelpful(){
     if (!this.state.helpfulClick) {
@@ -38,10 +38,11 @@ class AnswerEntry extends React.Component{
         method: "put",
         url: `/qa/answers/${this.props.answer.answer_id}/helpful`
       })
+      .catch((err) => console.log("Error: ", err));
     } else {
-      console.log("Already Clicked!")
+      console.log("Already Clicked!");
     }
-  }
+  };
 
   convertDate(date){
     const months = {
@@ -57,14 +58,22 @@ class AnswerEntry extends React.Component{
       "10":"October",
       "11":"November",
       "12":"December"
-    }
+    };
 
     let month = months[date.slice(5,7)];
     let day = date.slice(8,10);
     let year = date.slice(0,4);
 
     return `${month} ${day}, ${year}`
-  }
+  };
+
+  reportDisplay(){
+    if(this.state.reported) {
+      return "reported"
+    } else {
+      return "report"
+    }
+  };
 
   render() {
     const {body, photos, answerer_name, date} = this.props.answer
@@ -79,11 +88,11 @@ class AnswerEntry extends React.Component{
           <div className="answer-footer">
             <p>by {answerer_name}, {this.convertDate(date)}</p>
             <p >Helpful? <u onClick={() => this.handleHelpful()}>Yes</u> ({this.state.helpful})</p>
-            <p onClick={()=> this.handleReport()}>report</p>
+            <p onClick={()=> this.handleReport()}>{this.reportDisplay()}</p>
           </div>
         </div>
     )
   }
-}
+};
 
 export default AnswerEntry;

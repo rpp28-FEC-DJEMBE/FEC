@@ -193,6 +193,7 @@ input[type="file"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .more-q-btn,
@@ -396,7 +397,7 @@ font-size: 15px;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-  
+
 .review-photos {
   display: flex;
   flex-flow: row;

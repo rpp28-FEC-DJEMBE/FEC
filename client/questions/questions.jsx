@@ -3,25 +3,44 @@ import axios from 'axios';
 
 import Search from './search.jsx';
 import QuestionsList from './questionsList.jsx';
-import AnswerModal from './addAnswerModal.jsx'
-import AddQuestion from './addQuestion.jsx'
-
+import AnswerModal from './addAnswerModal.jsx';
+import AddQuestion from './addQuestion.jsx';
+import MoreAnsweredQuestions from './moreAnsweredQuestions.jsx';
 
 class Questions extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       product_id: 0,
+      masterQuestionsList: [],
       questions: [],
       displayQuestions: [],
       answerShow: false,
       questionShow: false,
       questionId: null,
-      questionBody: ""
+      questionBody: "",
+      searchInUse: false,
     }
     this.handleAddAnswerClick = this.handleAddAnswerClick.bind(this);
-    this.handleAddQClick = this.handleAddQClick.bind(this)
+    this.handleAddQClick = this.handleAddQClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleMoreAnsweredQuestions = this.handleMoreAnsweredQuestions.bind(this);
+  }
 
+  handleSearch(input){
+    const {masterQuestionsList} = this.state
+    if (input.length >= 3) {
+      this.setState({
+        searchInUse: true,
+        displayQuestions: masterQuestionsList.filter(question => question.question_body.toLowerCase().includes(input.toLowerCase()))
+      })
+    } else {
+      this.setState({
+        questions: masterQuestionsList.slice(2),
+        displayQuestions: masterQuestionsList.slice(0,2),
+        searchInUse: false
+      })
+    }
   }
 
   componentDidMount(){
@@ -43,10 +62,12 @@ class Questions extends React.Component{
 
   updateState(data){
     let sorted = data.data.results.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
+
     this.setState({
       product_id: Number(data.data.product_id),
-      displayQuestions: sorted.splice(0,2),
-      questions: sorted
+      masterQuestionsList: sorted.slice(),
+      displayQuestions: sorted.slice(0,2),
+      questions: sorted.slice(2)
     })
   }
 
@@ -94,21 +115,19 @@ class Questions extends React.Component{
     }
   }
 
-
-
   render() {
-    const {displayQuestions, answerShow, questionShow, product_id, questionId, questionBody} = this.state;
+    const {displayQuestions, answerShow, questionShow, product_id, questionId, questionBody, questions, searchInUse} = this.state;
     const {productName} = this.props.product;
 
     return (
       <div className="qaDisplay">
         <h3>Questions & Answers</h3>
-        <Search />
+        <Search
+        handleSearch={this.handleSearch} />
         <QuestionsList
           questions={displayQuestions}
           handleAddAnswer={this.handleAddAnswerClick}
-          handleAddQ={this.handleAddQClick}
-          handleMoreQuestions={this.handleMoreAnsweredQuestions} />
+        />
         <AnswerModal
           show={answerShow}
           productName={productName}
@@ -120,11 +139,14 @@ class Questions extends React.Component{
           productId={product_id}
           productName={productName}
           handleClose={this.handleAddQClick} />
-        <button className="more-q-btn" onClick={() => this.handleMoreAnsweredQuestions()}>More Answered Questions</button>
+        <MoreAnsweredQuestions
+          questions={questions}
+          searchInUse={searchInUse}
+          handleMoreAnsweredQuestions={this.handleMoreAnsweredQuestions} />
         <button className="add-q-btn" onClick={() => this.handleAddQClick()}>Add a question +</button>
       </div>
-    );
-  }
-}
+    )
+  };
+};
 
 export default Questions;

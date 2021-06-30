@@ -1,26 +1,50 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AnswersList from './answersList.jsx';
+import axios from 'axios';
 
-const QuestionEntry = ({questions, handleAddAnswer}) => {
+class QuestionEntry extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      helpfulClick: false,
+      helpful: this.props.question.question_helpfulness
+    }
+  }
 
-  return (
-    <>
-      {questions.map(({question_body, question_id, question_helpfulness}, index) =>
-      <div key={index}>
-          <div className="question-entry" key={index}>
-            <p className="question">Q: {question_body}</p>
-            <div className="question-entry-header">
-              <p>Helpful? <u>Yes</u> ({question_helpfulness})</p>
-              <p onClick={()=> handleAddAnswer(question_id, question_body)} >Add Answer</p>
-            </div>
+  updateQuestionHelpful(){
+    if (!this.state.helpfulClick) {
+      this.setState((ps) => {
+        return {
+          helpfulClick: true,
+          helpful: ps.helpful + 1
+        }
+      })
+      axios({
+      method:'put',
+      url: `/qa/questions/${this.props.question.question_id}/helpful`,
+    })
+    .catch((err) => console.log("Error: ", err));
+    } else {
+      console.log("Already Clicked!")
+    }
+  };
+
+  render() {
+    const {question_body, question_id} = this.props.question
+    return (
+      <>
+        <div className="question-entry">
+          <p className="question">Q: {question_body}</p>
+          <div className="question-entry-header">
+            <p>Helpful? <u onClick={() => this.updateQuestionHelpful()}>Yes</u> ({this.state.helpful})</p>
+            <p onClick={()=> handleAddAnswer(question_id, question_body)} >Add Answer</p>
           </div>
-            <AnswersList questionId={question_id}  />
-      </div>
-      )}
-    </>
-
-  )
+        </div>
+          <AnswersList
+            questionId={question_id}  />
+      </>
+    )
+  }
 }
-
 
 export default QuestionEntry;

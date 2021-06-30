@@ -12,11 +12,11 @@ class AnswersList extends React.Component {
       report:[]
     }
     this.handleExpandAnswers = this.handleExpandAnswers.bind(this);
-  }
+  };
 
   componentDidMount(){
     this.getAnswers();
-  }
+  };
 
   componentDidUpdate(prevProps){
     if(prevProps.questionId !== this.props.questionId) {
@@ -42,15 +42,6 @@ class AnswersList extends React.Component {
     .catch((err) => console.log("Error: ", err));
   };
 
-  updateQuestionHelpful(){
-    axios({
-      method:'put',
-      url: `/qa/questions/${this.props.questionId}/helpful`,
-    })
-    .catch((err) => console.log("Error: ", err));
-  };
-
-
   handleExpandAnswers() {
     this.setState({
       answers: this.state.answersList
@@ -64,9 +55,14 @@ class AnswersList extends React.Component {
     return (
       <div className="answer-list">
         {this.state.answers.map((answer, index) =>
-        <AnswerEntry answer={answer} key={index} question={this.props.question} />
+        <AnswerEntry
+          answer={answer}
+          key={index}
+          question={this.props.question} />
         )}
-        <ExpandAnswers answersList={this.state.answersList} seeMoreAnswers={this.handleExpandAnswers} />
+        <ExpandAnswers
+          answersList={this.state.answersList}
+          seeMoreAnswers={this.handleExpandAnswers} />
       </div>
     )
   };
