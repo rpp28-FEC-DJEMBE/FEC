@@ -1,13 +1,54 @@
-# FEC
+# Djembe Front-End Capstone
 
-install these
+## Overview
 
-    "@babel/core": "^7.14.3",
-    "@babel/preset-react": "^7.13.13",
-    "babel-loader": "^8.2.2",
-    "css-loader": "^5.2.6",
-    "nodemon": "^2.0.7",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0"
+This is a product display page that allows for the user to interact with the main image and allows for viewing other related products. Users can ask questions related to the product and provide answers. Users can rate and review their purchases of the product.
+
+## Table of Contents
+* [Product Overview](#product-overview)
+* [Related Products](#related-products)
+* [Questions & Answers](#questions-and-answers)
+* [Ratings & Reviews](#ratings-and-reviews)
+
+
+## Installation
+
+Use npm install to install dependencies
+```bash
+npm install
+```
+Use npm run client to start webpack to compile bundle
+```bash
+npm run client
+```
+Use npm start to run server
+```bash
+npm start
+```
+
+### [Product Overview](#product-overview)
+
+
+### [Related Products](#related-products)
+
+
+### [Questions & Answers](#questions-and-answers)
+
+
+### [Ratings & Reviews](#ratings-and-reviews)
+
+
+## Team Members
+* Andre Boussarath - https://github.com/aboussarath
+* Kingsley Allen - https://github.com/kingsleyallen
+* Huiqing Li - https://github.com/sharplessHQ
+* Simon Si - https://github.com/Sim0nSl1003
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+

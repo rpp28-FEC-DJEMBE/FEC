@@ -44,7 +44,6 @@ class AddQuestion extends React.Component{
   inputChange(stateKey){
     let input = document.getElementById(stateKey).value;
     this.setState({[stateKey]: input})
-    console.log(this.state)
   }
 
   handleClosing(){
