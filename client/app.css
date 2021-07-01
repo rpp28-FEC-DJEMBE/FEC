@@ -429,6 +429,17 @@ font-size: 15px;
   background-color: rgba(202, 202, 202, 0.822);
 }
 
+#overall-rating {
+  display: flex;
+  flex-direction: row;
+}
+
+#star-text{
+  margin: 0px;
+  padding-left: 3px;
+  padding-top: 2px;
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -458,7 +469,7 @@ font-size: 15px;
 .review-stars {
   width: 100px;
   unicode-bidi: bidi-override;
-  direction: rtl;
+  direction: ltr;
   text-align: center;
   position: relative;
 }
@@ -471,13 +482,28 @@ font-size: 15px;
   position: relative;
   width: 1.1em;
   cursor: pointer;
-  color: rgb(184, 184, 184);
+  color: rgb(0, 0, 0);
 }
 
 .review-stars > label:hover,
 .review-stars > label:hover ~ label,
 .review-stars > input.radio-btn:checked ~ label {
     color: transparent;
+}
+
+.review-stars > label:hover:before,
+.review-stars > label:hover ~ label:before,
+.review-stars > input.radio-btn:checked ~ label:before,
+.review-stars > input.radio-btn:checked ~ label:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+}
+
+.clear {
+  float: none;
+  clear: both;
 }
 
 
