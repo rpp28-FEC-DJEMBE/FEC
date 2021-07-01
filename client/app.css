@@ -450,8 +450,34 @@ font-size: 15px;
   -ms-overflow-style: none;
 }
 
-.review-list::-webkit-scrollbar {
+.review-list::-webkit-scrollbar,
+.hide {
   display: none;
+}
+
+.review-stars {
+  width: 100px;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+  position: relative;
+}
+
+.review-stars > label {
+  float: right;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  width: 1.1em;
+  cursor: pointer;
+  color: rgb(184, 184, 184);
+}
+
+.review-stars > label:hover,
+.review-stars > label:hover ~ label,
+.review-stars > input.radio-btn:checked ~ label {
+    color: transparent;
 }
 
 

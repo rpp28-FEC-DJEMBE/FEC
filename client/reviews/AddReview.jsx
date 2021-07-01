@@ -143,19 +143,24 @@ const AddReview = (props) => {
           <label>Overall Rating*</label>
           <div className="review-stars">
             <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str1" value="1"></input>
+              <input type="radio" name="rating" id="str1" value="1" className="radio-btn hide"></input>
+              <label for="str1" >★</label>
             </span>
             <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str2" value="2"></input>
+              <input type="radio" name="rating" id="str2" value="2" className="radio-btn hide"></input>
+              <label for="str2" >★</label>
             </span>
             <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str3" value="3"></input>
+              <input type="radio" name="rating" id="str3" value="3" className="radio-btn hide"></input>
+              <label for="str3" >★</label>
             </span>
             <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str4" value="4"></input>
+              <input type="radio" name="rating" id="str4" value="4" className="radio-btn hide"></input>
+              <label for="str4" >★</label>
             </span>
             <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str5" value="5"></input>
+              <input type="radio" name="rating" id="str5" value="5" className="radio-btn hide"></input>
+              <label for="str5" >★</label>
             </span>
           </div>
           <label>Do you recommend this product?*</label>
