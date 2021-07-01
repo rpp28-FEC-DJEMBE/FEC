@@ -148,16 +148,21 @@ input[type="file"] {
 }
 
 .answer-footer {
-  display: grid;
-  grid-template-columns: 35% 10% 5%;
+  display: flex;
+  justify-content: flex-start;
   font-size:12px;
   font-family: arial;
   opacity: 0.5;
 }
 
+.a-divider,
+ .q-divider {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
 .question-entry-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: inline;
   font-size: small;
   opacity: .5;
 }
