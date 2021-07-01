@@ -54,7 +54,6 @@ class AddQuestion extends React.Component{
       questionInput:""
     })
     this.props.handleClose()
-    console.log(this.state)
   }
 
   render(){
@@ -71,13 +70,13 @@ class AddQuestion extends React.Component{
           </div>
           <p className="subtitle"><b>About the {this.props.productName}</b></p>
           <label>What is your nickname* </label>
-          <input id="qUser" type="text" onChange={() => this.inputChange("qUser")} maxLength="60" placeholder="Example: jackson11!">{this.state.quser}</input>
+          <input id="qUser" type="text" onChange={() => this.inputChange("qUser")} maxLength="60" placeholder="Example: jackson11!" value={this.state.quser}></input>
           <p className="disclaimer">For privacy reasons, do not use your full name or email address</p>
           <label>Your email*</label>
-          <input id="qEmail" type="text" onChange={() => this.inputChange("qEmail")} maxLength="60" placeholder="“Why did you like the product or not?”">{this.state.qemail}</input>
+          <input id="qEmail" type="text" onChange={() => this.inputChange("qEmail")} maxLength="60" placeholder="“Why did you like the product or not?”" value={this.state.qemail} ></input>
           <p className="disclaimer">For authentication reasons, you will not be emailed</p>
           <label>Your Question*</label>
-          <textarea id="questionInput" type="text" onChange={() => this.inputChange("questionInput")} maxLength="1000">{this.state.questionInput}</textarea>
+          <textarea id="questionInput" type="text" onChange={() => this.inputChange("questionInput")} maxLength="1000" value={this.state.questionInput}></textarea>
           <div className="question-footer">
           <button onClick={() =>this.handleSubmit()}>Submit question</button>
           </div>
