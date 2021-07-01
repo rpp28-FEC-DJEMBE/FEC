@@ -156,8 +156,7 @@ input[type="file"] {
 }
 
 .question-entry-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: inline;
   font-size: small;
   opacity: .5;
 }
