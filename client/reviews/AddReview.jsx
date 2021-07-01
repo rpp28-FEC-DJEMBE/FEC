@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { charsTable } from './reviewHelpers.js';
+import AnswerPhotos from '../questions/answerPhotos.jsx';
+import AddedPhotos from '../questions/addedPhotos.jsx';
 
 const AddReview = (props) => {
-  const [product, setProduct] = useState('Andre');
   const [rating, setRating] = useState(0);
   const [recommend, setRecommend] = useState(null);
   const [characteristics, setChars] = useState({});
@@ -12,21 +13,6 @@ const AddReview = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
-
-  useEffect(() => {
-    getPdtName();
-  });
-
-
-  const getPdtName = () => {
-    axios.get(`/products/${props.productId}`)
-      .then((res) => {
-        setProduct(res.data.name);
-      })
-      .catch((err) => {
-        console.log('Error fetching product name', err);
-      })
-  }
 
 
   const charsEntry = (e) => {
@@ -105,6 +91,22 @@ const AddReview = (props) => {
     }
   }
 
+  const addPhotos = (e) => {
+    let file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file)
+    formData.append("upload_preset", "bji3bjas")
+
+    axios({
+      method: "post",
+      url: "https://api.cloudinary.com/v1_1/hrrpp28fec/image/upload",
+      data: formData
+    })
+    .then((data) => {
+      setPhotos(prevState => prevState.concat([data.data.url]))
+    })
+  }
+
   const submitReview = () => {
     let postBody = {
       product_id: props.productId,
@@ -135,7 +137,7 @@ const AddReview = (props) => {
         <div className='addreview-header'>
           <h2 className='review-title'> Write Your Review</h2>
           <div className='exit pointer' onClick={props.handleClose}>X</div>
-          <h3>About the {product}</h3>
+          <h3>About the {props.productName}</h3>
         </div>
         <div className='modal-body'>
           <label>Overall Rating*</label>
@@ -192,10 +194,11 @@ const AddReview = (props) => {
             </input>
             <p className="disclaimer">For authentication reasons, you will not be emailed</p>
           </div>
+          <AddedPhotos photos={photos} />
         </div>
         <div className='modal-footer'>
-          <input className="upload-photo" type="file"></input>
-          <button className="review-button" onClick={() => submitReview()}>Submit Review</button>
+          <AnswerPhotos updatePhotos={addPhotos} files={photos} />
+          <div className="answer-submit" onClick={() => submitReview()}>Submit Review</div>
         </div>
       </div>
     </div>

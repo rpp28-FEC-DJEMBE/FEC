@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AnswerPhotos = (props) => {
+const AnswerPhotos = ({files, updatePhotos}) => {
 
-  if (props.files.length < 5) {
+  if (files.length < 5) {
     return (
       <label  className="upload-btn" htmlFor="upload-photo">
-        <input id="upload-photo" type="file" accept="image/*" onChange={(e)=>props.updatePhotos(e)}></input>
+        <input id="upload-photo" type="file" accept="image/*" onChange={(e)=> updatePhotos(e)}></input>
         Upload Photos</label>
       )
   } else {

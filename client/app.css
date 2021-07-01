@@ -97,6 +97,10 @@ display: block;
   overflow-y:scroll;
 }
 
+.question-list::-webkit-scrollbar {
+  display:none;
+}
+
 .subtitle {
   margin: none;
 }
@@ -189,6 +193,7 @@ input[type="file"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .more-q-btn,
@@ -281,7 +286,7 @@ font-size: 15px;
 .review-content {
   display: grid;
   background-color: white;
-  max-height: 400px;
+  max-height: 80%;
   border-radius: .2rem;
   padding: 8px;
   overflow-y: scroll;
