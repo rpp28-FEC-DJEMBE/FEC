@@ -2,6 +2,7 @@ import React from 'react';
 import RatingStars from './RatingStars.jsx';
 import ReviewPhotoModal from './ReviewPhotoModal.jsx';
 import helper from './reviewHelpers.js';
+import axios from 'axios';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -24,6 +25,13 @@ class ReviewTile extends React.Component {
         }
       })
 
+      axios({
+        method:'put',
+        url: `/reviews/${this.props.review.review_id}/helpful`,
+      })
+      .catch((err) => console.log("Error: ", err));
+    } else {
+      console.log("Already Clicked!", this.state)
     }
   }
 
@@ -78,7 +86,7 @@ class ReviewTile extends React.Component {
           {photos}
         </div>
         <div id='review-footer'>
-          Helpful? <u className='pointer' onClick={this.handleHelpful}>Yes</u> {review.helpfulness} | <u className='pointer'>Report</u>
+          Helpful? <u className='pointer' onClick={() => this.handleHelpful()}>Yes</u> {this.state.helpfulness} | <u className='pointer'>Report</u>
         </div>
       </div>
     )
