@@ -290,7 +290,7 @@ font-size: 15px;
 .review-content {
   display: grid;
   background-color: white;
-  max-height: 400px;
+  max-height: 80%;
   border-radius: .2rem;
   padding: 8px;
   overflow-y: scroll;
