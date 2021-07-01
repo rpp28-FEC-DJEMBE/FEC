@@ -78,7 +78,7 @@ class ReviewTile extends React.Component {
           {photos}
         </div>
         <div id='review-footer'>
-          Helpful? <u className='pointer' onClick={this.handleHelpful}>Yes</u> {this.state.helpfulness} | <u className='pointer'>Report</u>
+          Helpful? <u className='pointer' onClick={this.handleHelpful}>Yes</u> {review.helpfulness} | <u className='pointer'>Report</u>
         </div>
       </div>
     )

@@ -101,6 +101,10 @@ display: block;
   overflow-y:scroll;
 }
 
+.question-list::-webkit-scrollbar {
+  display:none;
+}
+
 .subtitle {
   margin: none;
 }
@@ -193,6 +197,7 @@ input[type="file"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .more-q-btn,

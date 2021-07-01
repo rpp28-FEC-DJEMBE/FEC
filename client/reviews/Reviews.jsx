@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import Breakdown from './Breakdown.jsx';
+import { sortRelevantReviews } from './reviewHelpers.js';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -10,21 +11,6 @@ class Reviews extends React.Component {
       reviews: [],
       isLoaded: false
     }
-    this.handleSort = this.handleSort.bind(this);
-  }
-
-  handleSort(e) {
-    console.log('handle sort', e.target.value);
-    axios.get(`/reviews/?count=100&sort=${e.target.value}&product_id=${this.props.productId}`)
-      .then((res) => {
-        this.setState({
-          reviews: res.data.results,
-        });
-
-      })
-      .catch((err) => {
-        console.log('Error updating sort', err);
-      })
   }
 
   async getReviews() {
@@ -52,7 +38,7 @@ class Reviews extends React.Component {
       this.getReviews()
       .then((data) => {
         this.setState({
-          reviews: data.results,
+          reviews: sortRelevantReviews(data.results),
           productId: Number(data.product)
         })
       })
@@ -63,7 +49,7 @@ class Reviews extends React.Component {
     this.getReviews()
     .then((data) => {
       this.setState({
-        reviews: data.results,
+        reviews: sortRelevantReviews(data.results),
         productId: Number(data.product),
         isLoaded: true
       })
@@ -92,6 +78,7 @@ class Reviews extends React.Component {
           <div className='rr-content'>
             <Breakdown productId={this.props.productId} metaData={this.state.metaData} isLoaded={this.state.isLoaded}/>
             <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}    productName={this.props.productName}/>
+
           </div>
         </div>
       )
