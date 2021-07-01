@@ -3,30 +3,52 @@ import axios from 'axios';
 import ReviewTile from './ReviewTile.jsx';
 import SortOptions from './SortOptions.jsx';
 import AddReview from './AddReview.jsx';
+import { sortRelevantReviews } from './reviewHelpers.js';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productId: this.props.productId,
-      initial: this.props.reviews.slice(0,2),
-      reviews: this.props.reviews.slice(),
       showAdd: false,
+      count: 2,
+      sorting: 'relevant'
     }
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleAddReview = this.handleAddReview.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
-  renderInitial() {
-    return this.state.initial.map((review, index) => {
-      return <ReviewTile key={index} review={review} />
-    })
+  handleSort(e) {
+    if (e.target.value === 'helpful') {
+      let helpfulReviews = this.props.reviews.sort((a, b) => b.helpfulness - a.helpfulness);
+
+      this.setState({
+        sorting: 'helpful'
+      })
+    }
+
+    if (e.target.value === 'relevant') {
+      sortRelevantReviews(this.props.reviews);
+
+      this.setState({
+        sorting: 'relevant'
+      })
+    }
+
+    if (e.target.value === 'newest') {
+      let newestReviews = this.props.reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
+      this.setState({
+        sorting: 'newest'
+      })
+    }
   }
 
   handleMoreReviews() {
     this.setState((prevState) => ({
-      initial: prevState.initial.concat(this.state.reviews.splice(0,2))
+      count: prevState.count += 2,
     }))
   }
 
@@ -52,36 +74,26 @@ class ReviewList extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.productId !== this.props.productId){
       this.setState({
-        initial: this.props.reviews.slice(0,2),
-        reviews: this.props.reviews.slice(),
+        count: 2,
+        sorting: 'relevant'
       })
-      // console.log('review list props', this.props.reviews)
-      // console.log('review list state', this.state)
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      initial: this.state.reviews.splice(0,2)
-    })
-  }
-
   render() {
-    let tiles = (this.props.reviews.length) ? this.renderInitial() : `There are currently no reviews for this product.
+    let display = this.props.reviews.slice(0, this.state.count)
+    let tiles = (this.props.reviews.length) ? (display.map((review, index) => {
+      return <ReviewTile key={index} review={review} />
+    })) : `There are currently no reviews for this product.
     Be the first to leave a review!`;
-    let moreReviews = (this.state.initial.length === this.props.reviews.length) ? null :
+    let moreReviews = (display.length >= this.props.reviews.length) ? null :
       <button className='review-btn' onClick={this.handleMoreReviews}>More Reviews</button>;
 
     return (
       <div className='review-container'>
-        <SortOptions reviews={this.props.reviews} handleSort={this.props.handleSort}/>
+        <SortOptions reviews={this.props.reviews} handleSort={this.handleSort} sorting={this.state.sorting}/>
         <div className='review-list'>
           {tiles}
-          {/* {
-            (this.state.initial.map((review, index) => {
-              return <ReviewTile key={index} review={review} />
-            }))
-          } */}
         </div>
         <div className='review-buttons'>
           {moreReviews}
