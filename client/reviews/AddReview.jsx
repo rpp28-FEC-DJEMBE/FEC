@@ -14,6 +14,7 @@ const AddReview = (props) => {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [starText, setStarText] = useState('');
+  const [verified, setVerified] = useState(false);
 
 
   const charsEntry = (e) => {
@@ -89,6 +90,8 @@ const AddReview = (props) => {
 
     if (template !== `You must enter the following:`) {
       alert(template);
+    } else {
+      setVerified(true);
     }
   }
 
@@ -123,13 +126,15 @@ const AddReview = (props) => {
 
     console.log('review body being posted', postBody);
     missingFieldsAlert();
-    axios({
-      method: 'post',
-      url: `/reviews`,
-      data: postBody
-    })
-    .then(() => console.log(`Review successfully posted`))
-    .catch((err) => console.log('Error posting review'))
+    if (verified) {
+      axios({
+        method: 'post',
+        url: `/reviews`,
+        data: postBody
+      })
+      .then(() => console.log(`Review successfully posted`))
+      .catch((err) => console.log('Error posting review'))
+    }
   }
 
   const starClick = (e) => {
@@ -212,7 +217,7 @@ const AddReview = (props) => {
         </div>
         <div className='modal-footer'>
           <AnswerPhotos updatePhotos={addPhotos} files={photos} />
-          <div className="answer-submit" onClick={() => submitReview()}>Submit Review</div>
+          <div className="answer-submit pointer" onClick={() => submitReview()}>Submit Review</div>
         </div>
       </div>
     </div>
