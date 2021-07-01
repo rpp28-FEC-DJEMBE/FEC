@@ -1,11 +1,15 @@
 import React from 'react';
 
-const Search = () => {
+const Search = ({handleSearch}) => {
 
   return (
-    <div className="search">
-      <input className="qaSearch" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></input>
-    </div>
+    <form  className="search">
+      <input
+        className="qaSearch"
+        type="text"
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+        onChange={(e) => {handleSearch(e.target.value)}}></input>
+    </form>
     )
 }
 

@@ -37,13 +37,24 @@ class AddQuestion extends React.Component{
             product_id: this.props.productId
           }
         })
-        .catch((err) => console.log("Error: ", err))
+        .catch((err) => console.log("Error adding question", err))
       }
   }
 
   inputChange(stateKey){
     let input = document.getElementById(stateKey).value;
     this.setState({[stateKey]: input})
+    console.log(this.state)
+  }
+
+  handleClosing(){
+    this.setState({
+      qUser:"",
+      qEmail:"",
+      questionInput:""
+    })
+    this.props.handleClose()
+    console.log(this.state)
   }
 
   render(){
@@ -56,17 +67,17 @@ class AddQuestion extends React.Component{
         <div className="question-content">
           <div className="modal-header">
             <h2 className="question-title">Ask Your Question</h2>
-            <div onClick={() => this.props.handleClose()}>X</div>
+            <div onClick={() => this.handleClosing()}>X</div>
           </div>
-          <p className="subtitle">About the {this.props.productName}</p>
+          <p className="subtitle"><b>About the {this.props.productName}</b></p>
           <label>What is your nickname* </label>
-          <input id="qUser" type="text" onChange={() => this.inputChange("qUser")} maxLength="60" placeholder="Example: jackson11!"></input>
+          <input id="qUser" type="text" onChange={() => this.inputChange("qUser")} maxLength="60" placeholder="Example: jackson11!">{this.state.quser}</input>
           <p className="disclaimer">For privacy reasons, do not use your full name or email address</p>
           <label>Your email*</label>
-          <input id="qEmail" type="text" onChange={() => this.inputChange("qEmail")} maxLength="60" placeholder="“Why did you like the product or not?”"></input>
+          <input id="qEmail" type="text" onChange={() => this.inputChange("qEmail")} maxLength="60" placeholder="“Why did you like the product or not?”">{this.state.qemail}</input>
           <p className="disclaimer">For authentication reasons, you will not be emailed</p>
           <label>Your Question*</label>
-          <textarea id="questionInput" type="text" onChange={() => this.inputChange("questionInput")} maxLength="1000"></textarea>
+          <textarea id="questionInput" type="text" onChange={() => this.inputChange("questionInput")} maxLength="1000">{this.state.questionInput}</textarea>
           <div className="question-footer">
           <button onClick={() =>this.handleSubmit()}>Submit question</button>
           </div>
