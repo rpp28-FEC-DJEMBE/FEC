@@ -86,9 +86,11 @@ class AnswerEntry extends React.Component{
           </div>
           <AnswerPhotoDisplay photos={photos} />
           <div className="answer-footer">
-            <p>by {answerer_name}, {this.convertDate(date)}</p>
-            <p >Helpful? <u onClick={() => this.handleHelpful()}>Yes</u> ({this.state.helpful})</p>
-            <p onClick={()=> this.handleReport()}>{this.reportDisplay()}</p>
+            <span>by {answerer_name}, {this.convertDate(date)}</span>
+            <span className="a-divider">|</span>
+            <span >Helpful? <u onClick={() => this.handleHelpful()}>Yes</u> ({this.state.helpful})</span>
+            <span className="a-divider">|</span>
+            <span onClick={()=> this.handleReport()}>{this.reportDisplay()}</span>
           </div>
         </div>
     )
