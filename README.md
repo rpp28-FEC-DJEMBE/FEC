@@ -7,8 +7,8 @@ This is a product display page that allows for the user to interact with the mai
 ## Table of Contents
 * [Product Overview](#product-overview)
 * [Related Products](#related-products)
-* [Questions & Answers](#questions-and-answers)
-* [Ratings & Reviews](#ratings-and-reviews)
+* [Questions and Answers](#questions-and-answers)
+* [Ratings and Reviews](#ratings-and-reviews)
 
 
 ## Installation
@@ -27,15 +27,18 @@ npm start
 ```
 
 ### [Product Overview](#product-overview)
-
+![Product Overview](readme-screenshots/1-overview.png?raw=true "Optional Title")
 
 ### [Related Products](#related-products)
+![Related Products](readme-screenshots/2-related-products.png?raw=true "Optional Title")
 
 
-### [Questions & Answers](#questions-and-answers)
+### [Questions and Answers](#questions-and-answers)
+![Question and Answers](readme-screenshots/3-questions-and-answers.png?raw=true "Optional Title")
 
 
-### [Ratings & Reviews](#ratings-and-reviews)
+### [Ratings and Reviews](#ratings-and-reviews)
+![Ratings and Reviews](readme-screenshots/4-ratings-and-reviews.png?raw=true "Optional Title")
 
 
 ## Team Members
@@ -43,12 +46,5 @@ npm start
 * Kingsley Allen - https://github.com/kingsleyallen
 * Huiqing Li - https://github.com/sharplessHQ
 * Simon Si - https://github.com/Sim0nSl1003
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
 
 
