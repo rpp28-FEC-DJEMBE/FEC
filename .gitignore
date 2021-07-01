@@ -5,17 +5,8 @@ bin-release/
 [Bb]in/
 bundle.js
 bundle.js.LICENSE.txt
-client_overview_Overview_jsx.bundle.js
-client_questions_questions_jsx.bundle.js
-client_relatedProducts_RelatedPdt_jsx.bundle.js
-client_reviews_Reviews_jsx.bundle.js
-vendors-node_modules_enzyme_build_index_js.bundle.js
-280.bundle.js
-280.bundle.js.LICENSE.txt
-357.bundle.js
-726.bundle.js
-860.bundle.js
-918.bundle.js
+*.bundle.js
+*.LICENSE.txt
 
 # Other files and folders
 .settings/
