@@ -94,13 +94,13 @@ class AnswerModal extends React.Component {
           <p className="subtitle"> <b>{this.props.productName} : {this.props.questionBody}</b></p>
           <div className="input-content">
             <label htmlFor="user">What is your nickname* </label>
-            <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543">{this.state.user}</input>
+            <input id="user" type="text" onChange={() => this.inputChange("user")} maxLength="60" placeholder="Example: jack543" value={this.state.user}></input>
             <p className="disclaimer">For privacy reasons, do not use your full name or email address</p>
             <label htmlFor="email">Your email* </label>
-            <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com">{this.state.email}</input>
+            <input id="email" type="text" onChange={() => this.inputChange("email")} maxLength="60" placeholder="Example: jack@email.com" value={this.state.email}></input>
             <p className="disclaimer">For authentication reasons, you will not be emailed</p>
             <label htmlFor="answer">Your Answer*</label>
-            <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000">{this.state.answer}</textarea>
+            <textarea id="answer" type="text" onChange={() => this.inputChange("answer")} maxLength="1000" value={this.state.answer}></textarea>
           </div>
           <AddedPhotos photos={this.state.photos} />
           <div className="modal-footer">

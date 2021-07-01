@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {lazy, useEffect, useState} from 'react';
 import style from './Product.css';
 import RatingStars from '../reviews/RatingStars.jsx';
 import ratingHelper from '../reviews/reviewHelpers.js';
@@ -30,7 +30,7 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
         if (!res.data.results[0].photos[0].url) {
           imgLink = `https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg`;
         } else {
-          imgLink = res.data.results[0].photos[0].url;
+          imgLink = res.data.results[0].photos[0].url.split('&w=')[0] + '&w=250&q=80';
         }
         setDetail({
           img: imgLink,
@@ -70,7 +70,7 @@ function Product ({overviewProductId, id, category, name, default_price, rating,
       </div>
 
       <div className="product-image-div pointer" onClick={() => onCardClick(id, name)}>
-        <img className="product-image" src={detail.img} alt={`${id}`+'No Img'}></img>
+        <img className="product-image" src={detail.img} loading="lazy" width="50" height="50" alt={`${id}`+'No Img'}></img>
       </div>
 
       <div className="product-detail-box pointer" onClick={() => onCardClick(id, name)}>

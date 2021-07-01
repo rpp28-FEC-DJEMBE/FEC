@@ -5,6 +5,8 @@ bin-release/
 [Bb]in/
 bundle.js
 bundle.js.LICENSE.txt
+*.bundle.js
+*.LICENSE.txt
 
 # Other files and folders
 .settings/

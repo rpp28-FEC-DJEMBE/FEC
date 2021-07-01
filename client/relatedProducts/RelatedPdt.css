@@ -1,4 +1,5 @@
-.related-product-box {
+.related-product-box,
+.outfit-box {
   border: solid 1px powderblue;
   display: flex;
   justify-content: left;
@@ -8,11 +9,16 @@
   width: 1106px;
 }
 
-.related-product-widget {
+.related-product-widget,
+.outfit-widget {
   margin: auto;
   /* width: 1106px; */
   width: 1000px;
   overflow: hidden;
+}
+
+.outfit-widget {
+  padding-top: 20px;
 }
 
 .btn-Inactive {
@@ -25,7 +31,8 @@
   margin-left: 89%;
 }
 
-.related-product-box:after {
+.related-product-box:after,
+.outfit-box:after {
   content: "";
   position: absolute;
   z-index: 1;

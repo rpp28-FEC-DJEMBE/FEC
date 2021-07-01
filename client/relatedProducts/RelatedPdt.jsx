@@ -190,7 +190,7 @@ function RelatedPdt(props) {
   return (
     <div data-testid="relatedPdt" onClick={onCompaClose}>
       <div className="related-product-widget">
-        <h3 className="related-product-header">RELATED PRODUCTS</h3>
+        <h2 className="related-product-header">RELATED PRODUCTS</h2>
         <div className="related-product-box">
           <label
             className={pdtLayOut.pdtLeftBtn}
@@ -206,7 +206,6 @@ function RelatedPdt(props) {
                   category={product.category}
                   name={product.name}
                   default_price={product.default_price}
-                  rating={'5'}
                   cardBtn={'\u2606'}
                   onProductBtnClick={onProductBtnClick}
                   onCardClick={props.onCardClick}
@@ -221,9 +220,9 @@ function RelatedPdt(props) {
         </div>
       </div>
 
-      <div className="related-product-widget">
-        <h3 className="related-product-header">YOUR OUTFIT</h3>
-        <div className="related-product-box">
+      <div className="outfit-widget">
+        <h2 className="outfit-header">YOUR OUTFIT</h2>
+        <div className="outfit-box">
         <label
             className={outfitLayOut.pdtLeftBtn}
             onClick={() => slideLeft(outfitLayOut, outfits, displayOutfitItems)}
@@ -239,7 +238,6 @@ function RelatedPdt(props) {
                   category={outfit.category}
                   name={outfit.name}
                   default_price={outfit.default_price}
-                  rating={'5'}
                   cardBtn={'\u2327'}
                   onOutfitBtnClick={onOutfitBtnClick}
                   onCardClick={props.onCardClick}

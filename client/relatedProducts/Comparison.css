@@ -5,11 +5,13 @@
   margin: auto;
   height: 200px;
   overflow: auto;
-  top: 140%;
-  left: 30%;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   background-color: white;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .comparison-name-line {
@@ -17,10 +19,6 @@
   grid-template-columns: auto max-content;
   margin: 0;
 }
-
-/* .comparison-name {
-  font-size: medium;
-} */
 
 .comparison-table {
   display: grid;
