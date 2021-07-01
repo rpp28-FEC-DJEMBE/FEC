@@ -37,7 +37,7 @@ class QuestionEntry extends React.Component {
           <p className="question">Q: {question_body}</p>
           <div className="question-entry-header">
             <span>Helpful? <u onClick={() => this.updateQuestionHelpful()}>Yes</u> ({this.state.helpful})</span>
-            <span> | </span>
+            <span className="q-divider">|</span>
             <span onClick={()=> this.props.handleAddAnswer(question_id, question_body)} >Add Answer</span>
           </div>
         </div>
