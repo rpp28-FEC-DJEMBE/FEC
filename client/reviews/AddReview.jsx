@@ -151,12 +151,26 @@ const AddReview = (props) => {
     setStarText(starTxt[value])
   }
 
+  const closeModal = () => {
+    setRating(0);
+    setRecommend(null);
+    setChars({});
+    setSummary('');
+    setBody('');
+    setName('');
+    setEmail('');
+    setPhotos([]);
+    setStarText('');
+
+    props.handleClose();
+  }
+
   return(
-    <div className='review-modal' onClick={props.handleClose}>
+    <div className='review-modal' onClick={() => closeModal()}>
       <div className='review-content' onClick={e => e.stopPropagation()}>
         <div className='addreview-header'>
           <h2 className='review-title'> Write Your Review</h2>
-          <div className='exit pointer' onClick={props.handleClose}>X</div>
+          <div className='exit pointer' onClick={() => closeModal()}>X</div>
           <h3>About the {props.productName}</h3>
         </div>
         <div className='modal-body'>
