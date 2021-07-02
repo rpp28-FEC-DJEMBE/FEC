@@ -37,6 +37,8 @@ class App extends React.Component {
       productId: 22122,
       productName: 'Camo Onesie'
     }
+    this.onCardClick = this.onCardClick.bind(this);
+    this.apiInteractions = this.apiInteractions.bind(this);
   }
 
   onCardClick(productCardId, productName) {
@@ -47,6 +49,23 @@ class App extends React.Component {
     });
   }
 
+  apiInteractions(element, widget) {
+    let data = {
+      "element": element,
+      "widget": widget,
+      "time": new Date()
+    }
+    console.log(element, widget, data.time);
+
+    axios({
+      method: 'post',
+      url: '/interactions',
+      data: data
+    })
+    .then(res => console.log(res))
+    .catch(err => { throw new Error(err.message); });
+  }
+
   render() {
     return (
       <ErrorBoundary>
@@ -55,14 +74,13 @@ class App extends React.Component {
             <header>
               <nav>
                 <h1><img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />The Djembe Clothing Company</h1>
-                {/* <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div> */}
               </nav>
               <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
             </header>
-            <Overview productId={this.state.productId} />
-            <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
-            <Questions product={this.state} />
-            <Reviews productId={this.state.productId} />
+            <Overview productId={this.state.productId}  apiInteractions={this.apiInteractions} />
+            <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
+            <Questions product={this.state} apiInteractions={this.apiInteractions} />
+            <Reviews productId={this.state.productId} apiInteractions={this.apiInteractions} />
           </React.Fragment>
         </Suspense>
       </ErrorBoundary>

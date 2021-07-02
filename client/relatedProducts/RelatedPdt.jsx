@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, {useEffect, useState} from 'react';
 
 import style from './RelatedPdt.css';
@@ -188,7 +187,10 @@ function RelatedPdt(props) {
 
 
   return (
-    <div data-testid="relatedPdt" onClick={onCompaClose}>
+    <div data-testid="relatedPdt" onClick={(e) => {
+      onCompaClose();
+      props.apiInteractions(e.target.className, 'Related Product');
+    }}>
       <div className="related-product-widget">
         <h2 className="related-product-header">RELATED PRODUCTS</h2>
         <div className="related-product-box">
@@ -227,7 +229,9 @@ function RelatedPdt(props) {
             className={outfitLayOut.pdtLeftBtn}
             onClick={() => slideLeft(outfitLayOut, outfits, displayOutfitItems)}
           >{'\u1438'}</label>
-          <OutfitAddCard onAddOutfitClick={onAddOutfitClick}/>
+          <OutfitAddCard
+            onAddOutfitClick={onAddOutfitClick}
+          />
           {
             outfits.products.slice(outfitLayOut.displayFirstId, outfitLayOut.displayFirstId + displayOutfitItems).map( outfit =>
               (
@@ -251,10 +255,12 @@ function RelatedPdt(props) {
           >{'\u1433'}</label>
         </div>
       </div>
-
-      <Comparison productId={props.productId} btnId={btnId} showComp={showComp} onCompaClose={onCompaClose}/>
-
-
+      <Comparison
+        productId={props.productId}
+        btnId={btnId}
+        showComp={showComp}
+        onCompaClose={onCompaClose}
+      />
     </div>
   )
 }
