@@ -102,7 +102,8 @@ display: block;
 }
 
 .subtitle {
-  margin: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .search {
@@ -152,7 +153,8 @@ input[type="file"] {
   justify-content: flex-start;
   font-size:12px;
   font-family: arial;
-  opacity: 0.5;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 .a-divider,
@@ -164,12 +166,13 @@ input[type="file"] {
 .question-entry-header {
   display: inline;
   font-size: small;
-  opacity: .5;
+  margin-top: 10px;
 }
 
 .question {
   font-weight: bold;
   font-family: arial;
+  margin-bottom: 0px;
 }
 
 .breakdown {
@@ -231,6 +234,7 @@ font-size: 15px;
 
 .a {
   font-weight: bold;
+  margin-right: 5px;
 }
 
 .a, .answer-body {
@@ -238,11 +242,20 @@ font-size: 15px;
   margin-bottom: 0px;
 }
 
+.answer {
+  margin-top: 15px;
+}
+
+.question-title {
+  margin-bottom: 0px;
+  height: 25px;
+}
+
 .answer-content, .question-content {
   display: grid;
   background-color: white;
-  width: 750px;
-  height: 550px;
+  width: auto;
+  height: auto;
   border-radius: .2rem;
   padding: 8px;
 }
