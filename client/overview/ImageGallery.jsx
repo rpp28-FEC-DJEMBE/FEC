@@ -108,8 +108,6 @@ class ImageGallery extends React.Component {
     let posX = Math.min(Math.max(0, offsetX), width);
     let posY = Math.min(Math.max(0, offsetY), height);
 
-    console.log('posX, ')
-
     let percentX = posX / width * 100;
     let percentY = posY / height * 100;
 
@@ -213,6 +211,8 @@ class ImageGallery extends React.Component {
     if (this.props.imageMode === 2) {
       className = "o-images-main o-zoomed pointer";
       cssVariables['--bgImgUrl'] = 'url(' + this.state.mainImageUrl + ')';
+      cssVariables['--x'] = '50%';
+      cssVariables['--y'] = '50%';
       mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage}/>
     }
 

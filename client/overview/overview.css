@@ -121,6 +121,10 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   object-fit: cover;
 }
 
+.o-images-main:hover {
+  cursor: zoom-in;
+}
+
 .o-images-thumbnails > * {
   margin: 0;
   padding: 0;
