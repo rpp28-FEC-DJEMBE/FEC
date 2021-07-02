@@ -57,6 +57,16 @@ body * {
   margin-top: 8px;
 }
 
+.rating-breakdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.rating-bar {
+  margin: 5px 0px;
+}
+
 /* MODULE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -175,8 +185,8 @@ input[type="file"] {
 .breakdown {
   display: flex;
   flex-flow: column;
-  width: 325px;
-  justify-content: space-evenly;
+  width: 330px;
+  justify-content: space-around;
   padding-right: 20px;
 }
 
@@ -445,6 +455,7 @@ font-size: 15px;
   padding-top: 2px;
 }
 
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -509,6 +520,11 @@ font-size: 15px;
 .clear {
   float: none;
   clear: both;
+}
+
+.rating-bar:hover {
+  cursor: pointer;
+  background-color: rgb(136, 253, 157);
 }
 
 

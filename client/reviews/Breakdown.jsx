@@ -53,7 +53,12 @@ class Breakdown extends React.Component {
     } else {
       return (
         <div className='breakdown'>
-          <RatingBreakdown ratings={ratings} recommended={recommended} reviews={this.props.reviews}/>
+          <RatingBreakdown
+            ratings={ratings}
+            recommended={recommended}
+            reviews={this.props.reviews}
+            filterStars={this.props.filterStars}
+          />
           <ProductBreakdown characteristics={characteristics}/>
         </div>
       )

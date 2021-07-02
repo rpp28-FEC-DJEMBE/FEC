@@ -9,8 +9,10 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      isLoaded: false
+      isLoaded: false,
+      filters: []
     }
+    this.filterStars = this.filterStars.bind(this);
   }
 
   async getReviews() {
@@ -50,6 +52,17 @@ class Reviews extends React.Component {
     })
   }
 
+  filterStars(rating) {
+    let filters = this.state.filters;
+    if (!this.state.filters.includes(rating)) {
+      filters.push(rating);
+      this.setState({ filters: filters })
+    } else {
+      let removed = filters.filter(item => item !== rating);
+      this.setState({ filters: removed })
+    }
+  }
+
   render() {
     if (!this.state.isLoaded) {
       return (
@@ -60,19 +73,21 @@ class Reviews extends React.Component {
     } else {
     return (
       <div className='ratings-reviews'>
-          <h3 id='rr-title'>Ratings and Reviews</h3>
+          <h2 id='rr-title'>RATINGS & REVIEWS</h2>
           <div className='rr-content'>
             <Breakdown
               productId={this.props.productId}
               reviews={this.state.reviews}
               ratings={this.state.ratings}
               recommended={this.state.recommended}
+              filterStars={this.filterStars}
             />
             <ReviewList
               reviews={this.state.reviews}
               handleSort={this.handleSort}
               productId={this.props.productId}
               productName={this.props.productName}
+              filters={this.state.filters}
             />
           </div>
         </div>
