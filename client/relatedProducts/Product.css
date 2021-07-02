@@ -3,7 +3,6 @@
   /* background-color: powderblue; */
   width: 250px;
   height: 350px;
-  left: 50%;
   border: solid 1px grey;
   margin: 10px;
 }
@@ -16,7 +15,7 @@
 
 .product-image-div {
   height: 230px;
-  background-color: powderblue;
+  /* background-color: powderblue; */
 }
 
 .product-category {
@@ -26,7 +25,6 @@
 }
 
 .product-name {
-  /* font-weight: 300; */
   font-weight: bold;
   font-size: medium;
 }
@@ -51,6 +49,7 @@
   font-weight: 300;
   font-size: smaller;
   color: powderblue;
+  opacity: 0;
 }
 
 .product-image {
@@ -74,6 +73,5 @@
   margin-left: 210px;
   font-family: system-ui;
   font-size: x-large;
-  /* background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%); */
   background-image: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0) 50%);
 }

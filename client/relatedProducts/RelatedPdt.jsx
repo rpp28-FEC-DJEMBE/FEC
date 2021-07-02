@@ -169,7 +169,7 @@ function RelatedPdt(props) {
   }
 
   const onProductBtnClick = (btnId) => {
-    console.log('onProductBtnClick', btnId);
+    // console.log('onProductBtnClick', btnId);
     setShowComp(true);
     setBtnId(btnId);
   }

@@ -1,6 +1,6 @@
 .related-product-box,
 .outfit-box {
-  border: solid 1px powderblue;
+  /* border: solid 1px powderblue; */
   display: flex;
   justify-content: left;
   align-items: center;
