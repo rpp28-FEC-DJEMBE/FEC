@@ -10,7 +10,8 @@ class ReviewTile extends React.Component {
     this.state = {
       helpfulness: this.props.review.helpfulness,
       helpfulClicked: false,
-      showBody: false
+      showBody: false,
+      report: 'Report'
     }
     this.handleHelpful = this.handleHelpful.bind(this);
     this.handleShowMore = this.handleShowMore.bind(this);
@@ -31,7 +32,7 @@ class ReviewTile extends React.Component {
       })
       .catch((err) => console.log("Error: ", err));
     } else {
-      console.log("Already Clicked!", this.state)
+      alert("You've already voted for this review!")
     }
   }
 
@@ -39,6 +40,18 @@ class ReviewTile extends React.Component {
     this.setState({ showBody: true })
   }
 
+  handleReport(){
+    if (this.state.report === 'Report') {
+      this.setState({
+        report: 'Reported!',
+      })
+      axios({
+        method: "put",
+        url: `/reviews/${this.props.review.review_id}/report`
+      })
+      .catch((err) => console.log("Error: ", err));
+    }
+  }
 
   render() {
     let { review } = this.props;
@@ -86,7 +99,7 @@ class ReviewTile extends React.Component {
           {photos}
         </div>
         <div id='review-footer'>
-          Helpful? <u className='pointer' onClick={() => this.handleHelpful()}>Yes</u> {this.state.helpfulness} | <u className='pointer'>Report</u>
+        Was this review helpful? <u className='pointer' onClick={() => this.handleHelpful()}>Yes</u> {this.state.helpfulness} | <u className='pointer' onClick={() => this.handleReport()}>{this.state.report}</u>
         </div>
       </div>
     )
