@@ -47,8 +47,6 @@ class Reviews extends React.Component {
         ratings: getRatings(data.results),
         recommended: getRecommend(data.results)
       })
-      console.log('review ratings', getRatings(data.results));
-      console.log('review rec', getRecommend(data.results));
     })
   }
 

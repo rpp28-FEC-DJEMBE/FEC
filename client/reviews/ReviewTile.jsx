@@ -53,6 +53,14 @@ class ReviewTile extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.productId !== this.props.productId){
+      this.setState({
+        helpfulness: this.props.review.helpfulness
+      })
+    }
+  }
+
   render() {
     let { review } = this.props;
     let body = (review.body.length > 250 && !this.state.showBody) ? review.body.substr(0,250) + '...' : review.body;
