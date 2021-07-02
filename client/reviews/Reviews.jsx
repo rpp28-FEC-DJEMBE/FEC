@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import Breakdown from './Breakdown.jsx';
-import { sortRelevantReviews } from './reviewHelpers.js';
+import { sortRelevantReviews, getRatings, getRecommend } from './reviewHelpers.js';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -23,23 +23,15 @@ class Reviews extends React.Component {
     }
   }
 
-  async getMetaData() {
-    try {
-      let response = await axios.get(`/reviews/meta?product_id=${this.props.productId}`);
-      let metaData = response.data;
-      return metaData;
-    } catch(err) {
-      console.log('Error fetching review meta data')
-    }
-  }
-
   componentDidUpdate(prevProps) {
     if(prevProps.productId !== this.props.productId){
       this.getReviews()
       .then((data) => {
         this.setState({
           reviews: sortRelevantReviews(data.results),
-          productId: Number(data.product)
+          productId: Number(data.product),
+          ratings: getRatings(data.results),
+          recommended: getRecommend(data.results)
         })
       })
     }
@@ -51,17 +43,13 @@ class Reviews extends React.Component {
       this.setState({
         reviews: sortRelevantReviews(data.results),
         productId: Number(data.product),
-        isLoaded: true
+        isLoaded: true,
+        ratings: getRatings(data.results),
+        recommended: getRecommend(data.results)
       })
-      // return this.getMetaData()
+      console.log('review ratings', getRatings(data.results));
+      console.log('review rec', getRecommend(data.results));
     })
-    // .then((metaData) => {
-    //   this.setState({
-    //     metaData: metaData,
-    //     isLoaded: true
-    //   })
-    //   console.log('metadata', metaData)
-    // })
   }
 
   render() {
@@ -76,9 +64,18 @@ class Reviews extends React.Component {
       <div className='ratings-reviews'>
           <h3 id='rr-title'>Ratings and Reviews</h3>
           <div className='rr-content'>
-            <Breakdown productId={this.props.productId} metaData={this.state.metaData} isLoaded={this.state.isLoaded}/>
-            <ReviewList reviews={this.state.reviews} handleSort={this.handleSort} productId={this.props.productId}    productName={this.props.productName}/>
-
+            <Breakdown
+              productId={this.props.productId}
+              reviews={this.state.reviews}
+              ratings={this.state.ratings}
+              recommended={this.state.recommended}
+            />
+            <ReviewList
+              reviews={this.state.reviews}
+              handleSort={this.handleSort}
+              productId={this.props.productId}
+              productName={this.props.productName}
+            />
           </div>
         </div>
       )

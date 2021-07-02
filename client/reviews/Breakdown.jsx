@@ -40,8 +40,10 @@ class Breakdown extends React.Component {
   }
 
 
+
   render() {
-    let { ratings, recommended, characteristics } = this.state.metaData;
+    let { characteristics } = this.state.metaData;
+    let { ratings, recommended } = this.props
     if (!this.state.isLoaded) {
       return (
         <section className="breakdown">
@@ -51,7 +53,7 @@ class Breakdown extends React.Component {
     } else {
       return (
         <div className='breakdown'>
-          <RatingBreakdown ratings={ratings} recommended={recommended}/>
+          <RatingBreakdown ratings={ratings} recommended={recommended} reviews={this.props.reviews}/>
           <ProductBreakdown characteristics={characteristics}/>
         </div>
       )
