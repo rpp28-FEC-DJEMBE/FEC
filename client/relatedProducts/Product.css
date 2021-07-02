@@ -73,5 +73,5 @@
   margin-left: 210px;
   font-family: system-ui;
   font-size: x-large;
-  background-image: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0) 50%);
+  background-image: radial-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0) 40%);
 }

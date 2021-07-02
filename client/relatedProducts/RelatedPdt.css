@@ -36,11 +36,9 @@
   content: "";
   position: absolute;
   z-index: 1;
-  bottom: 0;
   margin-left: 80%;
   width: 11%;
   height: 360px;
-
   pointer-events: none;
   background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
 }
