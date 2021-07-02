@@ -5,12 +5,12 @@ const ReviewPhotoModal = (props) => {
 
   let modal = (!show) ? null :
     <div className='review-modal' onClick={() => setShow(false)}>
-      <img className='picture-modal' src={props.url} alt={props.id} onClick={e => e.stopPropagation()}/>
+      <img className='picture-modal' src={props.url} alt={null} onClick={e => e.stopPropagation()} onError={(e)=>{e.target.onerror = null; e.target.src=`https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg`}}/>
     </div>
 
   return (
     <li>
-      <img src={props.url} alt={props.id} className='review-photo pointer' onClick={() => setShow(true)}/>
+      <img src={props.url} alt={null} className='review-photo pointer' onClick={() => setShow(true)} onError={(e)=>{e.target.onerror = null; e.target.src=`https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg`}}/>
       {modal}
     </li>
   )

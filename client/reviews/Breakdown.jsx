@@ -13,9 +13,6 @@ class Breakdown extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (prevProps.isLoaded !== this.props.isLoaded) {
-    //   this.setState({ isLoaded: this.props.isLoaded })
-    // }
     if(prevProps.productId !== this.props.productId){
       axios.get(`/reviews/meta?product_id=${this.props.productId}`)
       .then((res) => {

@@ -69,7 +69,7 @@ class App extends React.Component {
             <Overview productId={this.state.productId} />
             <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
             <Questions product={this.state} />
-            <Reviews productId={this.state.productId} />
+            <Reviews productId={this.state.productId} productName={this.state.productName}/>
           </React.Fragment>
         </Suspense>
       </ErrorBoundary>
