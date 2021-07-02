@@ -32,6 +32,11 @@ npm start
 ### [Related Products](#related-products)
 ![Related Products](readme-screenshots/2-related-products.png?raw=true "Optional Title")
 
+Related Products section has Related Products list and Your Outfit List. Both lists consist of clickable cards in a carousel like format. Each card will display the image and brief information for a single product with an action button.
+
+Related Products list contains products associated with the current product determined by the company. The star action button opens a window comparing the details of the current product to the product that was selected from the list.
+
+Your Outfit List displays a "Add to Outfit" action card, and products that the user has selected to group together. The x action button removes the selected product from the Outfit List.
 
 ### [Questions and Answers](#questions-and-answers)
 ![Question and Answers](readme-screenshots/3-questions-and-answers.png?raw=true "Optional Title")
