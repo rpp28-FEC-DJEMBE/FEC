@@ -27,26 +27,20 @@ class Questions extends React.Component{
     this.handleMoreAnsweredQuestions = this.handleMoreAnsweredQuestions.bind(this);
   }
 
-  handleSearch(input){
-    const {masterQuestionsList} = this.state
-    if (input.length >= 3) {
-      this.setState({
-        searchInUse: true,
-        displayQuestions: masterQuestionsList.filter(question => question.question_body.toLowerCase().includes(input.toLowerCase()))
-      })
-    } else {
-      this.setState({
-        questions: masterQuestionsList.slice(2),
-        displayQuestions: masterQuestionsList.slice(0,2),
-        searchInUse: false
-      })
-    }
-  }
-
   componentDidMount(){
     this.getQuestions()
     .then((data) => this.updateState(data))
     .catch((err) => console.log("Error: ", err))
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.product_id !== this.props.product.productId){
+     this.getQuestions()
+     .then(data => {
+       this.updateState(data)
+     })
+    .catch((err) => console.log("Error: ", err))
+    }
   }
 
   getQuestions(){
@@ -71,13 +65,21 @@ class Questions extends React.Component{
     })
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(prevState.product_id !== this.props.product.productId){
-     this.getQuestions()
-     .then(data => {
-       this.updateState(data)
-     })
-    .catch((err) => console.log("Error: ", err))
+  handleSearch(input){
+    const {masterQuestionsList} = this.state
+    if (input.length >= 3) {
+      this.setState({
+        searchInUse: true,
+        displayQuestions: masterQuestionsList
+        .filter(question =>
+          question.question_body.toLowerCase().includes(input.toLowerCase()))
+      })
+    } else {
+      this.setState({
+        questions: masterQuestionsList.slice(2),
+        displayQuestions: masterQuestionsList.slice(0,2),
+        searchInUse: false
+      })
     }
   }
 

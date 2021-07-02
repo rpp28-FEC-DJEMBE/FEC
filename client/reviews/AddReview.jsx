@@ -13,6 +13,8 @@ const AddReview = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [starText, setStarText] = useState('');
+  const [verified, setVerified] = useState(false);
 
 
   const charsEntry = (e) => {
@@ -88,6 +90,8 @@ const AddReview = (props) => {
 
     if (template !== `You must enter the following:`) {
       alert(template);
+    } else {
+      setVerified(true);
     }
   }
 
@@ -122,42 +126,71 @@ const AddReview = (props) => {
 
     console.log('review body being posted', postBody);
     missingFieldsAlert();
-    axios({
-      method: 'post',
-      url: `/reviews`,
-      data: postBody
-    })
-    .then(() => console.log(`Review successfully posted`))
-    .catch((err) => console.log('Error posting review'))
+    if (verified) {
+      axios({
+        method: 'post',
+        url: `/reviews`,
+        data: postBody
+      })
+      .then(() => console.log(`Review successfully posted`))
+      .catch((err) => console.log('Error posting review'))
+    }
+  }
+
+  const starClick = (e) => {
+    let value = e.target.value;
+    let starTxt = {
+      '1': 'Poor',
+      '2': 'Fair',
+      '3': 'Average',
+      '4': 'Good',
+      '5': 'Great'
+    };
+
+    setRating(Number(value));
+    setStarText(starTxt[value])
+  }
+
+  const closeModal = () => {
+    setRating(0);
+    setRecommend(null);
+    setChars({});
+    setSummary('');
+    setBody('');
+    setName('');
+    setEmail('');
+    setPhotos([]);
+    setStarText('');
+
+    props.handleClose();
   }
 
   return(
-    <div className='review-modal' onClick={props.handleClose}>
+    <div className='review-modal' onClick={() => closeModal()}>
       <div className='review-content' onClick={e => e.stopPropagation()}>
         <div className='addreview-header'>
           <h2 className='review-title'> Write Your Review</h2>
-          <div className='exit pointer' onClick={props.handleClose}>X</div>
+          <div className='exit pointer' onClick={() => closeModal()}>X</div>
           <h3>About the {props.productName}</h3>
         </div>
         <div className='modal-body'>
           <label>Overall Rating*</label>
-          <div className="review-stars">
-            <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str1" value="1"></input>
-            </span>
-            <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str2" value="2"></input>
-            </span>
-            <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str3" value="3"></input>
-            </span>
-            <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str4" value="4"></input>
-            </span>
-            <span onClick={e => setRating(Number(e.target.value))}>
-              <input type="radio" name="rating" id="str5" value="5"></input>
-            </span>
-          </div>
+          <section id='overall-rating'>
+            <div className="review-stars">
+              <input id="star5" name="star" onClick={e => starClick(e)} type="radio" value="5" class="radio-btn hide" />
+              <label for="star5" >★</label>
+              <input id="star4" name="star" onClick={e => starClick(e)} type="radio" value="4" class="radio-btn hide" />
+              <label for="star4" >★</label>
+              <input id="star3" name="star" onClick={e => starClick(e)} type="radio" value="3" class="radio-btn hide" />
+              <label for="star3" >★</label>
+              <input id="star2" name="star" onClick={e => starClick(e)} type="radio" value="2" class="radio-btn hide" />
+              <label for="star2" >★</label>
+              <input id="star1" name="star" onClick={e => starClick(e)} type="radio" value="1" class="radio-btn hide" />
+              <label for="star1" >★</label>
+              <div class="clear"></div>
+            </div>
+            <p id='star-text'>{starText}</p>
+          </section>
           <label>Do you recommend this product?*</label>
           <div className='review-recommend' >
             <span onClick={e => setRecommend((e.target.value === 'true'))}>
@@ -198,7 +231,7 @@ const AddReview = (props) => {
         </div>
         <div className='modal-footer'>
           <AnswerPhotos updatePhotos={addPhotos} files={photos} />
-          <div className="answer-submit" onClick={() => submitReview()}>Submit Review</div>
+          <div className="answer-submit pointer" onClick={() => submitReview()}>Submit Review</div>
         </div>
       </div>
     </div>

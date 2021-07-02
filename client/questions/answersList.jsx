@@ -44,28 +44,39 @@ class AnswersList extends React.Component {
   };
 
   handleExpandAnswers() {
-    this.setState({
-      answers: this.state.answersList,
-      show: false
-    })
+    if (this.state.show === true) {
+
+      this.setState({
+        answers: this.state.answersList,
+        show: false
+      })
+    } else {
+      this.setState({
+        answers: this.state.answersList.slice(0,2),
+        show: true
+      })
+    }
   };
 
   render() {
+    const {answers, answersList, show} = this.state
+
     if (this.state.answers.length === 0) {
       return null;
     }
     return (
       <div className="answer-list">
-        {this.state.answers.map((answer, index) =>
+        {answers.map((answer, index) =>
         <AnswerEntry
           answer={answer}
           key={index}
           question={this.props.question} />
         )}
         <ExpandAnswers
-          answersList={this.state.answersList}
+          answers={answers}
+          answersList={answersList}
           seeMoreAnswers={this.handleExpandAnswers}
-          show={this.state.show} />
+          show={show} />
       </div>
     )
   };
