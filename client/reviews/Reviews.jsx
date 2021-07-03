@@ -35,7 +35,8 @@ class Reviews extends React.Component {
           productId: Number(data.product),
           ratings: getRatings(data.results),
           recommended: getRecommend(data.results),
-          display: sortRelevantReviews(data.results).slice()
+          display: sortRelevantReviews(data.results).slice(),
+          filters: []
         })
       })
     }
@@ -61,15 +62,29 @@ class Reviews extends React.Component {
     if (!this.state.filters.includes(rating)) {
       filters.push(rating);
       this.setState({ filters: filters })
-      let filtered = this.state.reviews.filter(review => review.rating === rating)
-      this.setState({ display: filtered })
     } else {
-      let removed = filters.filter(item => item !== rating);
-      this.setState({ filters: removed })
+      filters = filters.filter(item => item !== rating);
+      this.setState({ filters: filters })
     }
+    console.log('filters', filters)
+    // let filtered = this.state.reviews.filter(review => review.rating === rating)
+    // this.setState((prevState) => ({
+    //   display: prevState.display.concat(filtered)
+    // }))
 
-
-
+    let filtered = this.state.reviews.reduce((acc, review) => {
+      if (filters.includes(review.rating)) {
+        acc.push(review)
+      }
+      return acc;
+    }, [])
+    console.log(filtered)
+    if (filters.length === 0) {
+      this.setState({ display: this.state.reviews.slice() })
+    } else {
+      this.setState({ display: filtered })
+    }
+    // (filters.length === 0) ? this.setState({ display: this.state.reviews.slice() }) : this.setState({ display: filtered });
   }
 
   render() {
