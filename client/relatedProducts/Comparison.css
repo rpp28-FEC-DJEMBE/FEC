@@ -1,4 +1,5 @@
-.comparison-box {
+.comparison-box,
+.comparison-box-dark {
   border: solid 1px grey;
   padding: 5px;
   width: 40%;
@@ -12,6 +13,14 @@
   top: 0;
   right: 0;
   bottom: 0;
+}
+
+.comparison-box {
+  background-color: white;
+}
+
+.comparison-box-dark {
+  background-color: #282828;
 }
 
 .comparison-name-line {
