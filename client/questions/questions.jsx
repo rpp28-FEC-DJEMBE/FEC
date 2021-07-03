@@ -123,7 +123,7 @@ class Questions extends React.Component{
 
     return (
       <div className="qaDisplay">
-        <h3>Questions & Answers</h3>
+        <h2>QUESTIONS & ANSWERS</h2>
         <Search
         handleSearch={this.handleSearch} />
         <QuestionsList
