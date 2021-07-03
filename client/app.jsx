@@ -10,6 +10,8 @@ const Questions = lazy( () => import('./questions/questions.jsx'));
 const Reviews = lazy( () => import('./reviews/Reviews.jsx'));
 
 const renderLoader = () => <p>Loading</p>;
+const sun = '\u263C';
+const moon = '\u263D';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -91,10 +93,12 @@ class App extends React.Component {
                 <h1>
                   <img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />
                   The Djembe Clothing Company
-                  <label className="toggle">
+                  <label className="toggle pointer">
                     <input onClick={()=> this.themeToggle()} type="checkbox" ></input>
                     <span className="slider"></span>
                   </label>
+
+                  <span className="moon"><span className="sun">{sun}</span>{moon}</span>
                 </h1>
               </nav>
               <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>

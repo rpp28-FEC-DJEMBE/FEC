@@ -32,6 +32,18 @@
   transition: .5s;
 }
 
+.sun {
+  position: relative;
+  left: auto;
+  right: 50px;
+}
+
+.moon {
+  position: relative;
+  left: auto;
+  right: 45px;
+}
+
 .slider:before {
   position: absolute;
   content: "";
