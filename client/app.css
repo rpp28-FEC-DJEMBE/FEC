@@ -192,7 +192,7 @@ input[type="file"] {
 
 .rating-stars {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 25% 70%;
   grid-template-rows: 25px 25px;
 }
 
@@ -413,7 +413,8 @@ font-size: 15px;
   margin-bottom: 16px;
 }
 
-.review-photos {
+.review-photos,
+.filters {
   display: flex;
   flex-flow: row;
   align-items: baseline;
@@ -455,6 +456,9 @@ font-size: 15px;
   padding-top: 2px;
 }
 
+#review-btn {
+  background-color: rgb(184, 184, 184)
+}
 
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */

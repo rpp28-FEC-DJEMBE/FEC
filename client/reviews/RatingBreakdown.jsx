@@ -3,7 +3,7 @@ import RatingStars from './RatingStars.jsx';
 import RatingBars from './RatingBars.jsx';
 import helper from './reviewHelpers.js';
 
-const RatingBreakdown = ({ratings, recommended, reviews, filterStars, filters}) => {
+const RatingBreakdown = ({ratings, recommended, reviews, filterStars, filters, removeFilters}) => {
 
   if(Object.keys(ratings).length === 0) {
     return (
@@ -22,7 +22,7 @@ const RatingBreakdown = ({ratings, recommended, reviews, filterStars, filters}) 
   let totalRecs = helper.getRecTotal(recommended);
   let recommendPct = Math.round(helper.ratingConverter(recommended['true'], totalRecs));
   let starRating = helper.getAvgRating(ratings, 1);
-
+  let removeBtn = (filters.length) ? <button id='remove-btn' onClick={() => removeFilters()}>Remove all filters</button> : null;
   return (
     <div className='rating-breakdown'>
       <div className='rating-stars'>
@@ -31,11 +31,13 @@ const RatingBreakdown = ({ratings, recommended, reviews, filterStars, filters}) 
         {reviews.length} reviews
       </div>
       <p>{recommendPct}% of reviews recommend this product</p>
-      <ul>
+      <div className='filters'>
+        Current filters:
         {
-          filters.map((rating) => <li>{rating}</li>)
+          filters.map((rating) => <li style={{padding: '3px'}}>{rating}★</li>)
         }
-      </ul>
+      </div>
+      {removeBtn}
       <RatingBars ratings={ratings} filterStars={filterStars}/>
     </div>
   )

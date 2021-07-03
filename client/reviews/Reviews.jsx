@@ -14,6 +14,7 @@ class Reviews extends React.Component {
       display: []
     }
     this.filterStars = this.filterStars.bind(this);
+    this.removeFilters = this.removeFilters.bind(this);
   }
 
   async getReviews() {
@@ -59,6 +60,8 @@ class Reviews extends React.Component {
   filterStars(rating) {
     let filters = this.state.filters;
 
+    // check if filter array contains the clicked rating
+      // if no - add it, if yes - remove it
     if (!this.state.filters.includes(rating)) {
       filters.push(rating);
       this.setState({ filters: filters })
@@ -66,25 +69,30 @@ class Reviews extends React.Component {
       filters = filters.filter(item => item !== rating);
       this.setState({ filters: filters })
     }
-    console.log('filters', filters)
-    // let filtered = this.state.reviews.filter(review => review.rating === rating)
-    // this.setState((prevState) => ({
-    //   display: prevState.display.concat(filtered)
-    // }))
 
+    // filter the master list of reviews using the filters array
     let filtered = this.state.reviews.reduce((acc, review) => {
       if (filters.includes(review.rating)) {
         acc.push(review)
       }
       return acc;
     }, [])
-    console.log(filtered)
+
+    // if filters array is empty, return to default state
+      // else display the filtered state
     if (filters.length === 0) {
       this.setState({ display: this.state.reviews.slice() })
     } else {
       this.setState({ display: filtered })
     }
-    // (filters.length === 0) ? this.setState({ display: this.state.reviews.slice() }) : this.setState({ display: filtered });
+
+  }
+
+  removeFilters() {
+    this.setState({
+      display: this.state.reviews.slice(),
+      filters: []
+    })
   }
 
   render() {
@@ -106,6 +114,7 @@ class Reviews extends React.Component {
               recommended={this.state.recommended}
               filterStars={this.filterStars}
               filters={this.state.filters}
+              removeFilters={this.removeFilters}
             />
             <ReviewList
               reviews={this.state.display}
