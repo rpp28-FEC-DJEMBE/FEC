@@ -106,7 +106,11 @@ function RelatedPdt(props) {
       setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
 
       if (outfitLayOut.displayFirstId + displayOutfitItems === savedOutfitIds.length) {
-        setOutfitLayOut(parseLayout(outfitLayOut.displayFirstId, savedOutfitIds.length, 'pointer btn-Inactive', 'pointer rightBtn'));
+        if (outfitLayOut.displayFirstId === 0) {
+          setOutfitLayOut(parseLayout(outfitLayOut.displayFirstId, savedOutfitIds.length, 'pointer btn-Inactive', 'pointer rightBtn'));
+        } else {
+          setOutfitLayOut(parseLayout(outfitLayOut.displayFirstId, savedOutfitIds.length, 'pointer', 'pointer rightBtn'));
+        }
       }
 
     } catch (err) {
@@ -134,7 +138,7 @@ function RelatedPdt(props) {
   }
 
   const slideLeft = (carousel, products, itemNum) => {
-    let leftBtn, updatedLayout;
+    let leftBtn, updatedLayout, updatedLayoutRemoved;
     if (carousel.displayFirstId > 0) {
       if (carousel.displayFirstId === 1) {
         leftBtn = 'pointer btn-Inactive';
@@ -142,10 +146,15 @@ function RelatedPdt(props) {
         leftBtn = 'pointer';
       }
       updatedLayout = parseLayout(carousel.displayFirstId - 1, products.pdt_ids.length, leftBtn, 'pointer rightBtn');
+      updatedLayoutRemoved = parseLayout(carousel.displayFirstId - 1, products.pdt_ids.length, leftBtn, 'pointer rightBtn btn-Inactive');
       if (itemNum === displayPdtItems) {
         setPdtLayOut(updatedLayout);
       } else {
-        setOutfitLayOut(updatedLayout);
+        if (products.pdt_ids.length < carousel.displayFirstId + itemNum - 1) {
+          setOutfitLayOut(updatedLayoutRemoved);
+        } else {
+          setOutfitLayOut(updatedLayout);
+        }
       }
     }
   }
