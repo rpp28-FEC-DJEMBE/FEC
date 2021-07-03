@@ -7,7 +7,12 @@ function StyleSwatch(props) {
   });
 
   // let imgUrl = props.photo.split('&w=')[0] + '&w=64&h=64&fit=crop';
-  let imgUrl = props.photo.split('&w=')[0] + '&w=64&h=64';
+  let imgUrl;
+  if (props.photo) {
+    imgUrl = props.photo.split('&w=')[0] + '&w=64&h=64';
+  } else {
+    imgUrl = props.photo;
+  }
 
   return (
     <div className={"circle-container pointer" + (props.isSelected ? ' selected' : '')} onClick={onSwatchClick}>
