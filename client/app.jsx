@@ -73,11 +73,11 @@ class App extends React.Component {
     if(!this.state.darkmode) {
       this.setState({
         darkmode: true
-      }, console.log('true', this.state.darkmode))
+      })
     } else {
       this.setState({
         darkmode: false
-      }, console.log('false', this.state.darkmode))
+      })
     }
   }
 
