@@ -66,6 +66,11 @@ class App extends React.Component {
     .catch(err => { throw new Error(err.message); });
   }
 
+  themeToggle(){
+    const app = document.body;
+    app.classList.toggle("darkmode");
+  }
+
   render() {
     return (
       <ErrorBoundary>
@@ -73,7 +78,14 @@ class App extends React.Component {
           <React.Fragment>
             <header>
               <nav>
-                <h1><img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />The Djembe Clothing Company</h1>
+                <h1>
+                  <img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />
+                  The Djembe Clothing Company
+                  <label className="toggle">
+                    <input onClick={()=> this.themeToggle()} type="checkbox"></input>
+                    <span className="slider"></span>
+                  </label>
+                </h1>
               </nav>
               <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
             </header>
