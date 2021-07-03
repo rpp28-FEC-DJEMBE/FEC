@@ -92,7 +92,7 @@ class App extends React.Component {
                   <img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />
                   The Djembe Clothing Company
                   <label className="toggle">
-                    <input onClick={(e)=> this.themeToggle(e)} type="checkbox" ></input>
+                    <input onClick={()=> this.themeToggle()} type="checkbox" ></input>
                     <span className="slider"></span>
                   </label>
                 </h1>
