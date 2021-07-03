@@ -80,6 +80,12 @@ class ImageGallery extends React.Component {
       return;
     }
 
+    // close expanded screen
+    if (classes.contains('o-main-image-fullscreen-exit')) {
+      this.props.setImageMode(0);
+      return;
+    }
+
     // thumbnail gallery clicks
     let newSelectedImageIndex = 0;
 
@@ -138,11 +144,14 @@ class ImageGallery extends React.Component {
         if (isSelected) { imgClass = imgClass + ' ' + 'o-images-selected' };
         imgClass = imgClass.trim();
 
+        // let imgUrl = photo.thumbnail_url.split('&w=')[0] + '&w=100&h=100&fit=crop';
+        let imgUrl = photo.thumbnail_url.split('&w=')[0] + '&w=100';
+
         if (index >= firstVisibleImageIndex && index <= lastVisibleImageIndex) {
           if (this.props.imageMode === 0) {
             return (
               <li key={index}>
-                <img id={index} className={imgClass} src={photo.thumbnail_url} onClick={this.handleClick} />
+                <img id={index} className={imgClass} src={imgUrl} onClick={this.handleClick} alt="Person modeling a product" />
               </li>
             )
           }
@@ -159,7 +168,7 @@ class ImageGallery extends React.Component {
             <svg viewBox="0 0 100 100" width="100%" height="100%">
               <circle cx="50" cy="50" r="35" className="o-images-thumbnail-icon pointer" id={index} onClick={this.handleClick} />
               { isSelected
-                  ? <circle cx="50" cy="50" r="25" className="o-images-thumbnail-icon selected pointer" id={index} onClick={this.handleClick} />
+                  ? <circle cx="50" cy="50" r="25" className="o-images-thumbnail-icon selected pointer" id={index} onClick={this.handleClick} alt="Person modeling a product" />
                   : null
               }
             </svg>
@@ -188,11 +197,12 @@ class ImageGallery extends React.Component {
     let mainImageNext = null;
 
     if (this.props.imageMode === 0) {
-      if (firstVisibleImageIndex > 0) {
+
+      if (this.state.selectedImageIndex > 0) {
         mainImagePrev = <span className='material-icons pointer main-image-prev' onClick={this.handleClick}>arrow_back_ios</span>;
       }
 
-      if (lastVisibleImageIndex < this.props.stylePhotos.length - 1) {
+      if (this.state.selectedImageIndex < this.props.stylePhotos.length - 1) {
         mainImageNext = (<span className='material-icons pointer main-image-next' onClick={this.handleClick}>arrow_forward_ios</span>);
       }
     }
@@ -215,23 +225,39 @@ class ImageGallery extends React.Component {
 
   renderMainImage() {
 
-    let className, mainImage;
-    let cssVariables = {};
+    let mainImage, imgUrl;
 
-    if (this.props.imageMode === 0) {
-      className = "o-images-main pointer";
-      mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
-    }
-    if (this.props.imageMode === 1) {
-      className = "o-images-main o-expanded pointer";
-      mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
-    }
-    if (this.props.imageMode === 2) {
-      className = "o-images-main o-zoomed pointer";
-      cssVariables['--bgImgUrl'] = 'url(' + this.state.mainImageUrl + ')';
-      cssVariables['--x'] = '50%';
-      cssVariables['--y'] = '50%';
-      mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage}/>
+    if (this.state.mainImageUrl) {
+      let className;
+      let cssVariables = {};
+
+      if (this.props.imageMode === 0) {
+        className = "o-images-main pointer";
+        // imgUrl = this.state.mainImageUrl.split('&w=')[0] + '&w=800&h=624&fit=crop';
+        imgUrl = this.state.mainImageUrl.split('&w=')[0] + '&w=800';
+        mainImage = <img className={className} src={imgUrl} onClick={this.handleClick} ref={this.mainImage} alt="Person modeling a product"/>
+      }
+      if (this.props.imageMode === 1) {
+        className = "o-images-main o-expanded pointer";
+        imgUrl = this.state.mainImageUrl.split('&w=')[0] + '&w=1271&h624&fit=crop';
+        mainImage = (
+          <React.Fragment>
+            <img className={className} src={imgUrl} onClick={this.handleClick} ref={this.mainImage} alt="Person modeling a product" />
+            <span className="o-main-image-fullscreen-exit material-icons pointer" onClick={this.handleClick}>fullscreen_exit</span>
+          </React.Fragment>
+        )
+      }
+      if (this.props.imageMode === 2) {
+        // imgUrl = this.state.mainImageUrl.split('&w=')[0] + '&w=1271';
+        imgUrl = this.state.mainImageUrl;
+        className = "o-images-main o-zoomed pointer";
+        cssVariables['--bgImgUrl'] = 'url(' + imgUrl + ')';
+        cssVariables['--x'] = '50%';
+        cssVariables['--y'] = '50%';
+        mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage} alt="Person modeling a product" />
+      }
+    } else {
+      mainImage = <div className="o-images-main o-images-noimage"></div>
     }
 
     return (

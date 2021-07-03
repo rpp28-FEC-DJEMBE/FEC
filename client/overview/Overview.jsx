@@ -20,16 +20,24 @@ class Overview extends React.Component {
       imageMode: 0,
       productLoaded: false,
       styleLoaded: false,
-      useMockData: false
+      ratingsLoaded: false,
+      useMockData: false,
+      productRatings: null
     }
+
+    const addToCartIsActive = false;
 
     this.setStyle = this.setStyle.bind(this);
     this.setImageMode = this.setImageMode.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.apiInteractions = this.apiInteractions.bind(this);
+    this.getProductRatings = this.getProductRatings.bind(this);
   }
 
   componentDidMount() {
     this.getProduct(this.props.productId);
     this.getStyles(this.props.productId);
+    this.getProductRatings(this.props.productId);
   }
 
   componentDidUpdate(prevProps) {
@@ -40,6 +48,10 @@ class Overview extends React.Component {
       });
       this.getProduct(this.props.productId);
       this.getStyles(this.props.productId);
+      this.getProductRatings(this.props.productId);
+      this.setState({
+        imageMode: 0
+      });
     }
   }
 
@@ -115,6 +127,21 @@ class Overview extends React.Component {
       })
   }
 
+  getProductRatings(productId) {
+    const endpoint = '/reviews/meta?product_id=' + this.props.productId;
+    this.getAPIData(endpoint)
+      .then(response => {
+        // console.log('Overview: Received ratings data from the server:', response);
+        this.setState({
+          productRatings: response.data.ratings,
+          ratingsLoaded: true
+        });
+      })
+      .catch(error => {
+        console.error('Overview: Error getting product ratings from the server', error);
+      })
+  }
+
   async getAPIData(endpointUrl) {
     try {
       const response = await axios.get(endpointUrl);
@@ -126,6 +153,32 @@ class Overview extends React.Component {
     }
   }
 
+  addToCart(order) {
+    if (!this.addToCartIsActive) {
+      return order;
+    } else {
+      const endpoint = '/cart';
+      this.postAPIData(endpoint, order)
+        .then(response => {
+          // console.log('Overview: Received response adding to cart:', response);
+        })
+        .catch(error => {
+          console.error('Overview: Error adding to cart', error);
+        })
+    }
+  }
+
+  async postAPIData(endpointUrl, data) {
+    try {
+      const response = await axios.post(endpointUrl, data);
+      // console.log('Overview: Received data from server');
+      return response
+    } catch (error) {
+      console.error('Overview: Error getting data from server');
+      return error;
+    }
+  }
+
   setImageMode(mode) {
     // 0: normal, 1: expanded, 2: zoomed
     this.setState({
@@ -133,9 +186,13 @@ class Overview extends React.Component {
     })
   }
 
+  apiInteractions(e) {
+    this.props.apiInteractions(e.target.className, 'Overview');
+  }
+
   render() {
 
-    if (!this.state.productLoaded || !this.state.styleLoaded) {
+    if (!(this.state.productLoaded && this.state.styleLoaded && this.state.ratingsLoaded)) {
       return (
         <section className="container o-product-overview">
           <p>Loading...</p>
@@ -143,7 +200,7 @@ class Overview extends React.Component {
       )
     } else {
       return (
-        <section className="o-product-overview">
+        <section className="o-product-overview" onClick={this.apiInteractions}>
           <ImageGallery
             selectedStyleId={this.state.selectedStyleId}
             stylePhotos={this.state.selectedStyle.photos}
@@ -157,7 +214,9 @@ class Overview extends React.Component {
                 styles={this.state.productStyles}
                 selectedStyleId={this.state.selectedStyleId}
                 style={this.state.selectedStyle}
+                ratings={this.state.productRatings}
                 setStyle={this.setStyle}
+                addToCart={this.addToCart}
               />
           }
           <ProductDescription product={this.state.product} />

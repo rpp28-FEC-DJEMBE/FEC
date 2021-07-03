@@ -16,18 +16,16 @@ class ProductControls extends React.Component {
     this.renderPrice = this.renderPrice.bind(this);
   }
 
-  // async getStarAverage() {
-  //   let starAverage = 3;
-  //   // const ratingData = await axios.get(`/reviews/meta?product_id=${this.props.product[0].id}`);
-    // console.log(ratingData);
-    // const ratingAvg = ratingHelper.getAvgRating(ratingData.data.ratings);
-    // isNaN(ratingAvg) ? starAverage = 0 : starAverage = ratingAvg;
-  //   return (
-  //     <React.Fragment>
-  //       <RatingStars rating={starAverage} size={14} />
-  //     </React.Fragment>
-  //   );
-  // }
+  getStarAverage() {
+    let avgRating = ratingHelper.getAvgRating(this.props.ratings);
+    avgRating = isNaN(avgRating) ? 0 : avgRating
+    return (
+      <React.Fragment>
+        <RatingStars rating={avgRating} size={14} />
+        <a href="#rr-title" className="o-ratings-link">Read all reviews</a>
+      </React.Fragment>
+    );
+  }
 
   renderPrice() {
     if (this.props.style.sale_price) {
@@ -54,14 +52,13 @@ class ProductControls extends React.Component {
     } else {
       return(
         <section className="o-product-controls">
-          <RatingStars rating={3} size={14} />
-          {/* {this.getStarAverage()} */}
+          {this.getStarAverage()}
           <p className="o-product-category">{this.props.product[0].category}</p>
           <p className="o-product-name">{this.props.product[0].name}</p>
           {this.renderPrice()}
-          <p className="o-product-style-name"><b>STYLE > </b>{this.props.style.name}</p>
+          <p className="o-product-style-name"><b>STYLE <span>> </span></b>{this.props.style.name}</p>
           <StyleSelector styles={this.props.styles} selectedStyleId={this.props.selectedStyleId} setStyle={this.props.setStyle} />
-          <CartActions style={this.props.style} selectedStyleId={this.props.selectedStyleId} />
+          <CartActions style={this.props.style} selectedStyleId={this.props.selectedStyleId} addToCart={this.props.addToCart} />
         </section>
       )
     }
