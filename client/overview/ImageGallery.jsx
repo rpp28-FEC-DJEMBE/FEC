@@ -86,10 +86,10 @@ class ImageGallery extends React.Component {
     if ( classes.contains('o-images-thumbnail') || classes.contains('o-images-thumbnail-icon') ) {
       newSelectedImageIndex = parseInt(e.currentTarget.id);
     }
-    if (classes.contains('back-arrow')) {
+    if (classes.contains('back-arrow') || classes.contains('main-image-prev')) {
       newSelectedImageIndex = Math.max(this.state.selectedImageIndex - 1, 0);
     }
-    if (classes.contains('forward-arrow')) {
+    if (classes.contains('forward-arrow') || classes.contains('main-image-next')) {
       newSelectedImageIndex = Math.min(this.state.selectedImageIndex + 1, this.props.stylePhotos.length - 1);
     }
     this.setImages(newSelectedImageIndex);
@@ -169,7 +169,7 @@ class ImageGallery extends React.Component {
 
     }
 
-    // render the forward/backward arrows
+    // render the forward/backward arrows for the thumbnails
     let backArrow = null;
     let forwardArrow = null;
 
@@ -183,6 +183,20 @@ class ImageGallery extends React.Component {
       }
     }
 
+    // render the forward/backward arrows for the main image
+    let mainImagePrev = null;
+    let mainImageNext = null;
+
+    if (this.props.imageMode === 0) {
+      if (firstVisibleImageIndex > 0) {
+        mainImagePrev = <span className='material-icons pointer main-image-prev' onClick={this.handleClick}>arrow_back_ios</span>;
+      }
+
+      if (lastVisibleImageIndex < this.props.stylePhotos.length - 1) {
+        mainImageNext = (<span className='material-icons pointer main-image-next' onClick={this.handleClick}>arrow_forward_ios</span>);
+      }
+    }
+
     // return elements
     return (
       <React.Fragment>
@@ -190,6 +204,10 @@ class ImageGallery extends React.Component {
           <div className="back-arrow-container">{backArrow}</div>
           <ul>{thumbnailList}</ul>
           <div className="forward-arrow-container">{forwardArrow}</div>
+        </nav>
+        <nav className="o-main-image-arrows">
+          {mainImagePrev}
+          {mainImageNext}
         </nav>
       </React.Fragment>
     );
