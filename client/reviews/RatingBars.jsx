@@ -15,7 +15,7 @@ const RatingBars = ({ratings, filterStars}) => {
 
         return (
           <form className='rating-bar' key={star} onClick={() => filterStars(star)}>
-                <label for={`bar-${star}`} ><u>{star} stars</u></label>
+                <label htmlFor={`bar-${star}`} ><u>{star} stars</u></label>
                 <input readOnly id={`bar-${star}`}type="range" min="1" max="5" value='1' className="star-slider pointer" style={barWidth} ></input>
                 {ratings[star]}
           </form>
