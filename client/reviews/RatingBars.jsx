@@ -2,7 +2,7 @@ import React from 'react';
 import helper from './reviewHelpers.js';
 
 
-const RatingBars = ({ratings}) => {
+const RatingBars = ({ratings, filterStars}) => {
   let total = helper.getRatingTotal(ratings);
   let emptyBar = { '--width': `0%` };
   let stars = [5, 4, 3, 2, 1]
@@ -14,10 +14,11 @@ const RatingBars = ({ratings}) => {
         let barWidth = (ratings[star]) ? { '--width': `${helper.ratingConverter(ratings[star], total)}%` } : emptyBar;
 
         return (
-          <div className='rating-bar' key={star}>
-                <label>{star} stars</label>
-                <input readOnly type="range" min="1" max="5" value='1' className="star-slider" style={barWidth}></input>
-          </div>
+          <form className='rating-bar' key={star} onClick={() => filterStars(star)}>
+                <label htmlFor={`bar-${star}`} ><u>{star} stars</u></label>
+                <input readOnly id={`bar-${star}`}type="range" min="1" max="5" value='1' className="star-slider pointer" style={barWidth} ></input>
+                {ratings[star]}
+          </form>
         )
       })
     }
