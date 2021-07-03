@@ -248,7 +248,8 @@ class ImageGallery extends React.Component {
         )
       }
       if (this.props.imageMode === 2) {
-        imgUrl = this.state.mainImageUrl.split('&w=')[0] + '&w=1271';
+        // imgUrl = this.state.mainImageUrl.split('&w=')[0] + '&w=1271';
+        imgUrl = this.state.mainImageUrl;
         className = "o-images-main o-zoomed pointer";
         cssVariables['--bgImgUrl'] = 'url(' + imgUrl + ')';
         cssVariables['--x'] = '50%';
