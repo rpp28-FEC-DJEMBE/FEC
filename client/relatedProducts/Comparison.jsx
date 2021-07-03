@@ -10,7 +10,6 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
     {
       id: [],
       name: [],
-      // features: [[], []],
       featuresCombined: {
         value1: [],
         value2: [],
@@ -37,7 +36,6 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
         {
           id: [currentId, btnId],
           name: [featuresData1.data.name, featuresData2.data.name],
-          // features: [featuresData1.data.features, featuresData2.data.features],
           featuresCombined: featuresCombined
         }
       );

@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, {useEffect, useState} from 'react';
 
 import style from './RelatedPdt.css';
@@ -107,7 +106,11 @@ function RelatedPdt(props) {
       setOutfits({pdt_ids: savedOutfitIds, products: savedOutfit});
 
       if (outfitLayOut.displayFirstId + displayOutfitItems === savedOutfitIds.length) {
-        setOutfitLayOut(parseLayout(outfitLayOut.displayFirstId, savedOutfitIds.length, 'pointer btn-Inactive', 'pointer rightBtn'));
+        if (outfitLayOut.displayFirstId === 0) {
+          setOutfitLayOut(parseLayout(outfitLayOut.displayFirstId, savedOutfitIds.length, 'pointer btn-Inactive', 'pointer rightBtn'));
+        } else {
+          setOutfitLayOut(parseLayout(outfitLayOut.displayFirstId, savedOutfitIds.length, 'pointer', 'pointer rightBtn'));
+        }
       }
 
     } catch (err) {
@@ -135,7 +138,7 @@ function RelatedPdt(props) {
   }
 
   const slideLeft = (carousel, products, itemNum) => {
-    let leftBtn, updatedLayout;
+    let leftBtn, updatedLayout, updatedLayoutRemoved;
     if (carousel.displayFirstId > 0) {
       if (carousel.displayFirstId === 1) {
         leftBtn = 'pointer btn-Inactive';
@@ -143,10 +146,15 @@ function RelatedPdt(props) {
         leftBtn = 'pointer';
       }
       updatedLayout = parseLayout(carousel.displayFirstId - 1, products.pdt_ids.length, leftBtn, 'pointer rightBtn');
+      updatedLayoutRemoved = parseLayout(carousel.displayFirstId - 1, products.pdt_ids.length, leftBtn, 'pointer rightBtn btn-Inactive');
       if (itemNum === displayPdtItems) {
         setPdtLayOut(updatedLayout);
       } else {
-        setOutfitLayOut(updatedLayout);
+        if (products.pdt_ids.length < carousel.displayFirstId + itemNum - 1) {
+          setOutfitLayOut(updatedLayoutRemoved);
+        } else {
+          setOutfitLayOut(updatedLayout);
+        }
       }
     }
   }
@@ -169,7 +177,7 @@ function RelatedPdt(props) {
   }
 
   const onProductBtnClick = (btnId) => {
-    console.log('onProductBtnClick', btnId);
+    // console.log('onProductBtnClick', btnId);
     setShowComp(true);
     setBtnId(btnId);
   }
@@ -188,7 +196,10 @@ function RelatedPdt(props) {
 
 
   return (
-    <div data-testid="relatedPdt" onClick={onCompaClose}>
+    <div data-testid="relatedPdt" onClick={(e) => {
+      onCompaClose();
+      props.apiInteractions(e.target.className, 'Related Product');
+    }}>
       <div className="related-product-widget">
         <h2 className="related-product-header">RELATED PRODUCTS</h2>
         <div className="related-product-box">
@@ -227,7 +238,9 @@ function RelatedPdt(props) {
             className={outfitLayOut.pdtLeftBtn}
             onClick={() => slideLeft(outfitLayOut, outfits, displayOutfitItems)}
           >{'\u1438'}</label>
-          <OutfitAddCard onAddOutfitClick={onAddOutfitClick}/>
+          <OutfitAddCard
+            onAddOutfitClick={onAddOutfitClick}
+          />
           {
             outfits.products.slice(outfitLayOut.displayFirstId, outfitLayOut.displayFirstId + displayOutfitItems).map( outfit =>
               (
@@ -251,10 +264,12 @@ function RelatedPdt(props) {
           >{'\u1433'}</label>
         </div>
       </div>
-
-      <Comparison productId={props.productId} btnId={btnId} showComp={showComp} onCompaClose={onCompaClose}/>
-
-
+      <Comparison
+        productId={props.productId}
+        btnId={btnId}
+        showComp={showComp}
+        onCompaClose={onCompaClose}
+      />
     </div>
   )
 }

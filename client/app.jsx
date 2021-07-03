@@ -3,14 +3,7 @@ import ReactDOM from 'react-dom';
 const axios = require('axios');
 
 import './app.css';
-
-// import logo from './images/react_js_logo_64px.png';
 import logo from './images/djembe.png';
-// const logo = 'https://drive.google.com/uc?export=view&id=1ZJWMpyC9lHuT9YawTMJ8ymOfPlDK7ga_'
-// import Overview from './overview/Overview.jsx';
-// import RelatedPdt from './relatedProducts/RelatedPdt.jsx';
-// import Questions from './questions/questions.jsx';
-// import Reviews from './reviews/Reviews.jsx';
 const Overview = lazy( () => import('./overview/Overview.jsx'));
 const RelatedPdt = lazy( () => import('./relatedProducts/RelatedPdt.jsx'));
 const Questions = lazy( () => import('./questions/questions.jsx'));
@@ -42,8 +35,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 22122,
-      productName: 'Camo Onesie'
+      productName: 'Camo Onesie',
+      darkmode: false
     }
+    this.onCardClick = this.onCardClick.bind(this);
+    this.apiInteractions = this.apiInteractions.bind(this);
   }
 
   onCardClick(productCardId, productName) {
@@ -54,6 +50,37 @@ class App extends React.Component {
     });
   }
 
+  apiInteractions(element, widget) {
+    let data = {
+      "element": element,
+      "widget": widget,
+      "time": new Date()
+    }
+    console.log(element, widget, data.time);
+
+    axios({
+      method: 'post',
+      url: '/interactions',
+      data: data
+    })
+    .then(res => console.log(res))
+    .catch(err => { throw new Error(err.message); });
+  }
+
+  themeToggle(){
+    const app = document.body;
+    app.classList.toggle("darkmode");
+    if(!this.state.dark) {
+      this.setState({
+        darkmode: true
+      })
+    } else {
+      this.setState({
+        darkmode: false
+      })
+    }
+  }
+
   render() {
     return (
       <ErrorBoundary>
@@ -61,15 +88,21 @@ class App extends React.Component {
           <React.Fragment>
             <header>
               <nav>
-                <h1><img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />The Djembe Clothing Company</h1>
-                {/* <div style={{float: 'right'}} className="pointer" onClick={this.changeProductId.bind(this)}>{'ProductId: ' + this.state.productId}</div> */}
+                <h1>
+                  <img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />
+                  The Djembe Clothing Company
+                  <label className="toggle">
+                    <input onClick={()=> this.themeToggle()} type="checkbox" ></input>
+                    <span className="slider"></span>
+                  </label>
+                </h1>
               </nav>
               <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
             </header>
-            <Overview productId={this.state.productId} />
-            <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick.bind(this)}/>
-            <Questions product={this.state} />
-            <Reviews productId={this.state.productId} productName={this.state.productName}/>
+            <Overview productId={this.state.productId}  apiInteractions={this.apiInteractions} />
+            <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
+            <Questions product={this.state} apiInteractions={this.apiInteractions} />
+            <Reviews productId={this.state.productId} apiInteractions={this.apiInteractions} />
           </React.Fragment>
         </Suspense>
       </ErrorBoundary>
