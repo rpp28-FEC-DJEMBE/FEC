@@ -396,7 +396,7 @@ input[type="file"] {
   display: grid;
   background-color: white;
   max-height: 80%;
-  width: 40%;
+  width: 50%;
   border-radius: .2rem;
   padding: 8px;
   overflow-y: scroll;
@@ -417,7 +417,7 @@ input[type="file"] {
 
 .star-slider {
   -webkit-appearance: none;
-  width: 80%;
+  width: 77%;
   height: 7px;
   background: rgb(184, 184, 184);
   outline: none;
@@ -540,8 +540,7 @@ input[type="file"] {
   background-color: rgba(202, 202, 202, 0.822);
 }
 
-#overall-rating,
-.review-chars-entry {
+#overall-rating {
   display: flex;
   flex-direction: row;
 }
@@ -556,15 +555,6 @@ input[type="file"] {
   background-color: rgb(184, 184, 184)
 }
 
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
 
 .review-modal {
   position: fixed;
@@ -577,6 +567,9 @@ input[type="file"] {
 }
 
 .review-chars-entry {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 50% 50%;
   justify-content: space-evenly;
   margin-bottom: 2px;
 }

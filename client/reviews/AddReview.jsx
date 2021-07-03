@@ -34,15 +34,17 @@ const AddReview = (props) => {
       let selection = (!characters[char]) ? 'none selected' : characters[char];
       return (
         <div className='review-chars' style={{paddingLeft: '10px', marginBottom: '10px'}} key={charId}>
-          <label>{char}: {selection}</label>
+          <label>{char}</label>
           <div className='review-chars-entry'>
             {
               charsTable[char].map((option, index) => (
 
-                <span key={index} className='char-entry' style={{justifyContent: 'center'}}onClick={e => handleCharEntry(e)}>
-                  <input type='radio' id={`${char}-${index + 1}`} name={charId} value={index + 1}></input>
-                  {/* <label htmlFor={`${char}-${index + 1}`}>{option}</label> */}
-                  {(index === 0 || index === 4) ? <label htmlFor={`${char}-${index + 1}`}>{option}</label> : null}
+                <span key={index} className='char-entry' style={{alignItems: 'center'}} onClick={e => handleCharEntry(e)}>
+                  <div style={{justifyContent: 'space-between'}}>
+                    <input type='radio' id={ `${char}-${index + 1}`} name={charId} value={index + 1}></input>
+                  </div>
+                  <label htmlFor={`${char}-${index + 1}`} style={{fontSize: 'smaller'}}>{option}</label>
+                  {/* {(index === 0 || index === 4) ? <label htmlFor={`${char}-${index + 1}`}>{option}</label> : null} */}
                 </span>
               ))
 
@@ -137,8 +139,10 @@ const AddReview = (props) => {
         data: postBody
       })
       .then(() => console.log(`Review successfully posted`))
+      .then(()=> closeModal())
       .catch((err) => console.log('Error posting review'))
     }
+
   }
 
   const starClick = (e) => {
@@ -179,7 +183,7 @@ const AddReview = (props) => {
         </div>
         <div className='modal-body'>
           <label>Overall Rating*</label>
-          <section id='overall-rating bottom-space'>
+          <section id='overall-rating'>
             <div className="review-stars">
               <input id="star5" name="star" onClick={e => starClick(e)} type="radio" value="5" className="radio-btn hide" />
               <label htmlFor="star5" >★</label>
@@ -196,7 +200,7 @@ const AddReview = (props) => {
             <p id='star-text'>{starText}</p>
           </section>
           <label>Do you recommend this product?*</label>
-          <div className='review-recommend' >
+          <div className='review-recommend bottom-space' >
             <span onClick={e => setRecommend((e.target.value === 'true'))}>
               <input type='radio' name='recommend' value='true'></input>Yes</span>
             <span onClick={e => setRecommend((e.target.value === 'true'))}>
