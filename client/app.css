@@ -173,13 +173,6 @@ display: block;
   display:flex;
 }
 
-.upload-btn, .answer-submit {
-  border: solid 1px;
-  padding-top: .8rem;
-  margin-right: .7rem;
-
-}
-
 input[type="file"] {
   display: none;
 }
@@ -199,6 +192,7 @@ input[type="file"] {
   margin-top: 5px;
   font-size: small;
   opacity: .5;
+  margin-bottom: 0px;
 }
 
 .qaSearch {
@@ -267,19 +261,29 @@ input[type="file"] {
   z-index: 10;
 }
 
-.more-q-btn,
-.add-q-btn,
+.upload-btn,
+.answer-submit,
+.qa-button,
 .review-btn {
-border: solid 1px;
-border-color: black;
-background-color: white;
-height: 50px;
-margin-right: 1rem;
-padding-right: 1rem;
-padding-left: 1rem;
-font-weight: bold;
-font-size: 15px;
+  border: solid 1px;
+  border-color: black;
+  background-color: white;
+  height: 50px;
+  margin-right: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 10px;
 }
+
+.upload-btn, .answer-submit {
+  border: solid 1px;
+  padding-top: .8rem;
+  margin-right: .7rem;
+
+}
+
 
 .disclaimer {
   font-size: small;
@@ -293,6 +297,11 @@ font-size: 15px;
   margin-bottom: 0px;
   display: inline-flex;
 
+}
+
+#questionInput,
+#answer {
+  height: 80px;
 }
 
 .a {
@@ -312,6 +321,12 @@ font-size: 15px;
 .question-title {
   margin-bottom: 0px;
   height: 25px;
+}
+
+.question-footer {
+  margin-top:5px;
+  display: flex;
+  justify-content: center;
 }
 
 .answer-content, .question-content {
