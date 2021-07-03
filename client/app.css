@@ -3,6 +3,17 @@
 /* BASE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
+* {
+  color: rgb(184, 184, 184);
+}
+
+body {
+  background-color: #282626;
+}
+
+
+
+
 body {
   font-family: 'Roboto', sans-serif;
 }

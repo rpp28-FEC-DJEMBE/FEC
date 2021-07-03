@@ -40,5 +40,16 @@
   width: 11%;
   height: 360px;
   pointer-events: none;
+}
+
+/* light theme */
+/* .related-product-box:after,
+.outfit-box:after {
   background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+} */
+
+/* dark theme */
+.related-product-box:after,
+.outfit-box:after {
+  background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(40,38,38,1) 90%);
 }
