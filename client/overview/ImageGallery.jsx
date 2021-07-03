@@ -222,28 +222,34 @@ class ImageGallery extends React.Component {
 
   renderMainImage() {
 
-    let className, mainImage;
-    let cssVariables = {};
+    let mainImage;
 
-    if (this.props.imageMode === 0) {
-      className = "o-images-main pointer";
-      mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
-    }
-    if (this.props.imageMode === 1) {
-      className = "o-images-main o-expanded pointer";
-      mainImage = (
-        <React.Fragment>
-          <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
-          <span className="o-main-image-fullscreen-exit material-icons pointer" onClick={this.handleClick}>fullscreen_exit</span>
-        </React.Fragment>
-      )
-    }
-    if (this.props.imageMode === 2) {
-      className = "o-images-main o-zoomed pointer";
-      cssVariables['--bgImgUrl'] = 'url(' + this.state.mainImageUrl + ')';
-      cssVariables['--x'] = '50%';
-      cssVariables['--y'] = '50%';
-      mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage}/>
+    if (this.state.mainImageUrl) {
+      let className;
+      let cssVariables = {};
+
+      if (this.props.imageMode === 0) {
+        className = "o-images-main pointer";
+        mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
+      }
+      if (this.props.imageMode === 1) {
+        className = "o-images-main o-expanded pointer";
+        mainImage = (
+          <React.Fragment>
+            <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
+            <span className="o-main-image-fullscreen-exit material-icons pointer" onClick={this.handleClick}>fullscreen_exit</span>
+          </React.Fragment>
+        )
+      }
+      if (this.props.imageMode === 2) {
+        className = "o-images-main o-zoomed pointer";
+        cssVariables['--bgImgUrl'] = 'url(' + this.state.mainImageUrl + ')';
+        cssVariables['--x'] = '50%';
+        cssVariables['--y'] = '50%';
+        mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage}/>
+      }
+    } else {
+      mainImage = <div className="o-images-main o-images-noimage"></div>
     }
 
     return (

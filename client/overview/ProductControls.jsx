@@ -59,7 +59,7 @@ class ProductControls extends React.Component {
           <p className="o-product-category">{this.props.product[0].category}</p>
           <p className="o-product-name">{this.props.product[0].name}</p>
           {this.renderPrice()}
-          <p className="o-product-style-name"><b>STYLE > </b>{this.props.style.name}</p>
+          <p className="o-product-style-name"><b>STYLE <span>> </span></b>{this.props.style.name}</p>
           <StyleSelector styles={this.props.styles} selectedStyleId={this.props.selectedStyleId} setStyle={this.props.setStyle} />
           <CartActions style={this.props.style} selectedStyleId={this.props.selectedStyleId} addToCart={this.props.addToCart} />
         </section>

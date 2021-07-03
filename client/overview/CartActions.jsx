@@ -23,14 +23,24 @@ function CartActions(props) {
 
   useEffect(() => {
     setInventory(props.style.skus);
-  }, [props.style]); // Only re-run the effect if props.style changes
+    setOrderSku(null);
+    setOrderQty(null);
+  }, [props.style, props.selectedStyleId]); // Only re-run the effect if props.style changes
+
 
   const addToBag = () => {
-    const order = {
-      sku_id: orderSku,
-      count: orderQty
+
+    // TODO if select is not open, trigger an open of the select list (might need a ref)
+
+    if (orderSku) {
+      const order = {
+        sku_id: orderSku,
+        count: orderQty ? orderQty : 1
+      }
+      const result = props.addToCart(order);
+      console.log(result);
     }
-    console.log(props.addToCart(order));
+
   }
 
   if (!props || !inventory) {

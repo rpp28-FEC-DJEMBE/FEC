@@ -125,10 +125,18 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   cursor: zoom-in;
 }
 
+.o-images-main.o-images-noimage {
+  background-image: url(https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border: 1px #282626 solid;
+  opacity: 0.5;
+  cursor: default;
+}
+
 .o-main-image-arrows {
   position: relative;
   top: -55%;
-
 }
 
 .main-image-prev,
@@ -206,7 +214,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 }
 
 
-
 /* PRODUCT CONTROLS */
 
 .o-product-controls.stars {
@@ -224,6 +231,15 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   font-weight: 700;
   margin-top: 0rem;
   margin-bottom: 0rem;
+}
+
+.o-product-style-name {
+  text-transform: uppercase;
+}
+
+.o-product-style-name span {
+  position: relative;
+  top: -0.048rem;
 }
 
 .o-product-style-price .strikethrough {
@@ -354,6 +370,10 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 /* STATE-RELATED STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
+/* OUT OF STOCK */
+
+
+
 /* EXPANDED VIEW STYLES */
 
 .o-images.o-expanded {
@@ -365,7 +385,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 }
 
 .o-main-image-fullscreen-exit {
-
   /* color: rgb(219, 219, 219); */
   /* color: rgb(128, 128, 128); */
   color: white;

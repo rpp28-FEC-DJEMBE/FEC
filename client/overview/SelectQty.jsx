@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function SelectQty(props) {
 
@@ -13,6 +13,7 @@ function SelectQty(props) {
     props.saveQty(Number(event.currentTarget.value));
   });
 
+
   const renderQtyOptions = (() => {
 
     if (!props.selectedSku) {
@@ -20,6 +21,7 @@ function SelectQty(props) {
         <option value='0'>-</option>
       )
     } else {
+
       let maxQty = Math.min(props.inventory[props.selectedSku].quantity, maxOrderQuantity);
       const qtyOptions = [...Array(maxQty).keys()].map(qty => {
         return (<option key={qty + 1} value={qty + 1}>{qty + 1}</option>)
