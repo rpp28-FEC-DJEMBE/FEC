@@ -102,7 +102,7 @@ class App extends React.Component {
             <Overview productId={this.state.productId}  apiInteractions={this.apiInteractions} />
             <RelatedPdt productId={this.state.productId} darkmode={this.state.darkmode} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
             <Questions product={this.state} apiInteractions={this.apiInteractions} />
-            <Reviews productId={this.state.productId} apiInteractions={this.apiInteractions} />
+            <Reviews productId={this.state.productId} productName={this.state.productName} apiInteractions={this.apiInteractions} />
           </React.Fragment>
         </Suspense>
       </ErrorBoundary>
