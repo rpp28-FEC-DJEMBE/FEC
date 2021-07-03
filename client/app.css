@@ -237,6 +237,7 @@ input[type="file"] {
   display: inline;
   font-size: small;
   margin-top: 10px;
+  margin-left: auto;
 }
 
 .question {
@@ -591,7 +592,6 @@ input[type="file"] {
 }
 
 .review-list {
-  max-width: 800px;
   max-height: 530px;
   overflow-y: scroll;
   scroll-behavior: smooth;
