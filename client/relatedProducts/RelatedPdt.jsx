@@ -17,6 +17,13 @@ function RelatedPdt(props) {
   const displayPdtItems = 4;
   const displayOutfitItems = displayPdtItems - 1;
 
+  let relatedPdtClassName = 'related-product-box';
+  let outfitClassName = 'outfit-box';
+  if (props.darkmode) {
+    relatedPdtClassName = 'related-product-box-dark';
+    outfitClassName = 'outfit-box-dark';
+  }
+
   useEffect( () => {
     getOutfits();
     getRelatedPdts(props.productId);
@@ -202,7 +209,7 @@ function RelatedPdt(props) {
     }}>
       <div className="related-product-widget">
         <h2 className="related-product-header">RELATED PRODUCTS</h2>
-        <div className="related-product-box">
+        <div className={relatedPdtClassName}>
           <label
             className={pdtLayOut.pdtLeftBtn}
             onClick={() => slideLeft(pdtLayOut, relatedPdts, displayPdtItems)}
@@ -233,7 +240,7 @@ function RelatedPdt(props) {
 
       <div className="outfit-widget">
         <h2 className="outfit-header">YOUR OUTFIT</h2>
-        <div className="outfit-box">
+        <div className={outfitClassName}>
         <label
             className={outfitLayOut.pdtLeftBtn}
             onClick={() => slideLeft(outfitLayOut, outfits, displayOutfitItems)}
@@ -266,6 +273,7 @@ function RelatedPdt(props) {
       </div>
       <Comparison
         productId={props.productId}
+        darkmode={props.darkmode}
         btnId={btnId}
         showComp={showComp}
         onCompaClose={onCompaClose}

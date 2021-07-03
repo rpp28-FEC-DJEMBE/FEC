@@ -10,6 +10,8 @@ const Questions = lazy( () => import('./questions/questions.jsx'));
 const Reviews = lazy( () => import('./reviews/Reviews.jsx'));
 
 const renderLoader = () => <p>Loading</p>;
+const sun = '\u263C';
+const moon = '\u263D';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -70,7 +72,7 @@ class App extends React.Component {
   themeToggle(){
     const app = document.body;
     app.classList.toggle("darkmode");
-    if(!this.state.dark) {
+    if(!this.state.darkmode) {
       this.setState({
         darkmode: true
       })
@@ -91,16 +93,18 @@ class App extends React.Component {
                 <h1>
                   <img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />
                   The Djembe Clothing Company
-                  <label className="toggle">
+                  <label className="toggle pointer">
                     <input onClick={()=> this.themeToggle()} type="checkbox" ></input>
                     <span className="slider"></span>
                   </label>
+
+                  <span className="moon"><span className="sun">{sun}</span>{moon}</span>
                 </h1>
               </nav>
               <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
             </header>
             <Overview productId={this.state.productId}  apiInteractions={this.apiInteractions} />
-            <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
+            <RelatedPdt productId={this.state.productId} darkmode={this.state.darkmode} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
             <Questions product={this.state} apiInteractions={this.apiInteractions} />
             <Reviews productId={this.state.productId} productName={this.state.productName} apiInteractions={this.apiInteractions} />
           </React.Fragment>

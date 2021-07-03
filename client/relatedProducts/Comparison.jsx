@@ -3,7 +3,7 @@ import style from './Comparison.css';
 const axios = require('axios');
 const {collectFeatures, combineFeatures} = require('./featuresHelper');
 
-function Comparison ({productId, btnId, showComp, onCompaClose}) {
+function Comparison ({productId, darkmode, btnId, showComp, onCompaClose}) {
   const check="\u2713";
 
   const [featuresComp, setFeaturesComp] = useState(
@@ -15,8 +15,12 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
         value2: [],
         featureWValue: []
       }
+  });
+
+  let compClassName = 'comparison-box pointer';
+  if (darkmode) {
+    compClassName = 'comparison-box-dark pointer';
   }
-  );
 
   useEffect( () => {
     getFetures(productId, btnId);
@@ -51,7 +55,7 @@ function Comparison ({productId, btnId, showComp, onCompaClose}) {
   }
 
   return (
-    <div data-testid="comparison" className="comparison-box pointer" onClick={onCompaClose}>
+    <div data-testid="comparison" className={compClassName} onClick={onCompaClose}>
       <p className="comparing">COMPARING</p>
       <div className="comparison-name-line">
         <p>{featuresComp.name[0]}</p>

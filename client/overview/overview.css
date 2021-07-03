@@ -8,7 +8,7 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 
 .o-product-overview select,
 .o-product-overview button {
-  background: none;
+  background-color: rgb(255, 255, 255);
   box-shadow: none;
   border-radius: 0px;
   border: 0.1rem solid #5A5A5A;
@@ -21,6 +21,18 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+.o-ratings-link {
+  font-size: 0.75em;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  color: black;
+}
+
+.o-ratings-link:hover {
+  text-decoration: underline;
+}
+
 
 
 /* LAYOUT STYLES
@@ -125,16 +137,25 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   cursor: zoom-in;
 }
 
+.o-images-main.o-images-noimage {
+  background-image: url(https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border: 1px #282626 solid;
+  opacity: 0.5;
+  cursor: default;
+}
+
 .o-main-image-arrows {
   position: relative;
-  top: -50%;
-
+  top: -55%;
 }
 
 .main-image-prev,
 .main-image-next {
   position: absolute;
   color: rgb(219, 219, 219);
+  /* color: rgb(128, 128, 128); */
   font-size: 42px;
 }
 
@@ -205,7 +226,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 }
 
 
-
 /* PRODUCT CONTROLS */
 
 .o-product-controls.stars {
@@ -223,6 +243,15 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   font-weight: 700;
   margin-top: 0rem;
   margin-bottom: 0rem;
+}
+
+.o-product-style-name {
+  text-transform: uppercase;
+}
+
+.o-product-style-name span {
+  position: relative;
+  top: -0.048rem;
 }
 
 .o-product-style-price .strikethrough {
@@ -324,13 +353,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   left: -0.17rem;
 }
 
-
-/* PRODUCT CONTROLS: ADD TO CART CONTROLS */
-
-/* there are some in the layout section */
-
-
-
 /* PRODUCT DESCRIPTION */
 
 .o-product-description-slogan {
@@ -341,6 +363,7 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 .o-product-description-features {
   border-left: solid black 0.1rem;
 }
+
 
 .o-product-description-bullets li {
   list-style: none;
@@ -359,6 +382,10 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 /* STATE-RELATED STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
+/* OUT OF STOCK */
+
+
+
 /* EXPANDED VIEW STYLES */
 
 .o-images.o-expanded {
@@ -367,6 +394,16 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 
 .o-expanded:hover {
   cursor: crosshair;
+}
+
+.o-main-image-fullscreen-exit {
+  /* color: rgb(219, 219, 219); */
+  /* color: rgb(128, 128, 128); */
+  color: white;
+  font-size: 42px;
+  position: absolute;
+  top: 2%;
+  left: 96%;
 }
 
 .o-images.o-expanded nav ul li {
@@ -401,6 +438,5 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 }
 
 .o-images-main.o-zoomed:hover {
-  /* cursor: url('\2212'), auto; */
-  cursor: w-resize;
+  cursor: url('cursor-minus.png'), auto;
 }
