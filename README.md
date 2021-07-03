@@ -56,10 +56,10 @@ If the user wishes to answer a question, the user can click on 'Add Answer' whic
 ![Ratings and Reviews](readme-screenshots/4-ratings-and-reviews.png?raw=true "Optional Title")
 
 
-## Team Members
-* Andre Boussarath - https://github.com/aboussarath
+## Djembe Team Members
 * Kingsley Allen - https://github.com/kingsleyallen
 * Huiqing Li - https://github.com/sharplessHQ
 * Simon Si - https://github.com/Sim0nSl1003
+* Andre Boussarath - https://github.com/aboussarath
 
 
