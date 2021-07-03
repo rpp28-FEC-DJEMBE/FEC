@@ -5,7 +5,7 @@ function SelectQty(props) {
   // receives:
   // inventory={inventory}
   // saveQty={saveOrderQty}
-  // selectedSize={orderSize}
+  // selectedSku={orderSku}
 
   const maxOrderQuantity = 15;
 
@@ -15,13 +15,12 @@ function SelectQty(props) {
 
   const renderQtyOptions = (() => {
 
-    if (!props.selectedSize) {
+    if (!props.selectedSku) {
       return (
         <option value='0'>-</option>
       )
     } else {
-
-      let maxQty = Math.min(props.inventory[props.selectedSize], maxOrderQuantity);
+      let maxQty = Math.min(props.inventory[props.selectedSku].quantity, maxOrderQuantity);
       const qtyOptions = [...Array(maxQty).keys()].map(qty => {
         return (<option key={qty + 1} value={qty + 1}>{qty + 1}</option>)
       });
@@ -38,7 +37,7 @@ function SelectQty(props) {
         <select
           name="qty"
           className="o-qty-list"
-          disabled={!props.selectedSize}
+          disabled={!props.selectedSku}
           // selected={!props.selectedSize ? '0' : 1}
           onChange={saveQty}
         >

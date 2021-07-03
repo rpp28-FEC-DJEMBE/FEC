@@ -23,8 +23,11 @@ class Overview extends React.Component {
       useMockData: false
     }
 
+    const addToCartIsActive = false;
+
     this.setStyle = this.setStyle.bind(this);
     this.setImageMode = this.setImageMode.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -126,6 +129,33 @@ class Overview extends React.Component {
     }
   }
 
+  addToCart(order) {
+    if (!this.addToCartIsActive) {
+      return order;
+    } else {
+      const endpoint = '/cart';
+      this.postAPIData(endpoint, order)
+        .then(response => {
+          console.log('Overview: Received response adding to cart:', response);
+        })
+        .catch(error => {
+          console.error('Overview: Error adding to cart', error);
+        })
+    }
+  }
+
+  async postAPIData(endpointUrl, data) {
+    try {
+      const response = await axios.post(endpointUrl, data);
+      // console.log('Overview: Received data from server');
+      return response
+    } catch (error) {
+      // console.error('Overview: Error getting data from server');
+      return error;
+    }
+  }
+
+
   setImageMode(mode) {
     // 0: normal, 1: expanded, 2: zoomed
     this.setState({
@@ -158,6 +188,7 @@ class Overview extends React.Component {
                 selectedStyleId={this.state.selectedStyleId}
                 style={this.state.selectedStyle}
                 setStyle={this.setStyle}
+                addToCart={this.addToCart}
               />
           }
           <ProductDescription product={this.state.product} />

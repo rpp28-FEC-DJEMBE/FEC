@@ -4,22 +4,25 @@ function SelectSize(props) {
 
   // receives:
   // inventory={inventory}
-  // saveSize={saveOrderSize}
+  // saveSku={saveOrderSku}
 
-  const saveSize = (event => {
-    let size = event.currentTarget.value === 'Select Size' ? null : event.currentTarget.value;
-    props.saveSize(size);
+  const saveSku = (event => {
+    let sku = event.currentTarget.value === 'Select Size' ? null : event.currentTarget.value;
+    props.saveSku(sku);
   });
 
   const renderSizeOptions = (() => {
-    const sizeOptions = Object.keys(props.inventory).map(size => {
+
+    const skus = props.inventory;
+    const sizeOptions = Object.keys(skus).map(sku => {
       return (
-        <option key={size} value={size}>{size}</option>
+        <option key={sku} value={sku}>{skus[sku].size}</option>
       );
     });
+
     return (
       <React.Fragment>
-        <select name="size" className="o-size-list" onChange={saveSize}>
+        <select name="size" className="o-size-list" onChange={saveSku}>
           <option value='Select Size'>Select Size</option>
           {sizeOptions}
         </select>
