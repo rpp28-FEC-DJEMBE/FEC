@@ -35,7 +35,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 22122,
-      productName: 'Camo Onesie'
+      productName: 'Camo Onesie',
+      darkmode: false
     }
     this.onCardClick = this.onCardClick.bind(this);
     this.apiInteractions = this.apiInteractions.bind(this);
@@ -69,6 +70,15 @@ class App extends React.Component {
   themeToggle(){
     const app = document.body;
     app.classList.toggle("darkmode");
+    if(!this.state.dark) {
+      this.setState({
+        darkmode: true
+      })
+    } else {
+      this.setState({
+        darkmode: false
+      })
+    }
   }
 
   render() {
@@ -82,7 +92,7 @@ class App extends React.Component {
                   <img src={logo} loading="lazy" width="120" height="43" alt='Djembe' />
                   The Djembe Clothing Company
                   <label className="toggle">
-                    <input onClick={()=> this.themeToggle()} type="checkbox"></input>
+                    <input onClick={(e)=> this.themeToggle(e)} type="checkbox" ></input>
                     <span className="slider"></span>
                   </label>
                 </h1>
