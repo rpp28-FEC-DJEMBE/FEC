@@ -1,5 +1,5 @@
 // Get average rating for stars to nearest 0.25
-const getAvgRating = (data) => {
+const getAvgRating = (data, decimal) => {
   let total = 0;
   let ratings = 0;
   for (var key in data) {
@@ -8,7 +8,7 @@ const getAvgRating = (data) => {
   }
 
  let average = total/ratings;
- return (Math.round(average * 4) / 4).toFixed(2)
+ return (Math.round(average * 4) / 4).toFixed(decimal)
 }
 
 // Convert star/bar ratings to percentage for CSS
@@ -77,6 +77,20 @@ const sortRelevantReviews = (reviews) => {
   return reviews.sort((a, b) => a.rank - b.rank);
 }
 
+const getRatings = (reviews) => {
+  return reviews.reduce((allRatings, review) => {
+    (review.rating in allRatings) ? allRatings[review.rating]++ : allRatings[review.rating] = 1
+    return allRatings
+  }, {})
+}
+
+const getRecommend = (reviews) => {
+  return reviews.reduce((allRecs, review) => {
+    (review.recommend in allRecs) ? allRecs[review.recommend]++ : allRecs[review.recommend] = 1
+    return allRecs
+  }, {})
+}
+
 module.exports = {
   getAvgRating: getAvgRating,
   getRatingTotal: getRatingTotal,
@@ -84,5 +98,7 @@ module.exports = {
   ratingConverter: ratingConverter,
   convertDate: convertDate,
   charsTable: charsTable,
-  sortRelevantReviews: sortRelevantReviews
+  sortRelevantReviews: sortRelevantReviews,
+  getRatings: getRatings,
+  getRecommend: getRecommend
 }

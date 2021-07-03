@@ -79,7 +79,7 @@ class AddQuestion extends React.Component{
             <textarea id="questionInput" type="text" onChange={() => this.inputChange("questionInput")} maxLength="1000" value={this.state.questionInput}></textarea>
           </div>
           <div className="question-footer">
-          <button onClick={() =>this.handleSubmit()}>Submit question</button>
+          <button className="qa-button" onClick={() =>this.handleSubmit()}>Submit question</button>
           </div>
         </div>
       </div>

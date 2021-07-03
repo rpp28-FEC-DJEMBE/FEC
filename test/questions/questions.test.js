@@ -3,19 +3,19 @@ import {shallow, configure} from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({adapter: new Adapter()});
 
-import AddAnswerModal from '../../client/questions/addAnswerModal.jsx';
 import AddedPhotos from '../../client/questions/addedPhotos.jsx';
 import AddQuestion from '../../client/questions/addQuestion.jsx';
 import AnswerEntry from '../../client/questions/answerEntry.jsx';
+import AnswerPhotoDisplay from '../../client/questions/answerPhotoDisplay.jsx';
 import AnswerPhotos from '../../client/questions/answerPhotos.jsx';
 import AnswersList from '../../client/questions/answersList.jsx';
 import ExpandAnswers from '../../client/questions/expandAnswers.jsx';
+import MoreAnsweredQuestions from '../../client/questions/moreAnsweredQuestions.jsx';
 import QuestionEntry from '../../client/questions/questionEntry.jsx';
 import Questions from '../../client/questions/questions.jsx';
 import QuestionsList from '../../client/questions/questionsList.jsx';
 import Search from '../../client/questions/search.jsx';
 import AnswerModal from '../../client/questions/addAnswerModal.jsx';
-
 describe('Components all render', () => {
 
   test('Renders ExpandAnswers', () => {
@@ -85,8 +85,8 @@ describe('Components all render', () => {
   })
 
   test('Renders AddAnswerModal', () => {
-    const addAnswerModal = shallow(<AddAnswerModal show={true}/>)
-    expect(addAnswerModal.exists()).toBe(true);
+    const answerModal = shallow(<AnswerModal show={true}/>)
+    expect(answerModal.exists()).toBe(true);
   })
 
   test('Renders QuestionEntry', () => {
