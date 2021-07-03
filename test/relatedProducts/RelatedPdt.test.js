@@ -65,11 +65,12 @@ describe('RelatedPdt', () => {
   const getOutfits = jest.fn();
   const slideLeft = jest.fn();
   const onCardClick = jest.fn();
+  const apiInteractions = jest.fn();
   let wrapper;
 
   beforeEach( async() => {
     // wrapper = mount(<RelatedPdt getOutfits={getOutfits}/>)
-    wrapper = mount(<RelatedPdt productId={22122} onCardClick={onCardClick}/>)
+    wrapper = mount(<RelatedPdt productId={22122} onCardClick={onCardClick} apiInteractions={apiInteractions} />)
   } );
 
   it ('renders', async() => {
@@ -77,18 +78,18 @@ describe('RelatedPdt', () => {
     expect(wrapper).not.toBeNull();
   });
 
-  it ('shows my default text', async() => {
+  it ('shows my default text1', async() => {
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('h3').exists()).toBe(true);
-    // expect(wrapper.find('h3').text()).toEqual('RELATED PRODUCTS');
-    expect(wrapper.find('h3').at(0).text()).toEqual('RELATED PRODUCTS');
-    expect(wrapper.find('h3').at(1).text()).toEqual('YOUR OUTFIT');
-    expect(wrapper.find('h3').at(0).hasClass('related-product-header')).toBe(true);
+    expect(wrapper.find('h2').exists()).toBe(true);
+    // expect(wrapper.find('h2').text()).toEqual('RELATED PRODUCTS');
+    expect(wrapper.find('h2').at(0).text()).toEqual('RELATED PRODUCTS');
+    expect(wrapper.find('h2').at(1).text()).toEqual('YOUR OUTFIT');
+    expect(wrapper.find('h2').at(0).hasClass('related-product-header')).toBe(true);
     // expect(wrapper.getByTestId('relatedPdt').toBeInTheDocument()).toEqual('YOUR OUTFIT');
     // screen.getByTestId('relatedPdt').toBeInTheDocument();
   });
 
-  it ('shows my default text', async() => {
+  it ('shows my default text2', async() => {
     // expect(wrapper.find('label').at(2).hasClass('pointer rightBtn btn-Inactive')).toBe(true);
     expect(wrapper.find('label').at(2).hasClass('pointer rightBtn btn-Inactive'));
     expect(wrapper.find('label').exists()).toBe(true);
@@ -96,12 +97,12 @@ describe('RelatedPdt', () => {
     // expect(wrapper.find('label').at(1).simulate('click'));
     // expect(wrapper.find('label').at(2).simulate('click'));
     expect(wrapper.find('label').at(3).simulate('click'));
-    expect(wrapper.find('h3').at(1).text()).toEqual('YOUR OUTFIT');
+    expect(wrapper.find('h2').at(1).text()).toEqual('YOUR OUTFIT');
     // expect(relatedPdts).toBe(true);
     expect(wrapper.props().productId).toEqual(22122);
   });
 
-  it ('shows my default text', async() => {
+  it ('shows my default text3', async() => {
     expect(getOutfits).not.toHaveBeenCalled();
     expect(wrapper.find('label').at(3).simulate('click'));
     expect(getOutfits).toBeCalledTimes(0);
