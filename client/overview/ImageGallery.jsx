@@ -80,6 +80,12 @@ class ImageGallery extends React.Component {
       return;
     }
 
+    // close expanded screen
+    if (classes.contains('o-main-image-fullscreen-exit')) {
+      this.props.setImageMode(0);
+      return;
+    }
+
     // thumbnail gallery clicks
     let newSelectedImageIndex = 0;
 
@@ -188,11 +194,12 @@ class ImageGallery extends React.Component {
     let mainImageNext = null;
 
     if (this.props.imageMode === 0) {
-      if (firstVisibleImageIndex > 0) {
+
+      if (this.state.selectedImageIndex > 0) {
         mainImagePrev = <span className='material-icons pointer main-image-prev' onClick={this.handleClick}>arrow_back_ios</span>;
       }
 
-      if (lastVisibleImageIndex < this.props.stylePhotos.length - 1) {
+      if (this.state.selectedImageIndex < this.props.stylePhotos.length - 1) {
         mainImageNext = (<span className='material-icons pointer main-image-next' onClick={this.handleClick}>arrow_forward_ios</span>);
       }
     }
@@ -224,7 +231,12 @@ class ImageGallery extends React.Component {
     }
     if (this.props.imageMode === 1) {
       className = "o-images-main o-expanded pointer";
-      mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
+      mainImage = (
+        <React.Fragment>
+          <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
+          <span className="o-main-image-fullscreen-exit material-icons pointer" onClick={this.handleClick}>fullscreen_exit</span>
+        </React.Fragment>
+      )
     }
     if (this.props.imageMode === 2) {
       className = "o-images-main o-zoomed pointer";

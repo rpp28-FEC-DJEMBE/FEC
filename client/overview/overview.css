@@ -125,6 +125,28 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   cursor: zoom-in;
 }
 
+.o-main-image-arrows {
+  position: relative;
+  top: -55%;
+
+}
+
+.main-image-prev,
+.main-image-next {
+  position: absolute;
+  color: rgb(219, 219, 219);
+  /* color: rgb(128, 128, 128); */
+  font-size: 42px;
+}
+
+.main-image-prev {
+  left: 12%;
+}
+
+.main-image-next {
+  left: 93%;
+}
+
 .o-images-thumbnails > * {
   margin: 0;
   padding: 0;
@@ -303,13 +325,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   left: -0.17rem;
 }
 
-
-/* PRODUCT CONTROLS: ADD TO CART CONTROLS */
-
-
-
-
-
 /* PRODUCT DESCRIPTION */
 
 .o-product-description-slogan {
@@ -349,6 +364,17 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   cursor: crosshair;
 }
 
+.o-main-image-fullscreen-exit {
+
+  /* color: rgb(219, 219, 219); */
+  /* color: rgb(128, 128, 128); */
+  color: white;
+  font-size: 42px;
+  position: absolute;
+  top: 2%;
+  left: 96%;
+}
+
 .o-images.o-expanded nav ul li {
   width: 1.5rem;
   height: 1.5rem;
@@ -381,6 +407,5 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 }
 
 .o-images-main.o-zoomed:hover {
-  /* cursor: url('\2212'), auto; */
-  cursor: w-resize;
+  cursor: url('cursor-minus.png'), auto;
 }
