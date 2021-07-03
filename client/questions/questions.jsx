@@ -122,7 +122,10 @@ class Questions extends React.Component{
     const {productName} = this.props.product;
 
     return (
-      <div className="qaDisplay">
+      <div className="qaDisplay"
+        onClick={(e) => {
+        this.props.apiInteractions(e.target.className, 'Questions & Answers');
+      }}>
         <h2>QUESTIONS & ANSWERS</h2>
         <Search
         handleSearch={this.handleSearch} />
