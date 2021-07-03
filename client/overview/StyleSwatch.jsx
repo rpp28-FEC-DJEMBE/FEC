@@ -6,12 +6,15 @@ function StyleSwatch(props) {
     props.setStyle(props.styleId);
   });
 
+  // let imgUrl = props.photo.split('&w=')[0] + '&w=64&h=64&fit=crop';
+  let imgUrl = props.photo.split('&w=')[0] + '&w=64&h=64';
+
   return (
     <div className={"circle-container pointer" + (props.isSelected ? ' selected' : '')} onClick={onSwatchClick}>
       {props.isSelected ? <div className="icon-container"><span className="material-icons">check_circle_outline</span></div> : null}
       <div className="circle">
         { props.photo
-            ? <img className="circle-fill" src={props.photo} alt="Human model wearing the product style" />
+            ? <img className="circle-fill" src={imgUrl} alt="Human model wearing the product style" />
             : null
         }
 
