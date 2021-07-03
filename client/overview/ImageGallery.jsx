@@ -86,10 +86,10 @@ class ImageGallery extends React.Component {
     if ( classes.contains('o-images-thumbnail') || classes.contains('o-images-thumbnail-icon') ) {
       newSelectedImageIndex = parseInt(e.currentTarget.id);
     }
-    if (classes.contains('back-arrow')) {
+    if (classes.contains('back-arrow') || classes.contains('main-image-prev')) {
       newSelectedImageIndex = Math.max(this.state.selectedImageIndex - 1, 0);
     }
-    if (classes.contains('forward-arrow')) {
+    if (classes.contains('forward-arrow') || classes.contains('main-image-next')) {
       newSelectedImageIndex = Math.min(this.state.selectedImageIndex + 1, this.props.stylePhotos.length - 1);
     }
     this.setImages(newSelectedImageIndex);
@@ -107,8 +107,6 @@ class ImageGallery extends React.Component {
 
     let posX = Math.min(Math.max(0, offsetX), width);
     let posY = Math.min(Math.max(0, offsetY), height);
-
-    console.log('posX, ')
 
     let percentX = posX / width * 100;
     let percentY = posY / height * 100;
@@ -171,7 +169,7 @@ class ImageGallery extends React.Component {
 
     }
 
-    // render the forward/backward arrows
+    // render the forward/backward arrows for the thumbnails
     let backArrow = null;
     let forwardArrow = null;
 
@@ -185,6 +183,20 @@ class ImageGallery extends React.Component {
       }
     }
 
+    // render the forward/backward arrows for the main image
+    let mainImagePrev = null;
+    let mainImageNext = null;
+
+    if (this.props.imageMode === 0) {
+      if (firstVisibleImageIndex > 0) {
+        mainImagePrev = <span className='material-icons pointer main-image-prev' onClick={this.handleClick}>arrow_back_ios</span>;
+      }
+
+      if (lastVisibleImageIndex < this.props.stylePhotos.length - 1) {
+        mainImageNext = (<span className='material-icons pointer main-image-next' onClick={this.handleClick}>arrow_forward_ios</span>);
+      }
+    }
+
     // return elements
     return (
       <React.Fragment>
@@ -192,6 +204,10 @@ class ImageGallery extends React.Component {
           <div className="back-arrow-container">{backArrow}</div>
           <ul>{thumbnailList}</ul>
           <div className="forward-arrow-container">{forwardArrow}</div>
+        </nav>
+        <nav className="o-main-image-arrows">
+          {mainImagePrev}
+          {mainImageNext}
         </nav>
       </React.Fragment>
     );
@@ -213,6 +229,8 @@ class ImageGallery extends React.Component {
     if (this.props.imageMode === 2) {
       className = "o-images-main o-zoomed pointer";
       cssVariables['--bgImgUrl'] = 'url(' + this.state.mainImageUrl + ')';
+      cssVariables['--x'] = '50%';
+      cssVariables['--y'] = '50%';
       mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage}/>
     }
 

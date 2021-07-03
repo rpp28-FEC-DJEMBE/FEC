@@ -121,6 +121,31 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   object-fit: cover;
 }
 
+.o-images-main:hover {
+  cursor: zoom-in;
+}
+
+.o-main-image-arrows {
+  position: relative;
+  top: -50%;
+
+}
+
+.main-image-prev,
+.main-image-next {
+  position: absolute;
+  color: rgb(219, 219, 219);
+  font-size: 42px;
+}
+
+.main-image-prev {
+  left: 12%;
+}
+
+.main-image-next {
+  left: 93%;
+}
+
 .o-images-thumbnails > * {
   margin: 0;
   padding: 0;
@@ -302,7 +327,7 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 
 /* PRODUCT CONTROLS: ADD TO CART CONTROLS */
 
-
+/* there are some in the layout section */
 
 
 
@@ -316,7 +341,6 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 .o-product-description-features {
   border-left: solid black 0.1rem;
 }
-
 
 .o-product-description-bullets li {
   list-style: none;
