@@ -28,6 +28,7 @@ class Overview extends React.Component {
     this.setStyle = this.setStyle.bind(this);
     this.setImageMode = this.setImageMode.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.apiInteractions = this.apiInteractions.bind(this);
   }
 
   componentDidMount() {
@@ -155,12 +156,15 @@ class Overview extends React.Component {
     }
   }
 
-
   setImageMode(mode) {
     // 0: normal, 1: expanded, 2: zoomed
     this.setState({
       imageMode: mode
     })
+  }
+
+  apiInteractions(e) {
+    this.props.apiInteractions(e.target.className, 'Overview');
   }
 
   render() {
@@ -173,7 +177,7 @@ class Overview extends React.Component {
       )
     } else {
       return (
-        <section className="o-product-overview">
+        <section className="o-product-overview" onClick={this.apiInteractions}>
           <ImageGallery
             selectedStyleId={this.state.selectedStyleId}
             stylePhotos={this.state.selectedStyle.photos}
