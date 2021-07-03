@@ -1,4 +1,5 @@
-.comparison-box {
+.comparison-box,
+.comparison-box-dark {
   border: solid 1px grey;
   padding: 5px;
   width: 40%;
@@ -14,13 +15,11 @@
   bottom: 0;
 }
 
-/* for light theme */
-/* .comparison-box {
-  background-color: white;
-} */
-
-/* for dark theme */
 .comparison-box {
+  background-color: white;
+}
+
+.comparison-box-dark {
   background-color: #282828;
 }
 

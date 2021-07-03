@@ -70,14 +70,14 @@ class App extends React.Component {
   themeToggle(){
     const app = document.body;
     app.classList.toggle("darkmode");
-    if(!this.state.dark) {
+    if(!this.state.darkmode) {
       this.setState({
         darkmode: true
-      })
+      }, console.log('true', this.state.darkmode))
     } else {
       this.setState({
         darkmode: false
-      })
+      }, console.log('false', this.state.darkmode))
     }
   }
 
@@ -100,7 +100,7 @@ class App extends React.Component {
               <p>Site-Wide Announcement Message! -- Sale / Discount Offer -- New Product Highlight</p>
             </header>
             <Overview productId={this.state.productId}  apiInteractions={this.apiInteractions} />
-            <RelatedPdt productId={this.state.productId} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
+            <RelatedPdt productId={this.state.productId} darkmode={this.state.darkmode} onCardClick={this.onCardClick} apiInteractions={this.apiInteractions} />
             <Questions product={this.state} apiInteractions={this.apiInteractions} />
             <Reviews productId={this.state.productId} apiInteractions={this.apiInteractions} />
           </React.Fragment>

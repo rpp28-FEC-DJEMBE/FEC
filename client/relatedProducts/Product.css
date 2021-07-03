@@ -73,17 +73,5 @@
   margin-left: 210px;
   font-family: system-ui;
   font-size: x-large;
-}
-
-/* for light theme */
-/* .card-btn {
-  background-image: radial-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0) 40%);
-} */
-
-
-/* for dark theme */
-.card-btn{
-  /* background-image: radial-gradient(rgba(40,38,38,0.5), rgba(255,255,255,0) 40%); */
-  /* background-image: radial-gradient(rgba(184,184,184,1), rgba(255,255,255,0) 40%); */
   background-image: radial-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0) 40%);
 }
