@@ -165,8 +165,8 @@ const AddReview = (props) => {
   }
 
   return(
-    <div className='review-modal' onClick={() => closeModal()}>
-      <div className='review-content' onClick={e => e.stopPropagation()}>
+    <div className='review-modal'>
+      <div className='review-content'>
         <div className='addreview-header'>
           <h2 className='review-title'> Write Your Review</h2>
           <div className='exit pointer' onClick={() => closeModal()}>X</div>

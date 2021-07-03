@@ -104,7 +104,9 @@ class Reviews extends React.Component {
       )
     } else {
     return (
-      <div className='ratings-reviews'>
+      <div className='ratings-reviews' onClick={(e) => {
+        this.props.apiInteractions(e.target.className, 'Ratings & Reviews');
+      }}>
           <h2 id='rr-title'>RATINGS & REVIEWS</h2>
           <div className='rr-content'>
             <Breakdown

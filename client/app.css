@@ -526,6 +526,16 @@ font-size: 15px;
   background-color: rgb(184, 184, 184)
 }
 
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */
 
