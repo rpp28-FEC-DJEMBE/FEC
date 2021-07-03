@@ -123,7 +123,7 @@ class Questions extends React.Component{
 
     return (
       <div className="qaDisplay">
-        <h3>Questions & Answers</h3>
+        <h2>QUESTIONS & ANSWERS</h2>
         <Search
         handleSearch={this.handleSearch} />
         <QuestionsList
@@ -145,7 +145,7 @@ class Questions extends React.Component{
           questions={questions}
           searchInUse={searchInUse}
           handleMoreAnsweredQuestions={this.handleMoreAnsweredQuestions} />
-        <button className="add-q-btn" onClick={() => this.handleAddQClick()}>Add a question +</button>
+        <button className="qa-button" onClick={() => this.handleAddQClick()}>Add a question +</button>
       </div>
     )
   };

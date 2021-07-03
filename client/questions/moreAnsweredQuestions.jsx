@@ -4,7 +4,7 @@ const MoreAnsweredQuestions = ({questions, handleMoreAnsweredQuestions, searchIn
   if(questions.length > 0 && !searchInUse) {
     return (
       <button
-        className="more-q-btn"
+        className="qa-button"
         onClick={() => handleMoreAnsweredQuestions()}
       >More Answered Questions</button>
     )
