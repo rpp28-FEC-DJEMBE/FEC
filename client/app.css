@@ -86,7 +86,8 @@ body * {
 
 .rating-bars,
 .char-bar,
-#review-body {
+#review-body,
+.char-entry {
   display: flex;
   flex-flow: column;
 }
@@ -368,6 +369,7 @@ font-size: 15px;
   display: grid;
   background-color: white;
   max-height: 80%;
+  width: 40%;
   border-radius: .2rem;
   padding: 8px;
   overflow-y: scroll;
@@ -511,7 +513,8 @@ font-size: 15px;
   background-color: rgba(202, 202, 202, 0.822);
 }
 
-#overall-rating {
+#overall-rating,
+.review-chars-entry {
   display: flex;
   flex-direction: row;
 }
@@ -535,6 +538,26 @@ font-size: 15px;
   font-weight: bold;
   transition: 0.3s;
 }
+
+.review-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.review-chars-entry {
+  justify-content: space-evenly;
+  margin-bottom: 2px;
+}
+
+.bottom-space {
+  margin-bottom: 10px;
+}
+
 
 /* STATE STYLES
 - - - - - - - - - - - - - - - - - - - - - - - - */

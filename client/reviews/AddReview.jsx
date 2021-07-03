@@ -7,7 +7,7 @@ import AddedPhotos from '../questions/addedPhotos.jsx';
 const AddReview = (props) => {
   const [rating, setRating] = useState(0);
   const [recommend, setRecommend] = useState(null);
-  const [characteristics, setChars] = useState({});
+  const [characters, setChars] = useState({});
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
@@ -27,18 +27,23 @@ const AddReview = (props) => {
       setChars(prevState => ({...prevState, [nam]: val}))
     }
 
+    //click handler handle chars entry CharsTable[char][value - 1]
     // using chars table from helper file
     return chars.map(char => {
       let charId = characteristics[char].id;
+      let selection = (!characters[char]) ? 'none selected' : characters[char];
       return (
-        <div className='review-chars' key={charId}>
-          <label>{char}</label>
+        <div className='review-chars' style={{paddingLeft: '10px', marginBottom: '10px'}} key={charId}>
+          <label>{char}: {selection}</label>
           <div className='review-chars-entry'>
             {
               charsTable[char].map((option, index) => (
 
-              <span key={index} onClick={e => handleCharEntry(e)}>
-                      <input type='radio' name={charId} value={index + 1}></input>{option}</span>
+                <span key={index} className='char-entry' style={{justifyContent: 'center'}}onClick={e => handleCharEntry(e)}>
+                  <input type='radio' id={`${char}-${index + 1}`} name={charId} value={index + 1}></input>
+                  {/* <label htmlFor={`${char}-${index + 1}`}>{option}</label> */}
+                  {(index === 0 || index === 4) ? <label htmlFor={`${char}-${index + 1}`}>{option}</label> : null}
+                </span>
               ))
 
             }
@@ -71,7 +76,7 @@ const AddReview = (props) => {
       template += `
       - Do you recommend this product?*`
     }
-    if (Object.keys(characteristics).length !== Object.keys(props.metaData.characteristics).length) {
+    if (Object.keys(characters).length !== Object.keys(props.metaData.characteristics).length) {
       template += `
       - Characteristics*`
     }
@@ -121,7 +126,7 @@ const AddReview = (props) => {
       name: name,
       email: email,
       photos: photos,
-      characteristics: characteristics
+      characteristics: characters
     }
 
     missingFieldsAlert();
@@ -174,7 +179,7 @@ const AddReview = (props) => {
         </div>
         <div className='modal-body'>
           <label>Overall Rating*</label>
-          <section id='overall-rating'>
+          <section id='overall-rating bottom-space'>
             <div className="review-stars">
               <input id="star5" name="star" onClick={e => starClick(e)} type="radio" value="5" className="radio-btn hide" />
               <label htmlFor="star5" >★</label>
@@ -200,27 +205,27 @@ const AddReview = (props) => {
           <label>Characteristics*</label>
             {charsEntry()}
           <label>Review Summary</label>
-          <div className='review-text'>
+          <div className='review-text bottom-space' >
             <input
               id="summary" type="text" onChange={e => setSummary(e.target.value)} maxLength="60" placeholder="Example: Best purchase ever!">
             </input>
           </div>
           <label>Review Body*</label>
-          <div className='review-text'>
+          <div className='review-text bottom-space'>
             <textarea
               id="review-body" type="text" onChange={e => setBody(e.target.value)} maxLength="1000" placeholder="Why did you like the product or not?">
             </textarea>
             <p className="disclaimer">{reviewBodyCount()}</p>
           </div>
           <label>What is your nickname*</label>
-          <div className='review-text'>
+          <div className='review-text bottom-space'>
             <input
               id="nickname" type="text" onChange={e => setName(e.target.value)} maxLength="60" placeholder="Example: jackson11!">
             </input>
             <p className="disclaimer">For privacy reasons, do not use your full name or email address</p>
           </div>
           <label>Your email*</label>
-          <div className='review-text'>
+          <div className='review-text bottom-space'>
             <input
               id="email" type="email" onChange={e => setEmail(e.target.value)} maxLength="60" placeholder="Example: jackson11@email.com">
             </input>
@@ -228,7 +233,7 @@ const AddReview = (props) => {
           </div>
           <AddedPhotos photos={photos} />
         </div>
-        <div className='modal-footer'>
+        <div className='modal-footer' style={{margin: '10px', paddingBottom: '10px'}}>
           <AnswerPhotos updatePhotos={addPhotos} files={photos} />
           <div className="answer-submit pointer" onClick={() => submitReview()}>Submit Review</div>
         </div>
