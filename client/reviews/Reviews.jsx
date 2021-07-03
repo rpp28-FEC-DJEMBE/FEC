@@ -10,7 +10,8 @@ class Reviews extends React.Component {
     this.state = {
       reviews: [],
       isLoaded: false,
-      filters: []
+      filters: [],
+      display: []
     }
     this.filterStars = this.filterStars.bind(this);
   }
@@ -33,7 +34,8 @@ class Reviews extends React.Component {
           reviews: sortRelevantReviews(data.results),
           productId: Number(data.product),
           ratings: getRatings(data.results),
-          recommended: getRecommend(data.results)
+          recommended: getRecommend(data.results),
+          display: sortRelevantReviews(data.results).slice()
         })
       })
     }
@@ -47,20 +49,27 @@ class Reviews extends React.Component {
         productId: Number(data.product),
         isLoaded: true,
         ratings: getRatings(data.results),
-        recommended: getRecommend(data.results)
+        recommended: getRecommend(data.results),
+        display: sortRelevantReviews(data.results).slice()
       })
     })
   }
 
   filterStars(rating) {
     let filters = this.state.filters;
+
     if (!this.state.filters.includes(rating)) {
       filters.push(rating);
       this.setState({ filters: filters })
+      let filtered = this.state.reviews.filter(review => review.rating === rating)
+      this.setState({ display: filtered })
     } else {
       let removed = filters.filter(item => item !== rating);
       this.setState({ filters: removed })
     }
+
+
+
   }
 
   render() {
@@ -81,9 +90,10 @@ class Reviews extends React.Component {
               ratings={this.state.ratings}
               recommended={this.state.recommended}
               filterStars={this.filterStars}
+              filters={this.state.filters}
             />
             <ReviewList
-              reviews={this.state.reviews}
+              reviews={this.state.display}
               handleSort={this.handleSort}
               productId={this.props.productId}
               productName={this.props.productName}

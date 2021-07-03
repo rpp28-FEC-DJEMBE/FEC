@@ -3,7 +3,7 @@ import RatingStars from './RatingStars.jsx';
 import RatingBars from './RatingBars.jsx';
 import helper from './reviewHelpers.js';
 
-const RatingBreakdown = ({ratings, recommended, reviews, filterStars}) => {
+const RatingBreakdown = ({ratings, recommended, reviews, filterStars, filters}) => {
 
   if(Object.keys(ratings).length === 0) {
     return (
@@ -31,6 +31,11 @@ const RatingBreakdown = ({ratings, recommended, reviews, filterStars}) => {
         {reviews.length} reviews
       </div>
       <p>{recommendPct}% of reviews recommend this product</p>
+      <ul>
+        {
+          filters.map((rating) => <li>{rating}</li>)
+        }
+      </ul>
       <RatingBars ratings={ratings} filterStars={filterStars}/>
     </div>
   )

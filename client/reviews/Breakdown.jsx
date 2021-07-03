@@ -58,6 +58,7 @@ class Breakdown extends React.Component {
             recommended={recommended}
             reviews={this.props.reviews}
             filterStars={this.props.filterStars}
+            filters={this.props.filters}
           />
           <ProductBreakdown characteristics={characteristics}/>
         </div>
