@@ -341,6 +341,10 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
   max-width: 100%;
 }
 
+.o-expanded:hover {
+  cursor: crosshair;
+}
+
 .o-images.o-expanded nav ul li {
   width: 1.5rem;
   height: 1.5rem;
@@ -357,4 +361,22 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 .o-images-thumbnail-icon.selected {
   fill-opacity: 0.9;
   fill: black;
+}
+
+/* ZOOM VIEW STYLES */
+
+.o-images-main.o-zoomed {
+  --bgImgUrl: ;
+  --x: ;
+  --y: ;
+  max-width: 100%;
+  background-image: var(--bgImgUrl);
+  background-repeat: no-repeat;
+  background-size: 250%;
+  background-position: var(--x) var(--y);
+}
+
+.o-images-main.o-zoomed:hover {
+  /* cursor: url('\2212'), auto; */
+  cursor: w-resize;
 }

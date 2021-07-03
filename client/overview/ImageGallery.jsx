@@ -9,8 +9,10 @@ class ImageGallery extends React.Component {
       mainImageUrl: '',
       isLoaded: false
     }
-    this.handleClick = this.handleClick.bind(this);
     this.setImages = this.setImages.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.mainImage = React.createRef();
 
     // helpful values (not needed in state)
     this.thumbnailsToShow = 7;
@@ -21,12 +23,17 @@ class ImageGallery extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+
     if(prevProps.selectedStyleId != this.props.selectedStyleId && this.props.stylePhotos) {
       this.setState({
         isLoaded: false
       });
       this.setImages(this.state.selectedImageIndex);
     }
+
+    // if(this.props.imageMode === 2) {
+    //   this.mainImage.
+    // }
   }
 
   // calculates which thumbnails to show (when there are more than the max allowed) and sets state
@@ -63,18 +70,12 @@ class ImageGallery extends React.Component {
       if (this.props.imageMode === 0) {
         newMode = 1; //normal --> expanded
       }
-      // delete after zoom view is coded
       if (this.props.imageMode === 1) {
-        newMode = 0; //expanded --> normal
+        newMode = 2; //expanded --> zoomed
       }
-
-      // comment out until zoom view is coded
-      // if (this.props.imageMode === 1) {
-      //   newMode = 2; //expanded --> zoomed
-      // }
-      // if (this.props.imageMode === 2) {
-      //   newMode = 1; //zoomed --> expanded
-      // }
+      if (this.props.imageMode === 2) {
+        newMode = 1; //zoomed --> expanded
+      }
       this.props.setImageMode(newMode);
       return;
     }
@@ -93,6 +94,27 @@ class ImageGallery extends React.Component {
     }
     this.setImages(newSelectedImageIndex);
 
+  }
+
+  handleMouseMove(e) {
+
+    let zoomWindow = e.currentTarget;
+    let width = zoomWindow.offsetWidth;
+    let height = zoomWindow.offsetHeight;
+
+    let offsetX = e.clientX - this.mainImage.current.getBoundingClientRect().left;
+    let offsetY = e.clientY - this.mainImage.current.getBoundingClientRect().top;
+
+    let posX = Math.min(Math.max(0, offsetX), width);
+    let posY = Math.min(Math.max(0, offsetY), height);
+
+    console.log('posX, ')
+
+    let percentX = posX / width * 100;
+    let percentY = posY / height * 100;
+
+    zoomWindow.style.setProperty('--x', percentX + '%');
+    zoomWindow.style.setProperty('--y', percentY + '%');
   }
 
   // renders the two versions of the thumbnail gallery (want to make this a subcomonent)
@@ -166,11 +188,40 @@ class ImageGallery extends React.Component {
     // return elements
     return (
       <React.Fragment>
-        <div className="back-arrow-container">{backArrow}</div>
-        <ul>{thumbnailList}</ul>
-        <div className="forward-arrow-container">{forwardArrow}</div>
+        <nav className="o-images-thumbnails">
+          <div className="back-arrow-container">{backArrow}</div>
+          <ul>{thumbnailList}</ul>
+          <div className="forward-arrow-container">{forwardArrow}</div>
+        </nav>
       </React.Fragment>
     );
+  }
+
+  renderMainImage() {
+
+    let className, mainImage;
+    let cssVariables = {};
+
+    if (this.props.imageMode === 0) {
+      className = "o-images-main pointer";
+      mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
+    }
+    if (this.props.imageMode === 1) {
+      className = "o-images-main o-expanded pointer";
+      mainImage = <img className={className} src={this.state.mainImageUrl} onClick={this.handleClick} ref={this.mainImage}/>
+    }
+    if (this.props.imageMode === 2) {
+      className = "o-images-main o-zoomed pointer";
+      cssVariables['--bgImgUrl'] = 'url(' + this.state.mainImageUrl + ')';
+      mainImage = <div className={className} onClick={this.handleClick} onMouseMove={this.handleMouseMove} style={cssVariables} ref={this.mainImage}/>
+    }
+
+    return (
+      <React.Fragment>
+        {mainImage}
+      </React.Fragment>
+    );
+
   }
 
   render() {
@@ -182,20 +233,14 @@ class ImageGallery extends React.Component {
       )
     } else {
       return (
-        <section className={this.props.imageMode === 0 ? "o-images" : "o-images o-expanded"}>
-          <img className={
-              this.props.imageMode === 0
-                ? "o-images-main pointer"
-                : this.props.imageMode === 1
-                  ? "o-images-main o-expanded pointer"
-                  : "o-images-main o-zoomed pointer"
-            }
-            src={this.state.mainImageUrl}
-            onClick={this.handleClick}
-          />
-          <nav className="o-images-thumbnails">
-            {this.renderThumbnailGallery()}
-          </nav>
+        <section className={this.props.imageMode === 0
+            ? "o-images"
+            : this.props.imageMode === 1
+              ? "o-images o-expanded"
+              : "o-images o-zoomed"
+          }>
+          {this.renderMainImage()}
+          {this.renderThumbnailGallery()}
         </section>
       )
     }
